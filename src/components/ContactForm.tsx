@@ -23,8 +23,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 
-// EmailJS configuration - template_id is not sensitive
-const EMAILJS_TEMPLATE_ID = "template_p8p58qv";
+// EmailJS template ID - can be hardcoded or from env
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_p8p58qv";
 
 /**
  * Validation schema for contact form
@@ -97,11 +97,11 @@ const ContactForm = ({ className }: ContactFormProps) => {
         EMAILJS_TEMPLATE_ID,
         {
           from_name: data.name,
-          from_email: data.email,
+          reply_to: data.email,
           subject: data.subject,
           message: data.message,
         },
-        publicKey
+        { publicKey }
       );
 
       setStatus("success");

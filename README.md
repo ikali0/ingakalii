@@ -1,6 +1,67 @@
-# Welcome to your Lovable project
+# Portfolio Website
 
-## Project info
+A retro Windows-styled portfolio website built with React, TypeScript, and Tailwind CSS.
+
+## Features
+
+- 🖥️ Retro Windows UI with taskbar and Start menu
+- 📧 Contact form with EmailJS integration
+- 🎨 Responsive design with dark/light mode support
+- ⌨️ Keyboard accessible navigation
+
+## Environment Variables
+
+This project requires the following environment variables for the contact form:
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `VITE_EMAILJS_PUBLIC_KEY` | Your EmailJS public key | Yes |
+| `VITE_EMAILJS_SERVICE_ID` | Your EmailJS service ID | Yes |
+
+### EmailJS Setup
+
+1. Create an account at [EmailJS](https://www.emailjs.com/)
+2. Create an email service and note the **Service ID**
+3. Create an email template with ID `template_p8p58qv` (or update the template ID in `ContactForm.tsx`)
+4. Get your **Public Key** from Account > API Keys
+5. Add the environment variables to your project
+
+### Template Variables
+
+Your EmailJS template should include these variables:
+- `{{from_name}}` - Sender's name
+- `{{from_email}}` - Sender's email
+- `{{subject}}` - Email subject
+- `{{message}}` - Message content
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Run tests
+npm run test
+
+# Build for production
+npm run build
+```
+
+## Tech Stack
+
+- React 18
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- React Hook Form + Zod
+- EmailJS
+
+---
+
+## Project Info
 
 **URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 

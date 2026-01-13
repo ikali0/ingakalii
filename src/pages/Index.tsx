@@ -6,6 +6,7 @@ import Portfolio from "@/components/Portfolio";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import RetroTaskbar from "@/components/ui/retro-taskbar";
 
 const Index = () => {
   return (
@@ -20,6 +21,9 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
+      
+      {/* Retro Windows-style Taskbar */}
+      <RetroTaskbar />
     </div>
   );
 };

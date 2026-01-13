@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CRT Disabled State - removes all effects */
+.crt-disabled.crt-screen {
+  filter: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.crt-disabled .crt-scanlines,
+.crt-disabled .crt-flicker,
+.crt-disabled .crt-rgb-shift,
+.crt-disabled .crt-glow,
+.crt-disabled .crt-phosphor {
+  display: none !important;
+  animation: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Fira+Code:wght@400;500&display=swap');
 
 @layer base {

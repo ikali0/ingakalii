@@ -5,7 +5,7 @@
  * Provides navigation through a Start menu panel.
  */
 import { useState, useEffect } from "react";
-import { Monitor, User, Briefcase, Mail, FileText, Folder, X } from "lucide-react";
+import { Monitor, User, Briefcase, Mail, FileText, Folder, X, Tv, TvMinimalPlay } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface StartMenuItem {
@@ -31,6 +31,19 @@ const quickLaunchItems = [
 export const RetroTaskbar = () => {
   const [isStartOpen, setIsStartOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [crtEnabled, setCrtEnabled] = useState(true);
+
+  // Sync CRT effects with document body class
+  useEffect(() => {
+    const screen = document.querySelector('.crt-screen');
+    if (screen) {
+      if (crtEnabled) {
+        screen.classList.remove('crt-disabled');
+      } else {
+        screen.classList.add('crt-disabled');
+      }
+    }
+  }, [crtEnabled]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -172,11 +185,25 @@ export const RetroTaskbar = () => {
             </div>
           </div>
 
-          {/* Right side: Clock */}
-          <div className="retro-clock">
-            <div className="flex flex-col items-end leading-tight">
-              <span className="text-xs font-medium">{formatTime(currentTime)}</span>
-              <span className="text-[10px] opacity-80">{formatDate(currentTime)}</span>
+          {/* Right side: CRT Toggle + Clock */}
+          <div className="flex items-center gap-2">
+            {/* CRT Toggle Button */}
+            <button
+              onClick={() => setCrtEnabled(!crtEnabled)}
+              className="retro-quick-launch flex items-center gap-1 px-2"
+              aria-label={crtEnabled ? "Disable CRT effects" : "Enable CRT effects"}
+              title={crtEnabled ? "Disable CRT effects" : "Enable CRT effects"}
+            >
+              {crtEnabled ? <Tv className="w-4 h-4" /> : <TvMinimalPlay className="w-4 h-4" />}
+              <span className="text-[10px] hidden sm:inline">CRT</span>
+            </button>
+
+            {/* Clock */}
+            <div className="retro-clock">
+              <div className="flex flex-col items-end leading-tight">
+                <span className="text-xs font-medium">{formatTime(currentTime)}</span>
+                <span className="text-[10px] opacity-80">{formatDate(currentTime)}</span>
+              </div>
             </div>
           </div>
         </div>

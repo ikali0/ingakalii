@@ -23,8 +23,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 
-// EmailJS template ID - can be hardcoded or from env
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_p8p58qv";
+// EmailJS template ID
+const EMAILJS_TEMPLATE_ID = "template_16tlqcu";
 
 /**
  * Validation schema for contact form

@@ -3,27 +3,24 @@
  * 
  * Features:
  * - Form validation using Zod
- * - EmailJS integration for sending emails
+ * - EmailJS integration via edge function for security
  * - Loading states and error handling
  * - Toast notifications for feedback
  * 
- * Environment Variables Required:
- * - VITE_EMAILJS_PUBLIC_KEY: Your EmailJS public key
- * - VITE_EMAILJS_SERVICE_ID: Your EmailJS service ID
- * 
- * Template ID is configured as: template_p8p58qv
+ * The email is sent via an edge function that securely accesses
+ * the EmailJS credentials from environment variables.
  */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import emailjs from "@emailjs/browser";
 import { Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 /**
  * Validation schema for contact form
@@ -76,42 +73,32 @@ const ContactForm = ({ className }: ContactFormProps) => {
   });
 
   /**
-   * Handles form submission and sends email via EmailJS
+   * Handles form submission and sends email via edge function
    */
   const onSubmit = async (data: ContactFormData) => {
     setStatus("sending");
     setErrorMessage("");
 
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = "template_p8p58qv";
-
-    // Check if environment variables are configured
-    if (!publicKey || !serviceId) {
-      setStatus("error");
-      setErrorMessage(
-        "Email service is not configured. Please contact the site owner."
-      );
-      toast({
-        title: "Configuration Error",
-        description: "Email service is not properly configured.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     try {
-      await emailjs.send(
-        serviceId,
-        templateId,
+      const { data: responseData, error } = await supabase.functions.invoke(
+        "send-contact-email",
         {
-          from_name: data.name,
-          from_email: data.email,
-          subject: data.subject,
-          message: data.message,
-        },
-        publicKey
+          body: {
+            name: data.name,
+            email: data.email,
+            subject: data.subject,
+            message: data.message,
+          },
+        }
       );
+
+      if (error) {
+        throw new Error(error.message || "Failed to send message");
+      }
+
+      if (responseData?.error) {
+        throw new Error(responseData.error);
+      }
 
       setStatus("success");
       reset();
@@ -125,9 +112,13 @@ const ContactForm = ({ className }: ContactFormProps) => {
         setStatus("idle");
       }, 5000);
     } catch (error) {
-      console.error("EmailJS error:", error);
+      console.error("Contact form error:", error);
       setStatus("error");
-      setErrorMessage("Failed to send message. Please try again later.");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Failed to send message. Please try again later."
+      );
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",

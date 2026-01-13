@@ -3,24 +3,28 @@
  * 
  * Features:
  * - Form validation using Zod
- * - EmailJS integration via edge function for security
+ * - EmailJS browser SDK for email sending
  * - Loading states and error handling
  * - Toast notifications for feedback
  * 
- * The email is sent via an edge function that securely accesses
- * the EmailJS credentials from environment variables.
+ * Environment Variables Required:
+ * - VITE_EMAILJS_PUBLIC_KEY: Your EmailJS public key (safe for client-side)
+ * - VITE_EMAILJS_SERVICE_ID: Your EmailJS service ID (safe for client-side)
  */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import emailjs from "@emailjs/browser";
 import { Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+
+// EmailJS configuration - template_id is not sensitive
+const EMAILJS_TEMPLATE_ID = "template_p8p58qv";
 
 /**
  * Validation schema for contact form
@@ -73,32 +77,32 @@ const ContactForm = ({ className }: ContactFormProps) => {
   });
 
   /**
-   * Handles form submission and sends email via edge function
+   * Handles form submission and sends email via EmailJS browser SDK
    */
   const onSubmit = async (data: ContactFormData) => {
     setStatus("sending");
     setErrorMessage("");
 
     try {
-      const { data: responseData, error } = await supabase.functions.invoke(
-        "send-contact-email",
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+
+      if (!publicKey || !serviceId) {
+        throw new Error("Email service is not configured properly.");
+      }
+
+      // Send email using EmailJS browser SDK
+      await emailjs.send(
+        serviceId,
+        EMAILJS_TEMPLATE_ID,
         {
-          body: {
-            name: data.name,
-            email: data.email,
-            subject: data.subject,
-            message: data.message,
-          },
-        }
+          from_name: data.name,
+          from_email: data.email,
+          subject: data.subject,
+          message: data.message,
+        },
+        publicKey
       );
-
-      if (error) {
-        throw new Error(error.message || "Failed to send message");
-      }
-
-      if (responseData?.error) {
-        throw new Error(responseData.error);
-      }
 
       setStatus("success");
       reset();

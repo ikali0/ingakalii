@@ -28,7 +28,7 @@ const Hero = () => {
         </p>
 
         {/* Social links - centered on mobile */}
-        <div className="animate-fade-up opacity-0 delay-300 gap-4 mb-8 sm:mb-6 flex items-center justify-center sm:justify-start">
+        <div className="animate-fade-up opacity-0 delay-300 mb-8 sm:mb-6 sm:justify-start flex items-start justify-center gap-[12px] border border-fuchsia-400 border-solid">
           <a href="https://www.linkedin.com/in/ik11/" target="_blank" rel="noopener noreferrer" className="p-3 sm:p-2 border border-border text-muted-foreground hover:text-foreground hover:border-accent hover:scale-110 transition-all duration-200 bg-fuchsia-700 rounded-sm">
             <Linkedin className="w-5 h-5 sm:w-4 sm:h-4 text-slate-50" />
           </a>

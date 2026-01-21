@@ -104,11 +104,11 @@ function ProjectCardBack({
       </div>
       
       {/* Content */}
-      <div className="ml-3 md:ml-4 flex-1 p-2 md:p-3 flex flex-col justify-center items-center text-center py-[14px] px-[14px] mx-[12px] my-[6px]" style={{
+      <div className="ml-3 md:ml-4 flex-1 p-2 md:p-3 flex flex-col justify-center items-center text-center py-[11px] px-[11px] mx-[10px] my-[8px]" style={{
       backgroundImage: 'repeating-linear-gradient(transparent, transparent 11px, hsl(var(--border) / 0.3) 11px, hsl(var(--border) / 0.3) 12px)',
       backgroundSize: '100% 12px'
     }}>
-        <p className="text-[7px] leading-relaxed line-clamp-5 mb-2 text-black mx-[8px] px-[8px] py-[8px] my-[8px] text-left md:text-xs">
+        <p className="<div class=\"max-w-prose mx-auto px-4 py-6 font-sans\">\n  \n  <header class=\"mb-8\">\n    <h1 class=\"text-lg font-bold text-black md:text-xl leading-tight\">\n      Inga Kaltak\n    </h1>\n    <p class=\"text-sm text-slate-600 md:text-base\">\n      Applied AI Engineer & Governance Consultant\n    </p>\n  </header>\n\n  <section class=\"text-sm leading-relaxed text-slate-900 md:text-base space-y-6\">\n    <div>\n      <h2 class=\"text-md font-bold text-black border-b border-slate-200 mb-2\">Impact</h2>\n      <ul class=\"space-y-3 list-disc pl-4\">\n        <li><b>AI Governance:</b> 5 NIST AI RMF assessments conducted with full technical specs.</li>\n        <li><b>Cybersecurity:</b> 47 critical vulnerabilities identified across federal networks.</li>\n        <li><b>Efficiency:</b> 40% reduction in infra costs via open-source LLM integration.</li>\n      </ul>\n    </div>\n  </section>\n\n</div>">
           {project.description}
         </p>
         {project.live && <a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-2 py-0.5 rounded text-[7px] md:text-[8px] hover:bg-primary/90 transition-colors shadow-sm">
@@ -133,7 +133,7 @@ const Portfolio = () => {
         </div>
 
         {/* Mobile: 2 columns, Desktop: 3 columns */}
-        <div className="grid grid-cols-2 large:grid-cols-4 gap-2 md:gap-6 justify-items-center px-[12px] py-[12px] my-[11px] mx-[11px]">
+        <div className="grid grid-cols-2 large:grid-cols-4 gap-2 md:gap-6 justify-items-center my-[11px] mx-[11px] px-[11px] py-[11px]">
           {projects.map(project => <FlippingCard key={project.title} width={140} height={150} className="w-full max-w-[140px] md:max-w-[170px] md:!w-[170px] md:!h-[175px]" frontContent={<ProjectCardFront project={project} />} backContent={<ProjectCardBack project={project} />} />)}
         </div>
       </div>

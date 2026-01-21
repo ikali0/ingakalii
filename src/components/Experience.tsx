@@ -19,13 +19,13 @@ const experiences: ExperienceData[] = [
     organization: "Independent Consultant",
     period: "Oct 2023 - Present",
     location: "Philadelphia, PA",
-    [cite_start]description: "Leading AI consultancy delivering automation prototypes and compliance frameworks[cite: 5, 9].",
+    description: "Leading AI consultancy delivering automation prototypes and compliance frameworks.",
     highlights: [
-      [cite_start]"Built FERPA/Title IX compliance dashboards for multiple school districts [cite: 8, 15]",
-      [cite_start]"Led 3 POC studies converting policy frameworks into deployable controls [cite: 10, 17]",
-      [cite_start]"Conducted 5 NIST AI RMF feasibility assessments with technical specs [cite: 12, 19]",
-      [cite_start]"Developed GPT-4 and Claude tools to extract regulatory requirements [cite: 11, 18]",
-      [cite_start]"Integrated open-source LLMs (Llama, Mistral), cutting infra costs by 40% [cite: 14, 20]"
+      "Built FERPA/Title IX compliance dashboards for multiple school districts",
+      "Led 3 POC studies converting policy frameworks into deployable controls",
+      "Conducted 5 NIST AI RMF feasibility assessments with technical specs",
+      "Developed GPT-4 and Claude tools to extract regulatory requirements",
+      "Integrated open-source LLMs (Llama, Mistral), cutting infra costs by 40%"
     ],
     tags: ["NIST AI RMF", "GPT-4/Claude", "Compliance"],
     status: "in-progress"
@@ -35,12 +35,12 @@ const experiences: ExperienceData[] = [
     organization: "DIA & Lockheed Martin",
     period: "Nov 2024 - May 2025",
     location: "Washington, DC",
-    [cite_start]description: "Executed penetration tests across federal networks, identifying critical vulnerabilities[cite: 25, 28].",
+    description: "Executed penetration tests across federal networks, identifying critical vulnerabilities.",
     highlights: [
-      [cite_start]"Executed 12+ penetration tests using Metasploit, Burp Suite, and Nmap [cite: 28, 32]",
-      [cite_start]"Discovered 47 critical vulnerabilities with 48-hour SLA remediation [cite: 29, 33]",
-      [cite_start]"Reduced security incidents by 30% through OSINT reconnaissance [cite: 30, 33]",
-      [cite_start]"Briefed senior stakeholders on risk-prioritized action plans [cite: 31, 33]"
+      "Executed 12+ penetration tests using Metasploit, Burp Suite, and Nmap",
+      "Discovered 47 critical vulnerabilities with 48-hour SLA remediation",
+      "Reduced security incidents by 30% through OSINT reconnaissance",
+      "Briefed senior stakeholders on risk-prioritized action plans"
     ],
     tags: ["Metasploit", "OSINT", "Threat Modeling"],
     status: "complete"
@@ -50,12 +50,12 @@ const experiences: ExperienceData[] = [
     organization: "Accenture Federal Services",
     period: "Jul 2021 - Oct 2024",
     location: "Washington, DC",
-    [cite_start]description: "Optimized federal project portfolios and developed compliance frameworks[cite: 34, 37].",
+    description: "Optimized federal project portfolios and developed compliance frameworks.",
     highlights: [
-      [cite_start]"Optimized capital portfolios for DoD, achieving 30% improvement [cite: 37, 42]",
-      [cite_start]"Developed robust compliance frameworks with DLA [cite: 38, 43]",
-      [cite_start]"Designed user-centric interfaces for energy.gov [cite: 40, 46]",
-      [cite_start]"Reduced operational costs by 15% through analysis [cite: 41, 47]"
+      "Optimized capital portfolios for DoD, achieving 30% improvement",
+      "Developed robust compliance frameworks with DLA",
+      "Designed user-centric interfaces for energy.gov",
+      "Reduced operational costs by 15% through analysis"
     ],
     tags: ["DoD", "Policy", "UX/UI"],
     status: "complete"
@@ -65,11 +65,11 @@ const experiences: ExperienceData[] = [
     organization: "SAP SuccessFactors",
     period: "Dec 2019 - Mar 2021",
     location: "Newtown Square, PA",
-    [cite_start]description: "Created ROI reports and analyzed customer data for strategic decisions[cite: 52, 53].",
+    description: "Created ROI reports and analyzed customer data for strategic decisions.",
     highlights: [
-      [cite_start]"Created ROI reports for budget allocations and planning [cite: 53, 56]",
-      [cite_start]"Improved operational efficiency by 25% through data analysis [cite: 54, 57]",
-      [cite_start]"Achieved 30% reduction in data retrieval time [cite: 55, 57]"
+      "Created ROI reports for budget allocations and planning",
+      "Improved operational efficiency by 25% through data analysis",
+      "Achieved 30% reduction in data retrieval time"
     ],
     tags: ["Data Analysis", "ROI", "Process Optimization"],
     status: "complete"
@@ -81,7 +81,6 @@ const Experience = () => {
 
   return (
     <section id="experience" className="py-12 md:py-20 bg-slate-50">
-      {/* Container: max-w-prose prevents text from stretching too wide on desktop */}
       <div className="container mx-auto max-w-prose px-4">
         
         {/* Section Header */}

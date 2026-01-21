@@ -43,11 +43,11 @@ export type ContactFormData = z.infer<typeof contactFormSchema>;
  * EmailJS environment-aware constants.
  * These read from Vite's import.meta.env at module load time.
  */
-export const EMAILJS_SERVICE_ID = altruisticxai_1994
+export const EMAILJS_SERVICE_ID =
   import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
-export const EMAILJS_TEMPLATE_ID = portfolio_form11
+export const EMAILJS_TEMPLATE_ID =
   (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string) || "portfolio_form11";
-export const EMAILJS_PUBLIC_KEY = ef4gt_YB35_O5nFin
+export const EMAILJS_PUBLIC_KEY =
   import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
 
 /**

@@ -159,7 +159,7 @@ const Skills = () => {
         <h3 className="text-[10px] md:text-xs font-medium text-foreground mb-2">
           Also Proficient In
         </h3>
-        <div className="flex-wrap gap-1 flex items-start justify-center">
+        <div className="flex-wrap gap-1 flex items-start justify-center text-black">
           {additionalSkills.map(skill => <motion.span key={skill} className="px-1.5 py-0.5 border border-border/50 rounded-full text-[7px] md:text-[8px] text-muted-foreground hover:border-primary hover:text-primary transition-colors bg-muted/30" whileHover={{
           scale: 1.05
         }}>

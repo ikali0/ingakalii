@@ -33,7 +33,7 @@ const Contact = () => {
                 <div className="w-3 h-3 rounded-sm bg-accent" />
               </div>
             </div>
-            <div className="p-4">
+            <div className="p-4 px-[12px] py-[12px]">
               <ContactForm />
             </div>
           </div>
@@ -45,7 +45,7 @@ const Contact = () => {
               <div className="retro-title-bar">
                 <span className="font-bold text-sm">What I Can Help With</span>
               </div>
-              <div className="p-4">
+              <div className="p-4 px-[11px] py-px">
                 <ul className="space-y-2">
                   {services.map((service, index) => <li key={index} className="flex items-start gap-3 text-foreground">
                       <span className="text-accent font-medium">→</span>
@@ -60,7 +60,7 @@ const Contact = () => {
               <div className="retro-title-bar">
                 <span className="font-bold text-sm">Quick Links</span>
               </div>
-              <div className="p-4 space-y-3">
+              <div className="p-4 space-y-3 py-[11px] px-[11px]">
                 <a href="mailto:altruisticxai@gmail.com" className="retro-link-button">
                   <Mail className="w-4 h-4" />
                   <span>altruisticxai@gmail.com</span>

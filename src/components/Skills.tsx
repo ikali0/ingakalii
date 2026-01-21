@@ -90,9 +90,7 @@ const Skills = () => {
           <h2 className="font-display text-lg md:text-2xl font-medium text-foreground mb-1.5">
             Skills & Technologies
           </h2>
-          <p className="text-[10px] md:text-sm text-muted-foreground max-w-md">
-            A comprehensive toolkit built over years of hands-on work.
-          </p>
+          
         </motion.div>
 
         {/* Skill Cards Grid */}
@@ -156,9 +154,7 @@ const Skills = () => {
         <div className="h-px bg-border/40 mb-4" />
 
         {/* Additional Skills */}
-        <h3 className="text-[10px] md:text-xs font-medium text-foreground mb-2">
-          Also Proficient In
-        </h3>
+        
         <div className="flex-wrap gap-1 flex items-start justify-center">
           {additionalSkills.map(skill => <motion.span key={skill} className="px-1.5 py-0.5 border border-border/50 rounded-full text-[7px] md:text-[8px] text-muted-foreground hover:border-primary hover:text-primary transition-colors bg-muted/30" whileHover={{
           scale: 1.05

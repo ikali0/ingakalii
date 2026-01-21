@@ -5,29 +5,29 @@ import { CartoonButton } from "./ui/cartoon-button";
 const Hero = () => {
   return (
     <section className="relative min-h-[100svh] w-full flex flex-col items-center justify-center overflow-hidden px-6 py-12 sm:py-20">
-      {/* Background Layer - High Performance */}
+      {/* Background Layer */}
       <div className="absolute inset-0 z-0">
         <EntropyBackground />
       </div>
       
-      {/* Readability Overlay - Ensures text pops against particles */}
+      {/* Readability Overlay */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/20 via-transparent to-background/90 pointer-events-none" />
       
       <div className="container relative z-20 mx-auto max-w-5xl flex flex-col items-center md:items-start text-center md:text-left">
         
-        {/* Badge: Applied AI */}
+        {/* Badge */}
         <div className="animate-fade-up opacity-0">
           <span className="inline-block px-4 py-1.5 mb-6 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase bg-fuchsia-300 text-fuchsia-950 rounded-full shadow-sm">
             Applied AI Engineer & Independent Consultant
           </span>
         </div>
 
-        {/* Name: Optimized for all screens */}
+        {/* Name */}
         <h1 className="animate-fade-up opacity-0 [animation-delay:200ms] font-display text-6xl sm:text-7xl lg:text-9xl font-bold tracking-tight text-foreground mb-6 leading-[0.85]">
           Inga K.
         </h1>
 
-        {/* Subtext: Better line-height and contrast */}
+        {/* Subtext */}
         <p className="animate-fade-up opacity-0 [animation-delay:400ms] text-lg sm:text-xl md:text-2xl font-light text-slate-700 dark:text-slate-300 mb-10 max-w-2xl leading-relaxed text-balance">
           I translate{" "}
           <span className="relative inline-block">
@@ -39,7 +39,7 @@ const Hero = () => {
           and build AI systems that hold up under compliance, security, and real-world pressure.
         </p>
 
-        {/* Social Actions: Standardized Hit-Boxes */}
+        {/* Social Actions */}
         <div className="animate-fade-up opacity-0 [animation-delay:600ms] flex items-center justify-center md:justify-start gap-5 mb-12">
           <a 
             href="https://www.linkedin.com/in/ik11/" 
@@ -59,8 +59,8 @@ const Hero = () => {
           </a>
         </div>
 
-        {/* CTA Buttons: Grid for Mobile Taps, Flex for Desktop Flow */}
-        <div className="animate-fade-up opacity-0 [animation-delay:800ms] grid grid-cols-2 gap-3 sm:flex sm:flex-wrap md:justify-start w-full max-w-sm md:max-w-none">
+        {/* CTA Buttons: Corrected Grid Implementation */}
+        <div className="animate-fade-up opacity-0 [animation-delay:800ms] grid grid-cols-2 gap-4 sm:flex sm:flex-wrap md:justify-start w-full max-w-sm md:max-w-none">
           <CartoonButton label="Experience" href="#experience" className="w-full sm:w-auto" />
           <CartoonButton label="Portfolio" href="#portfolio" className="w-full sm:w-auto" />
           <CartoonButton label="About" href="#about" className="w-full sm:w-auto" />

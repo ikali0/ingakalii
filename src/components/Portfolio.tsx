@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { FlippingCard } from "@/components/ui/flipping-card";
 import { motion, AnimatePresence } from "framer-motion";
@@ -126,8 +126,8 @@ function ProjectCardBack({ project }: { project: ProjectData }) {
   );
 }
 
-const Portfolio = () => {
-  const [filter, setFilter] = useState("All");
+const Portfolio: React.FC = () => {
+  const [filter, setFilter] = useState<string>("All");
 
   const filteredProjects = projects.filter(p =>
     filter === "All" ? true : p.category === filter

@@ -171,12 +171,12 @@ const Experience = () => {
                       <p className="text-[8px] md:text-[10px] text-muted-foreground mb-1.5">{exp.organization}</p>
 
                       {/* Description */}
-                      <p className="text-[8px] md:text-[10px] text-foreground/70 leading-relaxed mb-1.5">
+                      <p className="text-[8px] md:text-[10px] leading-relaxed mb-1.5 text-purple-700">
                         {exp.description}
                       </p>
 
                       {/* Expand Button */}
-                      <button className="flex items-center gap-0.5 text-[8px] md:text-[9px] text-primary hover:text-primary/80 transition-colors mb-1.5" onClick={e => {
+                      <button className="flex items-center gap-0.5 text-[8px] md:text-[9px] transition-colors mb-1.5 text-black" onClick={e => {
                     e.stopPropagation();
                     toggleExpand(index);
                   }}>
@@ -224,7 +224,7 @@ const Experience = () => {
 
                       {/* Tags */}
                       <div className="flex flex-wrap gap-1">
-                        {exp.tags.map(tag => <span key={tag} className="px-1 py-0.5 bg-muted text-muted-foreground text-[7px] md:text-[8px] rounded border border-border/40">
+                        {exp.tags.map(tag => <span key={tag} className="px-1 py-0.5 bg-muted text-[7px] md:text-[8px] rounded border border-border/40 text-purple-900">
                             {tag}
                           </span>)}
                       </div>

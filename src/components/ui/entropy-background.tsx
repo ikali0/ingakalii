@@ -248,7 +248,7 @@ export const EntropyBackground = forwardRef<HTMLDivElement, EntropyBackgroundPro
     };
   }, []);
   return <div ref={containerRef} className={cn("absolute inset-0 bg-background", className)}>
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full shadow-sm" />
+      <canvas ref={canvasRef} className="<div class=\"absolute inset-0 size-full shadow-md sm:shadow-sm\"></div>" />
     </div>;
 });
 EntropyBackground.displayName = "EntropyBackground";

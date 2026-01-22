@@ -223,21 +223,21 @@ const ContactForm = ({
   }, [reset, toast]);
   return <form onSubmit={handleSubmit(onSubmit)} className={className}>
       {/* Name Field */}
-      <div className="space-y-2">
+      <div className="space-y-2 my-[10px]">
         <Label htmlFor="name">Name</Label>
         <Input id="name" placeholder="Your name" disabled={isSending} {...register("name")} />
         {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
       </div>
 
       {/* Email Field */}
-      <div className="space-y-2 mt-3">
+      <div className="space-y-2 mt-3 my-[10px]">
         <Label htmlFor="email">Email</Label>
         <Input id="email" type="email" placeholder="your.email@example.com" disabled={isSending} {...register("email")} />
         {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
       </div>
 
       {/* Subject Field */}
-      <div className="space-y-2 mt-3">
+      <div className="space-y-2 mt-3 my-[10px]">
         <Label htmlFor="subject">Subject</Label>
         <Input id="subject" placeholder="What's this about?" disabled={isSending} {...register("subject")} />
         {errors.subject && <p className="text-xs text-destructive">{errors.subject.message}</p>}

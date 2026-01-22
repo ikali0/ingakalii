@@ -33,7 +33,7 @@ const Contact = () => {
                 <div className="w-3 h-3 rounded-sm bg-accent" />
               </div>
             </div>
-            <div className="p-4 px-[12px] py-[12px]">
+            <div className="p-4 rounded-sm shadow-sm opacity-80 px-[8px] py-[8px]">
               <ContactForm />
             </div>
           </div>

@@ -71,7 +71,7 @@ const About = () => {
         <div className="text-xs sm:text-sm text-muted-foreground space-y-3 mb-6 sm:mb-8">
           <p>
             Developer and designer creating digital experiences. Background in{" "}
-            <strong className="text-foreground">computer science and philosophy</strong>.
+            <strong className="text-foreground">computer science, public policy, and economics </strong>.
           </p>
           <p>
             Full-stack development focused on the intersection of{" "}

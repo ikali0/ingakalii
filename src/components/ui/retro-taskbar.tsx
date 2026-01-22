@@ -180,10 +180,7 @@ export const RetroTaskbar = () => {
           {/* Right side: CRT Toggle + Clock */}
           <div className="flex items-center gap-2">
             {/* CRT Toggle Button */}
-            <button onClick={() => setCrtEnabled(!crtEnabled)} className="retro-quick-launch px-2 flex items-center justify-center gap-[2px]" aria-label={crtEnabled ? "Disable CRT effects" : "Enable CRT effects"} title={crtEnabled ? "Disable CRT effects" : "Enable CRT effects"}>
-              {crtEnabled ? <Tv className="w-4 h-4" /> : <TvMinimalPlay className="w-4 h-4" />}
-              <span className="text-[10px] hidden sm:inline text-center">CRT</span>
-            </button>
+            
 
             {/* Clock */}
             <div className="retro-clock">

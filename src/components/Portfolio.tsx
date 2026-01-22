@@ -124,10 +124,10 @@ const Portfolio = () => {
           <p className="text-xs md:text-sm uppercase tracking-widest font-medium mb-2 text-primary">
             ​Personal projects 
           </p>
-          <h2 className="font-display text-2xl font-medium text-foreground mb-3 md:text-2xl">
+          <h2 className="font-display text-2xl font-medium text-foreground mb-3 md:text-3xl">
             Portfolio
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground max-w-md mx-auto">
+          <p className="text-sm text-muted-foreground max-w-md mx-auto md:text-sm">
             A selection of projects I've designed and built.
           </p>
         </div>

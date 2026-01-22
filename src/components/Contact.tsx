@@ -15,10 +15,10 @@ const Contact = () => {
         <p className="text-sm uppercase tracking-widest text-accent font-medium mb-3 text-center">
           Get In Touch
         </p>
-        <h2 className="font-display text-3xl md:text-4xl font-medium text-foreground mb-6 text-center">
-          Let's Build Something Great
+        <h2 className="font-display text-3xl font-medium text-foreground mb-6 text-center md:text-3xl">
+          ​Let's Connect 
         </h2>
-        <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto text-center">
+        <p className="text-muted-foreground mb-10 max-w-xl mx-auto text-center text-sm">
           I'm currently open to freelance projects and full-time opportunities.
           Let's talk about how I can help bring your ideas to life.
         </p>

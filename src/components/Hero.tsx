@@ -38,7 +38,7 @@ const Hero = () => {
         </p>
 
         {/* Social Actions */}
-        <div className="animate-fade-up opacity-0 [animation-delay:600ms] flex items-center justify-center md:justify-start mb-12 gap-[14px]">
+        <div className="animate-fade-up opacity-0 [animation-delay:600ms] md:justify-start mb-12 flex items-start justify-center gap-[10px]">
           <a href="https://www.linkedin.com/in/ik11/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-[#0077b5] hover:bg-[#005c8d] text-white transition-all hover:scale-110 active:scale-95 shadow-md rounded-sm" aria-label="LinkedIn Profile">
             <Linkedin className="w-5 h-5 fill-current" />
           </a>

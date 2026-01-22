@@ -35,7 +35,7 @@ export function CartoonButton({
       {/* Enhanced glow effect */}
       <div className="absolute inset-0 rounded-full bg-primary/15 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       {/* Inner glow ring */}
-      <div className="absolute inset-0 rounded-full border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+      <div className="absolute inset-0 border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-sm" />
     </>;
   if (href) {
     return <a href={href} className={`inline-flex items-center justify-center ${buttonClasses}`}>

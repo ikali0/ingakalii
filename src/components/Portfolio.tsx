@@ -62,94 +62,63 @@ function ProjectCardFront({
 }: {
   project: ProjectData;
 }) {
-  return (
-    <div className="flex flex-col h-full w-full overflow-hidden rounded-lg bg-card shadow-md">
+  return <div className="flex flex-col h-full w-full overflow-hidden rounded-lg bg-card shadow-md">
       {/* Notebook spiral binding effect */}
       <div className="absolute left-0 top-0 bottom-0 w-4 md:w-5 bg-muted/60 border-r border-border flex flex-col justify-around py-3">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-border mx-auto" />
-        ))}
+        {[...Array(6)].map((_, i) => <div key={i} className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-border mx-auto" />)}
       </div>
       
       {/* Content with notebook margin */}
       <div className="ml-4 md:ml-5 flex flex-col h-full">
         {/* Image */}
         <div className="aspect-[16/10] overflow-hidden border-b border-border/50">
-          <img 
-            src={project.image} 
-            alt={project.title} 
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
-          />
+          <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
         </div>
         
         {/* Content area */}
-        <div 
-          className="flex-1 p-3 md:p-4 relative"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(transparent, transparent 15px, hsl(var(--border) / 0.3) 15px, hsl(var(--border) / 0.3) 16px)',
-            backgroundSize: '100% 16px'
-          }}
-        >
+        <div className="flex-1 p-3 md:p-4 relative" style={{
+        backgroundImage: 'repeating-linear-gradient(transparent, transparent 15px, hsl(var(--border) / 0.3) 15px, hsl(var(--border) / 0.3) 16px)',
+        backgroundSize: '100% 16px'
+      }}>
           <h3 className="text-sm md:text-base font-semibold text-foreground leading-tight line-clamp-2 mb-2">
             {project.title}
           </h3>
           <div className="flex flex-wrap gap-1.5 mt-2">
-            {project.tags.map((tag) => (
-              <span 
-                key={tag} 
-                className="text-[10px] md:text-xs text-primary bg-primary/10 px-2 py-1 rounded-full border border-primary/20 font-medium"
-              >
+            {project.tags.map(tag => <span key={tag} className="text-[10px] md:text-xs text-primary bg-primary/10 px-2 py-1 rounded-full border border-primary/20 font-medium">
                 {tag}
-              </span>
-            ))}
+              </span>)}
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }
 function ProjectCardBack({
   project
 }: {
   project: ProjectData;
 }) {
-  return (
-    <div className="flex flex-col h-full w-full rounded-lg bg-card shadow-md relative overflow-hidden">
+  return <div className="flex flex-col h-full w-full rounded-lg bg-card shadow-md relative overflow-hidden">
       {/* Notebook spiral binding effect */}
       <div className="absolute left-0 top-0 bottom-0 w-4 md:w-5 bg-muted/60 border-r border-border flex flex-col justify-around z-10 py-3">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-border mx-auto" />
-        ))}
+        {[...Array(6)].map((_, i) => <div key={i} className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-border mx-auto" />)}
       </div>
       
       {/* Content */}
-      <div 
-        className="ml-4 md:ml-5 flex-1 p-4 md:p-6 flex flex-col justify-center"
-        style={{
-          backgroundImage: 'repeating-linear-gradient(transparent, transparent 15px, hsl(var(--border) / 0.3) 15px, hsl(var(--border) / 0.3) 16px)',
-          backgroundSize: '100% 16px'
-        }}
-      >
-        <p className="text-sm md:text-base leading-relaxed text-foreground/80 mb-4 line-clamp-4">
+      <div className="ml-4 md:ml-5 flex-1 p-4 md:p-6 flex flex-col justify-center" style={{
+      backgroundImage: 'repeating-linear-gradient(transparent, transparent 15px, hsl(var(--border) / 0.3) 15px, hsl(var(--border) / 0.3) 16px)',
+      backgroundSize: '100% 16px'
+    }}>
+        <p className="text-sm leading-relaxed text-foreground/80 mb-4 line-clamp-4 md:text-sm">
           {project.description}
         </p>
-        {project.live && (
-          <a 
-            href={project.live} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors shadow-sm self-start"
-          >
+        {project.live && <a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 med-primary text-primary-foreground px-4 py-2 rounded-med text-sm font-medium hover: med-primary/90 transition-colors shadow-sm self-start">
             View Project <ExternalLink className="w-4 h-4" />
-          </a>
-        )}
+          </a>}
       </div>
-    </div>
-  );
+    </div>;
 }
 const Portfolio = () => {
-  return (
-    <section id="portfolio" className="py-12 md:py-20 px-4 bg-slate-50">
+  return <section id="portfolio" className="py-12 md:py-20 px-4 bg-slate-50">
       <div className="container mx-auto max-w-5xl">
         <div className="mb-8 md:mb-12 text-center">
           <p className="text-xs md:text-sm uppercase tracking-widest font-medium mb-2 text-primary">
@@ -165,20 +134,9 @@ const Portfolio = () => {
 
         {/* Responsive grid: 1 col mobile, 2 cols tablet, 3 cols desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projects.map((project) => (
-            <FlippingCard
-              key={project.title}
-              width={280}
-              height={300}
-              className="w-full !h-[280px] sm:!h-[300px]"
-              frontContent={<ProjectCardFront project={project} />}
-              backContent={<ProjectCardBack project={project} />}
-            />
-          ))}
+          {projects.map(project => <FlippingCard key={project.title} width={280} height={300} className="w-full !h-[280px] sm:!h-[300px]" frontContent={<ProjectCardFront project={project} />} backContent={<ProjectCardBack project={project} />} />)}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Portfolio;

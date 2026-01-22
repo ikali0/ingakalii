@@ -40,11 +40,12 @@ export type ContactFormData = z.infer<typeof contactFormSchema>;
 
 /**
  * EMAILJS CONFIGURATION
- * Keys are hardcoded here as requested.
+ * Uses environment variables with fallbacks to hardcoded values.
+ * Set these in your environment: VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY
  */
-export const EMAILJS_SERVICE_ID = "altruisticxai_1994";
-export const EMAILJS_TEMPLATE_ID = "portfolio_form11";
-export const EMAILJS_PUBLIC_KEY = "ef4gt_YB35_O5nFin";
+export const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "altruisticxai_1994";
+export const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "portfolio_form11";
+export const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "ef4gt_YB35_O5nFin";
 
 /**
  * Helper to verify EmailJS configuration.
@@ -308,7 +309,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
         </Button>
 
         {status === "success" && (
-          <div className="flex items-center text-green-600 text-sm">
+          <div className="flex items-center text-primary text-sm">
             <CheckCircle className="mr-1 h-4 w-4" /> Sent
           </div>
         )}

@@ -7,6 +7,7 @@ interface CartoonButtonProps {
   onClick?: () => void;
   href?: string;
   size?: 'sm' | 'md' | 'lg';
+  className?: string;
 }
 export function CartoonButton({
   label,
@@ -15,7 +16,8 @@ export function CartoonButton({
   disabled = false,
   onClick,
   href,
-  size = 'md'
+  size = 'md',
+  className
 }: CartoonButtonProps) {
   const handleClick = () => {
     if (disabled) return;
@@ -26,7 +28,7 @@ export function CartoonButton({
     md: 'h-9 px-4 text-xs sm:h-9 sm:px-4 sm:text-xs',
     lg: 'h-11 px-5 text-sm sm:h-10 sm:px-4 sm:text-xs'
   };
-  const buttonClasses = cn("relative rounded-full font-medium text-foreground border border-primary/40 transition-all duration-200 overflow-hidden group", sizeClasses[size], color, "animate-pulse-glow", "hover:shadow-[0_3px_0_0_hsl(var(--primary)/0.5),0_0_35px_hsl(var(--primary)/0.5)]", disabled ? 'opacity-50 pointer-events-none' : 'hover:-translate-y-1 hover:brightness-110 active:translate-y-0.5 active:shadow-[0_1px_0_0_hsl(var(--primary)/0.3)]');
+  const buttonClasses = cn("relative rounded-full font-medium text-foreground border border-primary/40 transition-all duration-200 overflow-hidden group", sizeClasses[size], color, "animate-pulse-glow", "hover:shadow-[0_3px_0_0_hsl(var(--primary)/0.5),0_0_35px_hsl(var(--primary)/0.5)]", disabled ? 'opacity-50 pointer-events-none' : 'hover:-translate-y-1 hover:brightness-110 active:translate-y-0.5 active:shadow-[0_1px_0_0_hsl(var(--primary)/0.3)]', className);
   const content = <>
       <span className="relative z-8 whitespace-wrap text-center text-xs">{label}</span>
       {hasHighlight && !disabled && <div className="absolute top-1/2 left-[-100%] w-12 h-16 bg-white/30 -translate-y-1/2 rotate-12 transition-all duration-500 ease-in-out group-hover:left-[200%]" />}

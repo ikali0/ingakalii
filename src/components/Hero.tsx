@@ -21,7 +21,7 @@ const Hero = () => {
         </div>
 
         {/* Name */}
-        <h1 className="animate-fade-up opacity-0 [animation-delay:200ms] sm:text-7xl lg:text-9xl font-bold tracking-tight text-foreground mb-6 leading-[0.85] text-7xl font-mono">
+        <h1 className="animate-fade-up opacity-0 [animation-delay:200ms] sm:text-7xl lg:text-9xl font-bold tracking-tight text-foreground mb-6 leading-[0.85] font-mono text-7xl">
           Inga K.
         </h1>
 
@@ -48,7 +48,7 @@ const Hero = () => {
         </div>
 
         {/* CTA Buttons: Corrected Grid Implementation */}
-        <div className="animate-fade-up opacity-0 [animation-delay:800ms] grid-cols-2 sm:flex sm:flex-wrap md:justify-start w-full max-w-sm md:max-w-none gap-[14px] flex items-start justify-center">
+        <div className="animate-fade-up opacity-0 [animation-delay:800ms] grid-cols-2 xsm:flex sm:flex-wrap md:justify-start min-w-full max-w-sm sm:max-w-none flex items-start justify-center gap-[10px]">
           <CartoonButton label="Experience" href="#experience" className="w-full sm:w-auto" />
           <CartoonButton label="Portfolio" href="#portfolio" className="w-full sm:w-auto" />
           <CartoonButton label="About" href="#about" className="w-full sm:w-auto" />

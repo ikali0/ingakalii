@@ -21,7 +21,7 @@ const Hero = () => {
         </div>
 
         {/* Name */}
-        <h1 className="animate-fade-up opacity-0 [animation-delay:200ms] sm:text-7xl lg:text-9xl font-bold tracking-tight text-foreground mb-6 leading-[0.85] font-mono text-7xl">
+        <h1 className="animate-fade-up opacity-0 [animation-delay:200ms] sm:text-7xl lg:text-9xl font-bold tracking-tight text-foreground mb-6 leading-[0.85] font-mono text-6xl">
           Inga K.
         </h1>
 

@@ -83,9 +83,7 @@ const Experience = () => {
           <h2 className="font-display text-lg font-medium text-foreground mb-1.5 md:text-3xl">
             Professional Experience
           </h2>
-          <p className="text-[10px] md:text-sm text-muted-foreground max-w-md">
-            Building secure, compliant, and impactful AI systems.
-          </p>
+          
         </motion.div>
 
         {/* Timeline */}

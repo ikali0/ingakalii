@@ -1,10 +1,8 @@
 import { ArrowDown, Linkedin, Mail } from "lucide-react";
 import EntropyBackground from "./ui/entropy-background";
 import { CartoonButton } from "./ui/cartoon-button";
-
 const Hero = () => {
-  return (
-    <section className="relative min-h-[100svh] w-full flex flex-col items-center justify-center overflow-hidden px-6 py-12 sm:py-20">
+  return <section className="relative min-h-[100svh] w-full flex flex-col items-center justify-center overflow-hidden px-6 py-12 sm:py-20">
       {/* Background Layer */}
       <div className="absolute inset-0 z-0">
         <EntropyBackground />
@@ -23,12 +21,12 @@ const Hero = () => {
         </div>
 
         {/* Name */}
-        <h1 className="animate-fade-up opacity-0 [animation-delay:200ms] font-display text-6xl sm:text-7xl lg:text-9xl font-bold tracking-tight text-foreground mb-6 leading-[0.85]">
+        <h1 className="animate-fade-up opacity-0 [animation-delay:200ms] font-display sm:text-7xl lg:text-9xl font-bold tracking-tight text-foreground mb-6 leading-[0.85] text-7xl">
           Inga K.
         </h1>
 
         {/* Subtext */}
-        <p className="animate-fade-up opacity-0 [animation-delay:400ms] text-lg sm:text-xl md:text-2xl font-light text-slate-700 dark:text-slate-300 mb-10 max-w-2xl leading-relaxed text-balance">
+        <p className="animate-fade-up opacity-0 [animation-delay:400ms] sm:text-xl md:text-2xl font-light mb-10 max-w-2xl leading-relaxed text-balance text-xl text-slate-800">
           I translate{" "}
           <span className="relative inline-block">
             <span className="relative z-10 font-semibold text-foreground italic">
@@ -40,21 +38,11 @@ const Hero = () => {
         </p>
 
         {/* Social Actions */}
-        <div className="animate-fade-up opacity-0 [animation-delay:600ms] flex items-center justify-center md:justify-start gap-5 mb-12">
-          <a 
-            href="https://www.linkedin.com/in/ik11/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="flex items-center justify-center w-12 h-12 bg-[#0077b5] hover:bg-[#005c8d] text-white rounded-xl transition-all hover:scale-110 active:scale-95 shadow-md"
-            aria-label="LinkedIn Profile"
-          >
+        <div className="animate-fade-up opacity-0 [animation-delay:600ms] flex items-center justify-center md:justify-start mb-12 gap-[14px]">
+          <a href="https://www.linkedin.com/in/ik11/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 bg-[#0077b5] hover:bg-[#005c8d] text-white transition-all hover:scale-110 active:scale-95 shadow-md rounded-sm" aria-label="LinkedIn Profile">
             <Linkedin className="w-5 h-5 fill-current" />
           </a>
-          <a 
-            href="mailto:altruisticxai@gmail.com" 
-            className="flex items-center justify-center w-12 h-12 bg-orange-500 hover:bg-orange-600 text-white rounded-xl transition-all hover:scale-110 active:scale-95 shadow-md"
-            aria-label="Send Email"
-          >
+          <a href="mailto:altruisticxai@gmail.com" className="flex items-center justify-center w-12 h-12 bg-orange-500 hover:bg-orange-600 text-white transition-all hover:scale-110 active:scale-95 shadow-md rounded-sm" aria-label="Send Email">
             <Mail className="w-5 h-5" />
           </a>
         </div>
@@ -75,8 +63,6 @@ const Hero = () => {
           </a>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;

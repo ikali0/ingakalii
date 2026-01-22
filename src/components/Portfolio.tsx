@@ -111,7 +111,7 @@ function ProjectCardBack({
         <p className="text-sm leading-relaxed text-foreground/80 mb-4 line-clamp-4 md:text-sm">
           {project.description}
         </p>
-        {project.live && <a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 med-primary text-primary-foreground px-4 py-2 rounded-med text-sm font-medium hover: med-primary/90 transition-colors shadow-sm self-start">
+        {project.live && <a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 med-primary rounded-med text-sm font-medium hover: med-primary/90 transition-colors shadow-sm self-start text-purple-500 px-[12px] py-[6px] bg-sidebar border border-slate-800 border-solid">
             View Project <ExternalLink className="w-4 h-4" />
           </a>}
       </div>
@@ -122,9 +122,9 @@ const Portfolio = () => {
       <div className="container mx-auto max-w-5xl">
         <div className="mb-8 md:mb-12 text-center">
           <p className="text-xs md:text-sm uppercase tracking-widest font-medium mb-2 text-primary">
-            Selected Work
+            ​Personal projects 
           </p>
-          <h2 className="font-display text-2xl md:text-4xl font-medium text-foreground mb-3">
+          <h2 className="font-display text-2xl font-medium text-foreground mb-3 md:text-2xl">
             Portfolio
           </h2>
           <p className="text-sm md:text-base text-muted-foreground max-w-md mx-auto">

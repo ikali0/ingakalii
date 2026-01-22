@@ -150,9 +150,9 @@ export const RetroTaskbar = () => {
 
       {/* Taskbar */}
       <div className="fixed bottom-0 left-0 right-0 z-50 retro-taskbar">
-        <div className="flex items-center justify-between h-full px-1">
+        <div className="h-full px-1 flex items-start justify-between bg-fuchsia-200 border-slate-800 border-solid border">
           {/* Left side: Start button + Quick launch */}
-          <div className="gap-1 flex items-start justify-center">
+          <div className="flex items-start justify-center gap-[2px]">
             {/* Start Button */}
             <button onClick={() => setIsStartOpen(!isStartOpen)} className={`retro-start-btn ${isStartOpen ? "retro-btn-pressed" : ""}`} aria-label="Start menu" aria-expanded={isStartOpen}>
               <div className="retro-windows-logo">

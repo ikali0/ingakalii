@@ -94,7 +94,7 @@ const Skills = () => {
           delay: idx * 0.1
         }} viewport={{
           once: true
-        }} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+        }} className="bg-white p-5 rounded-2xl border shadow-sm hover:shadow-md transition-shadow border-solid border-popover-foreground">
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 border-b pb-2">
                 {cat.category}
               </h3>

@@ -23,11 +23,11 @@ const Contact = () => {
           Let's talk about how I can help bring your ideas to life.
         </p>
 
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="shadow-sm">
           {/* Contact Form Window */}
           <div className="retro-window">
             <div className="retro-title-bar">
-              <span className="font-bold text-sm">Send a Message</span>
+              <span className="font-bold text-xs">Send a Message</span>
               <div className="flex gap-1">
                 <div className="w-3 h-3 rounded-sm bg-secondary" />
                 <div className="w-3 h-3 rounded-sm bg-accent" />
@@ -43,13 +43,13 @@ const Contact = () => {
             {/* Services Window */}
             <div className="retro-window">
               <div className="retro-title-bar">
-                <span className="font-bold text-sm">What I Can Help With</span>
+                <span className="font-bold text-xs">What I Can Help With</span>
               </div>
               <div className="p-4 px-[11px] py-px">
                 <ul className="space-y-2">
                   {services.map((service, index) => <li key={index} className="flex items-start gap-3 text-foreground">
                       <span className="text-accent font-medium">→</span>
-                      <span className="text-sm">{service}</span>
+                      <span className="text-xs">{service}</span>
                     </li>)}
                 </ul>
               </div>

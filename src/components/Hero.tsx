@@ -15,7 +15,7 @@ const Hero = () => {
         
         {/* Badge */}
         <div className="animate-fade-up opacity-0">
-          <span className="inline-block py-1.5 mb-6 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase bg-fuchsia-300 text-fuchsia-950 rounded-full shadow-sm px-[12px]">
+          <span className="inline-block py-1.5 mb-6 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase bg-fuchsia-300 rounded-full shadow-sm px-[6px] text-center text-slate-950">
             Applied AI Engineer & Independent Consultant
           </span>
         </div>

@@ -55,7 +55,7 @@ const About = () => {
   return <section id="about" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4 bg-slate-50">
       <div className="container mx-auto max-w-2xl border border-border/50 shadow-sm rounded-md p-4 sm:p-6 bg-[sidebar-primary-foreground] bg-background">
         {/* Notebook spiral effect */}
-        <div className="absolute left-2 top-4 bottom-4 w-3 hidden sm:flex flex-col gap-2">
+        <div className="absolute left-2 top-4 bottom-4 w-3 hidden sm:flex flex-col gap-[6px]">
           {[...Array(8)].map((_, i) => <div key={i} className="w-2 h-2 rounded-full bg-border/60" />)}
         </div>
         

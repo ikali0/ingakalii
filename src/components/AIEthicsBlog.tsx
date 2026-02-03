@@ -1,18 +1,18 @@
 /**
  * AI Ethics Blog Section Component
- * 
+ *
  * Displays article previews with external links to Substack/Medium.
  * Features a clean card-based layout with reading time estimates.
  */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { 
-  faArrowRight, 
-  faClock, 
+import {
+  faArrowRight,
+  faClock,
   faBookOpen,
   faScaleBalanced,
   faBrain,
   faShieldHalved,
-  faGavel
+  faGavel,
 } from "@fortawesome/free-solid-svg-icons";
 import { faMedium } from "@fortawesome/free-brands-svg-icons";
 import { motion } from "framer-motion";
@@ -36,24 +36,26 @@ interface BlogArticle {
 const articles: BlogArticle[] = [
   {
     title: "Building Fairness Metrics That Actually Matter",
-    excerpt: "A practical guide to selecting and implementing fairness metrics that align with your organization's values and regulatory requirements.",
+    excerpt:
+      "A practical guide to selecting and implementing fairness metrics that align with your organization's values and regulatory requirements.",
     readTime: "8 min read",
     publishDate: "Jan 2025",
     category: "Bias Detection",
     icon: faScaleBalanced,
     url: "https://medium.com/@yourusername/building-fairness-metrics",
     platform: "medium",
-    featured: true,
   },
   {
-    title: "NIST AI RMF: From Framework to Implementation",
-    excerpt: "How to translate the NIST AI Risk Management Framework into actionable technical controls for your ML pipeline.",
-    readTime: "12 min read",
-    publishDate: "Dec 2024",
-    category: "Governance",
+    title: "Frameworks Don’t Govern — People Do",
+    excerpt:
+      "Why the NIST AI Risk Management Framework succeeds or fails based on human judgment, incentives, and organizational power—not checklists.",
+    readTime: "7 min read",
+    publishDate: "Jan 2025",
+    category: "AI Governance",
     icon: faGavel,
-    url: "https://yourusername.substack.com/p/nist-ai-rmf-implementation",
+    url: "https://ingakali.substack.com/p/frameworks-dont-governpeople-do",
     platform: "substack",
+    featured: true,
   },
   {
     title: "The Hidden Costs of Algorithmic Bias",
@@ -87,12 +89,10 @@ function ArticleCard({ article }: ArticleCardProps) {
       href={article.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col h-full rounded-xl glass shadow-soft overflow-hidden touch-manipulation"
+      className="group flex flex-col h-full rounded-xl glass shadow-soft overflow-hidden"
       whileHover={{ y: -4, scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
-      {/* Featured Badge */}
       {article.featured && (
         <div className="bg-gradient-to-r from-primary to-accent px-3 py-1 text-center">
           <span className="text-[0.625rem] uppercase tracking-wider font-bold text-primary-foreground">
@@ -102,8 +102,7 @@ function ArticleCard({ article }: ArticleCardProps) {
       )}
 
       <div className="flex flex-col flex-1 p-card">
-        {/* Header Row */}
-        <div className="flex items-center justify-between gap-element-sm mb-element">
+        <div className="flex items-center justify-between mb-element">
           <div className="flex items-center gap-element-sm">
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
               <FontAwesomeIcon icon={article.icon} className="w-4 h-4 text-primary" />
@@ -112,117 +111,58 @@ function ArticleCard({ article }: ArticleCardProps) {
               {article.category}
             </Tag>
           </div>
+
           <div className="flex items-center gap-1 text-caption text-muted-foreground">
-            <FontAwesomeIcon 
-              icon={article.platform === "medium" ? faMedium : faBookOpen} 
-              className="w-3 h-3" 
-            />
+            <FontAwesomeIcon icon={article.platform === "medium" ? faMedium : faBookOpen} className="w-3 h-3" />
             <span className="hidden sm:inline">{article.platform === "medium" ? "Medium" : "Substack"}</span>
           </div>
         </div>
 
-        {/* Title */}
-        <h3 className="text-body font-semibold text-foreground leading-tight mb-element-sm group-hover:text-primary transition-colors">
-          {article.title}
-        </h3>
+        <h3 className="font-semibold mb-element-sm group-hover:text-primary transition-colors">{article.title}</h3>
 
-        {/* Excerpt */}
-        <p className="text-body-sm text-muted-foreground leading-relaxed line-clamp-3 mb-card-sm flex-1">
-          {article.excerpt}
-        </p>
+        <p className="text-muted-foreground line-clamp-3 flex-1">{article.excerpt}</p>
 
-        {/* Footer */}
-        <div className="flex items-center justify-between pt-element border-t border-border/50">
+        <div className="flex items-center justify-between pt-element border-t">
           <div className="flex items-center gap-element text-caption text-muted-foreground">
             <span>{article.publishDate}</span>
-            <span className="text-border">•</span>
-            <div className="flex items-center gap-1">
+            <span>•</span>
+            <span className="flex items-center gap-1">
               <FontAwesomeIcon icon={faClock} className="w-3 h-3" />
-              <span>{article.readTime}</span>
-            </div>
+              {article.readTime}
+            </span>
           </div>
-          
-          {/* Read More Arrow */}
-          <motion.div
-            className="flex items-center gap-1 text-primary text-caption font-medium"
-            whileHover={{ x: 4 }}
-          >
-            <span>Read</span>
-            <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3" />
-          </motion.div>
+
+          <span className="flex items-center gap-1 text-primary text-caption font-medium">
+            Read <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3" />
+          </span>
         </div>
       </div>
     </motion.a>
   );
 }
 
-const AIEthicsBlog = () => {
-  return (
-    <section 
-      id="blog" 
-      className="relative py-section-sm md:py-section px-4 bg-background overflow-hidden"
-      aria-labelledby="blog-heading"
-    >
-      {/* Abstract background */}
-      <GradientMesh className="inset-0 w-full h-full opacity-30" />
-      <ParallaxShape speed={0.15} rotateAmount={15} className="w-32 h-32 top-20 right-[5%]">
-        <CircleShape className="w-full h-full opacity-40" />
-      </ParallaxShape>
+const AIEthicsBlog = () => (
+  <section id="blog" className="relative py-section px-4 overflow-hidden">
+    <GradientMesh className="absolute inset-0 opacity-30" />
 
-      <div className="container relative z-10 mx-auto max-w-5xl">
-        <ScrollFade>
-          <SectionHeader 
-            overline="Insights"
-            title="AI Ethics Blog"
-            description="Thoughts on building responsible AI systems, governance frameworks, and the intersection of technology and ethics."
-          />
-        </ScrollFade>
+    <div className="container relative z-10 mx-auto max-w-5xl">
+      <ScrollFade>
+        <SectionHeader
+          overline="Insights"
+          title="AI Ethics Blog"
+          description="Thoughts on responsible AI, governance frameworks, and the human systems behind them."
+        />
+      </ScrollFade>
 
-        {/* Articles Grid */}
-        <StaggerContainer 
-          className="grid grid-cols-1 md:grid-cols-2 gap-card" 
-          staggerDelay={0.1}
-        >
-          {articles.map((article) => (
-            <StaggerItem key={article.title}>
-              <ArticleCard article={article} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-
-        {/* CTA to view all articles */}
-        <ScrollFade delay={0.3}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-element mt-container">
-            <motion.a
-              href="https://medium.com/@yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-element-sm px-6 py-3 min-h-[48px] rounded-lg bg-muted hover:bg-muted/80 active:bg-muted/60 text-foreground text-body-sm font-medium transition-colors touch-manipulation"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <FontAwesomeIcon icon={faMedium} className="w-5 h-5" />
-              <span>View All on Medium</span>
-              <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3 opacity-60" />
-            </motion.a>
-            
-            <motion.a
-              href="https://yourusername.substack.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-element-sm px-6 py-3 min-h-[48px] rounded-lg bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground text-body-sm font-medium transition-colors touch-manipulation"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <FontAwesomeIcon icon={faBookOpen} className="w-4 h-4" />
-              <span>Subscribe on Substack</span>
-              <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3 opacity-60" />
-            </motion.a>
-          </div>
-        </ScrollFade>
-      </div>
-    </section>
-  );
-};
+      <StaggerContainer className="grid md:grid-cols-2 gap-card">
+        {articles.map((article) => (
+          <StaggerItem key={article.title}>
+            <ArticleCard article={article} />
+          </StaggerItem>
+        ))}
+      </StaggerContainer>
+    </div>
+  </section>
+);
 
 export default AIEthicsBlog;

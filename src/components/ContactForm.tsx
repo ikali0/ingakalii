@@ -1,14 +1,14 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import emailjs from "@emailjs/browser";
 import { Send, Loader2, CheckCircle, AlertCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 /**
  * Validation schema for contact form
@@ -38,96 +38,6 @@ export const contactFormSchema = z.object({
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
 
-/**
- * EMAILJS CONFIGURATION
- * Uses environment variables with fallbacks to hardcoded values.
- * These are PUBLIC configuration values (not secrets) required for EmailJS browser SDK.
- * The public key is safe to expose client-side per EmailJS documentation.
- */
-export const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_mst73v9";
-export const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "SITE_FORM";
-export const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "65eWYLkIKGyzzMajE";
-
-/**
- * Helper to verify EmailJS configuration.
- */
-export function verifyEmailJSEnv() {
-  const missing: string[] = [];
-  if (!EMAILJS_PUBLIC_KEY) missing.push("EMAILJS_PUBLIC_KEY");
-  if (!EMAILJS_SERVICE_ID) missing.push("EMAILJS_SERVICE_ID");
-  if (!EMAILJS_TEMPLATE_ID) missing.push("EMAILJS_TEMPLATE_ID");
-
-  const ok = missing.length === 0;
-
-  // eslint-disable-next-line no-console
-  console.debug("[ContactForm] Config check", {
-    ok,
-    missing,
-    SERVICE_ID: EMAILJS_SERVICE_ID,
-    TEMPLATE_ID: EMAILJS_TEMPLATE_ID,
-    // Don't log the full public key for security best practices, even if client-side
-    PUBLIC_KEY_SET: !!EMAILJS_PUBLIC_KEY,
-  });
-
-  return { ok, missing };
-}
-
-/**
- * Rate limiting configuration
- */
-const RATE_LIMIT_KEY = "contact_form_submissions";
-const MAX_SUBMISSIONS = 3; 
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
-
-const formatRemainingTime = (ms: number) => {
-  const s = Math.ceil(ms / 1000);
-  if (s < 60) return `${s}s`;
-  const m = Math.ceil(s / 60);
-  return `${m}m`;
-};
-
-const checkRateLimit = (): { isLimited: boolean; remainingTime: number } => {
-  try {
-    const stored = localStorage.getItem(RATE_LIMIT_KEY);
-    if (!stored) return { isLimited: false, remainingTime: 0 };
-
-    const submissions: number[] = JSON.parse(stored);
-    const now = Date.now();
-
-    const validSubmissions = submissions.filter(
-      (timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS
-    );
-
-    if (validSubmissions.length >= MAX_SUBMISSIONS) {
-      const earliest = Math.min(...validSubmissions);
-      const remaining = RATE_LIMIT_WINDOW_MS - (now - earliest);
-      return { isLimited: true, remainingTime: remaining };
-    }
-
-    return { isLimited: false, remainingTime: 0 };
-  } catch (err) {
-    localStorage.removeItem(RATE_LIMIT_KEY);
-    return { isLimited: false, remainingTime: 0 };
-  }
-};
-
-const recordSubmission = () => {
-  try {
-    const stored = localStorage.getItem(RATE_LIMIT_KEY);
-    const submissions: number[] = stored ? JSON.parse(stored) : [];
-    
-    const now = Date.now();
-    submissions.push(now);
-    
-    const cleaned = submissions.filter(
-      (ts) => now - ts < RATE_LIMIT_WINDOW_MS
-    );
-    localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(cleaned));
-  } catch {
-    // ignore localStorage errors
-  }
-};
-
 interface ContactFormProps {
   className?: string;
 }
@@ -149,77 +59,56 @@ const ContactForm = ({ className }: ContactFormProps) => {
     "idle" | "sending" | "success" | "error" | "rate_limited"
   >("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [rateLimitTime, setRateLimitTime] = useState<number>(0);
 
   const isSending = status === "sending" || isSubmitting;
 
-  useEffect(() => {
-    // Initialize EmailJS with the hardcoded key
-    if (EMAILJS_PUBLIC_KEY) {
-      try {
-        emailjs.init(EMAILJS_PUBLIC_KEY);
-      } catch (err) {
-        console.warn("[ContactForm] Failed to init EmailJS:", err);
-      }
-    } else {
-      console.warn("[ContactForm] Public Key missing.");
-    }
-  }, []);
-
   const onSubmit = useCallback(
     async (data: ContactFormData) => {
-      // 1. Check Rate Limit
-      const { isLimited, remainingTime } = checkRateLimit();
-      if (isLimited) {
-        setStatus("rate_limited");
-        setRateLimitTime(remainingTime);
-        toast({
-          title: "Too Many Requests",
-          description: `Please wait ${formatRemainingTime(remainingTime)} before sending another message.`,
-          variant: "destructive",
-        });
-        return;
-      }
-
       setStatus("sending");
       setErrorMessage(null);
 
       try {
-        // 2. Validate Config
-        if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
-          throw new Error("Email service configuration is missing.");
-        }
-
-        const templateParams = {
-          from_name: data.name,
-          reply_to: data.email,
-          subject: data.subject,
-          message: data.message,
-        };
-
-        // 3. Send Email
-        await emailjs.send(
-          EMAILJS_SERVICE_ID, 
-          EMAILJS_TEMPLATE_ID, 
-          templateParams, 
-          EMAILJS_PUBLIC_KEY
+        // Call edge function with server-side rate limiting
+        const { data: response, error } = await supabase.functions.invoke(
+          "send-contact-email",
+          {
+            body: {
+              name: data.name,
+              email: data.email,
+              subject: data.subject,
+              message: data.message,
+            },
+          }
         );
 
-        // 4. Handle Success
+        if (error) {
+          throw error;
+        }
+
+        // Check for rate limit response
+        if (response?.error === "Rate limit exceeded") {
+          setStatus("rate_limited");
+          toast({
+            title: "Too Many Requests",
+            description: response.message || "Please try again later.",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        // Handle success
         setStatus("success");
-        recordSubmission();
         reset();
-        
+
         toast({
           title: "Message sent",
           description: "Thanks — I'll reply as soon as I can.",
           variant: "default",
         });
-
       } catch (err: any) {
-        // 5. Handle Error
         setStatus("error");
-        const message = err?.text || err?.message || "An unexpected error occurred.";
+        const message =
+          err?.message || err?.text || "An unexpected error occurred.";
         setErrorMessage(message);
 
         toast({
@@ -325,7 +214,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
         {status === "rate_limited" && (
           <div className="flex items-center text-muted-foreground text-sm">
             <Clock className="mr-1 h-4 w-4" />
-            Wait {formatRemainingTime(rateLimitTime)}
+            Rate limit exceeded
           </div>
         )}
       </div>

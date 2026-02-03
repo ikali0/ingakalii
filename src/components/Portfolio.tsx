@@ -360,7 +360,7 @@ function ProjectCard({
           </AnimatePresence>
 
           {/* Spacer to push button to bottom */}
-          
+          <div className="flex-1" />
 
           {/* Action Button - touch-friendly sizing */}
           {project.live && <motion.a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-element-sm w-full text-body-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 active:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-card rounded-md mt-card-sm min-h-[44px] touch-manipulation px-[6px] py-[6px] my-[10px]" aria-label={`View ${project.title} project`} whileHover={{

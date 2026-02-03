@@ -11,8 +11,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 import EntropyBackground from "./ui/entropy-background";
+
 const Hero = () => {
   return <section className="relative min-h-[100svh] w-full flex flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-section-sm sm:pb-section">
       {/* Background Layer */}
@@ -35,7 +41,7 @@ const Hero = () => {
         duration: 0.6,
         delay: 0.1
       }}>
-          <span className="inline-block py-1.5 mb-card uppercase bg-secondary/15 text-secondary-foreground rounded-full shadow-sm border border-secondary/25 backdrop-blur-sm text-xs font-normal font-serif text-center px-[6px]">
+          <span className="inline-block py-1.5 mb-card uppercase bg-secondary/15 text-secondary-foreground rounded-full shadow-sm border border-secondary/25 backdrop-blur-sm px-[8px] text-xs font-normal font-serif text-center">
             Applied AI Engineer & Independent Consultant
           </span>
         </motion.div>
@@ -79,23 +85,27 @@ const Hero = () => {
         {/* Social Actions */}
         <TooltipProvider>
           <motion.div className="md:justify-start mb-container-lg flex items-start justify-center gap-3" initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6,
-          delay: 0.6
-        }}>
+            opacity: 0,
+            y: 30
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.6
+          }}>
             {/* LinkedIn */}
             <Tooltip>
               <TooltipTrigger asChild>
-                <motion.a href="https://www.linkedin.com/in/ik11/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg shadow-sm touch-manipulation border border-[#0A66C2]/20 bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 transition-colors" aria-label="LinkedIn Profile" whileHover={{
-                scale: 1.05
-              }} whileTap={{
-                scale: 0.95
-              }}>
+                <motion.a 
+                  href="https://www.linkedin.com/in/ik11/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg shadow-sm touch-manipulation border border-[#0A66C2]/20 bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 transition-colors" 
+                  aria-label="LinkedIn Profile" 
+                  whileHover={{ scale: 1.05 }} 
+                  whileTap={{ scale: 0.95 }}
+                >
                   <FontAwesomeIcon icon={faLinkedin} className="w-4 h-4 text-[#0A66C2]" />
                 </motion.a>
               </TooltipTrigger>
@@ -107,11 +117,13 @@ const Hero = () => {
             {/* Mail */}
             <Tooltip>
               <TooltipTrigger asChild>
-                <motion.a href="mailto:altruisticxai@gmail.com" className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg shadow-sm touch-manipulation border border-pink-300/30 bg-pink-400/10 hover:bg-pink-400/20 transition-colors" aria-label="Send Email" whileHover={{
-                scale: 1.05
-              }} whileTap={{
-                scale: 0.95
-              }}>
+                <motion.a 
+                  href="mailto:altruisticxai@gmail.com" 
+                  className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg shadow-sm touch-manipulation border border-pink-300/30 bg-pink-400/10 hover:bg-pink-400/20 transition-colors" 
+                  aria-label="Send Email" 
+                  whileHover={{ scale: 1.05 }} 
+                  whileTap={{ scale: 0.95 }}
+                >
                   <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-pink-400" />
                 </motion.a>
               </TooltipTrigger>

@@ -79,7 +79,7 @@ function ArticleCard({
           </span>
         </div>}
 
-      <div className="flex-col flex-1 p-card py-[17px] px-[17px] flex items-start justify-start">
+      <div className="flex flex-col flex-1 p-card">
         <div className="flex items-center justify-between mb-element">
           <div className="flex items-center gap-element-sm">
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -92,7 +92,7 @@ function ArticleCard({
 
           <div className="flex items-center gap-1 text-caption text-muted-foreground">
             <FontAwesomeIcon icon={article.platform === "medium" ? faMedium : faBookOpen} className="w-3 h-3" />
-            <span className="hidden sm:inline text-sm text-center">{article.platform === "medium" ? "Medium" : "Substack"}</span>
+            <span className="hidden sm:inline">{article.platform === "medium" ? "Medium" : "Substack"}</span>
           </div>
         </div>
 
@@ -101,7 +101,14 @@ function ArticleCard({
         
 
         <div className="flex items-center justify-between pt-element border-t">
-          
+          <div className="flex items-center gap-element text-caption text-muted-foreground">
+            <span>{article.publishDate}</span>
+            <span>•</span>
+            <span className="flex items-center gap-1">
+              <FontAwesomeIcon icon={faClock} className="w-3 h-3" />
+              {article.readTime}
+            </span>
+          </div>
 
           <span className="flex items-center gap-1 text-primary text-caption font-medium">
             Read <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3" />

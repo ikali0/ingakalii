@@ -68,7 +68,7 @@ const projects: ProjectData[] = [
 
 function ProjectCard({ project }: { project: ProjectData }) {
   return (
-    <div className="group relative flex flex-col h-full overflow-hidden rounded-lg bg-card border-2 border-border shadow-card transition-all duration-300 hover:shadow-elevated hover:-translate-y-1">
+    <div className="group relative flex flex-col h-full overflow-hidden rounded-lg bg-card border-2 border-border shadow-card transition-all duration-300 ease-out hover:shadow-elevated hover:-translate-y-1.5 hover:border-primary/60">
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
@@ -94,7 +94,7 @@ function ProjectCard({ project }: { project: ProjectData }) {
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs text-secondary bg-secondary/10 px-2 py-0.5 rounded-full border border-secondary/30 font-medium"
+              className="text-xs text-secondary bg-secondary/10 px-2 py-0.5 rounded-full border border-secondary/30 font-medium transition-transform duration-300 group-hover:scale-[1.03]"
             >
               {tag}
             </span>
@@ -107,7 +107,7 @@ function ProjectCard({ project }: { project: ProjectData }) {
             href={project.live}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 text-sm font-medium text-primary-foreground bg-primary rounded-md hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 text-sm font-medium text-primary-foreground bg-primary rounded-md hover:bg-primary/90 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2"
           >
             View Project <ExternalLink className="w-4 h-4" />
           </a>

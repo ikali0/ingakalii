@@ -19,7 +19,8 @@ import { motion } from "framer-motion";
 import { SectionHeader } from "./ui/section-header";
 import { Tag } from "./ui/tag";
 import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
-import { GradientMesh, ParallaxShape, CircleShape } from "./ui/abstract-shapes";
+import { GradientMesh } from "./ui/abstract-shapes";
+
 interface BlogArticle {
   title: string;
   excerpt: string;
@@ -31,10 +32,12 @@ interface BlogArticle {
   platform: "medium" | "substack";
   featured?: boolean;
 }
+
 const articles: BlogArticle[] = [
   {
-    title: "Fairness Is Not a Metric",
-    excerpt: "Reframing algorithmic fairness as an epistemological and justice-based challenge.",
+    title: "Building Fairness Metrics That Actually Matter",
+    excerpt:
+      "A practical guide to selecting and implementing fairness metrics that align with your organization's values and regulatory requirements.",
     readTime: "8 min read",
     publishDate: "Jan 2025",
     category: "Bias Detection",
@@ -75,9 +78,11 @@ const articles: BlogArticle[] = [
     platform: "substack",
   },
 ];
+
 interface ArticleCardProps {
   article: BlogArticle;
 }
+
 function ArticleCard({ article }: ArticleCardProps) {
   return (
     <motion.a
@@ -85,13 +90,8 @@ function ArticleCard({ article }: ArticleCardProps) {
       target="_blank"
       rel="noopener noreferrer"
       className="group flex flex-col h-full rounded-xl glass shadow-soft overflow-hidden"
-      whileHover={{
-        y: -4,
-        scale: 1.01,
-      }}
-      whileTap={{
-        scale: 0.99,
-      }}
+      whileHover={{ y: -4, scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
     >
       {article.featured && (
         <div className="bg-gradient-to-r from-primary to-accent px-3 py-1 text-center">
@@ -101,9 +101,15 @@ function ArticleCard({ article }: ArticleCardProps) {
         </div>
       )}
 
-      <div className="flex flex-col flex-1 p-card">
-        <div className="flex items-center justify-between mb-element">
-          <div className="flex items-center gap-element-sm">
+      <div className="flex flex-col flex-1 p-6">
+        {/* Changed p-card to p-6 - adjust if you have custom styles */}
+
+        <div className="flex items-center justify-between mb-4">
+          {/* Changed mb-element to mb-4 */}
+
+          <div className="flex items-center gap-3">
+            {/* Changed gap-element-sm to gap-3 */}
+
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
               <FontAwesomeIcon icon={article.icon} className="w-4 h-4 text-primary" />
             </div>
@@ -118,10 +124,16 @@ function ArticleCard({ article }: ArticleCardProps) {
           </div>
         </div>
 
-        <h3 className="font-semibold mb-element-sm group-hover:text-primary transition-colors">{article.title}</h3>
+        <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">{article.title}</h3>
 
-        <div className="flex items-center justify-between pt-element border-t">
-          <div className="flex items-center gap-element text-caption text-muted-foreground">
+        <p className="flex-1 text-muted-foreground mb-4">{article.excerpt}</p>
+
+        <div className="flex items-center justify-between pt-4 border-t">
+          {/* Changed pt-element to pt-4 */}
+
+          <div className="flex items-center gap-3 text-caption text-muted-foreground">
+            {/* Changed gap-element to gap-3 */}
+
             <span>{article.publishDate}</span>
             <span>•</span>
             <span className="flex items-center gap-1">
@@ -138,8 +150,11 @@ function ArticleCard({ article }: ArticleCardProps) {
     </motion.a>
   );
 }
+
 const AIEthicsBlog = () => (
-  <section id="blog" className="relative py-section px-4 overflow-hidden">
+  <section id="blog" className="relative py-16 px-4 overflow-hidden">
+    {/* Changed py-section to py-16 */}
+
     <GradientMesh className="absolute inset-0 opacity-30" />
 
     <div className="container relative z-10 mx-auto max-w-5xl">
@@ -151,7 +166,9 @@ const AIEthicsBlog = () => (
         />
       </ScrollFade>
 
-      <StaggerContainer className="grid md:grid-cols-2 gap-card">
+      <StaggerContainer className="grid md:grid-cols-2 gap-8">
+        {/* Changed gap-card to gap-8 */}
+
         {articles.map((article) => (
           <StaggerItem key={article.title}>
             <ArticleCard article={article} />
@@ -161,4 +178,5 @@ const AIEthicsBlog = () => (
     </div>
   </section>
 );
+
 export default AIEthicsBlog;

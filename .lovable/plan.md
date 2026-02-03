@@ -1,8 +1,9 @@
-
 # BEM Refactoring + Portfolio Case Study Expansion
 
 ## Overview
+
 This plan covers two major enhancements:
+
 1. Refactor About, Skills, and Contact sections to use the BEM utility classes already defined in `global.css`
 2. Transform the Portfolio section from basic descriptions into compelling case studies with problem/approach/outcomes structure
 
@@ -15,12 +16,14 @@ This plan covers two major enhancements:
 **Current State:** Uses inline Tailwind classes like `py-section-sm md:py-section px-4 bg-muted/30`
 
 **Changes:**
+
 - Replace section wrapper with `section section--padded section--muted`
 - Replace container with `section__container section__container--sm`
 - Replace header block with `header`, `header__overline`, `header__title`
 - Add `card--glass` to the main content card
 
 **Key Replacements:**
+
 ```text
 "relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden"
   → "section section--padded section--muted"
@@ -42,6 +45,7 @@ This plan covers two major enhancements:
 **Current State:** Uses inline classes for section and bento grid layout
 
 **Changes:**
+
 - Replace section wrapper with `section section--padded section--background`
 - Replace container with `section__container section__container--lg`
 - Replace bento grid with `grid--bento` utility class
@@ -49,6 +53,7 @@ This plan covers two major enhancements:
 - Use `icon-badge icon-badge--md icon-badge--primary` for skill icons
 
 **Key Replacements:**
+
 ```text
 "relative py-section-sm md:py-section px-4 bg-background overflow-hidden"
   → "section section--padded section--background"
@@ -66,6 +71,7 @@ Icon container: → "icon-badge icon-badge--md icon-badge--primary"
 **Current State:** Uses inline Tailwind for sections and retro windows
 
 **Changes:**
+
 - Replace section wrapper with `section section--padded section--background`
 - Replace container with `section__container section__container--lg`
 - Replace header with BEM classes `header`, `header__overline`, `header__description`
@@ -74,6 +80,7 @@ Icon container: → "icon-badge icon-badge--md icon-badge--primary"
 - Use `list`, `list__item`, `list__icon`, `list__text` for services list
 
 **Key Replacements:**
+
 ```text
 "relative py-section-sm md:py-section px-4 pb-section bg-background overflow-hidden"
   → "section section--padded section--background"
@@ -120,14 +127,16 @@ interface ProjectData {
 ### Case Study Content for Each Project
 
 **1. AI Ethics Dashboard**
+
 - **Problem:** Organizations lacked real-time visibility into AI system fairness, making bias detection reactive rather than proactive.
 - **Approach:** Built an interactive monitoring platform with automated auditing pipelines and customizable fairness thresholds.
-- **Outcomes:** 
+- **Outcomes:**
   - Reduced bias detection time by 60%
   - Enabled proactive intervention in 3 enterprise deployments
   - Decreased false positive rate by 35%
 
 **2. Governance Framework**
+
 - **Problem:** Manual policy compliance checking created bottlenecks and inconsistencies in AI deployment approvals.
 - **Approach:** Developed an automated policy engine that maps governance requirements to technical controls.
 - **Outcomes:**
@@ -136,6 +145,7 @@ interface ProjectData {
   - Reduced deployment delays by 2 weeks on average
 
 **3. Stakeholder Mapping**
+
 - **Problem:** Complex tech projects failed due to unidentified stakeholder conflicts and power dynamics.
 - **Approach:** Created a force-directed graph visualization tool for mapping interests, influence, and potential friction points.
 - **Outcomes:**
@@ -144,6 +154,7 @@ interface ProjectData {
   - Reduced project scope creep incidents by 30%
 
 **4. Bias Detection API**
+
 - **Problem:** Data scientists lacked standardized tools for measuring multiple bias types across diverse datasets.
 - **Approach:** Built a RESTful API with modular bias metrics and automated reporting for ML pipelines.
 - **Outcomes:**
@@ -152,6 +163,7 @@ interface ProjectData {
   - Processed 2M+ bias evaluations
 
 **5. Decision Framework**
+
 - **Problem:** Teams made inconsistent ethical decisions under time pressure without structured guidance.
 - **Approach:** Developed a mobile-first app with timed ethical frameworks and decision audit trails.
 - **Outcomes:**
@@ -160,6 +172,7 @@ interface ProjectData {
   - Adopted by 3 organizations
 
 **6. Tutoring & Applied Services**
+
 - **Problem:** Students needed personalized, adaptive learning experiences that traditional tutoring couldn't provide at scale.
 - **Approach:** Built an AI-powered platform with adaptive curriculum and real-time progress tracking.
 - **Outcomes:**
@@ -229,6 +242,7 @@ The card layout will be restructured as:
 ## Part 3: Optional Sections
 
 ### A. Blog/Philosophy Link Section
+
 Add a compact "Thoughts" or "Writing" section between Portfolio and Experience:
 
 ```typescript
@@ -246,6 +260,7 @@ const blogLinks = [
 If no links exist yet, show a placeholder with a future link to Substack/Medium.
 
 ### B. Testimonials (Optional)
+
 Add testimonial capability to project cards:
 
 ```typescript
@@ -259,19 +274,20 @@ testimonial?: {
 Display as a collapsible or hover-revealed quote within the card.
 
 ### C. Visual Timeline Enhancement
+
 The Experience section already has a timeline. Optionally add a compact "Project Timeline" view showing project dates chronologically.
 
 ---
 
 ## Files to be Modified
 
-| File | Changes |
-|------|---------|
-| `src/global.css` | Add case study BEM classes |
-| `src/components/About.tsx` | Apply BEM classes |
-| `src/components/Skills.tsx` | Apply BEM classes |
-| `src/components/Contact.tsx` | Apply BEM classes |
-| `src/components/Portfolio.tsx` | Full case study refactor |
+| File                           | Changes                    |
+| ------------------------------ | -------------------------- |
+| `src/global.css`               | Add case study BEM classes |
+| `src/components/About.tsx`     | Apply BEM classes          |
+| `src/components/Skills.tsx`    | Apply BEM classes          |
+| `src/components/Contact.tsx`   | Apply BEM classes          |
+| `src/components/Portfolio.tsx` | Full case study refactor   |
 
 ---
 

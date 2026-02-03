@@ -4,7 +4,9 @@
  * Professional timeline with expandable cards and abstract shapes.
  */
 import { useState } from "react";
-import { Briefcase, MapPin, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBriefcase, faLocationDot, faPersonWalkingLuggage, faBuilding, faShieldHalved, faChartLine } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tag } from "./ui/tag";
 import { RingShape, DotsPattern, ParallaxShape } from "./ui/abstract-shapes";
@@ -18,6 +20,7 @@ interface ExperienceData {
   highlights: string[];
   tags: string[];
   status: "complete" | "in-progress" | "pending";
+  icon: typeof faBriefcase;
 }
 
 const experiences: ExperienceData[] = [
@@ -35,7 +38,8 @@ const experiences: ExperienceData[] = [
       "Integrated open-source LLMs, cutting infra costs by 40%"
     ],
     tags: ["NIST AI RMF", "GPT-4/Claude", "Compliance"],
-    status: "in-progress"
+    status: "in-progress",
+    icon: faPersonWalkingLuggage
   },
   {
     title: "Penetration Tester",
@@ -50,7 +54,8 @@ const experiences: ExperienceData[] = [
       "Briefed senior stakeholders on risk-prioritized action plans"
     ],
     tags: ["Metasploit", "OSINT", "Threat Modeling"],
-    status: "complete"
+    status: "complete",
+    icon: faShieldHalved
   },
   {
     title: "Consulting Analyst",
@@ -65,7 +70,8 @@ const experiences: ExperienceData[] = [
       "Reduced operational costs by 15% through analysis"
     ],
     tags: ["DoD", "Policy", "UX/UI"],
-    status: "complete"
+    status: "complete",
+    icon: faBuilding
   },
   {
     title: "Business Analyst",
@@ -79,7 +85,8 @@ const experiences: ExperienceData[] = [
       "Achieved 30% reduction in data retrieval time"
     ],
     tags: ["Data Analysis", "ROI", "Process Optimization"],
-    status: "complete"
+    status: "complete",
+    icon: faChartLine
   }
 ];
 
@@ -190,14 +197,14 @@ const Experience = () => {
                       <div className="flex items-center justify-between gap-element-sm mb-element-sm">
                         <div className="flex items-center gap-element-sm">
                           <div className="p-1 rounded bg-primary/10">
-                            <Briefcase className="h-3 w-3 text-primary" />
+                            <FontAwesomeIcon icon={exp.icon} className="h-3 w-3 text-primary" />
                           </div>
                           <span className="text-caption font-medium text-primary">
                             {exp.period}
                           </span>
                         </div>
                         <div className="flex items-center gap-1 text-caption text-muted-foreground">
-                          <MapPin className="w-3 h-3" />
+                          <FontAwesomeIcon icon={faLocationDot} className="w-3 h-3" />
                           <span className="hidden sm:inline text-justify text-xs font-light">
                             {exp.location}
                           </span>

@@ -7,7 +7,9 @@
  * - Social links with hover effects
  * - Scroll indicator
  */
-import { ArrowDown, Linkedin, Mail } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import EntropyBackground from "./ui/entropy-background";
 
@@ -84,7 +86,7 @@ const Hero = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Linkedin className="w-5 h-5" />
+            <FontAwesomeIcon icon={faLinkedin} className="w-5 h-5" />
           </motion.a>
           <motion.a
             href="mailto:altruisticxai@gmail.com"
@@ -93,7 +95,7 @@ const Hero = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Mail className="w-5 h-5" />
+            <FontAwesomeIcon icon={faEnvelope} className="w-5 h-5" />
           </motion.a>
         </motion.div>
 
@@ -113,7 +115,7 @@ const Hero = () => {
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              <ArrowDown className="w-5 h-5 text-accent" />
+              <FontAwesomeIcon icon={faArrowDown} className="w-5 h-5 text-accent" />
             </motion.div>
           </a>
         </motion.div>

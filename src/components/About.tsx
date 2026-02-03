@@ -2,15 +2,21 @@
  * About Section Component
  * 
  * Personal introduction with glassmorphism cards, scroll animations, and abstract shapes.
- * Includes integrated links to AI ethics writing on Medium and Substack.
+ * Includes integrated links to AI ethics writing on Medium and Substack with editorial microcopy.
  */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLaptopCode, faLightbulb, faHandshake, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faLaptopCode, faLightbulb, faHandshake } from "@fortawesome/free-solid-svg-icons";
 import { faMedium } from "@fortawesome/free-brands-svg-icons";
 import { motion } from "framer-motion";
 import { FlippingCard } from "./ui/flipping-card";
 import { ScrollFade } from "./ui/scroll-fade";
 import { BlobShape, SparkleShape, ParallaxShape } from "./ui/abstract-shapes";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 interface HighlightData {
   icon: typeof faLaptopCode;
@@ -95,57 +101,83 @@ const About = () => {
             </h2>
           </div>
 
-          {/* Description */}
+          {/* About Me Content - Exact 120 Words */}
           <div className="text-body-sm md:text-body text-muted-foreground space-y-card-sm mb-card leading-relaxed">
             <p>
-              Developer and designer creating digital experiences. Background in{" "}
+              I write and work at the intersection of{" "}
               <strong className="text-foreground font-semibold">
-                computer science, public policy, and economics
+                artificial intelligence, ethics, and human impact
               </strong>
-              .
+              . My focus is not hype, but consequences: how systems shape behavior, power, access, and trust once they enter the real world.
             </p>
             <p>
-              Full-stack development focused on the intersection of{" "}
+              I publish long-form writing on AI ethics, alignment, and responsibility, examining where technology helps, where it quietly harms, and what accountability should actually mean. My work lives across independent platforms, where I write freely, critically, and in public.
+            </p>
+            <p>
+              I believe good technology should be{" "}
               <strong className="text-foreground font-semibold">
-                technology and social impact
+                legible, humane, and grounded in lived reality
               </strong>
-              . I write regularly about AI ethics, governance, and responsible deployment.
+              —not just ambition. This site collects my thinking, writing, and points of contact for readers, collaborators, researchers, and thoughtful technologists globally.
             </p>
           </div>
 
-          {/* Writing Links - Editorial Style */}
+          {/* Writing Platform Links - Editorial Style */}
           <div className="mb-container md:mb-container-lg">
             <p className="text-caption text-muted-foreground mb-3">
-              Read my thoughts on AI ethics:
+              Read the writing
             </p>
-            <div className="flex flex-wrap gap-2">
-              <motion.a
-                href="https://medium.com/@altruisticxai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 min-h-[44px] rounded-lg bg-card border border-border/50 text-body-sm font-medium text-foreground hover:border-primary/30 hover:bg-primary/5 transition-colors touch-manipulation group"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <FontAwesomeIcon icon={faMedium} className="w-4 h-4 text-foreground" />
-                <span>Medium</span>
-                <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3 text-muted-foreground group-hover:text-primary transition-colors" />
-              </motion.a>
-              <motion.a
-                href="https://ingakali.substack.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 min-h-[44px] rounded-lg bg-card border border-border/50 text-body-sm font-medium text-foreground hover:border-[#FF6719]/30 hover:bg-[#FF6719]/5 transition-colors touch-manipulation group"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <svg className="w-4 h-4 text-[#FF6719]" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
-                </svg>
-                <span>Substack</span>
-                <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3 text-muted-foreground group-hover:text-[#FF6719] transition-colors" />
-              </motion.a>
-            </div>
+            <TooltipProvider>
+              <div className="flex flex-wrap gap-3">
+                {/* Medium Button */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <motion.a
+                      href="https://medium.com/@altruisticxai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex flex-col items-start gap-0.5 px-4 py-3 min-h-[44px] rounded-lg bg-card border border-border/50 hover:border-primary/30 hover:bg-primary/5 transition-colors touch-manipulation group"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <span className="inline-flex items-center gap-2">
+                        <FontAwesomeIcon icon={faMedium} className="w-4 h-4 text-foreground" />
+                        <span className="text-body-sm font-medium text-foreground">Medium</span>
+                      </span>
+                      <span className="text-caption text-muted-foreground">AI ethics essays</span>
+                    </motion.a>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Read in-depth work on Medium</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                {/* Substack Button */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <motion.a
+                      href="https://ingakali.substack.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex flex-col items-start gap-0.5 px-4 py-3 min-h-[44px] rounded-lg bg-card border border-border/50 hover:border-[#FF6719]/30 hover:bg-[#FF6719]/5 transition-colors touch-manipulation group"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <span className="inline-flex items-center gap-2">
+                        <svg className="w-4 h-4 text-[#FF6719]" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+                        </svg>
+                        <span className="text-body-sm font-medium text-foreground">Substack</span>
+                      </span>
+                      <span className="text-caption text-muted-foreground">Ongoing analysis</span>
+                    </motion.a>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Subscribe for new writing</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </TooltipProvider>
           </div>
 
           {/* Highlight Cards */}

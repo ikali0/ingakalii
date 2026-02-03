@@ -38,7 +38,7 @@ function CardFront({ data }: { data: HighlightData }) {
   const Icon = data.icon;
   return (
     <div className="flex flex-col items-center justify-center h-full w-full p-card-sm text-center">
-      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-element-sm">
         <Icon className="w-4 h-4 text-primary" />
       </div>
       <h4 className="font-display text-body-sm font-medium text-foreground mb-1 leading-tight">
@@ -67,19 +67,19 @@ const About = () => {
       id="about"
       className="py-section-sm md:py-section px-4 bg-muted/30"
     >
-      <div className="container mx-auto max-w-2xl border border-border/50 shadow-sm rounded-lg p-card md:p-8 bg-background">
+      <div className="container mx-auto max-w-2xl border border-border/50 shadow-sm rounded-lg p-card md:p-container bg-background">
         {/* Header */}
-        <div className="mb-8 md:mb-10">
-          <p className="text-overline uppercase text-accent font-semibold mb-2">
+        <div className="mb-container md:mb-container-lg">
+          <p className="text-overline uppercase text-accent font-semibold mb-element-sm">
             About Me
           </p>
-          <h2 className="font-display text-display-sm text-foreground mb-2">
+          <h2 className="font-display text-display-sm text-foreground mb-element-sm">
             Building with Purpose
           </h2>
         </div>
 
         {/* Description */}
-        <div className="text-body-sm md:text-body text-muted-foreground space-y-4 mb-8 md:mb-10 leading-relaxed">
+        <div className="text-body-sm md:text-body text-muted-foreground space-y-card-sm mb-container md:mb-container-lg leading-relaxed">
           <p>
             Developer and designer creating digital experiences. Background in{" "}
             <strong className="text-foreground font-semibold">

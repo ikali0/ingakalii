@@ -70,6 +70,12 @@
     --font-body: 'Poppins', system-ui, sans-serif;
     --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 
+    /* Semantic Opacity Scale */
+    --opacity-subtle: 0.05;
+    --opacity-light: 0.1;
+    --opacity-medium: 0.2;
+    --opacity-heavy: 0.4;
+
     /* Shadows */
     --shadow-color: 326 58% 57% / 0.5;
     --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);

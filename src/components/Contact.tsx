@@ -18,11 +18,11 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-section-sm md:py-section px-4 pb-32 bg-background"
+      className="py-section-sm md:py-section px-4 pb-section bg-background"
     >
       <div className="container mx-auto max-w-5xl">
-        <div className="text-center mb-10 md:mb-14">
-          <p className="text-overline uppercase text-accent font-semibold mb-2">
+        <div className="text-center mb-container md:mb-container-lg">
+          <p className="text-overline uppercase text-accent font-semibold mb-element-sm">
             Get In Touch
           </p>
           <p className="text-body text-muted-foreground max-w-xl mx-auto leading-relaxed">
@@ -54,11 +54,11 @@ const Contact = () => {
                 <span className="font-bold text-body-sm">What I Can Help With</span>
               </div>
               <div className="p-card bg-card">
-                <ul className="space-y-3">
+                <ul className="space-y-element">
                   {services.map((service, index) => (
                     <li
                       key={index}
-                      className="flex items-start gap-3 text-foreground"
+                      className="flex items-start gap-element text-foreground"
                     >
                       <span className="text-accent font-medium">→</span>
                       <span className="text-body-sm">{service}</span>

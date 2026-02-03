@@ -85,11 +85,11 @@ const Skills = () => {
               viewport={{ once: true }}
               className="bg-card p-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="text-overline text-muted-foreground uppercase mb-6 pb-2 border-b border-border">
+              <h3 className="text-overline text-muted-foreground uppercase mb-card pb-element-sm border-b border-border">
                 {cat.category}
               </h3>
 
-              <div className="space-y-6">
+              <div className="space-y-card">
                 {cat.skills.map((skill) => (
                   <SkillBar
                     key={skill.name}
@@ -104,7 +104,7 @@ const Skills = () => {
         </div>
 
         {/* Secondary Stack */}
-        <div className="mt-12 flex flex-wrap justify-center gap-2">
+        <div className="mt-container-lg flex flex-wrap justify-center gap-element-sm">
           {secondaryTech.map((tech) => (
             <Tag key={tech} variant="outline" size="md">
               {tech}

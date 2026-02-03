@@ -15,15 +15,17 @@ export default {
     extend: {
       /* ========================================
        * SPACING SCALE
-       * Use these consistently: space-section, gap-container, etc.
+       * Semantic tokens for consistent layouts
        * ======================================== */
       spacing: {
-        'section': '6rem',      // py-section for major sections
-        'section-sm': '4rem',   // py-section-sm for compact sections
-        'container': '2rem',    // gap-container for grid/flex gaps
-        'container-lg': '3rem', // gap-container-lg for larger gaps
-        'card': '1.5rem',       // p-card for card padding
-        'card-sm': '1rem',      // p-card-sm for compact cards
+        'section': '6rem',        // 96px - major section padding
+        'section-sm': '4rem',     // 64px - compact sections
+        'container': '2rem',      // 32px - grid/flex gaps
+        'container-lg': '3rem',   // 48px - larger gaps
+        'card': '1.5rem',         // 24px - card internal padding
+        'card-sm': '1rem',        // 16px - compact card padding
+        'element': '0.75rem',     // 12px - between small elements
+        'element-sm': '0.5rem',   // 8px - tight element spacing
       },
       /* ========================================
        * TYPOGRAPHY SCALE

@@ -12,7 +12,7 @@ import EntropyBackground from "./ui/entropy-background";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[100svh] w-full flex flex-col items-center justify-center overflow-hidden px-6 py-section-sm sm:py-section">
+    <section className="relative min-h-[100svh] w-full flex flex-col items-center justify-center overflow-hidden px-4 py-section-sm sm:py-section">
       {/* Background Layer */}
       <div className="absolute inset-0 z-0">
         <EntropyBackground />
@@ -27,18 +27,18 @@ const Hero = () => {
       <div className="container relative z-20 mx-auto max-w-5xl flex flex-col items-center md:items-start text-center md:text-left">
         {/* Badge */}
         <div className="animate-fade-up opacity-0">
-          <span className="inline-block px-3 py-1.5 mb-6 text-overline uppercase bg-secondary/20 text-secondary-foreground rounded-full shadow-sm border border-secondary/30">
+          <span className="inline-block px-3 py-1.5 mb-card text-overline uppercase bg-secondary/20 text-secondary-foreground rounded-full shadow-sm border border-secondary/30">
             Applied AI Engineer & Independent Consultant
           </span>
         </div>
 
         {/* Name */}
-        <h1 className="animate-fade-up opacity-0 [animation-delay:200ms] text-display-lg sm:text-display-xl font-display text-foreground mb-6 tracking-tight">
+        <h1 className="animate-fade-up opacity-0 [animation-delay:200ms] text-display-lg sm:text-display-xl font-display text-foreground mb-card tracking-tight">
           Inga K.
         </h1>
 
         {/* Subtext */}
-        <p className="animate-fade-up opacity-0 [animation-delay:400ms] text-body-lg md:text-heading font-light mb-10 max-w-2xl leading-relaxed text-balance text-foreground/80">
+        <p className="animate-fade-up opacity-0 [animation-delay:400ms] text-body-lg md:text-heading font-light mb-container max-w-2xl leading-relaxed text-balance text-foreground/80">
           I translate{" "}
           <span className="relative inline-block">
             <span className="relative z-10 font-semibold text-foreground italic">
@@ -54,7 +54,7 @@ const Hero = () => {
         </p>
 
         {/* Social Actions */}
-        <div className="animate-fade-up opacity-0 [animation-delay:600ms] md:justify-start mb-12 flex items-start justify-center gap-3">
+        <div className="animate-fade-up opacity-0 [animation-delay:600ms] md:justify-start mb-container-lg flex items-start justify-center gap-element">
           <a
             href="https://www.linkedin.com/in/ik11/"
             target="_blank"
@@ -74,10 +74,10 @@ const Hero = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="animate-fade-up opacity-0 [animation-delay:1000ms] mt-16 md:mt-12 flex justify-center md:justify-start w-full">
+        <div className="animate-fade-up opacity-0 [animation-delay:1000ms] mt-section-sm md:mt-container flex justify-center md:justify-start w-full">
           <a
             href="#about"
-            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
+            className="flex flex-col items-center gap-element-sm text-muted-foreground hover:text-foreground transition-colors group"
           >
             <span className="text-overline uppercase">Explore</span>
             <ArrowDown className="w-5 h-5 animate-bounce text-accent" />

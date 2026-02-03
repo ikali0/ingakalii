@@ -81,8 +81,9 @@ export function BlobShape({ className }: ShapeProps) {
     >
       <defs>
         <linearGradient id="blob-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="hsl(var(--secondary))" stopOpacity="0.1" />
+          <stop offset="0%" stopColor="hsl(213 94% 35%)" stopOpacity="0.15" />
+          <stop offset="50%" stopColor="hsl(265 50% 55%)" stopOpacity="0.1" />
+          <stop offset="100%" stopColor="hsl(158 55% 45%)" stopOpacity="0.08" />
         </linearGradient>
       </defs>
       <motion.path
@@ -120,8 +121,8 @@ export function CircleShape({ className }: ShapeProps) {
     >
       <defs>
         <radialGradient id="circle-gradient" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="hsl(var(--accent))" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0" />
+          <stop offset="0%" stopColor="hsl(158 55% 45%)" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="hsl(158 55% 45%)" stopOpacity="0" />
         </radialGradient>
       </defs>
       <motion.circle
@@ -155,7 +156,7 @@ export function DotsPattern({ className }: ShapeProps) {
       viewBox="0 0 100 100"
     >
       <pattern id="dots-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-        <circle cx="2" cy="2" r="1.5" fill="hsl(var(--primary))" opacity="0.4" />
+        <circle cx="2" cy="2" r="1.5" fill="hsl(213 94% 35%)" opacity="0.35" />
       </pattern>
       <rect width="100%" height="100%" fill="url(#dots-pattern)" />
     </svg>
@@ -176,9 +177,9 @@ export function WavyLine({ className }: ShapeProps) {
     >
       <defs>
         <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="hsl(var(--secondary))" stopOpacity="0" />
-          <stop offset="50%" stopColor="hsl(var(--secondary))" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="hsl(var(--secondary))" stopOpacity="0" />
+          <stop offset="0%" stopColor="hsl(158 55% 45%)" stopOpacity="0" />
+          <stop offset="50%" stopColor="hsl(158 55% 45%)" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="hsl(158 55% 45%)" stopOpacity="0" />
         </linearGradient>
       </defs>
       <motion.path
@@ -208,8 +209,8 @@ export function TriangleShape({ className }: ShapeProps) {
     >
       <defs>
         <linearGradient id="triangle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="hsl(var(--accent))" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
+          <stop offset="0%" stopColor="hsl(158 55% 45%)" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="hsl(213 94% 35%)" stopOpacity="0.05" />
         </linearGradient>
       </defs>
       <motion.polygon
@@ -243,8 +244,8 @@ export function RingShape({ className }: ShapeProps) {
     >
       <defs>
         <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="hsl(var(--secondary))" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.1" />
+          <stop offset="0%" stopColor="hsl(158 55% 45%)" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="hsl(265 50% 55%)" stopOpacity="0.1" />
         </linearGradient>
       </defs>
       <motion.circle
@@ -269,7 +270,7 @@ export function RingShape({ className }: ShapeProps) {
         cy="50"
         r="25"
         fill="none"
-        stroke="hsl(var(--primary))"
+        stroke="hsl(213 94% 35%)"
         strokeWidth="1"
         strokeOpacity="0.15"
         strokeDasharray="5 5"
@@ -301,8 +302,8 @@ export function SparkleShape({ className }: ShapeProps) {
     >
       <motion.path
         d="M25 0 L28 20 L50 25 L28 30 L25 50 L22 30 L0 25 L22 20 Z"
-        fill="hsl(var(--accent))"
-        fillOpacity="0.3"
+        fill="hsl(158 55% 45%)"
+        fillOpacity="0.35"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -327,7 +328,7 @@ export function GradientMesh({ className }: ShapeProps) {
       <motion.div
         className="absolute w-[500px] h-[500px] rounded-full blur-3xl"
         style={{
-          background: "radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(213 94% 35% / 0.08) 0%, transparent 70%)",
         }}
         animate={{
           x: [0, 50, 0],
@@ -342,7 +343,7 @@ export function GradientMesh({ className }: ShapeProps) {
       <motion.div
         className="absolute w-[400px] h-[400px] rounded-full blur-3xl"
         style={{
-          background: "radial-gradient(circle, hsl(var(--secondary) / 0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(158 55% 45% / 0.06) 0%, transparent 70%)",
           right: "-100px",
           top: "100px",
         }}

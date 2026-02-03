@@ -43,13 +43,13 @@ export const EntropyBackground = forwardRef<HTMLDivElement, EntropyBackgroundPro
       height
     } = resizeCanvas();
 
-    // Enhanced color palette with more vibrant tones
-    const pinkColor = '#d04f99';
-    const pinkGlow = '#ff6bc2';
-    const tealColor = '#8acfd1';
-    const tealGlow = '#5de8eb';
-    const accentColor = '#e670ab';
-    const lineColor = '#50afb6';
+    // AI/Ethics color palette
+    const neuralPurple = '#8b5cf6';
+    const neuralGlow = '#a78bfa';
+    const ethicsGreen = '#10b981';
+    const ethicsGlow = '#34d399';
+    const techBlue = '#3b82f6';
+    const lineColor = '#0ea5e9';
     class Particle {
       x: number;
       y: number;
@@ -122,8 +122,8 @@ export const EntropyBackground = forwardRef<HTMLDivElement, EntropyBackgroundPro
       draw(ctx: CanvasRenderingContext2D, time: number) {
         const baseAlpha = this.order ? 0.8 - this.influence * 0.3 : 0.9;
         const pulseAlpha = baseAlpha + Math.sin(time * 0.03 + this.pulsePhase) * 0.15;
-        const color = this.order ? tealColor : pinkColor;
-        const glowColor = this.order ? tealGlow : pinkGlow;
+        const color = this.order ? ethicsGreen : neuralPurple;
+        const glowColor = this.order ? ethicsGlow : neuralGlow;
 
         // Outer glow
         const glowSize = this.size * 2.5;
@@ -182,7 +182,7 @@ export const EntropyBackground = forwardRef<HTMLDivElement, EntropyBackgroundPro
           if (distance < lineDistance) {
             const alpha = 0.25 * (1 - distance / lineDistance);
             const pulseAlpha = alpha * (0.8 + Math.sin(time * 0.02) * 0.2);
-            const connectionColor = particle.order && neighbor.order ? tealColor : !particle.order && !neighbor.order ? accentColor : lineColor;
+            const connectionColor = particle.order && neighbor.order ? ethicsGreen : !particle.order && !neighbor.order ? techBlue : lineColor;
             ctx.strokeStyle = connectionColor + Math.round(pulseAlpha * 255).toString(16).padStart(2, '0');
             ctx.lineWidth = mobile ? 0.5 : 0.8;
             ctx.beginPath();
@@ -205,11 +205,11 @@ export const EntropyBackground = forwardRef<HTMLDivElement, EntropyBackgroundPro
 
       // Outer glow for divider
       const glowGradient = ctx.createLinearGradient(width / 2, 0, width / 2, height);
-      glowGradient.addColorStop(0, `${tealGlow}00`);
-      glowGradient.addColorStop(0.3, tealGlow + Math.round(pulseAlpha * 0.3 * 255).toString(16).padStart(2, '0'));
-      glowGradient.addColorStop(0.5, pinkGlow + Math.round(pulseAlpha * 0.4 * 255).toString(16).padStart(2, '0'));
-      glowGradient.addColorStop(0.7, tealGlow + Math.round(pulseAlpha * 0.3 * 255).toString(16).padStart(2, '0'));
-      glowGradient.addColorStop(1, `${pinkGlow}00`);
+      glowGradient.addColorStop(0, `${ethicsGlow}00`);
+      glowGradient.addColorStop(0.3, ethicsGlow + Math.round(pulseAlpha * 0.3 * 255).toString(16).padStart(2, '0'));
+      glowGradient.addColorStop(0.5, neuralGlow + Math.round(pulseAlpha * 0.4 * 255).toString(16).padStart(2, '0'));
+      glowGradient.addColorStop(0.7, ethicsGlow + Math.round(pulseAlpha * 0.3 * 255).toString(16).padStart(2, '0'));
+      glowGradient.addColorStop(1, `${neuralGlow}00`);
       ctx.strokeStyle = glowGradient;
       ctx.lineWidth = pulseWidth * 4;
       ctx.beginPath();
@@ -219,11 +219,11 @@ export const EntropyBackground = forwardRef<HTMLDivElement, EntropyBackgroundPro
 
       // Core divider line
       const gradient = ctx.createLinearGradient(width / 2, 0, width / 2, height);
-      gradient.addColorStop(0, `${tealColor}00`);
-      gradient.addColorStop(0.2, tealColor + Math.round(pulseAlpha * 255).toString(16).padStart(2, '0'));
-      gradient.addColorStop(0.5, pinkColor + Math.round(pulseAlpha * 255).toString(16).padStart(2, '0'));
-      gradient.addColorStop(0.8, tealColor + Math.round(pulseAlpha * 255).toString(16).padStart(2, '0'));
-      gradient.addColorStop(1, `${pinkColor}00`);
+      gradient.addColorStop(0, `${ethicsGreen}00`);
+      gradient.addColorStop(0.2, ethicsGreen + Math.round(pulseAlpha * 255).toString(16).padStart(2, '0'));
+      gradient.addColorStop(0.5, neuralPurple + Math.round(pulseAlpha * 255).toString(16).padStart(2, '0'));
+      gradient.addColorStop(0.8, ethicsGreen + Math.round(pulseAlpha * 255).toString(16).padStart(2, '0'));
+      gradient.addColorStop(1, `${neuralPurple}00`);
       ctx.strokeStyle = gradient;
       ctx.lineWidth = pulseWidth;
       ctx.beginPath();

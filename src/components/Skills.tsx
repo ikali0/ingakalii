@@ -32,7 +32,7 @@ const bentoCards: BentoCard[] = [
     category: "Offensive Security",
     icon: Shield,
     span: "tall",
-    accent: "from-red-500/20 to-orange-500/10",
+    accent: "from-red-500/15 to-orange-500/10",
     skills: [
       { name: "Penetration Testing", level: 90, examples: ["Red Teaming", "Exploit Dev"] },
       { name: "Vulnerability Research", level: 90, examples: ["CVE Analysis", "SAST/DAST"] },
@@ -44,7 +44,7 @@ const bentoCards: BentoCard[] = [
     category: "Applied AI & LLMs",
     icon: Brain,
     span: "wide",
-    accent: "from-purple-500/20 to-blue-500/10",
+    accent: "from-[hsl(265_50%_55%/0.2)] to-[hsl(213_94%_35%/0.1)]",
     skills: [
       { name: "GPT-5 / Claude 3.5", level: 95, examples: ["Reasoning", "Agents"] },
       { name: "Open Source LLMs", level: 88, examples: ["Llama", "Fine-Tuning"] },
@@ -55,7 +55,7 @@ const bentoCards: BentoCard[] = [
     category: "Governance & Risk",
     icon: Scale,
     span: "normal",
-    accent: "from-green-500/20 to-teal-500/10",
+    accent: "from-[hsl(158_55%_45%/0.2)] to-[hsl(180_50%_40%/0.1)]",
     skills: [
       { name: "NIST AI RMF", level: 92, examples: ["Map/Measure"] },
       { name: "Compliance", level: 85, examples: ["FERPA", "SOC2"] },
@@ -66,7 +66,7 @@ const bentoCards: BentoCard[] = [
     category: "Engineering",
     icon: Code,
     span: "normal",
-    accent: "from-blue-500/20 to-cyan-500/10",
+    accent: "from-[hsl(213_94%_35%/0.2)] to-[hsl(190_80%_45%/0.1)]",
     skills: [
       { name: "Full-Stack Dev", level: 88, examples: ["React", "Node.js"] },
       { name: "System Design", level: 85, examples: ["Microservices"] },
@@ -77,7 +77,7 @@ const bentoCards: BentoCard[] = [
     category: "Data & ML Ops",
     icon: Database,
     span: "wide",
-    accent: "from-amber-500/20 to-yellow-500/10",
+    accent: "from-amber-500/15 to-yellow-500/10",
     skills: [
       { name: "Vector Databases", level: 90, examples: ["Pinecone", "Weaviate"] },
       { name: "MLOps Pipelines", level: 85, examples: ["MLflow", "Weights & Biases"] },
@@ -109,7 +109,7 @@ function BentoCardComponent({ card }: { card: BentoCard }) {
       className={`${spanClasses[card.span]} relative overflow-hidden rounded-xl glass shadow-soft group`}
       whileHover={{ 
         scale: 1.02,
-        boxShadow: "0 12px 40px -12px hsl(var(--primary) / 0.25)"
+        boxShadow: "0 12px 40px -12px hsl(158 55% 45% / 0.2)"
       }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >

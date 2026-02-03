@@ -169,10 +169,10 @@ export const RetroTaskbar = () => {
             >
               <div className="retro-windows-logo">
                 <div className="grid grid-cols-2 gap-0.5">
-                  <div className="w-2 h-2 bg-destructive" />
-                  <div className="w-2 h-2 bg-secondary" />
-                  <div className="w-2 h-2 bg-primary" />
-                  <div className="w-2 h-2 bg-accent" />
+                  <div className="w-2 h-2 bg-[hsl(213_94%_35%)]" />
+                  <div className="w-2 h-2 bg-[hsl(158_55%_45%)]" />
+                  <div className="w-2 h-2 bg-[hsl(265_50%_55%)]" />
+                  <div className="w-2 h-2 bg-[hsl(45_95%_55%)]" />
                 </div>
               </div>
               <span className="font-bold text-xs">Start</span>

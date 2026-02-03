@@ -34,7 +34,7 @@ export function GlassCard({
       }}
       whileHover={hoverScale ? { 
         scale: 1.02,
-        boxShadow: "0 8px 32px -8px hsl(var(--primary) / 0.2)"
+        boxShadow: "0 8px 32px -8px hsl(158 55% 45% / 0.2)"
       } : undefined}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
       onClick={onClick}

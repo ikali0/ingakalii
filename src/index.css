@@ -181,6 +181,8 @@
 
   html {
     scroll-behavior: smooth;
+    /* Account for fixed navbar height on anchor navigation */
+    scroll-padding-top: 5rem; /* 80px = navbar height */
     /* Smooth dark mode transition */
     transition: background-color 0.3s ease, color 0.3s ease;
   }
@@ -208,6 +210,11 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     @apply font-medium tracking-tight;
+  }
+
+  /* Ensure sections have proper scroll targets */
+  section[id] {
+    scroll-margin-top: 5rem; /* 80px for fixed navbar */
   }
 }
 
@@ -374,6 +381,13 @@
     }
   }
 
+  /* ========================================
+   * NAVBAR STYLES
+   * ======================================== */
+  .navbar {
+    @apply will-change-transform;
+  }
+
   .nav-link {
     @apply relative text-muted-foreground transition-colors duration-200;
   }
@@ -382,13 +396,14 @@
     @apply text-foreground;
   }
 
-  .nav-link::after {
-    content: '';
-    @apply absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300;
+  /* Active nav link indicator (for CSS-only fallback) */
+  .nav-link--active {
+    @apply text-primary;
   }
 
-  .nav-link:hover::after {
-    @apply w-full;
+  .section-divider {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent 0%, hsl(var(--border)) 20%, hsl(var(--border)) 80%, transparent 100%);
   }
 
   .section-divider {

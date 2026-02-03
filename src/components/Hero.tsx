@@ -15,7 +15,7 @@ import EntropyBackground from "./ui/entropy-background";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[100svh] w-full flex flex-col items-center justify-center overflow-hidden px-4 py-section-sm sm:py-section">
+    <section className="relative min-h-[100svh] w-full flex flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-section-sm sm:pb-section">
       {/* Background Layer */}
       <div className="absolute inset-0 z-0">
         <EntropyBackground />

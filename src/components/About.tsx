@@ -7,7 +7,7 @@ import { Code2, Sparkles, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { FlippingCard } from "./ui/flipping-card";
 import { ScrollFade } from "./ui/scroll-fade";
-import { BlobShape, SparkleShape } from "./ui/abstract-shapes";
+import { BlobShape, SparkleShape, ParallaxShape } from "./ui/abstract-shapes";
 
 interface HighlightData {
   icon: typeof Code2;
@@ -70,10 +70,16 @@ const About = () => {
       id="about"
       className="relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden"
     >
-      {/* Abstract background shapes */}
-      <BlobShape className="w-64 h-64 -top-20 -right-20 opacity-60" />
-      <SparkleShape className="w-8 h-8 top-32 left-[10%]" />
-      <SparkleShape className="w-6 h-6 bottom-20 right-[15%]" />
+      {/* Abstract background shapes with parallax */}
+      <ParallaxShape speed={0.15} className="w-64 h-64 -top-20 -right-20">
+        <BlobShape className="w-full h-full opacity-60" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.25} className="w-8 h-8 top-32 left-[10%]">
+        <SparkleShape className="w-full h-full" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.3} className="w-6 h-6 bottom-20 right-[15%]">
+        <SparkleShape className="w-full h-full" />
+      </ParallaxShape>
 
       <ScrollFade>
         <div className="container relative z-10 mx-auto max-w-2xl glass rounded-xl p-card md:p-container shadow-soft">

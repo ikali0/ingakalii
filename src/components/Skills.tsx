@@ -9,7 +9,7 @@ import { SectionHeader } from "./ui/section-header";
 import { SkillBar } from "./ui/skill-bar";
 import { Tag } from "./ui/tag";
 import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
-import { CircleShape, RingShape, DotsPattern, SparkleShape } from "./ui/abstract-shapes";
+import { CircleShape, RingShape, DotsPattern, SparkleShape, ParallaxShape } from "./ui/abstract-shapes";
 
 interface Skill {
   name: string;
@@ -150,11 +150,19 @@ function BentoCardComponent({ card }: { card: BentoCard }) {
 const Skills = () => {
   return (
     <section id="skills" className="relative py-section-sm md:py-section px-4 bg-background overflow-hidden">
-      {/* Abstract background shapes */}
-      <CircleShape className="w-48 h-48 -top-10 -left-10" />
-      <RingShape className="w-32 h-32 top-1/3 right-[5%]" />
-      <DotsPattern className="w-32 h-32 bottom-20 left-[8%]" />
-      <SparkleShape className="w-6 h-6 top-40 right-[20%]" />
+      {/* Abstract background shapes with parallax */}
+      <ParallaxShape speed={0.1} className="w-48 h-48 -top-10 -left-10">
+        <CircleShape className="w-full h-full" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.2} rotateAmount={15} className="w-32 h-32 top-1/3 right-[5%]">
+        <RingShape className="w-full h-full" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.08} className="w-32 h-32 bottom-20 left-[8%]">
+        <DotsPattern className="w-full h-full" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.3} className="w-6 h-6 top-40 right-[20%]">
+        <SparkleShape className="w-full h-full" />
+      </ParallaxShape>
 
       <div className="container relative z-10 mx-auto max-w-5xl">
         {/* Header */}

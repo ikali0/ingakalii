@@ -2,9 +2,66 @@
  * Abstract SVG Background Shapes
  * 
  * Decorative shapes to break up boxy layouts and add visual interest.
+ * Includes ParallaxShape wrapper for scroll-based parallax effects.
  */
-import { motion } from "framer-motion";
+import { ReactNode, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+
+interface ParallaxShapeProps {
+  children: ReactNode;
+  /** Speed multiplier: 0.1 = subtle, 0.5 = dramatic */
+  speed?: number;
+  /** Degrees to rotate as user scrolls */
+  rotateAmount?: number;
+  /** Additional positioning classes */
+  className?: string;
+}
+
+/**
+ * Parallax wrapper that moves children based on scroll position.
+ * Creates depth by moving elements at different speeds.
+ */
+export function ParallaxShape({
+  children,
+  speed = 0.15,
+  rotateAmount = 0,
+  className,
+}: ParallaxShapeProps) {
+  const [windowHeight, setWindowHeight] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+    const handleResize = () => setWindowHeight(window.innerHeight);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Map scroll progress to Y translation
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, prefersReducedMotion ? 0 : speed * windowHeight]
+  );
+
+  // Map scroll progress to rotation
+  const rotate = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, prefersReducedMotion ? 0 : rotateAmount]
+  );
+
+  return (
+    <motion.div
+      className={cn("absolute pointer-events-none", className)}
+      style={{ y, rotate }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 interface ShapeProps {
   className?: string;

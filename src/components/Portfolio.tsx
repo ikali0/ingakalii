@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { SectionHeader } from "./ui/section-header";
 import { Tag } from "./ui/tag";
 import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
-import { TriangleShape, WavyLine, GradientMesh } from "./ui/abstract-shapes";
+import { TriangleShape, WavyLine, GradientMesh, ParallaxShape } from "./ui/abstract-shapes";
 
 // Import generated images
 import ethicsDashboard from "@/assets/portfolio-ethics-dashboard.jpg";
@@ -151,11 +151,17 @@ const Portfolio = () => {
       className="relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden"
       aria-labelledby="portfolio-heading"
     >
-      {/* Abstract background elements */}
+      {/* Abstract background elements with parallax */}
       <GradientMesh className="inset-0 w-full h-full" />
-      <TriangleShape className="w-24 h-24 top-20 right-[10%] opacity-50" />
-      <TriangleShape className="w-16 h-16 bottom-32 left-[5%] opacity-40 rotate-45" />
-      <WavyLine className="w-full h-16 top-1/2 left-0 opacity-50" />
+      <ParallaxShape speed={0.2} rotateAmount={10} className="w-24 h-24 top-20 right-[10%]">
+        <TriangleShape className="w-full h-full opacity-50" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.15} rotateAmount={-8} className="w-16 h-16 bottom-32 left-[5%]">
+        <TriangleShape className="w-full h-full opacity-40 rotate-45" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.1} className="w-full h-16 top-1/2 left-0">
+        <WavyLine className="w-full h-full opacity-50" />
+      </ParallaxShape>
 
       <div className="container relative z-10 mx-auto max-w-6xl">
         <ScrollFade>

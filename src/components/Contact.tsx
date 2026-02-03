@@ -6,7 +6,7 @@
 import { motion } from "framer-motion";
 import ContactForm from "./ContactForm";
 import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
-import { BlobShape, CircleShape, SparkleShape } from "./ui/abstract-shapes";
+import { BlobShape, CircleShape, SparkleShape, ParallaxShape } from "./ui/abstract-shapes";
 
 const Contact = () => {
   const services = [
@@ -21,11 +21,19 @@ const Contact = () => {
       id="contact"
       className="relative py-section-sm md:py-section px-4 pb-section bg-background overflow-hidden"
     >
-      {/* Abstract background shapes */}
-      <BlobShape className="w-80 h-80 -bottom-20 -right-32 opacity-40" />
-      <CircleShape className="w-32 h-32 top-20 left-[5%]" />
-      <SparkleShape className="w-10 h-10 top-1/3 right-[20%]" />
-      <SparkleShape className="w-6 h-6 bottom-40 left-[25%]" />
+      {/* Abstract background shapes with parallax */}
+      <ParallaxShape speed={0.15} className="w-80 h-80 -bottom-20 -right-32">
+        <BlobShape className="w-full h-full opacity-40" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.2} className="w-32 h-32 top-20 left-[5%]">
+        <CircleShape className="w-full h-full" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.25} className="w-10 h-10 top-1/3 right-[20%]">
+        <SparkleShape className="w-full h-full" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.35} className="w-6 h-6 bottom-40 left-[25%]">
+        <SparkleShape className="w-full h-full" />
+      </ParallaxShape>
 
       <div className="container relative z-10 mx-auto max-w-5xl">
         <ScrollFade>

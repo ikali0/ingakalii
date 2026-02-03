@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Briefcase, MapPin, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tag } from "./ui/tag";
-import { RingShape, DotsPattern } from "./ui/abstract-shapes";
+import { RingShape, DotsPattern, ParallaxShape } from "./ui/abstract-shapes";
 
 interface ExperienceData {
   title: string;
@@ -103,9 +103,13 @@ const Experience = () => {
 
   return (
     <section id="experience" className="relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden">
-      {/* Abstract background shapes */}
-      <RingShape className="w-40 h-40 -top-10 right-[10%]" />
-      <DotsPattern className="w-48 h-48 bottom-10 -left-10 opacity-40" />
+      {/* Abstract background shapes with parallax */}
+      <ParallaxShape speed={0.2} rotateAmount={12} className="w-40 h-40 -top-10 right-[10%]">
+        <RingShape className="w-full h-full" />
+      </ParallaxShape>
+      <ParallaxShape speed={0.1} className="w-48 h-48 bottom-10 -left-10">
+        <DotsPattern className="w-full h-full opacity-40" />
+      </ParallaxShape>
 
       <div className="container relative z-10 mx-auto max-w-3xl">
         {/* Section Header */}

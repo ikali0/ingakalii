@@ -466,14 +466,16 @@
     background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
   }
 
-  /* Taskbar styles */
+  /* Taskbar styles - responsive height */
   .retro-taskbar {
-    @apply h-11 bg-muted;
+    @apply h-11 sm:h-11 bg-muted;
     border-top: 2px solid hsl(var(--border));
     box-shadow: 
       inset 0 1px 0 hsl(var(--accent) / 0.3),
       0 -2px 10px hsl(var(--foreground) / 0.1);
     background: linear-gradient(180deg, hsl(var(--muted)) 0%, hsl(var(--muted) / 0.9) 100%);
+    /* Safe area for iOS notch/home indicator */
+    padding-bottom: env(safe-area-inset-bottom, 0);
   }
 
   /* Start button */
@@ -576,6 +578,35 @@
 }
 
 @layer utilities {
+  /* Touch-friendly utilities */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Safe area bottom for iOS */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  
+  /* Extra small screen breakpoint for hiding elements */
+  @screen xs {
+    .xs\\:inline {
+      display: inline;
+    }
+    .xs\\:block {
+      display: block;
+    }
+  }
+  
+  /* Hide scrollbar utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
   .animate-fade-up {
     animation: fadeUp 0.6s ease-out forwards;
   }

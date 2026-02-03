@@ -89,20 +89,20 @@ export const RetroTaskbar = () => {
 
   return (
     <>
-      {/* Start Menu Overlay */}
+      {/* Start Menu Overlay - prevents interaction with page when menu is open */}
       <AnimatePresence>
         {isStartOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40"
+            className="fixed inset-0 z-40 bg-background/20 backdrop-blur-[1px]"
             onClick={() => setIsStartOpen(false)}
           />
         )}
       </AnimatePresence>
 
-      {/* Start Menu */}
+      {/* Start Menu - responsive positioning */}
       <AnimatePresence>
         {isStartOpen && (
           <motion.div
@@ -110,27 +110,27 @@ export const RetroTaskbar = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="fixed left-2 bottom-14 z-50 w-64 retro-window"
+            className="fixed left-2 right-2 sm:left-2 sm:right-auto bottom-14 z-50 sm:w-64 retro-window max-h-[70vh] overflow-y-auto"
           >
             {/* Title bar */}
-            <div className="retro-title-bar">
+            <div className="retro-title-bar sticky top-0 z-10">
               <span className="font-bold text-sm tracking-wide">Portfolio</span>
               <button
                 onClick={() => setIsStartOpen(false)}
-                className="retro-close-btn"
+                className="retro-close-btn min-w-[20px] min-h-[20px] flex items-center justify-center"
                 aria-label="Close menu"
               >
                 <X className="w-3 h-3" />
               </button>
             </div>
 
-            {/* Menu items */}
+            {/* Menu items with touch-friendly sizing */}
             <div className="p-1">
               {menuItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => handleMenuClick(item.href)}
-                  className="retro-menu-item w-full"
+                  className="retro-menu-item w-full min-h-[44px] touch-manipulation"
                 >
                   <span className="retro-menu-icon">{item.icon}</span>
                   <span className="font-medium">{item.label}</span>
@@ -145,7 +145,7 @@ export const RetroTaskbar = () => {
             <div className="p-2">
               <a
                 href="mailto:altruisticxai@gmail.com"
-                className="retro-menu-item w-full text-sm"
+                className="retro-menu-item w-full text-sm min-h-[44px] touch-manipulation"
               >
                 <Mail className="w-4 h-4" />
                 <span>Send Email...</span>
@@ -156,38 +156,38 @@ export const RetroTaskbar = () => {
       </AnimatePresence>
 
       {/* Taskbar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 retro-taskbar">
-        <div className="flex items-center justify-between h-full px-1">
+      <div className="fixed bottom-0 left-0 right-0 z-50 retro-taskbar safe-area-bottom">
+        <div className="flex items-center justify-between h-full px-1 sm:px-2">
           {/* Left side: Start button + Quick launch */}
-          <div className="gap-1 flex items-start justify-center">
-            {/* Start Button */}
+          <div className="gap-1 flex items-center">
+            {/* Start Button - touch-friendly sizing */}
             <button
               onClick={() => setIsStartOpen(!isStartOpen)}
-              className={`retro-start-btn ${isStartOpen ? "retro-btn-pressed" : ""}`}
+              className={`retro-start-btn min-h-[36px] touch-manipulation ${isStartOpen ? "retro-btn-pressed" : ""}`}
               aria-label="Start menu"
               aria-expanded={isStartOpen}
             >
               <div className="retro-windows-logo">
                 <div className="grid grid-cols-2 gap-0.5">
-                  <div className="w-2 h-2 bg-[hsl(213_94%_35%)]" />
-                  <div className="w-2 h-2 bg-[hsl(158_55%_45%)]" />
-                  <div className="w-2 h-2 bg-[hsl(265_50%_55%)]" />
+                  <div className="w-2 h-2 bg-primary" />
+                  <div className="w-2 h-2 bg-secondary" />
+                  <div className="w-2 h-2 bg-accent" />
                   <div className="w-2 h-2 bg-[hsl(45_95%_55%)]" />
                 </div>
               </div>
-              <span className="font-bold text-xs">Start</span>
+              <span className="font-bold text-xs hidden xs:inline">Start</span>
             </button>
 
-            {/* Divider */}
-            <div className="retro-taskbar-divider" />
+            {/* Divider - hidden on very small screens */}
+            <div className="retro-taskbar-divider hidden sm:block" />
 
-            {/* Quick launch icons */}
-            <div className="flex items-center gap-1">
+            {/* Quick launch icons - hidden on mobile for cleaner look */}
+            <div className="hidden sm:flex items-center gap-1">
               {quickLaunchItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => handleMenuClick(item.href)}
-                  className="retro-quick-launch"
+                  className="retro-quick-launch min-w-[32px] min-h-[32px] touch-manipulation"
                   aria-label={item.label}
                   title={item.label}
                 >
@@ -198,12 +198,12 @@ export const RetroTaskbar = () => {
           </div>
 
           {/* Right side: Dark Mode Toggle + Clock */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             {/* Dark Mode Toggle Button */}
             {mounted && (
               <motion.button
                 onClick={toggleTheme}
-                className="retro-quick-launch w-8 h-8"
+                className="retro-quick-launch w-9 h-9 min-w-[36px] min-h-[36px] touch-manipulation"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
@@ -223,11 +223,11 @@ export const RetroTaskbar = () => {
               </motion.button>
             )}
 
-            {/* Clock */}
-            <div className="retro-clock">
-              <div className="flex-col leading-tight flex items-center justify-start">
-                <span className="text-xs font-medium text-center">{formatTime(currentTime)}</span>
-                <span className="text-[10px] opacity-80">{formatDate(currentTime)}</span>
+            {/* Clock - responsive sizing */}
+            <div className="retro-clock px-2 sm:px-3">
+              <div className="flex-col leading-tight flex items-center justify-center">
+                <span className="text-[11px] sm:text-xs font-medium text-center whitespace-nowrap">{formatTime(currentTime)}</span>
+                <span className="text-[9px] sm:text-[10px] opacity-80 hidden xs:block">{formatDate(currentTime)}</span>
               </div>
             </div>
           </div>

@@ -15,7 +15,8 @@ const Index = () => {
       <div className="crt-scanlines" aria-hidden="true" />
       
       <Navbar />
-      <main className="crt-phosphor">
+      {/* Main content with bottom padding for fixed taskbar */}
+      <main className="crt-phosphor pb-14">
         <Hero />
         <About />
         <Skills />

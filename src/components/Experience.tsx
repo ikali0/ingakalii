@@ -138,9 +138,9 @@ const Experience = () => {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Timeline Line */}
+          {/* Timeline Line - adjusted for mobile */}
           <div
-            className="absolute left-2 md:left-1/2 top-0 bottom-0 w-0.5 md:-translate-x-1/2 rounded-full"
+            className="absolute left-3 md:left-1/2 top-0 bottom-0 w-0.5 md:-translate-x-1/2 rounded-full"
             style={{
               background: "linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--primary)) 100%)",
               boxShadow: "0 0 8px hsl(var(--primary) / 0.3)"
@@ -155,11 +155,11 @@ const Experience = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-20px" }}
                 transition={{ duration: 0.3, delay: index * 0.06 }}
-                className="relative pl-container md:pl-0"
+                className="relative pl-10 md:pl-0"
               >
-                {/* Timeline Node */}
+                {/* Timeline Node - properly aligned for mobile */}
                 <motion.div
-                  className={`absolute left-0.5 md:left-1/2 top-element w-element h-element rounded-full md:-translate-x-1/2 z-10 ${getStatusStyles(exp.status)}`}
+                  className={`absolute left-1.5 md:left-1/2 top-4 w-3 h-3 rounded-full md:-translate-x-1/2 z-10 ${getStatusStyles(exp.status)}`}
                   style={{
                     boxShadow: exp.status === "in-progress"
                       ? "0 0 10px hsl(var(--primary)), inset 0 -1px 2px rgba(0,0,0,0.2)"

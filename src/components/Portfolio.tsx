@@ -154,8 +154,9 @@ function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <motion.article
-      className="h-full"
+      className="h-full touch-manipulation"
       whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
       <div className="flex flex-col h-full overflow-hidden rounded-xl glass shadow-soft">
@@ -205,10 +206,10 @@ function ProjectCard({ project }: ProjectCardProps) {
             ))}
           </div>
 
-          {/* Expandable Case Study Section */}
+          {/* Expandable Case Study Section - touch-friendly button */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-element-sm text-body-sm font-medium text-primary hover:text-primary/80 transition-colors mb-element"
+            className="flex items-center gap-element-sm text-body-sm font-medium text-primary hover:text-primary/80 transition-colors mb-element min-h-[44px] touch-manipulation"
             aria-expanded={isExpanded}
           >
             <span>{isExpanded ? "Hide Details" : "View Case Study"}</span>
@@ -270,13 +271,13 @@ function ProjectCard({ project }: ProjectCardProps) {
           {/* Spacer to push button to bottom */}
           <div className="flex-1" />
 
-          {/* Action Button */}
+          {/* Action Button - touch-friendly sizing */}
           {project.live && (
             <motion.a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-element-sm w-full py-element px-card-sm text-body-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-card rounded-md mt-card-sm"
+              className="inline-flex items-center justify-center gap-element-sm w-full py-3 px-card-sm text-body-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 active:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-card rounded-md mt-card-sm min-h-[44px] touch-manipulation"
               aria-label={`View ${project.title} project`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

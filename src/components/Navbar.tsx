@@ -109,7 +109,7 @@ const Navbar = () => {
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <button
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-md text-foreground hover:bg-muted/50 transition-colors"
+              className="md:hidden flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-md text-foreground hover:bg-muted/50 transition-colors touch-manipulation"
               aria-label="Open navigation menu"
             >
               <Menu className="w-5 h-5" />
@@ -129,10 +129,10 @@ const Navbar = () => {
                       href={link.href}
                       onClick={(e) => handleLinkClick(e, link.href)}
                       className={cn(
-                        "flex items-center gap-3 px-4 py-3 rounded-lg text-body font-medium transition-all duration-200",
+                        "flex items-center gap-3 px-4 py-4 min-h-[48px] rounded-lg text-body font-medium transition-all duration-200 touch-manipulation",
                         activeSection === link.id
                           ? "text-primary bg-primary/10 border-l-2 border-primary"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted/50 active:bg-muted"
                       )}
                     >
                       {link.label}

@@ -55,127 +55,167 @@ interface ProjectData {
   github?: string;
   live?: string;
 }
-const projects: ProjectData[] = [
-  {
-    title: "AI Ethics Dashboard",
-    description: "Interactive platform for monitoring and auditing AI systems for fairness, transparency, and accountability metrics.",
-    image: ethicsDashboard,
-    tags: ["React", "Python", "Fairlearn"],
-    icon: faChartLine,
-    techStack: ["React 18", "Python 3.11", "Fairlearn", "FastAPI", "PostgreSQL", "Docker"],
-    impactMetrics: [
-      { label: "Bias Incidents Reduced", value: "40%", improvement: "↓" },
-      { label: "Detection Speed", value: "3.2s", improvement: "↓ from 45s" },
-      { label: "Models Audited", value: "150+", improvement: "" },
-    ],
-    caseStudy: {
-      problem: "Organizations lacked visibility into algorithmic bias across their ML pipelines, leading to compliance risks and reputational damage.",
-      approach: "Built real-time monitoring dashboards using Fairlearn and custom fairness metrics, integrated with existing MLOps workflows via REST APIs.",
-      outcome: "Enabled proactive bias detection before production deployment, reducing post-launch fairness incidents.",
-    },
-    github: "https://github.com",
-    live: "https://example.com",
+const projects: ProjectData[] = [{
+  title: "AI Ethics Dashboard",
+  description: "Interactive platform for monitoring and auditing AI systems for fairness, transparency, and accountability metrics.",
+  image: ethicsDashboard,
+  tags: ["React", "Python", "Fairlearn"],
+  icon: faChartLine,
+  techStack: ["React 18", "Python 3.11", "Fairlearn", "FastAPI", "PostgreSQL", "Docker"],
+  impactMetrics: [{
+    label: "Bias Incidents Reduced",
+    value: "40%",
+    improvement: "↓"
+  }, {
+    label: "Detection Speed",
+    value: "3.2s",
+    improvement: "↓ from 45s"
+  }, {
+    label: "Models Audited",
+    value: "150+",
+    improvement: ""
+  }],
+  caseStudy: {
+    problem: "Organizations lacked visibility into algorithmic bias across their ML pipelines, leading to compliance risks and reputational damage.",
+    approach: "Built real-time monitoring dashboards using Fairlearn and custom fairness metrics, integrated with existing MLOps workflows via REST APIs.",
+    outcome: "Enabled proactive bias detection before production deployment, reducing post-launch fairness incidents."
   },
-  {
-    title: "Governance Framework Tool",
-    description: "Tool for organizations to create and implement AI governance policies with automated compliance checking.",
-    image: governance,
-    tags: ["Next.js", "TypeScript", "NIST AI RMF"],
-    icon: faGavel,
-    techStack: ["Next.js 14", "TypeScript", "Prisma", "tRPC", "Tailwind CSS", "Vercel"],
-    impactMetrics: [
-      { label: "Audit Prep Time", value: "60%", improvement: "↓ reduction" },
-      { label: "Compliance Score", value: "94%", improvement: "↑ from 67%" },
-      { label: "Policy Templates", value: "45+", improvement: "" },
-    ],
-    caseStudy: {
-      problem: "Federal agencies struggled to translate NIST AI RMF requirements into actionable technical controls and documentation.",
-      approach: "Developed a structured workflow tool mapping RMF categories to specific code patterns, tests, and documentation templates.",
-      outcome: "Accelerated compliance documentation and reduced audit preparation time significantly.",
-    },
-    github: "https://github.com",
-    live: "https://example.com",
+  github: "https://github.com",
+  live: "https://example.com"
+}, {
+  title: "Governance Framework Tool",
+  description: "Tool for organizations to create and implement AI governance policies with automated compliance checking.",
+  image: governance,
+  tags: ["Next.js", "TypeScript", "NIST AI RMF"],
+  icon: faGavel,
+  techStack: ["Next.js 14", "TypeScript", "Prisma", "tRPC", "Tailwind CSS", "Vercel"],
+  impactMetrics: [{
+    label: "Audit Prep Time",
+    value: "60%",
+    improvement: "↓ reduction"
+  }, {
+    label: "Compliance Score",
+    value: "94%",
+    improvement: "↑ from 67%"
+  }, {
+    label: "Policy Templates",
+    value: "45+",
+    improvement: ""
+  }],
+  caseStudy: {
+    problem: "Federal agencies struggled to translate NIST AI RMF requirements into actionable technical controls and documentation.",
+    approach: "Developed a structured workflow tool mapping RMF categories to specific code patterns, tests, and documentation templates.",
+    outcome: "Accelerated compliance documentation and reduced audit preparation time significantly."
   },
-  {
-    title: "Stakeholder Mapping",
-    description: "Visual tool for mapping stakeholder interests, power dynamics, and potential conflicts in tech deployment.",
-    image: stakeholder,
-    tags: ["React", "D3.js", "Force Graph"],
-    icon: faUsers,
-    techStack: ["React", "D3.js", "Force Graph", "Node.js", "MongoDB", "AWS Lambda"],
-    impactMetrics: [
-      { label: "Alignment Improved", value: "35%", improvement: "↑" },
-      { label: "Conflict Resolution", value: "2.1x", improvement: "faster" },
-      { label: "Stakeholders Mapped", value: "500+", improvement: "" },
-    ],
-    caseStudy: {
-      problem: "Complex AI deployments involve multiple stakeholders with competing interests, leading to project delays and scope conflicts.",
-      approach: "Created interactive force-directed graphs to visualize stakeholder relationships, influence levels, and potential friction points.",
-      outcome: "Improved cross-functional alignment and reduced stakeholder conflicts during AI rollouts.",
-    },
-    github: "https://github.com",
+  github: "https://github.com",
+  live: "https://example.com"
+}, {
+  title: "Stakeholder Mapping",
+  description: "Visual tool for mapping stakeholder interests, power dynamics, and potential conflicts in tech deployment.",
+  image: stakeholder,
+  tags: ["React", "D3.js", "Force Graph"],
+  icon: faUsers,
+  techStack: ["React", "D3.js", "Force Graph", "Node.js", "MongoDB", "AWS Lambda"],
+  impactMetrics: [{
+    label: "Alignment Improved",
+    value: "35%",
+    improvement: "↑"
+  }, {
+    label: "Conflict Resolution",
+    value: "2.1x",
+    improvement: "faster"
+  }, {
+    label: "Stakeholders Mapped",
+    value: "500+",
+    improvement: ""
+  }],
+  caseStudy: {
+    problem: "Complex AI deployments involve multiple stakeholders with competing interests, leading to project delays and scope conflicts.",
+    approach: "Created interactive force-directed graphs to visualize stakeholder relationships, influence levels, and potential friction points.",
+    outcome: "Improved cross-functional alignment and reduced stakeholder conflicts during AI rollouts."
   },
-  {
-    title: "Bias Detection API",
-    description: "RESTful API service for detecting and measuring various types of bias in datasets and model outputs.",
-    image: biasDetection,
-    tags: ["Python", "FastAPI", "Scikit-learn"],
-    icon: faBug,
-    techStack: ["Python", "FastAPI", "Scikit-learn", "NumPy", "Pandas", "Redis", "Kubernetes"],
-    impactMetrics: [
-      { label: "Fairness Score", value: "18%", improvement: "↑ improvement" },
-      { label: "Metrics Supported", value: "12+", improvement: "" },
-      { label: "API Latency", value: "< 200ms", improvement: "p99" },
-    ],
-    caseStudy: {
-      problem: "Data science teams lacked standardized tools to measure demographic parity, equalized odds, and other fairness metrics during development.",
-      approach: "Built a modular API supporting 12+ fairness metrics with clear documentation and integration guides for CI/CD pipelines.",
-      outcome: "Enabled teams to catch bias issues early in the development lifecycle.",
-    },
-    github: "https://github.com",
-    live: "https://example.com",
+  github: "https://github.com"
+}, {
+  title: "Bias Detection API",
+  description: "RESTful API service for detecting and measuring various types of bias in datasets and model outputs.",
+  image: biasDetection,
+  tags: ["Python", "FastAPI", "Scikit-learn"],
+  icon: faBug,
+  techStack: ["Python", "FastAPI", "Scikit-learn", "NumPy", "Pandas", "Redis", "Kubernetes"],
+  impactMetrics: [{
+    label: "Fairness Score",
+    value: "18%",
+    improvement: "↑ improvement"
+  }, {
+    label: "Metrics Supported",
+    value: "12+",
+    improvement: ""
+  }, {
+    label: "API Latency",
+    value: "< 200ms",
+    improvement: "p99"
+  }],
+  caseStudy: {
+    problem: "Data science teams lacked standardized tools to measure demographic parity, equalized odds, and other fairness metrics during development.",
+    approach: "Built a modular API supporting 12+ fairness metrics with clear documentation and integration guides for CI/CD pipelines.",
+    outcome: "Enabled teams to catch bias issues early in the development lifecycle."
   },
-  {
-    title: "Ethical Decision Framework",
-    description: "Mobile-first application helping teams make ethical decisions under time pressure with structured frameworks.",
-    image: decisionFramework,
-    tags: ["React Native", "Firebase", "Ethics"],
-    icon: faMobile,
-    techStack: ["React Native", "Firebase", "Expo", "TypeScript", "Redux Toolkit"],
-    impactMetrics: [
-      { label: "Team Adoption", value: "90%", improvement: "" },
-      { label: "Decision Time", value: "40%", improvement: "↓ faster" },
-      { label: "Scenarios Trained", value: "200+", improvement: "" },
-    ],
-    caseStudy: {
-      problem: "Engineering teams faced ethical dilemmas without structured frameworks, leading to inconsistent decision-making under pressure.",
-      approach: "Developed a mobile app with guided decision trees based on established ethical frameworks (IEEE, ACM) with scenario-based training.",
-      outcome: "Standardized ethical decision-making across distributed teams.",
-    },
-    github: "https://github.com",
+  github: "https://github.com",
+  live: "https://example.com"
+}, {
+  title: "Ethical Decision Framework",
+  description: "Mobile-first application helping teams make ethical decisions under time pressure with structured frameworks.",
+  image: decisionFramework,
+  tags: ["React Native", "Firebase", "Ethics"],
+  icon: faMobile,
+  techStack: ["React Native", "Firebase", "Expo", "TypeScript", "Redux Toolkit"],
+  impactMetrics: [{
+    label: "Team Adoption",
+    value: "90%",
+    improvement: ""
+  }, {
+    label: "Decision Time",
+    value: "40%",
+    improvement: "↓ faster"
+  }, {
+    label: "Scenarios Trained",
+    value: "200+",
+    improvement: ""
+  }],
+  caseStudy: {
+    problem: "Engineering teams faced ethical dilemmas without structured frameworks, leading to inconsistent decision-making under pressure.",
+    approach: "Developed a mobile app with guided decision trees based on established ethical frameworks (IEEE, ACM) with scenario-based training.",
+    outcome: "Standardized ethical decision-making across distributed teams."
   },
-  {
-    title: "AI Tutoring Platform",
-    description: "AI-powered tutoring platform providing personalized learning experiences and academic support services.",
-    image: tutoring,
-    tags: ["React", "GPT-4", "Personalization"],
-    icon: faGraduationCap,
-    techStack: ["React", "GPT-4 API", "Supabase", "Tailwind CSS", "Vercel Edge"],
-    impactMetrics: [
-      { label: "Test Scores", value: "25%", improvement: "↑ improvement" },
-      { label: "Session Completion", value: "87%", improvement: "" },
-      { label: "Students Helped", value: "1,200+", improvement: "" },
-    ],
-    caseStudy: {
-      problem: "Students lacked access to personalized, on-demand academic support that adapts to their learning pace and style.",
-      approach: "Built an AI tutor using GPT-4 with custom prompting strategies, progress tracking, and adaptive difficulty scaling.",
-      outcome: "Delivered scalable 1:1 tutoring experiences with measurable learning improvements.",
-    },
-    github: "https://github.com",
-    live: "https://studii.lovable.app",
+  github: "https://github.com"
+}, {
+  title: "AI Tutoring Platform",
+  description: "AI-powered tutoring platform providing personalized learning experiences and academic support services.",
+  image: tutoring,
+  tags: ["React", "GPT-4", "Personalization"],
+  icon: faGraduationCap,
+  techStack: ["React", "GPT-4 API", "Supabase", "Tailwind CSS", "Vercel Edge"],
+  impactMetrics: [{
+    label: "Test Scores",
+    value: "25%",
+    improvement: "↑ improvement"
+  }, {
+    label: "Session Completion",
+    value: "87%",
+    improvement: ""
+  }, {
+    label: "Students Helped",
+    value: "1,200+",
+    improvement: ""
+  }],
+  caseStudy: {
+    problem: "Students lacked access to personalized, on-demand academic support that adapts to their learning pace and style.",
+    approach: "Built an AI tutor using GPT-4 with custom prompting strategies, progress tracking, and adaptive difficulty scaling.",
+    outcome: "Delivered scalable 1:1 tutoring experiences with measurable learning improvements."
   },
-];
-
+  github: "https://github.com",
+  live: "https://studii.lovable.app"
+}];
 interface ProjectCardProps {
   project: ProjectData;
 }
@@ -201,12 +241,10 @@ function ProjectCard({
             <FontAwesomeIcon icon={project.icon} className="text-primary text-xs" />
           </div>
           {/* Primary Impact Metric Badge */}
-          {project.impactMetrics[0] && (
-            <div className="absolute bottom-2 right-2 max-w-[70%] sm:max-w-none px-1.5 py-0.5 rounded bg-secondary/90 backdrop-blur-sm text-secondary-foreground text-[0.625rem] font-medium shadow-sm truncate">
+          {project.impactMetrics[0] && <div className="absolute bottom-2 right-2 max-w-[70%] sm:max-w-none px-1.5 py-0.5 rounded bg-secondary/90 backdrop-blur-sm text-secondary-foreground text-[0.625rem] font-medium shadow-sm truncate">
               {project.impactMetrics[0].label}: {project.impactMetrics[0].value}
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-card/50 via-transparent to-transparent opacity-65 transition-opacity duration-300 group-hover:opacity-80" aria-hidden="true" />
+            </div>}
+          <div className="absolute inset-0 bg-gradient-to-t from-card/50 via-transparent to-transparent transition-opacity duration-300 opacity-5" aria-hidden="true" />
         </div>
 
         {/* Content */}
@@ -221,28 +259,19 @@ function ProjectCard({
 
           {/* Category Tags */}
           <div className="flex flex-wrap gap-1 mb-2" role="list" aria-label="Categories">
-            {project.tags.map(tag => (
-              <Tag key={tag} variant="default" size="sm" role="listitem">
+            {project.tags.map(tag => <Tag key={tag} variant="default" size="sm" role="listitem">
                 {tag}
-              </Tag>
-            ))}
+              </Tag>)}
           </div>
           
           {/* Tech Stack - Compact display */}
           <div className="flex flex-wrap gap-1 mb-card-sm">
-            {project.techStack.slice(0, 4).map(tech => (
-              <span 
-                key={tech} 
-                className="text-[0.625rem] px-1.5 py-0.5 rounded bg-muted text-muted-foreground"
-              >
+            {project.techStack.slice(0, 4).map(tech => <span key={tech} className="text-[0.625rem] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
                 {tech}
-              </span>
-            ))}
-            {project.techStack.length > 4 && (
-              <span className="text-[0.625rem] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+              </span>)}
+            {project.techStack.length > 4 && <span className="text-[0.625rem] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
                 +{project.techStack.length - 4}
-              </span>
-            )}
+              </span>}
           </div>
 
           {/* Expandable Case Study Section - touch-friendly button */}
@@ -309,15 +338,11 @@ function ProjectCard({
                   <div className="mt-element pt-element border-t border-border/30">
                     <p className="text-caption font-semibold text-foreground mb-element-sm">Key Metrics</p>
                     <div className="grid grid-cols-3 gap-element-sm">
-                      {project.impactMetrics.map((metric) => (
-                        <div key={metric.label} className="text-center p-2 rounded-md bg-muted/50">
+                      {project.impactMetrics.map(metric => <div key={metric.label} className="text-center p-2 rounded-md bg-muted/50">
                           <p className="text-body-sm font-bold text-primary">{metric.value}</p>
                           <p className="text-[0.625rem] text-muted-foreground leading-tight">{metric.label}</p>
-                          {metric.improvement && (
-                            <p className="text-[0.5625rem] text-secondary font-medium">{metric.improvement}</p>
-                          )}
-                        </div>
-                      ))}
+                          {metric.improvement && <p className="text-[0.5625rem] text-secondary font-medium">{metric.improvement}</p>}
+                        </div>)}
                     </div>
                   </div>
                   
@@ -325,14 +350,9 @@ function ProjectCard({
                   <div className="mt-element">
                     <p className="text-caption font-semibold text-foreground mb-element-sm">Tech Stack</p>
                     <div className="flex flex-wrap gap-1">
-                      {project.techStack.map(tech => (
-                        <span 
-                          key={tech} 
-                          className="text-[0.625rem] px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/20"
-                        >
+                      {project.techStack.map(tech => <span key={tech} className="text-[0.625rem] px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/20">
                           {tech}
-                        </span>
-                      ))}
+                        </span>)}
                     </div>
                   </div>
                 </div>
@@ -340,7 +360,7 @@ function ProjectCard({
           </AnimatePresence>
 
           {/* Spacer to push button to bottom */}
-          <div className="flex-1" />
+          
 
           {/* Action Button - touch-friendly sizing */}
           {project.live && <motion.a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-element-sm w-full text-body-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 active:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-card rounded-md mt-card-sm min-h-[44px] touch-manipulation px-[6px] py-[6px] my-[10px]" aria-label={`View ${project.title} project`} whileHover={{
@@ -356,12 +376,7 @@ function ProjectCard({
     </motion.article>;
 }
 const Portfolio = () => {
-  return (
-    <section 
-      id="portfolio" 
-      className="relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden" 
-      aria-labelledby="portfolio-heading"
-    >
+  return <section id="portfolio" className="relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden" aria-labelledby="portfolio-heading">
       {/* Abstract background elements with parallax */}
       <GradientMesh className="inset-0 w-full h-full" />
       <ParallaxShape speed={0.2} rotateAmount={10} className="w-24 h-24 top-20 right-[10%]">
@@ -376,27 +391,16 @@ const Portfolio = () => {
 
       <div className="container relative z-10 mx-auto max-w-5xl">
         <ScrollFade>
-          <SectionHeader 
-            overline="Case Studies" 
-            title="Featured Work" 
-            description="Projects designed to solve real problems in AI ethics, governance, and responsible technology deployment." 
-          />
+          <SectionHeader overline="Case Studies" title="Featured Work" description="Projects designed to solve real problems in AI ethics, governance, and responsible technology deployment." />
         </ScrollFade>
 
         {/* Responsive Grid */}
-        <StaggerContainer 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" 
-          staggerDelay={0.08}
-        >
-          {projects.map(project => (
-            <StaggerItem key={project.title}>
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.08}>
+          {projects.map(project => <StaggerItem key={project.title}>
               <ProjectCard project={project} />
-            </StaggerItem>
-          ))}
+            </StaggerItem>)}
         </StaggerContainer>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Portfolio;

@@ -87,7 +87,123 @@
 
 @layer components {
   /* ========================================
-   * RETRO WINDOWS UI
+   * BEM UTILITY CLASSES
+   * Consolidated patterns for reusability
+   * ======================================== */
+
+  /* Section - Base layout for page sections */
+  .section {
+    @apply relative overflow-hidden;
+  }
+  .section--padded {
+    @apply py-section-sm md:py-section px-4;
+  }
+  .section--muted {
+    @apply bg-muted/30;
+  }
+  .section--background {
+    @apply bg-background;
+  }
+  .section__container {
+    @apply container relative z-10 mx-auto;
+  }
+  .section__container--sm {
+    @apply max-w-2xl;
+  }
+  .section__container--md {
+    @apply max-w-3xl;
+  }
+  .section__container--lg {
+    @apply max-w-5xl;
+  }
+  .section__container--xl {
+    @apply max-w-6xl;
+  }
+
+  /* Card - Reusable card patterns */
+  .card {
+    @apply rounded-xl overflow-hidden;
+  }
+  .card--glass {
+    @apply backdrop-blur-sm;
+    background: linear-gradient(135deg, hsla(var(--card) / 0.85) 0%, hsla(var(--card) / 0.65) 100%);
+    box-shadow: var(--shadow-soft);
+  }
+  .card__content {
+    @apply p-card;
+  }
+  .card__content--sm {
+    @apply p-card-sm;
+  }
+  .card__image {
+    @apply relative overflow-hidden bg-muted;
+  }
+  .card__image-zoom {
+    @apply w-full h-full object-cover transition-transform duration-300 ease-out;
+  }
+  .card__image-zoom:hover,
+  .group:hover .card__image-zoom {
+    @apply scale-105;
+  }
+
+  /* Header - Section header patterns */
+  .header {
+    @apply mb-container md:mb-container-lg;
+  }
+  .header__overline {
+    @apply text-overline uppercase text-accent font-semibold mb-element-sm;
+  }
+  .header__title {
+    @apply font-display text-display-sm md:text-display-md text-foreground;
+  }
+  .header__description {
+    @apply text-body text-muted-foreground max-w-xl mx-auto leading-relaxed;
+  }
+
+  /* Icon - Badge/icon container patterns */
+  .icon-badge {
+    @apply flex items-center justify-center rounded-lg;
+  }
+  .icon-badge--sm {
+    @apply w-8 h-8;
+  }
+  .icon-badge--md {
+    @apply w-10 h-10;
+  }
+  .icon-badge--primary {
+    @apply bg-primary/10 text-primary;
+  }
+  .icon-badge--card {
+    @apply bg-card/90 backdrop-blur-sm shadow-md;
+  }
+
+  /* List - Common list patterns */
+  .list {
+    @apply space-y-element;
+  }
+  .list__item {
+    @apply flex items-start gap-element text-foreground;
+  }
+  .list__icon {
+    @apply text-accent w-4 h-4 mt-0.5 flex-shrink-0;
+  }
+  .list__text {
+    @apply text-body-sm;
+  }
+
+  /* Grid - Layout grid patterns */
+  .grid--cards {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-container md:gap-container-lg;
+  }
+  .grid--bento {
+    @apply grid grid-cols-1 md:grid-cols-3 auto-rows-[minmax(180px,auto)] gap-container;
+  }
+  .grid--two-col {
+    @apply grid sm:grid-cols-2 gap-container-lg;
+  }
+
+  /* ========================================
+   * RETRO WINDOWS UI (BEM)
    * ======================================== */
   .retro-window {
     @apply bg-card rounded-none transition-all duration-200;
@@ -97,7 +213,21 @@
       inset -1px -1px 0 hsla(var(--muted-foreground) / 0.2),
       var(--shadow-soft);
   }
+  .retro-window__title-bar {
+    @apply flex items-center justify-between px-2 py-1.5 text-primary-foreground select-none;
+    background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.85) 100%);
+  }
+  .retro-window__controls {
+    @apply flex gap-1;
+  }
+  .retro-window__control {
+    @apply w-3 h-3 rounded-sm;
+  }
+  .retro-window__content {
+    @apply p-card bg-card/70 backdrop-blur-sm;
+  }
 
+  /* Legacy alias for backwards compat */
   .retro-title-bar {
     @apply flex items-center justify-between px-2 py-1.5 text-primary-foreground select-none;
     background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.85) 100%);
@@ -109,13 +239,28 @@
     border: 2px outset hsl(var(--primary) / 0.7);
     box-shadow: 2px 2px 0 hsla(var(--foreground) / 0.1);
   }
-
   .retro-button:active {
     border-style: inset;
     @apply translate-x-[1px] translate-y-[1px];
   }
 
-  /* Glass effect with blue tint */
+  /* ========================================
+   * GLASS EFFECTS (BEM)
+   * ======================================== */
+  .glass {
+    @apply backdrop-blur-sm;
+    background: linear-gradient(135deg, hsla(var(--card) / 0.85) 0%, hsla(var(--card) / 0.65) 100%);
+  }
+  .glass--subtle {
+    @apply backdrop-blur-sm;
+    background: linear-gradient(135deg, hsla(var(--card) / 0.9) 0%, hsla(var(--card) / 0.7) 100%);
+  }
+  .glass--strong {
+    @apply backdrop-blur-md;
+    background: linear-gradient(135deg, hsla(var(--card) / 0.95) 0%, hsla(var(--card) / 0.85) 100%);
+  }
+
+  /* Legacy alias */
   .glass-subtle {
     @apply backdrop-blur-sm;
     background: linear-gradient(135deg, hsla(var(--card) / 0.9) 0%, hsla(var(--card) / 0.7) 100%);

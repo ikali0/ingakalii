@@ -1,182 +1,166 @@
 
-# AI/Ethics Theme Visual Enhancement Plan
+# Mobile/Tablet UX Audit + React Runtime Error Fix
 
 ## Overview
-Transform the portfolio from a generic design into a distinctive AI/ethics-themed experience using deep blues for trust and technology, accents of emerald green for ethics and growth, while maintaining the existing retro Windows UI flavor.
+This plan addresses two critical issues: a React runtime error causing blank screens and a comprehensive mobile/tablet UX audit to ensure the portfolio feels intentional and polished on all devices.
 
 ---
 
-## Phase 1: Color Scheme Overhaul
+## Part 1: Fix React Runtime Error (Priority: Critical)
 
-### New Color Palette
-**Primary Theme: "Digital Trust"**
-- **Deep Navy** (`210 50% 8%`) - Primary backgrounds and text
-- **Tech Blue** (`213 94% 40%`) - Primary actions, trust indicators
-- **Ethics Green** (`158 60% 45%`) - Accent for ethics/growth elements
-- **Soft Slate** (`215 20% 95%`) - Light backgrounds
-- **Neural Purple** (`265 50% 55%`) - Secondary accent for AI elements
+### Root Cause Analysis
+The error `Cannot read properties of null (reading 'useEffect')` in `@tanstack/react-query` indicates a **duplicate React instance** being bundled by Vite. While `package.json` shows aligned React versions (18.3.1), the bundler may resolve React differently for different dependencies.
 
-### Files to Modify
-1. **src/global.css** - Update CSS custom properties in `:root` and `.dark`:
-   - Replace pink/magenta tones with deep blues
-   - Update accent from current blue to ethics green
-   - Create new shadow colors using blue-green spectrum
-   - Update gradient definitions for AI-inspired depth
+### Solution
+Add React deduplication to `vite.config.ts`:
 
-2. **src/components/ui/entropy-background.tsx** - Update particle colors:
-   - Replace `pinkColor` with neural purple tones
-   - Replace `tealColor` with ethics green tones
-   - Update divider line gradient to blue-green spectrum
+```text
+File: vite.config.ts
 
----
+Add resolve.dedupe configuration to force a single React instance:
 
-## Phase 2: Typography Refinement
+resolve: {
+  alias: {
+    "@": path.resolve(__dirname, "./src"),
+  },
+  dedupe: ["react", "react-dom"],
+},
+```
 
-### Font Strategy
-**Current:** Poppins (body) + Lora (display)
-**Enhanced:** Inter (body - clean, modern) + Playfair Display (headings - elegant, authoritative)
-
-### Changes
-1. **index.html** - Add preconnect links for Google Fonts performance
-2. **src/global.css** - Update font imports:
-   - Add Playfair Display with weights 500, 600, 700
-   - Keep Inter (already loaded) as primary body font
-   - Update `--font-display` and `--font-body` variables
-
-3. **tailwind.config.ts** - Update font families to reference new fonts
-
-### Typography Adjustments
-- Apply `tracking-tight` to all display headings
-- Use `leading-relaxed` (golden ratio ~1.618) for body text
-- Increase font-weight contrast between headings and body
+This is a one-line addition that prevents Vite from bundling multiple React instances.
 
 ---
 
-## Phase 3: Depth & Visual Polish
+## Part 2: Mobile/Tablet UX Audit
 
-### Gradient Enhancements
-1. **src/global.css** - Add new gradient utilities:
-   - `.gradient-hero` - Subtle blue-to-transparent for Hero section
-   - `.gradient-section` - Alternating section backgrounds
-   - Update `.glass` class with blue-tinted glassmorphism
+### Issues Identified
 
-2. **Component Updates**:
-   - **Hero.tsx** - Add subtle gradient overlay reinforcing AI theme
-   - **About.tsx** - Update glass card gradient to use new palette
-   - **Skills.tsx** - Update bento card accent gradients
+#### A. Spacing & Typography Inconsistencies
+| Issue | Location | Fix |
+|-------|----------|-----|
+| Hero section uses `min-h-[100svh]` but `pt-20` may clip content on short screens | `Hero.tsx` | Add responsive padding adjustment |
+| Portfolio cards have inconsistent tap target sizes | `Portfolio.tsx` | Ensure all buttons meet 44px minimum |
+| Bento grid cards collapse poorly on tablet (768-1024px) | `Skills.tsx` | Add `lg:` breakpoint adjustments |
 
-### Shadow System
-- Update `--shadow-color` to use deep blue (`210 50% 30%`)
-- Create softer, more diffuse shadows for premium feel
-- Add `--shadow-glow` for interactive elements
+#### B. Navigation & Tap Targets
+| Issue | Location | Fix |
+|-------|----------|-----|
+| Mobile nav sheet close button is 16x16px (too small) | `sheet.tsx` | Increase to 44x44px tap area |
+| Navbar hamburger icon container is 44px but visual target appears smaller | `Navbar.tsx` | Add visual padding/background |
+| Start menu items already have `min-h-[44px]` (good) | `retro-taskbar.tsx` | Verified compliant |
 
-### Border Refinements
-- Soften border colors to blend with new palette
-- Update `--border` to subtle blue-gray
+#### C. Animation & Hover State Degradation
+| Issue | Location | Fix |
+|-------|----------|-----|
+| 3D card hover effects use `@media (hover: hover)` (good) | `index.css` | Already handled |
+| Framer Motion `whileHover` should pair with `whileTap` | Various | Add `whileTap` where missing |
+| Portfolio card `whileHover={{ scale: 1.01 }}` has no `whileTap` fallback | `Portfolio.tsx` | Add `whileTap={{ scale: 0.99 }}` |
 
----
+#### D. Overlapping/Clipped Elements
+| Issue | Location | Fix |
+|-------|----------|-----|
+| Metric badge on portfolio cards may overflow on small screens | `Portfolio.tsx` | Add text truncation + responsive sizing |
+| Career timeline nodes position may overlap on narrow screens | `project-timeline.tsx` | Review positioning |
+| Contact section `pb-section` may conflict with taskbar | `Contact.tsx` | Adjust bottom padding |
 
-## Phase 4: Component Color Updates
-
-### Hero Section (src/components/Hero.tsx)
-- Update badge background to ethics green with transparency
-- Adjust social button colors to new primary/secondary
-
-### Skills Section (src/components/Skills.tsx)
-- Update bento card accent gradients to AI-inspired color pairs:
-  - Security: Deep red to orange (warning/danger)
-  - AI/LLMs: Neural purple to tech blue (innovation)
-  - Governance: Ethics green to teal (trust/compliance)
-  - Engineering: Tech blue to cyan (technical)
-  - Data: Amber to gold (information/data)
-
-### Retro Taskbar (src/components/ui/retro-taskbar.tsx)
-- Update Windows logo colors to match new palette
-- Adjust taskbar background gradient
-
-### Glass Cards (src/components/ui/glass-card.tsx)
-- Update glass gradient to use new palette
-- Adjust hover shadow to ethics green glow
-
-### Abstract Shapes (src/components/ui/abstract-shapes.tsx)
-- Update gradient stops to use new color variables
-- Maintain animation behavior
+#### E. Font Scaling Issues
+| Issue | Location | Fix |
+|-------|----------|-----|
+| Display-XL (4.5rem) may be too large on mobile | `tailwind.config.ts` | Already has responsive classes |
+| Overline text (0.6875rem) may be too small on mobile | Various | Add `sm:text-xs` fallback |
 
 ---
 
-## Technical Implementation Details
+## Implementation Plan
 
-### CSS Variable Updates (src/global.css)
+### Step 1: Fix Vite Config (Critical)
+Update `vite.config.ts` to dedupe React.
 
+### Step 2: Improve Sheet Component Tap Targets
+Update `sheet.tsx` close button from 16x16px to include a 44x44px touch target.
+
+### Step 3: Enhance Mobile Navbar
+- Add visual background to hamburger button on scroll
+- Increase touch feedback visibility
+
+### Step 4: Fix Portfolio Card Mobile Issues
+- Add `whileTap` fallback to all cards
+- Ensure metric badges truncate properly
+- Add responsive text sizing for case study content
+
+### Step 5: Improve Skills Bento Grid Tablet Layout
+- Add intermediate breakpoint handling for 768-1024px screens
+- Ensure tall cards don't create awkward gaps
+
+### Step 6: Add Reduced Motion Support
+Add `prefers-reduced-motion` media query to disable:
+- CRT scanline effects
+- Continuous flicker animations
+- Complex parallax movements
+
+### Step 7: Contact Section Spacing
+- Verify bottom padding accounts for fixed taskbar on all screen sizes
+- Add extra padding on mobile
+
+---
+
+## Files to Modify
+
+1. **vite.config.ts** - Add React deduplication
+2. **src/components/ui/sheet.tsx** - Increase close button tap target
+3. **src/components/Navbar.tsx** - Enhance mobile hamburger visibility
+4. **src/components/Portfolio.tsx** - Add whileTap, fix responsive sizing
+5. **src/components/Skills.tsx** - Improve tablet grid layout
+6. **src/index.css** - Add prefers-reduced-motion support
+7. **src/components/Contact.tsx** - Adjust mobile bottom padding
+
+---
+
+## Technical Details
+
+### Reduced Motion CSS Addition (index.css)
 ```css
-:root {
-  /* New AI/Ethics Palette */
-  --background: 215 25% 97%;
-  --foreground: 210 50% 12%;
-  --card: 210 30% 98%;
-  --card-foreground: 210 50% 15%;
-  --primary: 213 94% 35%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 158 60% 42%;
-  --secondary-foreground: 158 60% 15%;
-  --accent: 158 55% 45%;
-  --accent-foreground: 158 55% 10%;
-  --muted: 215 20% 93%;
-  --muted-foreground: 215 15% 40%;
-  --border: 215 20% 85%;
-  --input: 215 25% 92%;
-  --ring: 158 55% 50%;
+@media (prefers-reduced-motion: reduce) {
+  .crt-screen,
+  .crt-flicker,
+  .crt-scanlines {
+    animation: none !important;
+  }
   
-  /* Typography */
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  
-  /* Enhanced Shadows */
-  --shadow-color: 213 50% 30%;
-  --shadow-soft: 0 4px 20px -4px hsla(213, 50%, 30%, 0.15);
-  --shadow-elevated: 0 8px 32px -8px hsla(213, 50%, 30%, 0.2);
-}
-
-.dark {
-  --background: 210 35% 8%;
-  --foreground: 210 20% 85%;
-  --card: 210 30% 12%;
-  --primary: 213 90% 60%;
-  --secondary: 158 55% 50%;
-  --accent: 158 50% 55%;
-  --border: 210 20% 20%;
-  --shadow-color: 213 50% 15%;
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 ```
 
-### Font Import Update
+### Sheet Close Button Enhancement
+```tsx
+// Current: w-4 h-4
+// Updated: Add padding wrapper for 44x44 tap target
+<SheetPrimitive.Close className="absolute right-4 top-4 p-2 -m-2 rounded-sm ...">
+  <X className="h-4 w-4" />
+</SheetPrimitive.Close>
+```
 
-```css
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Geist+Mono&display=swap');
+### Portfolio whileTap Addition
+```tsx
+// Current
+whileHover={{ scale: 1.01 }}
+whileTap={{ scale: 0.99 }}
+
+// All motion.article and motion.a elements get matching whileTap
 ```
 
 ---
 
-## Files to be Modified
+## Success Criteria
 
-| File | Changes |
-|------|---------|
-| `index.html` | Add font preconnect links for performance |
-| `src/global.css` | Full color palette overhaul, typography updates, new shadows/gradients |
-| `tailwind.config.ts` | Update font family references |
-| `src/components/Hero.tsx` | Update badge and button colors |
-| `src/components/Skills.tsx` | Update bento card accent gradients |
-| `src/components/ui/entropy-background.tsx` | Update particle/line colors |
-| `src/components/ui/glass-card.tsx` | Update glass gradient and hover effects |
-| `src/components/ui/abstract-shapes.tsx` | Update SVG gradient colors |
-| `src/components/ui/retro-taskbar.tsx` | Update Windows logo and taskbar colors |
-
----
-
-## Expected Outcome
-- A cohesive AI/ethics visual identity with deep blues conveying trust and technology
-- Ethics green accents highlighting growth and responsible innovation
-- Modern, premium typography with Playfair Display headings
-- Enhanced depth through refined shadows and subtle gradients
-- Maintained retro Windows aesthetic with updated color scheme
-- Improved contrast and accessibility across light/dark modes
+1. No React runtime errors on page load
+2. All interactive elements have minimum 44x44px tap targets
+3. Smooth animations on touch devices with tap feedback
+4. No overlapping elements on screens 320px-768px
+5. Reduced motion support for accessibility
+6. Consistent spacing using semantic tokens
+7. Clean tablet (768-1024px) layouts without awkward gaps

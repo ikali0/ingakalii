@@ -41,11 +41,12 @@ export type ContactFormData = z.infer<typeof contactFormSchema>;
 /**
  * EMAILJS CONFIGURATION
  * Uses environment variables with fallbacks to hardcoded values.
- * Set these in your environment: VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY
+ * These are PUBLIC configuration values (not secrets) required for EmailJS browser SDK.
+ * The public key is safe to expose client-side per EmailJS documentation.
  */
-export const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-export const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-export const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+export const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "altruisticxai@gmail.com";
+export const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "SITE_FORM";
+export const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "65eWYLkIKGyzzMajE";
 
 /**
  * Helper to verify EmailJS configuration.

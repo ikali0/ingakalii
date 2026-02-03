@@ -1,25 +1,28 @@
 /**
  * Experience Section Component
  *
- * Professional timeline with expandable cards.
+ * - Expandable experience cards
+ * - Filters by role and year
+ * - VerticalTimeline derived from same data (no duplication)
  */
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBriefcase,
   faLocationDot,
   faPersonWalkingLuggage,
   faBuilding,
   faShieldHalved,
   faChartLine,
-  faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Tag } from "./ui/tag";
 import { RingShape, DotsPattern, ParallaxShape } from "./ui/abstract-shapes";
+import { VerticalTimeline, type TimelineEntry } from "./ui/vertical-timeline";
 
-/* ----------------------------- DATA ----------------------------- */
+/* ------------------------------------------------------------------ */
+/* DATA — single source of truth                                       */
+/* ------------------------------------------------------------------ */
 
 interface ExperienceData {
   id: string;
@@ -62,7 +65,7 @@ const experiences: ExperienceData[] = [
     highlights: [
       "Executed 12+ penetration tests",
       "Discovered 47 critical vulnerabilities",
-      "Reduced incidents by 30%",
+      "Reduced security incidents by 30%",
     ],
     tags: ["Metasploit", "OSINT", "Threat Modeling"],
     status: "complete",
@@ -75,7 +78,11 @@ const experiences: ExperienceData[] = [
     period: "Jul 2021 – Oct 2024",
     location: "Washington, DC",
     description: "Optimized federal portfolios and compliance frameworks.",
-    highlights: ["30% portfolio optimization", "DLA compliance frameworks", "energy.gov UX design"],
+    highlights: [
+      "30% portfolio optimization",
+      "Developed DLA compliance frameworks",
+      "Designed energy.gov UX interfaces",
+    ],
     tags: ["DoD", "Policy", "UX/UI"],
     status: "complete",
     icon: faBuilding,
@@ -87,18 +94,65 @@ const experiences: ExperienceData[] = [
     period: "Dec 2019 – Mar 2021",
     location: "Newtown Square, PA",
     description: "ROI analysis and enterprise reporting.",
-    highlights: ["25% efficiency improvement", "30% faster data retrieval"],
+    highlights: ["25% operational efficiency improvement", "30% reduction in data retrieval time"],
     tags: ["ROI", "Data Analysis"],
     status: "complete",
     icon: faChartLine,
   },
 ];
 
-/* ----------------------------- COMPONENT ----------------------------- */
+/* ------------------------------------------------------------------ */
+/* COMPONENT                                                          */
+/* ------------------------------------------------------------------ */
 
 const Experience = () => {
-  const [expandedId, setExpandedId] = useState<string | null>(null);
   const reduceMotion = useReducedMotion();
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [roleFilter, setRoleFilter] = useState("all");
+  const [yearFilter, setYearFilter] = useState("all");
+
+  /* ------------------ derived filter values ------------------ */
+
+  const roles = useMemo(() => Array.from(new Set(experiences.map((e) => e.title))), []);
+
+  const years = useMemo(() => {
+    const allYears = experiences.flatMap((e) => e.period.match(/\d{4}/g) ?? []);
+    return Array.from(new Set(allYears)).sort((a, b) => Number(b) - Number(a));
+  }, []);
+
+  /* ------------------ filtered experiences ------------------ */
+
+  const filteredExperiences = useMemo(() => {
+    return experiences.filter((exp) => {
+      const roleMatch = roleFilter === "all" || exp.title === roleFilter;
+      const yearMatch = yearFilter === "all" || exp.period.includes(yearFilter);
+      return roleMatch && yearMatch;
+    });
+  }, [roleFilter, yearFilter]);
+
+  /* ------------------ derived timeline entries ------------------ */
+
+  const timelineEntries: TimelineEntry[] = useMemo(() => {
+    return filteredExperiences.map((exp) => {
+      const years = exp.period.match(/\d{4}/g) ?? [];
+      const startYear = years[0] ?? "";
+      const endYear = exp.period.includes("Present") ? undefined : years[1];
+
+      return {
+        year: startYear,
+        endYear,
+        title: exp.title,
+        organization: exp.organization,
+        location: exp.location,
+        description: exp.description,
+        highlights: exp.highlights,
+        tags: exp.tags,
+        type: "career",
+        icon: exp.icon,
+        isCurrent: exp.status === "in-progress",
+      };
+    });
+  }, [filteredExperiences]);
 
   return (
     <section id="experience" className="relative py-section px-4 bg-muted/30 overflow-hidden">
@@ -123,9 +177,38 @@ const Experience = () => {
           <h2 className="font-display text-display-sm md:text-display-md">Professional Experience</h2>
         </motion.div>
 
-        {/* Experience Cards */}
+        {/* Filters */}
+        <div className="flex flex-wrap gap-3 mb-container">
+          <select
+            value={roleFilter}
+            onChange={(e) => setRoleFilter(e.target.value)}
+            className="rounded-md border bg-background px-3 py-2 text-sm"
+          >
+            <option value="all">All Roles</option>
+            {roles.map((role) => (
+              <option key={role} value={role}>
+                {role}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={yearFilter}
+            onChange={(e) => setYearFilter(e.target.value)}
+            className="rounded-md border bg-background px-3 py-2 text-sm"
+          >
+            <option value="all">All Years</option>
+            {years.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Cards */}
         <div className="space-y-card">
-          {experiences.map((exp) => {
+          {filteredExperiences.map((exp) => {
             const expanded = expandedId === exp.id;
 
             return (
@@ -184,6 +267,9 @@ const Experience = () => {
             );
           })}
         </div>
+
+        {/* Derived Vertical Timeline */}
+        <VerticalTimeline entries={timelineEntries} title="Career Journey" overline="Timeline" />
       </div>
     </section>
   );

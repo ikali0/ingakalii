@@ -57,60 +57,7 @@ export function VerticalTimeline({
   overline = "Timeline"
 }: VerticalTimelineProps) {
   return <ScrollFade>
-      <div className="relative">
-        {/* Section Header */}
-        <div className="mb-container">
-          <p className="text-overline uppercase text-accent font-semibold mb-element-sm">
-            {overline}
-          </p>
-          <h3 className="text-heading font-display text-foreground">
-            {title}
-          </h3>
-        </div>
-
-        {/* Timeline Container - Flexbox vertical layout */}
-        <div className="relative flex flex-col">
-          {/* Vertical Line */}
-          <div className="absolute left-4 md:left-6 top-0 bottom-0 w-0.5 rounded-full" style={{
-          background: "linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%)"
-        }} aria-hidden="true" />
-
-          {/* Timeline Entries */}
-          <div className="flex flex-col gap-card">
-            {entries.map((entry, index) => {
-            const Icon = entry.icon || defaultIcons[entry.type];
-            const styles = typeStyles[entry.type];
-            return <motion.div key={`${entry.year}-${entry.title}`} initial={{
-              opacity: 0,
-              x: -20
-            }} whileInView={{
-              opacity: 1,
-              x: 0
-            }} viewport={{
-              once: true,
-              margin: "-50px"
-            }} transition={{
-              duration: 0.4,
-              delay: index * 0.08
-            }} className="relative flex gap-card pl-10 md:pl-14">
-                  {/* Timeline Node */}
-                  <motion.div className={`absolute left-2 md:left-4 top-1 w-5 h-5 rounded-full border-2 ${styles.node} ${entry.isCurrent ? 'animate-pulse' : ''} ${styles.glow} flex items-center justify-center`} whileHover={{
-                scale: 1.3
-              }} transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 25
-              }}>
-                    <div className="absolute inset-0.5 rounded-full bg-background/20" />
-                  </motion.div>
-
-                  {/* Content Card */}
-                  
-                </motion.div>;
-          })}
-          </div>
-        </div>
-      </div>
+      
     </ScrollFade>;
 }
 export default VerticalTimeline;

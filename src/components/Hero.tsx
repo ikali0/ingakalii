@@ -32,7 +32,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <span className="inline-block px-3 py-1.5 mb-card text-overline uppercase bg-secondary/20 text-secondary-foreground rounded-full shadow-sm border border-secondary/30 backdrop-blur-sm">
+          <span className="inline-block px-3 py-1.5 mb-card text-overline uppercase bg-secondary/15 text-secondary-foreground rounded-full shadow-sm border border-secondary/25 backdrop-blur-sm">
             Applied AI Engineer & Independent Consultant
           </span>
         </motion.div>

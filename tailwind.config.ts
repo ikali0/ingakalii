@@ -78,18 +78,9 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
         },
-        slate: {
-          deep: 'hsl(var(--slate-deep))',
-          medium: 'hsl(var(--slate-medium))'
-        },
-        cream: {
-          DEFAULT: 'hsl(var(--cream))',
-          dark: 'hsl(var(--cream-dark))'
-        },
-        amber: {
-          DEFAULT: 'hsl(var(--amber))',
-          glow: 'hsl(var(--amber-glow))',
-          muted: 'hsl(var(--amber-muted))'
+        neural: {
+          DEFAULT: 'hsl(var(--neural))',
+          foreground: 'hsl(var(--neural-foreground))'
         },
         sidebar: {
           DEFAULT: 'hsl(var(--sidebar-background))',
@@ -103,8 +94,8 @@ export default {
         }
       },
       fontFamily: {
-        display: ['var(--font-display)'],
-        body: ['var(--font-body)'],
+        display: ['Playfair Display', 'Georgia', 'serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
         sans: [
           'Inter',
           'ui-sans-serif',
@@ -116,8 +107,7 @@ export default {
           'Noto Color Emoji'
         ],
         serif: [
-          'EB Garamond',
-          'ui-serif',
+          'Playfair Display',
           'Georgia',
           'Cambria',
           'Times New Roman',

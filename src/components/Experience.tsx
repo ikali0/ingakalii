@@ -1,13 +1,71 @@
-/**
- * Experience Section Component
- *
- * - Expandable experience cards
- * - Filters by role and year
- * - VerticalTimeline derived from same data (no duplication)
- */
-import { useMemo, useState } from "react";
+import { FC } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Tag } from "./ui/tag";
+import type { ExperienceData } from "./data";
+
+interface ExperienceCardProps {
+  exp: ExperienceData;
+  expanded: boolean;
+  toggle: () => void;
+}
+
+export const ExperienceCard: FC<ExperienceCardProps> = ({ exp, expanded, toggle }) => {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.div layout className="glass rounded-lg p-card">
+      <div className="flex justify-between mb-element-sm">
+        <span className="text-caption text-primary">{exp.period}</span>
+        <span className="text-caption text-muted-foreground flex gap-1">
+          <FontAwesomeIcon icon={exp.icon} />
+          {exp.location}
+        </span>
+      </div>
+
+      <h3 className="font-semibold">{exp.title}</h3>
+      <p className="text-caption text-muted-foreground">{exp.organization}</p>
+      <p className="text-caption mt-element-sm">{exp.description}</p>
+
+      <button onClick={toggle} aria-expanded={expanded} className="flex items-center gap-1 text-caption mt-element">
+        {expanded ? "Less" : "More"}
+        <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: reduceMotion ? 0 : 0.3 }}>
+          <ChevronDown className="w-3 h-3" />
+        </motion.div>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            layout
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.3 }}
+            className="mt-element"
+          >
+            <ul className="list-disc list-inside space-y-2">
+              {exp.highlights.map((h) => (
+                <li key={h} className="text-sm">
+                  {h}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="flex flex-wrap gap-2 mt-element">
+        {exp.tags.map((tag) => (
+          <Tag key={tag} size="sm" variant="muted">
+            {tag}
+          </Tag>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
 import {
   faLocationDot,
   faPersonWalkingLuggage,
@@ -15,16 +73,9 @@ import {
   faShieldHalved,
   faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Tag } from "./ui/tag";
-import { RingShape, DotsPattern, ParallaxShape } from "./ui/abstract-shapes";
-import { VerticalTimeline, type TimelineEntry } from "./ui/vertical-timeline";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
-/* ------------------------------------------------------------------ */
-/* DATA — single source of truth                                       */
-/* ------------------------------------------------------------------ */
-
-interface ExperienceData {
+export interface ExperienceData {
   id: string;
   title: string;
   organization: string;
@@ -34,10 +85,10 @@ interface ExperienceData {
   highlights: string[];
   tags: string[];
   status: "complete" | "in-progress" | "pending";
-  icon: any;
+  icon: IconDefinition;
 }
 
-const experiences: ExperienceData[] = [
+export const experiences: ExperienceData[] = [
   {
     id: "ai-policy",
     title: "AI Policy Engineer",
@@ -100,59 +151,53 @@ const experiences: ExperienceData[] = [
     icon: faChartLine,
   },
 ];
+import { useMemo, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ParallaxShape, RingShape, DotsPattern } from "./ui/abstract-shapes";
+import { VerticalTimeline, type TimelineEntry } from "./ui/vertical-timeline";
+import { ExperienceCard } from "./ExperienceCard";
+import { experiences, type ExperienceData } from "./data";
 
-/* ------------------------------------------------------------------ */
-/* COMPONENT                                                          */
-/* ------------------------------------------------------------------ */
-
-const Experience = () => {
+export const Experience = () => {
   const reduceMotion = useReducedMotion();
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [roleFilter, setRoleFilter] = useState("all");
   const [yearFilter, setYearFilter] = useState("all");
 
   /* ------------------ derived filter values ------------------ */
-
   const roles = useMemo(() => Array.from(new Set(experiences.map((e) => e.title))), []);
-
   const years = useMemo(() => {
     const allYears = experiences.flatMap((e) => e.period.match(/\d{4}/g) ?? []);
     return Array.from(new Set(allYears)).sort((a, b) => Number(b) - Number(a));
   }, []);
 
   /* ------------------ filtered experiences ------------------ */
+  const matchesFilter = (exp: ExperienceData) =>
+    (roleFilter === "all" || exp.title === roleFilter) && (yearFilter === "all" || exp.period.includes(yearFilter));
 
-  const filteredExperiences = useMemo(() => {
-    return experiences.filter((exp) => {
-      const roleMatch = roleFilter === "all" || exp.title === roleFilter;
-      const yearMatch = yearFilter === "all" || exp.period.includes(yearFilter);
-      return roleMatch && yearMatch;
-    });
-  }, [roleFilter, yearFilter]);
+  const filteredExperiences = useMemo(() => experiences.filter(matchesFilter), [roleFilter, yearFilter]);
 
-  /* ------------------ derived timeline entries ------------------ */
-
-  const timelineEntries: TimelineEntry[] = useMemo(() => {
-    return filteredExperiences.map((exp) => {
-      const years = exp.period.match(/\d{4}/g) ?? [];
-      const startYear = years[0] ?? "";
-      const endYear = exp.period.includes("Present") ? undefined : years[1];
-
-      return {
-        year: startYear,
-        endYear,
-        title: exp.title,
-        organization: exp.organization,
-        location: exp.location,
-        description: exp.description,
-        highlights: exp.highlights,
-        tags: exp.tags,
-        type: "career",
-        icon: exp.icon,
-        isCurrent: exp.status === "in-progress",
-      };
-    });
-  }, [filteredExperiences]);
+  /* ------------------ timeline entries ------------------ */
+  const timelineEntries: TimelineEntry[] = useMemo(
+    () =>
+      filteredExperiences.map((exp) => {
+        const [startYear, endYear] = exp.period.match(/\d{4}/g) ?? [];
+        return {
+          year: startYear,
+          endYear: exp.period.includes("Present") ? undefined : endYear,
+          title: exp.title,
+          organization: exp.organization,
+          location: exp.location,
+          description: exp.description,
+          highlights: exp.highlights,
+          tags: exp.tags,
+          type: "career",
+          icon: exp.icon,
+          isCurrent: exp.status === "in-progress",
+        };
+      }),
+    [filteredExperiences],
+  );
 
   return (
     <section id="experience" className="relative py-section px-4 bg-muted/30 overflow-hidden">
@@ -206,69 +251,19 @@ const Experience = () => {
           </select>
         </div>
 
-        {/* Cards */}
+        {/* Experience Cards */}
         <div className="space-y-card">
-          {filteredExperiences.map((exp) => {
-            const expanded = expandedId === exp.id;
-
-            return (
-              <motion.div key={exp.id} layout className="glass rounded-lg p-card">
-                <div className="flex justify-between mb-element-sm">
-                  <span className="text-caption text-primary">{exp.period}</span>
-                  <span className="text-caption text-muted-foreground flex gap-1">
-                    <FontAwesomeIcon icon={faLocationDot} />
-                    {exp.location}
-                  </span>
-                </div>
-
-                <h3 className="font-semibold">{exp.title}</h3>
-                <p className="text-caption text-muted-foreground">{exp.organization}</p>
-
-                <p className="text-caption mt-element-sm">{exp.description}</p>
-
-                <button
-                  onClick={() => setExpandedId(expanded ? null : exp.id)}
-                  className="flex items-center gap-1 text-caption mt-element"
-                >
-                  {expanded ? "Less" : "More"}
-                  <motion.div animate={{ rotate: expanded ? 180 : 0 }}>
-                    <ChevronDown className="w-3 h-3" />
-                  </motion.div>
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {expanded && (
-                    <motion.div
-                      layout
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="mt-element"
-                    >
-                      <ul className="space-y-2">
-                        {exp.highlights.map((h) => (
-                          <li key={h} className="text-sm">
-                            • {h}
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                <div className="flex flex-wrap gap-2 mt-element">
-                  {exp.tags.map((tag) => (
-                    <Tag key={tag} size="sm" variant="muted">
-                      {tag}
-                    </Tag>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
+          {filteredExperiences.map((exp) => (
+            <ExperienceCard
+              key={exp.id}
+              exp={exp}
+              expanded={expandedId === exp.id}
+              toggle={() => setExpandedId(expandedId === exp.id ? null : exp.id)}
+            />
+          ))}
         </div>
 
-        {/* Derived Vertical Timeline */}
+        {/* Vertical Timeline */}
         <VerticalTimeline entries={timelineEntries} title="Career Journey" overline="Timeline" />
       </div>
     </section>

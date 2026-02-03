@@ -1,18 +1,31 @@
+/**
+ * SectionHeader Component
+ *
+ * A consistent header for page sections with:
+ * - Overline label (optional)
+ * - Title
+ * - Description (optional)
+ * - Centered or left-aligned variants
+ */
+
 import { cn } from "@/lib/utils";
 
-export interface SectionHeaderProps {
-  id?: string; // <-- Added id here
+interface SectionHeaderProps {
+  /** Small uppercase label above the title */
   overline?: string;
+  /** Main section title */
   title: string;
+  /** Optional description below title */
   description?: string;
+  /** Alignment: 'center' (default) or 'left' */
   align?: "center" | "left";
+  /** Additional className for the container */
   className?: string;
 }
 
-export function SectionHeader({ id, overline, title, description, align = "center", className }: SectionHeaderProps) {
+export function SectionHeader({ overline, title, description, align = "center", className }: SectionHeaderProps) {
   return (
     <header
-      id={id}
       className={cn("mb-10 md:mb-14", align === "center" && "text-center", align === "left" && "text-left", className)}
     >
       {overline && <p className="text-overline uppercase text-accent font-semibold mb-2">{overline}</p>}

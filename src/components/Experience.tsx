@@ -6,11 +6,85 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBriefcase, faLocationDot, faPersonWalkingLuggage, faBuilding, faShieldHalved, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { faBriefcase, faLocationDot, faPersonWalkingLuggage, faBuilding, faShieldHalved, faChartLine, faRocket, faAward, faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tag } from "./ui/tag";
 import { RingShape, DotsPattern, ParallaxShape } from "./ui/abstract-shapes";
-import { ProjectTimeline } from "./ui/project-timeline";
+import { VerticalTimeline, type TimelineEntry } from "./ui/vertical-timeline";
+
+// Career timeline entries for the vertical timeline
+const careerTimeline: TimelineEntry[] = [
+  {
+    year: "2019",
+    endYear: "2021",
+    title: "Business Analyst",
+    organization: "SAP SuccessFactors",
+    location: "Newtown Square, PA",
+    description: "Started career building ROI reports and optimizing data workflows for enterprise clients.",
+    highlights: [
+      "Created ROI reports for budget allocations",
+      "Improved operational efficiency by 25%",
+      "Achieved 30% reduction in data retrieval time"
+    ],
+    tags: ["Data Analysis", "ROI", "Process Optimization"],
+    type: "career",
+    icon: faBriefcase,
+  },
+  {
+    year: "2021",
+    endYear: "2024",
+    title: "Consulting Analyst",
+    organization: "Accenture Federal Services",
+    location: "Washington, DC",
+    description: "Joined federal consulting practice for DoD and agency modernization projects.",
+    highlights: [
+      "Optimized capital portfolios for DoD (30% improvement)",
+      "Developed compliance frameworks with DLA",
+      "Designed user-centric interfaces for energy.gov"
+    ],
+    tags: ["DoD", "Policy", "UX/UI"],
+    type: "career",
+    icon: faBriefcase,
+  },
+  {
+    year: "2023",
+    title: "AI Policy Consulting Launch",
+    organization: "Independent Consultant",
+    location: "Philadelphia, PA",
+    description: "Launched independent practice focusing on NIST AI RMF compliance and automation.",
+    tags: ["NIST AI RMF", "GPT-4/Claude", "Compliance"],
+    type: "milestone",
+    icon: faRocket,
+    isCurrent: true,
+  },
+  {
+    year: "2024",
+    endYear: "2025",
+    title: "Penetration Tester",
+    organization: "DIA & Lockheed Martin",
+    location: "Washington, DC",
+    description: "Security role executing federal network assessments and vulnerability remediation.",
+    highlights: [
+      "Executed 12+ penetration tests",
+      "Discovered 47 critical vulnerabilities",
+      "Reduced security incidents by 30%"
+    ],
+    tags: ["Metasploit", "OSINT", "Threat Modeling"],
+    type: "achievement",
+    icon: faShieldHalved,
+  },
+  {
+    year: "2025",
+    title: "AI Ethics Focus",
+    organization: "Ongoing",
+    location: "Remote",
+    description: "Deepening work in responsible AI, bias detection frameworks, and governance tooling.",
+    tags: ["AI Ethics", "Bias Detection", "Governance"],
+    type: "milestone",
+    icon: faLightbulb,
+    isCurrent: true,
+  },
+];
 
 interface ExperienceData {
   title: string;
@@ -288,8 +362,12 @@ const Experience = () => {
           </div>
         </div>
 
-        {/* Career Timeline */}
-        <ProjectTimeline />
+        {/* Vertical Career Timeline */}
+        <VerticalTimeline 
+          entries={careerTimeline} 
+          title="Career Journey"
+          overline="Timeline"
+        />
       </div>
     </section>
   );

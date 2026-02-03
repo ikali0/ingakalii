@@ -4,6 +4,7 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Portfolio from "@/components/Portfolio";
 import Experience from "@/components/Experience";
+import AIEthicsBlog from "@/components/AIEthicsBlog";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import RetroTaskbar from "@/components/ui/retro-taskbar";
@@ -22,6 +23,7 @@ const Index = () => {
         <Skills />
         <Portfolio />
         <Experience />
+        <AIEthicsBlog />
         <Contact />
       </main>
       <Footer />

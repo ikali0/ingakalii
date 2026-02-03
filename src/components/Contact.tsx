@@ -1,11 +1,12 @@
 /**
  * Contact Section Component
  *
- * A retro Windows-styled contact section with glassmorphism styling and scroll animations.
+ * A retro Windows-styled contact section with glassmorphism, scroll animations, and abstract shapes.
  */
 import { motion } from "framer-motion";
 import ContactForm from "./ContactForm";
 import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
+import { BlobShape, CircleShape, SparkleShape } from "./ui/abstract-shapes";
 
 const Contact = () => {
   const services = [
@@ -18,9 +19,15 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-section-sm md:py-section px-4 pb-section bg-background"
+      className="relative py-section-sm md:py-section px-4 pb-section bg-background overflow-hidden"
     >
-      <div className="container mx-auto max-w-5xl">
+      {/* Abstract background shapes */}
+      <BlobShape className="w-80 h-80 -bottom-20 -right-32 opacity-40" />
+      <CircleShape className="w-32 h-32 top-20 left-[5%]" />
+      <SparkleShape className="w-10 h-10 top-1/3 right-[20%]" />
+      <SparkleShape className="w-6 h-6 bottom-40 left-[25%]" />
+
+      <div className="container relative z-10 mx-auto max-w-5xl">
         <ScrollFade>
           <div className="text-center mb-container md:mb-container-lg">
             <p className="text-overline uppercase text-accent font-semibold mb-element-sm">

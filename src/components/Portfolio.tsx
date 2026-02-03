@@ -1,13 +1,14 @@
 /**
  * Portfolio Section Component
  * 
- * Project showcase with glassmorphism cards and hover animations.
+ * Project showcase with glassmorphism cards, hover animations, and abstract shapes.
  */
 import { ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import { SectionHeader } from "./ui/section-header";
 import { Tag } from "./ui/tag";
 import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
+import { TriangleShape, WavyLine, GradientMesh } from "./ui/abstract-shapes";
 
 // Import generated images
 import ethicsDashboard from "@/assets/portfolio-ethics-dashboard.jpg";
@@ -147,10 +148,16 @@ const Portfolio = () => {
   return (
     <section
       id="portfolio"
-      className="py-section-sm md:py-section px-4 bg-muted/30"
+      className="relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden"
       aria-labelledby="portfolio-heading"
     >
-      <div className="container mx-auto max-w-6xl">
+      {/* Abstract background elements */}
+      <GradientMesh className="inset-0 w-full h-full" />
+      <TriangleShape className="w-24 h-24 top-20 right-[10%] opacity-50" />
+      <TriangleShape className="w-16 h-16 bottom-32 left-[5%] opacity-40 rotate-45" />
+      <WavyLine className="w-full h-16 top-1/2 left-0 opacity-50" />
+
+      <div className="container relative z-10 mx-auto max-w-6xl">
         <ScrollFade>
           <SectionHeader
             overline="Personal Projects"

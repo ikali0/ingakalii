@@ -1,12 +1,13 @@
 /**
  * About Section Component
  * 
- * Personal introduction with glassmorphism cards and scroll animations.
+ * Personal introduction with glassmorphism cards, scroll animations, and abstract shapes.
  */
 import { Code2, Sparkles, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { FlippingCard } from "./ui/flipping-card";
 import { ScrollFade } from "./ui/scroll-fade";
+import { BlobShape, SparkleShape } from "./ui/abstract-shapes";
 
 interface HighlightData {
   icon: typeof Code2;
@@ -67,10 +68,15 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-section-sm md:py-section px-4 bg-muted/30"
+      className="relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden"
     >
+      {/* Abstract background shapes */}
+      <BlobShape className="w-64 h-64 -top-20 -right-20 opacity-60" />
+      <SparkleShape className="w-8 h-8 top-32 left-[10%]" />
+      <SparkleShape className="w-6 h-6 bottom-20 right-[15%]" />
+
       <ScrollFade>
-        <div className="container mx-auto max-w-2xl glass rounded-xl p-card md:p-container shadow-soft">
+        <div className="container relative z-10 mx-auto max-w-2xl glass rounded-xl p-card md:p-container shadow-soft">
           {/* Header */}
           <div className="mb-container md:mb-container-lg">
             <p className="text-overline uppercase text-accent font-semibold mb-element-sm">

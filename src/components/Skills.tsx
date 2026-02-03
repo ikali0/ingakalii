@@ -1,13 +1,14 @@
 /**
  * Skills Section Component
  * 
- * Technical proficiency display with animated skill bars and scroll animations.
+ * Technical proficiency display with animated skill bars, scroll animations, and abstract shapes.
  */
 import { motion } from "framer-motion";
 import { SectionHeader } from "./ui/section-header";
 import { SkillBar } from "./ui/skill-bar";
 import { Tag } from "./ui/tag";
 import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
+import { CircleShape, RingShape, DotsPattern } from "./ui/abstract-shapes";
 
 interface Skill {
   name: string;
@@ -59,8 +60,13 @@ const secondaryTech = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-section-sm md:py-section px-4 bg-background">
-      <div className="container mx-auto max-w-4xl">
+    <section id="skills" className="relative py-section-sm md:py-section px-4 bg-background overflow-hidden">
+      {/* Abstract background shapes */}
+      <CircleShape className="w-48 h-48 -top-10 -left-10" />
+      <RingShape className="w-32 h-32 top-1/3 right-[5%]" />
+      <DotsPattern className="w-32 h-32 bottom-20 left-[8%]" />
+
+      <div className="container relative z-10 mx-auto max-w-4xl">
         {/* Header */}
         <ScrollFade>
           <SectionHeader

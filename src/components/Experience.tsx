@@ -1,12 +1,13 @@
 /**
  * Experience Section Component
  * 
- * Professional timeline with expandable cards.
+ * Professional timeline with expandable cards and abstract shapes.
  */
 import { useState } from "react";
 import { Briefcase, MapPin, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tag } from "./ui/tag";
+import { RingShape, DotsPattern } from "./ui/abstract-shapes";
 
 interface ExperienceData {
   title: string;
@@ -101,8 +102,12 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-section-sm md:py-section px-4 bg-muted/30">
-      <div className="container mx-auto max-w-3xl">
+    <section id="experience" className="relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden">
+      {/* Abstract background shapes */}
+      <RingShape className="w-40 h-40 -top-10 right-[10%]" />
+      <DotsPattern className="w-48 h-48 bottom-10 -left-10 opacity-40" />
+
+      <div className="container relative z-10 mx-auto max-w-3xl">
         {/* Section Header */}
         <motion.div
           className="mb-container md:mb-container-lg"
@@ -164,12 +169,13 @@ const Experience = () => {
                 {/* Card Container */}
                 <div className={`md:w-[calc(50%-1.5rem)] ${index % 2 === 0 ? "md:ml-auto md:pl-card" : "md:mr-auto md:pr-card"}`}>
                   <motion.div
-                    className="relative bg-card border border-border rounded-lg overflow-hidden cursor-pointer"
+                    className="relative glass rounded-lg overflow-hidden cursor-pointer"
                     style={{
                       boxShadow: "0 4px 12px -4px hsl(var(--primary) / 0.1), inset 0 1px 0 rgba(255,255,255,0.06)"
                     }}
                     whileHover={{
                       y: -2,
+                      scale: 1.01,
                       boxShadow: "0 8px 20px -6px hsl(var(--primary) / 0.2), inset 0 1px 0 rgba(255,255,255,0.1)"
                     }}
                     onClick={() => toggleExpand(index)}
@@ -255,9 +261,11 @@ const Experience = () => {
                       {/* Tags */}
                       <div className="flex-wrap flex items-start justify-center gap-element-sm">
                         {exp.tags.map((tag) => (
-                          <Tag key={tag} variant="muted" size="sm">
-                            {tag}
-                          </Tag>
+                          <motion.div key={tag} whileHover={{ scale: 1.1 }}>
+                            <Tag variant="muted" size="sm">
+                              {tag}
+                            </Tag>
+                          </motion.div>
                         ))}
                       </div>
                     </div>

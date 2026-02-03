@@ -1,7 +1,7 @@
 /**
  * Experience Section Component
  * 
- * Professional timeline with expandable cards and abstract shapes.
+ * Professional timeline with expandable cards, abstract shapes, and career timeline.
  */
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -10,6 +10,7 @@ import { faBriefcase, faLocationDot, faPersonWalkingLuggage, faBuilding, faShiel
 import { motion, AnimatePresence } from "framer-motion";
 import { Tag } from "./ui/tag";
 import { RingShape, DotsPattern, ParallaxShape } from "./ui/abstract-shapes";
+import { ProjectTimeline } from "./ui/project-timeline";
 
 interface ExperienceData {
   title: string;
@@ -286,6 +287,9 @@ const Experience = () => {
             ))}
           </div>
         </div>
+
+        {/* Career Timeline */}
+        <ProjectTimeline />
       </div>
     </section>
   );

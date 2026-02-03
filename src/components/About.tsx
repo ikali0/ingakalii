@@ -3,14 +3,15 @@
  * 
  * Personal introduction with glassmorphism cards, scroll animations, and abstract shapes.
  */
-import { Code2, Sparkles, Users } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLaptopCode, faLightbulb, faHandshake } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { FlippingCard } from "./ui/flipping-card";
 import { ScrollFade } from "./ui/scroll-fade";
 import { BlobShape, SparkleShape, ParallaxShape } from "./ui/abstract-shapes";
 
 interface HighlightData {
-  icon: typeof Code2;
+  icon: typeof faLaptopCode;
   title: string;
   description: string;
   backDescription: string;
@@ -18,19 +19,19 @@ interface HighlightData {
 
 const highlights: HighlightData[] = [
   {
-    icon: Code2,
+    icon: faLaptopCode,
     title: "Technical Excellence",
     description: "Clean, maintainable code.",
     backDescription: "Production-ready code with testing and documentation.",
   },
   {
-    icon: Sparkles,
+    icon: faLightbulb,
     title: "Creative Solutions",
     description: "Elegant problem solving.",
     backDescription: "Combining technical expertise with design thinking.",
   },
   {
-    icon: Users,
+    icon: faHandshake,
     title: "Team Player",
     description: "Collaborative impact.",
     backDescription: "Bridging technical and non-technical stakeholders.",
@@ -38,11 +39,10 @@ const highlights: HighlightData[] = [
 ];
 
 function CardFront({ data }: { data: HighlightData }) {
-  const Icon = data.icon;
   return (
     <div className="flex flex-col items-center justify-center h-full w-full p-card-sm text-center">
       <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-element-sm">
-        <Icon className="w-4 h-4 text-primary" />
+        <FontAwesomeIcon icon={data.icon} className="w-4 h-4 text-primary" />
       </div>
       <h4 className="font-display text-body-sm font-medium text-foreground mb-1 leading-tight">
         {data.title}

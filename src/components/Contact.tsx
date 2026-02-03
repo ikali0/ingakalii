@@ -4,16 +4,18 @@
  * A retro Windows-styled contact section with glassmorphism, scroll animations, and abstract shapes.
  */
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCode, faRobot, faLightbulb, faPalette } from "@fortawesome/free-solid-svg-icons";
 import ContactForm from "./ContactForm";
 import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
 import { BlobShape, CircleShape, SparkleShape, ParallaxShape } from "./ui/abstract-shapes";
 
 const Contact = () => {
   const services = [
-    "Full-stack web development",
-    "AI/ML integration & consulting",
-    "Technical architecture & code review",
-    "UI/UX design implementation",
+    { text: "Full-stack web development", icon: faCode },
+    { text: "AI/ML integration & consulting", icon: faRobot },
+    { text: "Technical architecture & code review", icon: faLightbulb },
+    { text: "UI/UX design implementation", icon: faPalette },
   ];
 
   return (
@@ -92,8 +94,11 @@ const Contact = () => {
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.1, duration: 0.3 }}
                       >
-                        <span className="text-accent font-medium">→</span>
-                        <span className="text-body-sm">{service}</span>
+                        <FontAwesomeIcon 
+                          icon={service.icon} 
+                          className="text-accent w-4 h-4 mt-0.5" 
+                        />
+                        <span className="text-body-sm">{service.text}</span>
                       </motion.li>
                     ))}
                   </ul>

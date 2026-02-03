@@ -3,7 +3,9 @@
  * 
  * Project showcase with glassmorphism cards, hover animations, and abstract shapes.
  */
-import { ExternalLink } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartLine, faGavel, faUsers, faBug, faMobile, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { SectionHeader } from "./ui/section-header";
 import { Tag } from "./ui/tag";
@@ -23,6 +25,7 @@ interface ProjectData {
   description: string;
   image: string;
   tags: string[];
+  icon: typeof faChartLine;
   github?: string;
   live?: string;
 }
@@ -33,6 +36,7 @@ const projects: ProjectData[] = [
     description: "Interactive platform for monitoring and auditing AI systems for fairness, transparency, and accountability metrics.",
     image: ethicsDashboard,
     tags: ["React", "Python"],
+    icon: faChartLine,
     github: "https://github.com",
     live: "https://example.com"
   },
@@ -41,6 +45,7 @@ const projects: ProjectData[] = [
     description: "Tool for organizations to create and implement AI governance policies with automated compliance checking.",
     image: governance,
     tags: ["Next.js", "TypeScript"],
+    icon: faGavel,
     github: "https://github.com",
     live: "https://example.com"
   },
@@ -49,6 +54,7 @@ const projects: ProjectData[] = [
     description: "Visual tool for mapping stakeholder interests, power dynamics, and potential conflicts in tech deployment.",
     image: stakeholder,
     tags: ["React", "Force Graph"],
+    icon: faUsers,
     github: "https://github.com"
   },
   {
@@ -56,6 +62,7 @@ const projects: ProjectData[] = [
     description: "RESTful API service for detecting and measuring various types of bias in datasets and model outputs.",
     image: biasDetection,
     tags: ["Python", "FastAPI"],
+    icon: faBug,
     github: "https://github.com",
     live: "https://example.com"
   },
@@ -64,6 +71,7 @@ const projects: ProjectData[] = [
     description: "Mobile-first application helping teams make ethical decisions under time pressure with structured frameworks.",
     image: decisionFramework,
     tags: ["React Native", "Firebase"],
+    icon: faMobile,
     github: "https://github.com"
   },
   {
@@ -71,6 +79,7 @@ const projects: ProjectData[] = [
     description: "AI-powered tutoring platform providing personalized learning experiences and academic support services.",
     image: tutoring,
     tags: ["React", "AI"],
+    icon: faGraduationCap,
     github: "https://github.com",
     live: "https://studii.lovable.app"
   }
@@ -88,16 +97,29 @@ function ProjectCard({ project }: ProjectCardProps) {
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
       <div className="flex flex-col h-full overflow-hidden rounded-xl glass shadow-soft">
-        {/* Image Container */}
-        <div className="card-image-shine relative aspect-[16/10] sm:aspect-[4/3] overflow-hidden bg-muted">
+        {/* Image Container with hover zoom effect */}
+        <div className="card-image-shine relative aspect-[16/10] sm:aspect-[4/3] overflow-hidden bg-muted group">
           <img
             src={project.image}
             alt={project.title}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-500 ease-out"
+            className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
           />
+          {/* Category Icon Badge */}
+          <div className="absolute top-3 left-3 w-8 h-8 rounded-lg bg-card/90 backdrop-blur-sm flex items-center justify-center shadow-md">
+            <FontAwesomeIcon 
+              icon={project.icon} 
+              className="text-primary text-sm" 
+            />
+          </div>
           <div
-            className="absolute inset-0 bg-gradient-to-t from-card/40 via-transparent to-transparent opacity-65"
+            className="absolute inset-0 bg-gradient-to-t from-card/40 via-transparent to-transparent opacity-65 transition-opacity duration-300 group-hover:opacity-80"
+            aria-hidden="true"
+          />
+          {/* Hover shadow overlay */}
+          <div 
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+            style={{ boxShadow: "inset 0 0 30px hsl(var(--primary) / 0.15)" }}
             aria-hidden="true"
           />
         </div>
@@ -135,7 +157,7 @@ function ProjectCard({ project }: ProjectCardProps) {
               whileTap={{ scale: 0.98 }}
             >
               <span>View Project</span>
-              <ExternalLink className="w-4 h-4" aria-hidden="true" />
+              <FontAwesomeIcon icon={faExternalLinkAlt} className="w-3 h-3" aria-hidden="true" />
             </motion.a>
           )}
         </div>

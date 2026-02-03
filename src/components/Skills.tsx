@@ -1,12 +1,13 @@
 /**
  * Skills Section Component
  * 
- * Technical proficiency display with animated skill bars.
+ * Technical proficiency display with animated skill bars and scroll animations.
  */
 import { motion } from "framer-motion";
 import { SectionHeader } from "./ui/section-header";
 import { SkillBar } from "./ui/skill-bar";
 import { Tag } from "./ui/tag";
+import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
 
 interface Skill {
   name: string;
@@ -61,56 +62,65 @@ const Skills = () => {
     <section id="skills" className="py-section-sm md:py-section px-4 bg-background">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
+        <ScrollFade>
           <SectionHeader
             overline="Technical Proficiency"
             title="Skills & Expertise"
             description="Bridging the gap between frontier AI development and rigorous security infrastructure."
             align="left"
           />
-        </motion.div>
+        </ScrollFade>
 
         {/* Competency Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-container md:gap-container-lg">
-          {skillCategories.map((cat, idx) => (
-            <motion.div
-              key={cat.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-card p-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow"
-            >
-              <h3 className="text-overline text-muted-foreground uppercase mb-card pb-element-sm border-b border-border">
-                {cat.category}
-              </h3>
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-container md:gap-container-lg">
+          {skillCategories.map((cat) => (
+            <StaggerItem key={cat.category}>
+              <motion.div
+                className="glass rounded-xl p-card shadow-soft h-full"
+                whileHover={{ 
+                  scale: 1.02,
+                  boxShadow: "0 8px 32px -8px hsl(var(--primary) / 0.2)"
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              >
+                <h3 className="text-overline text-muted-foreground uppercase mb-card pb-element-sm border-b border-border/50">
+                  {cat.category}
+                </h3>
 
-              <div className="space-y-card">
-                {cat.skills.map((skill) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    level={skill.level}
-                    examples={skill.examples}
-                  />
-                ))}
-              </div>
-            </motion.div>
+                <div className="space-y-card">
+                  {cat.skills.map((skill) => (
+                    <SkillBar
+                      key={skill.name}
+                      name={skill.name}
+                      level={skill.level}
+                      examples={skill.examples}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* Secondary Stack */}
-        <div className="mt-container-lg flex flex-wrap justify-center gap-element-sm">
-          {secondaryTech.map((tech) => (
-            <Tag key={tech} variant="outline" size="md">
-              {tech}
-            </Tag>
-          ))}
-        </div>
+        <ScrollFade delay={0.3} className="mt-container-lg">
+          <div className="flex flex-wrap justify-center gap-element-sm">
+            {secondaryTech.map((tech, index) => (
+              <motion.div
+                key={tech}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05, duration: 0.3 }}
+                whileHover={{ scale: 1.1 }}
+              >
+                <Tag variant="outline" size="md">
+                  {tech}
+                </Tag>
+              </motion.div>
+            ))}
+          </div>
+        </ScrollFade>
       </div>
     </section>
   );

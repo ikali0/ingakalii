@@ -181,11 +181,28 @@
 
   html {
     scroll-behavior: smooth;
+    /* Smooth dark mode transition */
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
+    /* Enable smooth theme transitions */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Glassmorphism utilities */
+  .glass {
+    @apply backdrop-blur-md;
+    background: linear-gradient(135deg, hsl(var(--card) / 0.7) 0%, hsl(var(--card) / 0.5) 100%);
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
+  
+  .glass-subtle {
+    @apply backdrop-blur-sm;
+    background: hsl(var(--card) / 0.4);
+    border: 1px solid hsl(var(--border) / 0.2);
   }
 
   h1, h2, h3, h4, h5, h6 {

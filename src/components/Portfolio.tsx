@@ -1,11 +1,13 @@
 /**
  * Portfolio Section Component
  * 
- * Project showcase with 3D card effects.
+ * Project showcase with glassmorphism cards and hover animations.
  */
 import { ExternalLink } from "lucide-react";
+import { motion } from "framer-motion";
 import { SectionHeader } from "./ui/section-header";
 import { Tag } from "./ui/tag";
+import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
 
 // Import generated images
 import ethicsDashboard from "@/assets/portfolio-ethics-dashboard.jpg";
@@ -75,16 +77,16 @@ const projects: ProjectData[] = [
 
 interface ProjectCardProps {
   project: ProjectData;
-  index: number;
 }
 
-function ProjectCard({ project, index }: ProjectCardProps) {
+function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article
-      className="portfolio-card-3d h-full"
-      style={{ animationDelay: `${index * 100}ms` }}
+    <motion.article
+      className="h-full"
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
-      <div className="portfolio-card-inner flex flex-col h-full overflow-hidden rounded-xl bg-card border-2 border-border">
+      <div className="flex flex-col h-full overflow-hidden rounded-xl glass shadow-soft">
         {/* Image Container */}
         <div className="card-image-shine relative aspect-[16/10] sm:aspect-[4/3] overflow-hidden bg-muted">
           <img
@@ -112,28 +114,32 @@ function ProjectCard({ project, index }: ProjectCardProps) {
           {/* Tags */}
           <div className="flex flex-wrap gap-element-sm mb-card-sm" role="list" aria-label="Technologies used">
             {project.tags.map((tag) => (
-              <Tag key={tag} variant="default" size="sm" role="listitem">
-                {tag}
-              </Tag>
+              <motion.div key={tag} whileHover={{ scale: 1.1 }}>
+                <Tag variant="default" size="sm" role="listitem">
+                  {tag}
+                </Tag>
+              </motion.div>
             ))}
           </div>
 
           {/* Action Button */}
           {project.live && (
-            <a
+            <motion.a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="portfolio-button inline-flex items-center justify-center gap-element-sm w-full py-element px-card-sm text-body-sm font-medium text-primary-foreground bg-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-card rounded-sm"
+              className="inline-flex items-center justify-center gap-element-sm w-full py-element px-card-sm text-body-sm font-medium text-primary-foreground bg-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-card rounded-md"
               aria-label={`View ${project.title} project`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               <span>View Project</span>
               <ExternalLink className="w-4 h-4" aria-hidden="true" />
-            </a>
+            </motion.a>
           )}
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
@@ -145,22 +151,25 @@ const Portfolio = () => {
       aria-labelledby="portfolio-heading"
     >
       <div className="container mx-auto max-w-6xl">
-        <SectionHeader
-          overline="Personal Projects"
-          title="Featured Work"
-          description="A selection of projects I've designed and built."
-        />
+        <ScrollFade>
+          <SectionHeader
+            overline="Personal Projects"
+            title="Featured Work"
+            description="A selection of projects I've designed and built."
+          />
+        </ScrollFade>
 
         {/* Responsive Grid */}
-        <div
+        <StaggerContainer
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-container md:gap-container-lg"
-          role="list"
-          aria-label="Portfolio projects"
+          staggerDelay={0.08}
         >
-          {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+          {projects.map((project) => (
+            <StaggerItem key={project.title}>
+              <ProjectCard project={project} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

@@ -3,11 +3,12 @@
  * 
  * The main landing section featuring:
  * - Animated entropy background
- * - Name and title
- * - Social links
+ * - Name and title with scroll animations
+ * - Social links with hover effects
  * - Scroll indicator
  */
 import { ArrowDown, Linkedin, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 import EntropyBackground from "./ui/entropy-background";
 
 const Hero = () => {
@@ -26,19 +27,33 @@ const Hero = () => {
 
       <div className="container relative z-20 mx-auto max-w-5xl flex flex-col items-center md:items-start text-center md:text-left">
         {/* Badge */}
-        <div className="animate-fade-up opacity-0">
-          <span className="inline-block px-3 py-1.5 mb-card text-overline uppercase bg-secondary/20 text-secondary-foreground rounded-full shadow-sm border border-secondary/30">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          <span className="inline-block px-3 py-1.5 mb-card text-overline uppercase bg-secondary/20 text-secondary-foreground rounded-full shadow-sm border border-secondary/30 backdrop-blur-sm">
             Applied AI Engineer & Independent Consultant
           </span>
-        </div>
+        </motion.div>
 
         {/* Name */}
-        <h1 className="animate-fade-up opacity-0 [animation-delay:200ms] text-display-lg sm:text-display-xl font-display text-foreground mb-card tracking-tight">
+        <motion.h1 
+          className="text-display-lg sm:text-display-xl font-display text-foreground mb-card tracking-tight"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           Inga K.
-        </h1>
+        </motion.h1>
 
         {/* Subtext */}
-        <p className="animate-fade-up opacity-0 [animation-delay:400ms] text-body-lg md:text-heading font-light mb-container max-w-2xl leading-relaxed text-balance text-foreground/80">
+        <motion.p 
+          className="text-body-lg md:text-heading font-light mb-container max-w-2xl leading-relaxed text-balance text-foreground/80"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           I translate{" "}
           <span className="relative inline-block">
             <span className="relative z-10 font-semibold text-foreground italic">
@@ -51,38 +66,57 @@ const Hero = () => {
           </span>{" "}
           and build AI systems that hold up under compliance, security, and
           real-world pressure.
-        </p>
+        </motion.p>
 
         {/* Social Actions */}
-        <div className="animate-fade-up opacity-0 [animation-delay:600ms] md:justify-start mb-container-lg flex items-start justify-center gap-element">
-          <a
+        <motion.div 
+          className="md:justify-start mb-container-lg flex items-start justify-center gap-element"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <motion.a
             href="https://www.linkedin.com/in/ik11/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-12 h-12 bg-primary hover:bg-primary/90 text-primary-foreground transition-all hover:scale-105 active:scale-95 shadow-md rounded-md"
+            className="flex items-center justify-center w-12 h-12 bg-primary hover:bg-primary/90 text-primary-foreground shadow-md rounded-md"
             aria-label="LinkedIn Profile"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
           >
             <Linkedin className="w-5 h-5" />
-          </a>
-          <a
+          </motion.a>
+          <motion.a
             href="mailto:altruisticxai@gmail.com"
-            className="flex items-center justify-center w-12 h-12 bg-secondary hover:bg-secondary/90 text-secondary-foreground transition-all hover:scale-105 active:scale-95 shadow-md rounded-md"
+            className="flex items-center justify-center w-12 h-12 bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-md rounded-md"
             aria-label="Send Email"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
           >
             <Mail className="w-5 h-5" />
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
 
         {/* Scroll Indicator */}
-        <div className="animate-fade-up opacity-0 [animation-delay:1000ms] mt-section-sm md:mt-container flex justify-center md:justify-start w-full">
+        <motion.div 
+          className="mt-section-sm md:mt-container flex justify-center md:justify-start w-full"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1 }}
+        >
           <a
             href="#about"
             className="flex flex-col items-center gap-element-sm text-muted-foreground hover:text-foreground transition-colors group"
           >
             <span className="text-overline uppercase">Explore</span>
-            <ArrowDown className="w-5 h-5 animate-bounce text-accent" />
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowDown className="w-5 h-5 text-accent" />
+            </motion.div>
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

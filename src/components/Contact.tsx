@@ -1,11 +1,11 @@
 /**
  * Contact Section Component
  *
- * A retro Windows-styled contact section with:
- * - Contact form with EdgeJS integration
- * - Services list
+ * A retro Windows-styled contact section with glassmorphism styling and scroll animations.
  */
+import { motion } from "framer-motion";
 import ContactForm from "./ContactForm";
+import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
 
 const Contact = () => {
   const services = [
@@ -21,54 +21,72 @@ const Contact = () => {
       className="py-section-sm md:py-section px-4 pb-section bg-background"
     >
       <div className="container mx-auto max-w-5xl">
-        <div className="text-center mb-container md:mb-container-lg">
-          <p className="text-overline uppercase text-accent font-semibold mb-element-sm">
-            Get In Touch
-          </p>
-          <p className="text-body text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            I'm currently open to freelance projects and full-time opportunities.
-            Let's talk about how I can help bring your ideas to life.
-          </p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 gap-container-lg">
-          {/* Contact Form Window */}
-          <div className="retro-window">
-            <div className="retro-title-bar">
-              <span className="font-bold text-body-sm">Send a Message</span>
-              <div className="flex gap-1">
-                <div className="w-3 h-3 rounded-sm bg-secondary" />
-                <div className="w-3 h-3 rounded-sm bg-accent" />
-              </div>
-            </div>
-            <div className="p-card bg-card">
-              <ContactForm />
-            </div>
+        <ScrollFade>
+          <div className="text-center mb-container md:mb-container-lg">
+            <p className="text-overline uppercase text-accent font-semibold mb-element-sm">
+              Get In Touch
+            </p>
+            <p className="text-body text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              I'm currently open to freelance projects and full-time opportunities.
+              Let's talk about how I can help bring your ideas to life.
+            </p>
           </div>
+        </ScrollFade>
+
+        <StaggerContainer className="grid sm:grid-cols-2 gap-container-lg" staggerDelay={0.15}>
+          {/* Contact Form Window */}
+          <StaggerItem>
+            <motion.div 
+              className="retro-window glass-subtle"
+              whileHover={{ scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            >
+              <div className="retro-title-bar">
+                <span className="font-bold text-body-sm">Send a Message</span>
+                <div className="flex gap-1">
+                  <div className="w-3 h-3 rounded-sm bg-secondary" />
+                  <div className="w-3 h-3 rounded-sm bg-accent" />
+                </div>
+              </div>
+              <div className="p-card bg-card/70 backdrop-blur-sm">
+                <ContactForm />
+              </div>
+            </motion.div>
+          </StaggerItem>
 
           {/* Info Panel */}
-          <div className="space-y-container">
-            {/* Services Window */}
-            <div className="retro-window">
-              <div className="retro-title-bar">
-                <span className="font-bold text-body-sm">What I Can Help With</span>
-              </div>
-              <div className="p-card bg-card">
-                <ul className="space-y-element">
-                  {services.map((service, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start gap-element text-foreground"
-                    >
-                      <span className="text-accent font-medium">→</span>
-                      <span className="text-body-sm">{service}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <StaggerItem>
+            <div className="space-y-container">
+              {/* Services Window */}
+              <motion.div 
+                className="retro-window glass-subtle"
+                whileHover={{ scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              >
+                <div className="retro-title-bar">
+                  <span className="font-bold text-body-sm">What I Can Help With</span>
+                </div>
+                <div className="p-card bg-card/70 backdrop-blur-sm">
+                  <ul className="space-y-element">
+                    {services.map((service, index) => (
+                      <motion.li
+                        key={index}
+                        className="flex items-start gap-element text-foreground"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1, duration: 0.3 }}
+                      >
+                        <span className="text-accent font-medium">→</span>
+                        <span className="text-body-sm">{service}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
             </div>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerContainer>
       </div>
     </section>
   );

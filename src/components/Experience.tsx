@@ -1,7 +1,7 @@
 /**
  * Experience Section Component
  *
- * Professional timeline with expandable cards and career progression.
+ * Professional timeline with expandable cards.
  */
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -13,13 +13,11 @@ import {
   faBuilding,
   faShieldHalved,
   faChartLine,
-  faRocket,
   faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Tag } from "./ui/tag";
 import { RingShape, DotsPattern, ParallaxShape } from "./ui/abstract-shapes";
-import { VerticalTimeline, type TimelineEntry } from "./ui/vertical-timeline";
 
 /* ----------------------------- DATA ----------------------------- */
 
@@ -96,14 +94,6 @@ const experiences: ExperienceData[] = [
   },
 ];
 
-/* ----------------------------- HELPERS ----------------------------- */
-
-const statusGlow = {
-  complete: "hsl(var(--secondary) / 0.6)",
-  "in-progress": "hsl(var(--primary))",
-  pending: "hsl(var(--border))",
-};
-
 /* ----------------------------- COMPONENT ----------------------------- */
 
 const Experience = () => {
@@ -133,86 +123,63 @@ const Experience = () => {
           <h2 className="font-display text-display-sm md:text-display-md">Professional Experience</h2>
         </motion.div>
 
-        {/* Timeline */}
+        {/* Experience Cards */}
         <div className="space-y-card">
-          {experiences.map((exp, index) => {
+          {experiences.map((exp) => {
             const expanded = expandedId === exp.id;
 
             return (
-              <motion.div
-                key={exp.id}
-                layout
-                initial={{ opacity: 0, x: -12 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.06 }}
-                className="relative pl-10"
-              >
-                {/* Node */}
-                <motion.div
-                  className="absolute left-1.5 top-6 w-3 h-3 rounded-full"
-                  animate={{
-                    boxShadow: `0 0 10px ${statusGlow[exp.status]}`,
-                  }}
-                />
+              <motion.div key={exp.id} layout className="glass rounded-lg p-card">
+                <div className="flex justify-between mb-element-sm">
+                  <span className="text-caption text-primary">{exp.period}</span>
+                  <span className="text-caption text-muted-foreground flex gap-1">
+                    <FontAwesomeIcon icon={faLocationDot} />
+                    {exp.location}
+                  </span>
+                </div>
 
-                {/* Card */}
-                <motion.div layout className="glass rounded-lg p-card">
-                  {/* Header */}
-                  <div className="flex justify-between mb-element-sm">
-                    <span className="text-caption text-primary">{exp.period}</span>
-                    <span className="text-caption text-muted-foreground flex gap-1">
-                      <FontAwesomeIcon icon={faLocationDot} />
-                      {exp.location}
-                    </span>
-                  </div>
+                <h3 className="font-semibold">{exp.title}</h3>
+                <p className="text-caption text-muted-foreground">{exp.organization}</p>
 
-                  <h3 className="font-semibold">{exp.title}</h3>
-                  <p className="text-caption text-muted-foreground">{exp.organization}</p>
+                <p className="text-caption mt-element-sm">{exp.description}</p>
 
-                  <p className="text-caption mt-element-sm">{exp.description}</p>
+                <button
+                  onClick={() => setExpandedId(expanded ? null : exp.id)}
+                  className="flex items-center gap-1 text-caption mt-element"
+                >
+                  {expanded ? "Less" : "More"}
+                  <motion.div animate={{ rotate: expanded ? 180 : 0 }}>
+                    <ChevronDown className="w-3 h-3" />
+                  </motion.div>
+                </button>
 
-                  {/* Toggle */}
-                  <button
-                    onClick={() => setExpandedId(expanded ? null : exp.id)}
-                    className="flex items-center gap-1 text-caption mt-element"
-                  >
-                    {expanded ? "Less" : "More"}
-                    <motion.div animate={{ rotate: expanded ? 180 : 0 }}>
-                      <ChevronDown className="w-3 h-3" />
+                <AnimatePresence initial={false}>
+                  {expanded && (
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="mt-element"
+                    >
+                      <ul className="space-y-2">
+                        {exp.highlights.map((h) => (
+                          <li key={h} className="text-sm">
+                            • {h}
+                          </li>
+                        ))}
+                      </ul>
                     </motion.div>
-                  </button>
+                  )}
+                </AnimatePresence>
 
-                  {/* Expand */}
-                  <AnimatePresence initial={false}>
-                    {expanded && (
-                      <motion.div
-                        layout
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="mt-element"
-                      >
-                        <ul className="space-y-2">
-                          {exp.highlights.map((h) => (
-                            <li key={h} className="text-sm">
-                              • {h}
-                            </li>
-                          ))}
-                        </ul>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mt-element">
-                    {exp.tags.map((tag) => (
-                      <Tag key={tag} size="sm" variant="muted">
-                        {tag}
-                      </Tag>
-                    ))}
-                  </div>
-                </motion.div>
+                <div className="flex flex-wrap gap-2 mt-element">
+                  {exp.tags.map((tag) => (
+                    <Tag key={tag} size="sm" variant="muted">
+                      {tag}
+                    </Tag>
+                  ))}
+                </div>
               </motion.div>
             );
           })}

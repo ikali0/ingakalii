@@ -1,24 +1,24 @@
-"use client";
+/**
+ * Hero Section Component
+ *
+ * Main landing section featuring:
+ * - Animated entropy background
+ * - Name and title with scroll-safe animations
+ * - Social links with accessible tooltips
+ * - Scroll indicator
+ */
 
-import * as React from "react";
-import { motion, useInView, type Variants } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { motion, type Variants } from "framer-motion";
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import EntropyBackground from "./ui/entropy-background";
 
-/* -------------------------------------------------------------------------------------------------
- * Memoized motion variants
- * ------------------------------------------------------------------------------------------------- */
-
-const fadeUpVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 24,
-  },
-  visible: (delay: number = 0) => ({
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
     transition: {
@@ -29,7 +29,7 @@ const fadeUpVariants: Variants = {
   }),
 };
 
-const bounceDownVariants: Variants = {
+const bounceDown: Variants = {
   animate: {
     y: [0, 8, 0],
     transition: {
@@ -40,25 +40,11 @@ const bounceDownVariants: Variants = {
   },
 };
 
-/* -------------------------------------------------------------------------------------------------
- * Hero Component
- * ------------------------------------------------------------------------------------------------- */
-
-const Hero: React.FC = () => {
-  const sectionRef = React.useRef<HTMLElement | null>(null);
-
-  const isInView = useInView(sectionRef, {
-    once: true,
-    margin: "-80px",
-  });
-
-  const animationState = isInView ? "visible" : "hidden";
-
+const Hero = () => {
   return (
     <section
-      ref={sectionRef}
-      aria-label="Hero section"
       className="relative min-h-[100svh] w-full overflow-hidden px-4 pt-20 pb-section-sm sm:pb-section"
+      aria-label="Hero section"
     >
       {/* Background */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
@@ -67,13 +53,13 @@ const Hero: React.FC = () => {
 
       {/* Readability overlay */}
       <div
-        aria-hidden="true"
         className="absolute inset-0 z-10 bg-gradient-to-b from-background/20 via-transparent to-background/90 pointer-events-none"
+        aria-hidden="true"
       />
 
       <div className="container relative z-20 mx-auto max-w-5xl flex flex-col items-center md:items-start text-center md:text-left">
         {/* Badge */}
-        <motion.div variants={fadeUpVariants} initial="hidden" animate={animationState} custom={0.1}>
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1}>
           <span className="inline-block mb-card rounded-full border border-secondary/25 bg-secondary/15 px-3 py-1.5 text-xs font-light uppercase font-serif text-secondary-foreground shadow-sm backdrop-blur-sm">
             Applied AI Engineer & Independent Consultant
           </span>
@@ -82,9 +68,9 @@ const Hero: React.FC = () => {
         {/* Name */}
         <motion.h1
           className="mb-card text-display-lg sm:text-display-xl font-display tracking-tight text-foreground"
-          variants={fadeUpVariants}
+          variants={fadeUp}
           initial="hidden"
-          animate={animationState}
+          animate="visible"
           custom={0.2}
         >
           Inga K.
@@ -93,15 +79,15 @@ const Hero: React.FC = () => {
         {/* Subtext */}
         <motion.p
           className="mb-container max-w-2xl text-body-lg md:text-heading font-light leading-relaxed text-foreground/80 text-balance"
-          variants={fadeUpVariants}
+          variants={fadeUp}
           initial="hidden"
-          animate={animationState}
+          animate="visible"
           custom={0.4}
         >
           I translate{" "}
           <span className="relative inline-block">
             <span className="relative z-10 font-semibold italic text-foreground">policy into deployable controls</span>
-            <span aria-hidden="true" className="absolute bottom-1 left-0 h-3 w-full bg-secondary/20" />
+            <span className="absolute bottom-1 left-0 h-3 w-full bg-secondary/20" aria-hidden="true" />
           </span>{" "}
           and build AI systems that hold up under compliance, security, and real-world pressure.
         </motion.p>
@@ -110,9 +96,9 @@ const Hero: React.FC = () => {
         <TooltipProvider delayDuration={150}>
           <motion.div
             className="mb-container-lg flex items-center justify-center gap-3 md:justify-start"
-            variants={fadeUpVariants}
+            variants={fadeUp}
             initial="hidden"
-            animate={animationState}
+            animate="visible"
             custom={0.6}
           >
             {/* LinkedIn */}
@@ -154,9 +140,9 @@ const Hero: React.FC = () => {
         {/* Scroll indicator */}
         <motion.div
           className="mt-section-sm flex w-full justify-center md:mt-container md:justify-start"
-          variants={fadeUpVariants}
+          variants={fadeUp}
           initial="hidden"
-          animate={animationState}
+          animate="visible"
           custom={1}
         >
           <a
@@ -164,7 +150,7 @@ const Hero: React.FC = () => {
             className="group flex flex-col items-center gap-element-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             <span className="text-overline uppercase text-secondary-foreground">Explore</span>
-            <motion.div variants={bounceDownVariants} animate="animate">
+            <motion.div variants={bounceDown} animate="animate">
               <FontAwesomeIcon icon={faArrowDown} className="h-5 w-5 text-accent" />
             </motion.div>
           </a>
@@ -174,4 +160,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default React.memo(Hero);
+export default Hero;

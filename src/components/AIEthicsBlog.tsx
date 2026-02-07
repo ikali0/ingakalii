@@ -72,7 +72,7 @@ function ArticleCard({
         </div>
       </div>
 
-      <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors text-base">
+      <h3 className="text-foreground mb-2 group-hover:text-primary transition-colors text-xs text-center font-extralight">
         {article.title}
       </h3>
       

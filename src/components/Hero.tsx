@@ -4,6 +4,7 @@
 
 import React, { memo, useId } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
 import { Linkedin, Mail, ArrowDown, BookOpen, Coffee } from "lucide-react";
 import {
   Tooltip,
@@ -17,7 +18,7 @@ import {
 type SocialLink = {
   href: string;
   label: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: LucideIcon;
   borderClass: string;
   iconClass: string;
   tooltip: string;
@@ -43,7 +44,7 @@ const SOCIAL_LINKS: SocialLink[] = [
     tooltip: "Send email",
   },
   {
-    href: "https://substack.com/@yourusername",
+    href: "https://substack.com/@ingakali",
     label: "Substack",
     icon: BookOpen,
     borderClass: "border-lime-200 dark:border-lime-800",
@@ -66,11 +67,10 @@ const EntropyBackground = memo(() => {
   const patternId = useId();
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden" aria-hidden>
       <svg
         className="absolute inset-0 w-full h-full"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden
       >
         <defs>
           <pattern
@@ -88,6 +88,7 @@ const EntropyBackground = memo(() => {
             <circle cx="90" cy="40" r="1" fill="hsl(var(--accent))" opacity="0.1" />
           </pattern>
         </defs>
+
         <rect width="100%" height="100%" fill={`url(#${patternId})`} />
       </svg>
 
@@ -95,6 +96,7 @@ const EntropyBackground = memo(() => {
     </div>
   );
 });
+
 EntropyBackground.displayName = "EntropyBackground";
 
 /* ---------------- Hero ---------------- */
@@ -153,32 +155,45 @@ const Hero = () => {
         </motion.p>
 
         <TooltipProvider>
-          <motion.div {...fadeUp(0.3)} className="flex flex-wrap gap-3 sm:gap-4 mb-16 justify-center">
-            {SOCIAL_LINKS.map(({ href, label, icon: Icon, borderClass, iconClass, tooltip }) => (
-              <Tooltip key={label}>
-                <TooltipTrigger asChild>
-                  <motion.a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    {...hoverMotion}
-                    className={`flex items-center justify-center w-12 h-12 rounded-xl bg-background/70 backdrop-blur-md border ${borderClass} transition-all shadow-sm hover:shadow-lg`}
-                  >
-                    <Icon className={`w-5 h-5 ${iconClass}`} />
-                  </motion.a>
-                </TooltipTrigger>
-                <TooltipContent>{tooltip}</TooltipContent>
-              </Tooltip>
-            ))}
+          <motion.div
+            {...fadeUp(0.3)}
+            className="flex flex-wrap gap-3 sm:gap-4 mb-16 justify-center"
+          >
+            {SOCIAL_LINKS.map(
+              ({ href, label, icon: Icon, borderClass, iconClass, tooltip }) => (
+                <Tooltip key={label}>
+                  <TooltipTrigger asChild>
+                    <motion.a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      {...hoverMotion}
+                      className={`flex items-center justify-center w-12 h-12 rounded-xl bg-background/70 backdrop-blur-md border ${borderClass} transition-all shadow-sm hover:shadow-lg`}
+                    >
+                      <Icon className={`w-5 h-5 ${iconClass}`} />
+                    </motion.a>
+                  </TooltipTrigger>
+                  <TooltipContent>{tooltip}</TooltipContent>
+                </Tooltip>
+              )
+            )}
           </motion.div>
         </TooltipProvider>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
-          <a href="#about" className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors">
-            <span className="text-xs uppercase tracking-widest mb-3">Explore</span>
+          <a
+            href="#about"
+            className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <span className="text-xs uppercase tracking-widest mb-3">
+              Explore
+            </span>
             {!reduceMotion && (
-              <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.6, repeat: Infinity }}>
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity }}
+              >
                 <ArrowDown className="w-4 h-4 text-lime-500" />
               </motion.div>
             )}

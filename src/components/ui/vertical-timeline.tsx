@@ -80,20 +80,20 @@ export function VerticalTimeline({
         }} className="relative">
               {/* Node marker */}
               <div className={`absolute -left-[calc(0.75rem+1px)] top-1 w-6 h-6 rounded-full flex items-center justify-center ${styles.node} ${styles.glow}`}>
-                <FontAwesomeIcon icon={Icon} className="text-white text-xs" />
+                <FontAwesomeIcon icon={Icon} className="text-xs bg-fuchsia-500 rounded-sm shadow-sm opacity-85 border-lime-100 text-lime-100 border border-dotted" />
               </div>
 
               {/* Content */}
               <div className="ml-4">
-                <span className="text-caption text-muted-foreground">{yearLabel}</span>
+                <span className="text-caption text-secondary">{yearLabel}</span>
                 <h4 className="font-semibold text-foreground">{entry.title}</h4>
-                <p className="text-caption text-muted-foreground">
+                <p className="text-caption text-accent font-extralight">
                   {entry.organization} · {entry.location}
                 </p>
                 <p className="text-body-sm mt-1">{entry.description}</p>
 
                 {entry.highlights && entry.highlights.length > 0 && <ul className="mt-2 space-y-1">
-                    {entry.highlights.map((h, i) => <li key={i} className="text-caption text-muted-foreground">• {h}</li>)}
+                    {entry.highlights.map((h, i) => <li key={i} className="text-caption text-secondary-foreground">• {h}</li>)}
                   </ul>}
 
                 {entry.tags && entry.tags.length > 0 && <div className="flex flex-wrap gap-1.5 mt-2">

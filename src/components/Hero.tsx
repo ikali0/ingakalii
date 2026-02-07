@@ -1,9 +1,9 @@
 /**
  * File: components/Hero.tsx
- * Enhanced 3D Hero with vibrant responsive background
+ * Enhanced Hero with Entropy particle background
  */
 
-import React, { memo, useId } from "react";
+import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import { Linkedin, Mail, ArrowDown, BookOpen, Coffee } from "lucide-react";
@@ -13,6 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Entropy } from "@/components/ui/entropy";
 
 /* ---------------- Types ---------------- */
 
@@ -53,7 +54,7 @@ const SOCIAL_LINKS: SocialLink[] = [
     tooltip: "Read my newsletter",
   },
   {
-    href: "https://ko-fi.com/yourusername",
+    href: "https://ko-fi.com/ingakali",
     label: "Ko-fi",
     icon: Coffee,
     borderClass: "border-pink-300 dark:border-pink-700",
@@ -61,146 +62,6 @@ const SOCIAL_LINKS: SocialLink[] = [
     tooltip: "Support my work",
   },
 ];
-
-/* ---------------- 3D Background ---------------- */
-
-const Vibrant3DBackground = memo(() => {
-  const patternId = useId();
-  const gradientId = useId();
-
-  return (
-    <div className="absolute inset-0 overflow-hidden" aria-hidden>
-      {/* Base gradient layer */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-teal-50 to-lime-100 dark:from-purple-950 dark:via-teal-950 dark:to-lime-950" />
-      
-      {/* 3D floating orbs with depth */}
-      <div className="absolute inset-0" style={{ perspective: "1000px", perspectiveOrigin: "50% 50%" }}>
-        {/* Large back orb */}
-        <motion.div
-          className="absolute w-[600px] h-[600px] rounded-full opacity-30"
-          style={{
-            background: "radial-gradient(circle at 30% 30%, #a855f7 0%, #7c3aed 40%, transparent 70%)",
-            filter: "blur(40px)",
-            transform: "translateZ(-200px)",
-            left: "-10%",
-            top: "-20%",
-          }}
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        
-        {/* Mid-layer teal orb */}
-        <motion.div
-          className="absolute w-[500px] h-[500px] rounded-full opacity-25"
-          style={{
-            background: "radial-gradient(circle at 60% 40%, #14b8a6 0%, #0d9488 40%, transparent 70%)",
-            filter: "blur(30px)",
-            transform: "translateZ(-100px)",
-            right: "-5%",
-            top: "30%",
-          }}
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-            scale: [1, 1.15, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
-        
-        {/* Front lime orb */}
-        <motion.div
-          className="absolute w-[400px] h-[400px] rounded-full opacity-20"
-          style={{
-            background: "radial-gradient(circle at 50% 50%, #84cc16 0%, #65a30d 40%, transparent 70%)",
-            filter: "blur(25px)",
-            transform: "translateZ(-50px)",
-            left: "20%",
-            bottom: "-10%",
-          }}
-          animate={{
-            x: [0, 30, 0],
-            y: [0, -20, 0],
-            scale: [1, 1.08, 1],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4,
-          }}
-        />
-        
-        {/* Pink accent orb */}
-        <motion.div
-          className="absolute w-[300px] h-[300px] rounded-full opacity-15"
-          style={{
-            background: "radial-gradient(circle at 40% 60%, #ec4899 0%, #db2777 40%, transparent 70%)",
-            filter: "blur(20px)",
-            transform: "translateZ(-30px)",
-            right: "15%",
-            bottom: "20%",
-          }}
-          animate={{
-            x: [0, -20, 0],
-            y: [0, 25, 0],
-            scale: [1, 1.12, 1],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
-      </div>
-      
-      {/* Mesh pattern overlay for texture */}
-      <svg
-        className="absolute inset-0 w-full h-full opacity-30"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <pattern
-            id={patternId}
-            x="0"
-            y="0"
-            width="60"
-            height="60"
-            patternUnits="userSpaceOnUse"
-          >
-            <circle cx="30" cy="30" r="1.5" fill="hsl(var(--primary))" opacity="0.4" />
-            <circle cx="10" cy="10" r="1" fill="hsl(var(--accent))" opacity="0.3" />
-            <circle cx="50" cy="15" r="1" fill="hsl(var(--secondary))" opacity="0.3" />
-          </pattern>
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
-            <stop offset="50%" stopColor="hsl(var(--accent))" stopOpacity="0.05" />
-            <stop offset="100%" stopColor="hsl(var(--secondary))" stopOpacity="0.1" />
-          </linearGradient>
-        </defs>
-        <rect width="100%" height="100%" fill={`url(#${patternId})`} />
-      </svg>
-      
-      {/* Glass overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-background/40 backdrop-blur-[2px]" />
-    </div>
-  );
-});
-
-Vibrant3DBackground.displayName = "Vibrant3DBackground";
 
 /* ---------------- Hero ---------------- */
 
@@ -219,9 +80,13 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-4 sm:px-6 pt-24 sm:pt-28 pb-16 sm:pb-20">
-      <div className="absolute inset-0 z-0">
-        <Vibrant3DBackground />
+      {/* Entropy particle background */}
+      <div className="absolute inset-0 z-0 bg-background">
+        <Entropy className="opacity-40" />
       </div>
+      
+      {/* Gradient overlay for depth */}
+      <div className="absolute inset-0 z-5 bg-gradient-to-t from-background via-background/50 to-background/30" />
 
       <div className="relative z-20 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
         <motion.span

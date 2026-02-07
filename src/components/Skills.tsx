@@ -6,31 +6,16 @@
  */
 
 import { motion } from "framer-motion";
-import {
-  Shield,
-  Brain,
-  Scale,
-  Code,
-  Database,
-  Terminal,
-  Zap,
-} from "lucide-react";
-
+import { Shield, Brain, Scale, Code, Database, Terminal, Zap } from "lucide-react";
 import { SectionHeader } from "./ui/section-header";
 import { SkillBar } from "./ui/skill-bar";
 import { Tag } from "./ui/tag";
-import {
-  ScrollFade,
-  StaggerContainer,
-  StaggerItem,
-} from "./ui/scroll-fade";
-
+import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
 interface Skill {
   name: string;
   level: number;
   examples: string[];
 }
-
 interface BentoCard {
   id: string;
   category: string;
@@ -38,133 +23,122 @@ interface BentoCard {
   skills: Skill[];
   span: "normal" | "wide" | "tall";
 }
-
-const bentoCards: BentoCard[] = [
-  {
-    id: "security",
-    category: "Adversarial Security",
-    icon: Shield,
-    span: "tall",
-    skills: [
-      {
-        name: "Penetration Testing",
-        level: 95,
-        examples: ["Red Teaming", "Exploit Development"],
-      },
-      {
-        name: "Vulnerability Research",
-        level: 90,
-        examples: ["CVE Analysis", "SAST/DAST"],
-      },
-      {
-        name: "Threat Modeling",
-        level: 90,
-        examples: ["Zero Trust", "Attack Surface Mapping"],
-      },
-    ],
-  },
-  {
-    id: "ai",
-    category: "Applied LLM Systems",
-    icon: Brain,
-    span: "wide",
-    skills: [
-      {
-        name: "LLM Deployment",
-        level: 95,
-        examples: ["Open-Source Models", "Infrastructure Optimization"],
-      },
-      {
-        name: "Prompt Risk Analysis",
-        level: 90,
-        examples: ["Injection Mitigation", "Agent Guardrails"],
-      },
-    ],
-  },
-  {
-    id: "governance",
-    category: "AI Governance Implementation",
-    icon: Scale,
-    span: "normal",
-    skills: [
-      {
-        name: "NIST AI RMF",
-        level: 95,
-        examples: ["Map / Measure / Manage"],
-      },
-      {
-        name: "Compliance Architecture",
-        level: 85,
-        examples: ["FERPA", "SOC2", "Audit Readiness"],
-      },
-    ],
-  },
-  {
-    id: "engineering",
-    category: "Systems Engineering",
-    icon: Code,
-    span: "normal",
-    skills: [
-      {
-        name: "System Design",
-        level: 90,
-        examples: ["Distributed Systems", "Service Architecture"],
-      },
-      {
-        name: "Full-Stack Development",
-        level: 85,
-        examples: ["React", "Node.js"],
-      },
-    ],
-  },
-  {
-    id: "ml",
-    category: "ML Infrastructure",
-    icon: Database,
-    span: "wide",
-    skills: [
-      {
-        name: "Vector Databases",
-        level: 90,
-        examples: ["Pinecone", "Weaviate"],
-      },
-      {
-        name: "MLOps Pipelines",
-        level: 85,
-        examples: ["MLflow", "CI/CD"],
-      },
-    ],
-  },
-];
-
-const secondaryTech = [
-  { name: "Python", icon: Terminal },
-  { name: "PyTorch", icon: Zap },
-  { name: "LangChain", icon: Brain },
-  { name: "Docker", icon: Database },
-  { name: "Linux", icon: Terminal },
-  { name: "DevSecOps", icon: Shield },
-];
-
-function BentoCardComponent({ card }: { card: BentoCard }) {
+const bentoCards: BentoCard[] = [{
+  id: "security",
+  category: "Adversarial Security",
+  icon: Shield,
+  span: "tall",
+  skills: [{
+    name: "Penetration Testing",
+    level: 95,
+    examples: ["Red Teaming", "Exploit Development"]
+  }, {
+    name: "Vulnerability Research",
+    level: 90,
+    examples: ["CVE Analysis", "SAST/DAST"]
+  }, {
+    name: "Threat Modeling",
+    level: 90,
+    examples: ["Zero Trust", "Attack Surface Mapping"]
+  }]
+}, {
+  id: "ai",
+  category: "Applied LLM Systems",
+  icon: Brain,
+  span: "wide",
+  skills: [{
+    name: "LLM Deployment",
+    level: 95,
+    examples: ["Open-Source Models", "Infrastructure Optimization"]
+  }, {
+    name: "Prompt Risk Analysis",
+    level: 90,
+    examples: ["Injection Mitigation", "Agent Guardrails"]
+  }]
+}, {
+  id: "governance",
+  category: "AI Governance Implementation",
+  icon: Scale,
+  span: "normal",
+  skills: [{
+    name: "NIST AI RMF",
+    level: 95,
+    examples: ["Map / Measure / Manage"]
+  }, {
+    name: "Compliance Architecture",
+    level: 85,
+    examples: ["FERPA", "SOC2", "Audit Readiness"]
+  }]
+}, {
+  id: "engineering",
+  category: "Systems Engineering",
+  icon: Code,
+  span: "normal",
+  skills: [{
+    name: "System Design",
+    level: 90,
+    examples: ["Distributed Systems", "Service Architecture"]
+  }, {
+    name: "Full-Stack Development",
+    level: 85,
+    examples: ["React", "Node.js"]
+  }]
+}, {
+  id: "ml",
+  category: "ML Infrastructure",
+  icon: Database,
+  span: "wide",
+  skills: [{
+    name: "Vector Databases",
+    level: 90,
+    examples: ["Pinecone", "Weaviate"]
+  }, {
+    name: "MLOps Pipelines",
+    level: 85,
+    examples: ["MLflow", "CI/CD"]
+  }]
+}];
+const secondaryTech = [{
+  name: "Python",
+  icon: Terminal
+}, {
+  name: "PyTorch",
+  icon: Zap
+}, {
+  name: "LangChain",
+  icon: Brain
+}, {
+  name: "Docker",
+  icon: Database
+}, {
+  name: "Linux",
+  icon: Terminal
+}, {
+  name: "DevSecOps",
+  icon: Shield
+}];
+function BentoCardComponent({
+  card
+}: {
+  card: BentoCard;
+}) {
   const Icon = card.icon;
-
   const spanClasses = {
     normal: "col-span-1 row-span-1",
     wide: "col-span-1 sm:col-span-2 row-span-1",
-    tall: "col-span-1 row-span-1 lg:row-span-2",
+    tall: "col-span-1 row-span-1 lg:row-span-2"
   };
-
-  return (
-    <motion.div
-      className={`${spanClasses[card.span]} 
+  return <motion.div className={`${spanClasses[card.span]} 
         relative overflow-hidden rounded-lg 
         bg-card border border-border/40 
         shadow-sm hover:shadow-md 
-        transition-all duration-300`}
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
-    >
+        transition-all duration-300`} whileHover={{
+    y: -4
+  }} transition={{
+    type: "spring",
+    stiffness: 300,
+    damping: 25
+  }}>
       <div className="p-5 h-full flex flex-col">
 
         {/* Header */}
@@ -179,78 +153,12 @@ function BentoCardComponent({ card }: { card: BentoCard }) {
 
         {/* Skills */}
         <div className="space-y-4 flex-1">
-          {card.skills.map((skill) => (
-            <SkillBar
-              key={skill.name}
-              name={skill.name}
-              level={skill.level}
-              examples={skill.examples}
-            />
-          ))}
+          {card.skills.map(skill => <SkillBar key={skill.name} name={skill.name} level={skill.level} examples={skill.examples} />)}
         </div>
       </div>
-    </motion.div>
-  );
+    </motion.div>;
 }
-
 const Skills = () => {
-  return (
-    <section
-      id="skills"
-      className="relative py-16 md:py-24 px-4 bg-background"
-    >
-      <div className="container mx-auto max-w-5xl">
-
-        {/* Header */}
-        <ScrollFade>
-          <SectionHeader
-            overline="Systems Capability"
-            title="Applied Engineering Domains"
-            description="AI systems, governance implementation, security architecture, and production infrastructure designed to hold under constraint."
-            align="left"
-          />
-        </ScrollFade>
-
-        {/* Bento Grid */}
-        <StaggerContainer
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[minmax(160px,auto)] gap-5 mt-10"
-          staggerDelay={0.08}
-        >
-          {bentoCards.map((card) => (
-            <StaggerItem key={card.id}>
-              <BentoCardComponent card={card} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-
-        {/* Secondary Stack */}
-        <ScrollFade delay={0.2} className="mt-16">
-          <div className="flex flex-wrap justify-center items-center gap-3 text-xs font-medium tracking-tight text-muted-foreground">
-            {secondaryTech.map((tech) => {
-              const Icon = tech.icon;
-
-              return (
-                <motion.div
-                  key={tech.name}
-                  whileHover={{ y: -2 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <Tag
-                    variant="outline"
-                    size="md"
-                    className="flex items-center gap-1.5"
-                  >
-                    <Icon className="w-3.5 h-3.5" />
-                    {tech.name}
-                  </Tag>
-                </motion.div>
-              );
-            })}
-          </div>
-        </ScrollFade>
-      </div>
-    </section>
-  );
+  return;
 };
-
 export default Skills;

@@ -9,8 +9,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBolt,
-  faIndustry,
   faAtom,
   faBrain,
   faShieldHalved,
@@ -33,7 +31,7 @@ import tutoring from "@/assets/portfolio-tutoring.jpg";
 interface Category {
   id: string;
   label: string;
-  icon: typeof faBolt;
+  icon: typeof faBrain;
   color: string;
   bgColor: string;
 }

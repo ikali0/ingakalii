@@ -17,7 +17,7 @@ const Contact = () => {
     text: "UI/UX implementation",
     icon: faPalette
   }];
-  return <section id="contact" className="relative py-16 sm:py-20 px-4 bg-background">
+  return <section id="contact" className="relative py-16 bg-background sm:py-[10px] px-[8px]">
       <div className="mx-auto max-w-4xl space-y-12">
 
         {/* Header */}

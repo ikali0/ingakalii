@@ -103,11 +103,7 @@ const About = () => {
           </div>
 
           {/* Writing Platform Links - Editorial Style */}
-          <div className="mb-container md:mb-container-lg">
-            <TooltipProvider>
-              
-            </TooltipProvider>
-          </div>
+          {/* Writing Platform Links placeholder removed */}
 
           {/* Highlight Cards */}
           <div className="flex flex-wrap gap-container justify-center">

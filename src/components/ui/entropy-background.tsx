@@ -168,6 +168,7 @@ export const EntropyBackground = forwardRef<HTMLDivElement, EntropyBackgroundPro
     let time = 0;
     let animationId: number;
     function animate() {
+      if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
 
       // Update neighbors less frequently on mobile
@@ -179,7 +180,7 @@ export const EntropyBackground = forwardRef<HTMLDivElement, EntropyBackgroundPro
       particles.forEach(particle => {
         particle.neighbors.forEach(neighbor => {
           const distance = Math.hypot(particle.x - neighbor.x, particle.y - neighbor.y);
-          if (distance < lineDistance) {
+          if (distance < lineDistance && ctx) {
             const alpha = 0.25 * (1 - distance / lineDistance);
             const pulseAlpha = alpha * (0.8 + Math.sin(time * 0.02) * 0.2);
             const connectionColor = particle.order && neighbor.order ? ethicsGreen : !particle.order && !neighbor.order ? techBlue : lineColor;
@@ -196,7 +197,7 @@ export const EntropyBackground = forwardRef<HTMLDivElement, EntropyBackgroundPro
       // Update and draw particles
       particles.forEach(particle => {
         particle.update(width, height, time);
-        particle.draw(ctx, time);
+        if (ctx) particle.draw(ctx, time);
       });
 
       // Enhanced animated pulsing divider line with glow

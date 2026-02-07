@@ -57,7 +57,7 @@ function ArticleCard({
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-md flex items-center justify-center bg-secondary-foreground text-accent-foreground border-lime-100 border border-solid">
-            <FontAwesomeIcon icon={article.icon} className="w-5 h-5 text-foreground/70" />
+            <FontAwesomeIcon icon={article.icon} className="w-5 h-5 text-lime-300" />
           </div>
           <div>
             <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium">

@@ -160,30 +160,7 @@ function BentoCardComponent({
 }
 const Skills = () => {
   return <section id="skills" className="py-16 px-4 bg-muted/30 md:py-[88px]">
-      <div className="max-w-5xl mx-auto">
-        <ScrollFade>
-          <SectionHeader overline="Expertise" title="Technical Proficiencies" description="Strategic skills across security, AI systems, and governance." />
-        </ScrollFade>
-
-        {/* Bento Grid */}
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {bentoCards.map(card => <StaggerItem key={card.id}>
-              <BentoCardComponent card={card} />
-            </StaggerItem>)}
-        </StaggerContainer>
-
-        {/* Secondary Tech Tags */}
-        <ScrollFade>
-          <div className="mt-10 pt-8 border-t border-border/30">
-            
-            <div className="flex flex-wrap gap-2">
-              {secondaryTech.map(tech => <Tag key={tech.name}>
-                  {tech.name}
-                </Tag>)}
-            </div>
-          </div>
-        </ScrollFade>
-      </div>
+      
     </section>;
 };
 export default Skills;

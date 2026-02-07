@@ -116,10 +116,22 @@ const CarouselItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
   className,
   ...props
 }, ref) => {
-  const {
-    orientation
-  } = useCarousel();
-  return <div ref={ref} role="group" aria-roledescription="slide" className={cn("", orientation === "horizontal" ? "pl-4" : "pt-4", className)} {...props} />;
+  const { orientation } = useCarousel();
+
+  return (
+    <div
+      ref={ref}
+      role="group"
+      aria-roledescription="slide"
+      className={cn(
+        orientation === "horizontal"
+          ? "pl-4 flex-[0_0_100%]"
+          : "pt-4 flex-[0_0_100%]",
+        className
+      )}
+      {...props}
+    />
+  );
 });
 CarouselItem.displayName = "CarouselItem";
 const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(({

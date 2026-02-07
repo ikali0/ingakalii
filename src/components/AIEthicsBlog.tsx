@@ -1,9 +1,5 @@
-"use client";
-
 import { motion } from "framer-motion";
-import Script from "next/script";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect } from "react";
 import { SectionHeader } from "./ui/section-header";
 
 /* ---------------- Links ---------------- */
@@ -17,56 +13,20 @@ const substackMainUrl =
 const predictionsUrl =
   "https://open.substack.com/pub/ingakali/p/2026-ai-predictions-vs-reality?r=7e4ma3&utm_campaign=post&utm_medium=web";
 
-/* ---------------- Animated Card ---------------- */
-
-function AnimatedCard({
-  title,
-  excerpt,
-  href,
-  platform,
-}: {
-  title: string;
-  excerpt: string;
-  href: string;
-  platform: "Medium" | "Substack";
-}) {
-  const ref = useRef<HTMLAnchorElement | null>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  return (
-    <motion.a
-      ref={ref}
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 24 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.45, ease: "easeOut" }}
-      whileHover={{ y: -4 }}
-      whileTap={{ scale: 0.98 }}
-      className="group block rounded-2xl border border-border/40 bg-card p-6
-                 shadow-sm transition-all hover:border-primary/40
-                 hover:shadow-md"
-    >
-      <div className="flex items-center justify-between mb-4 text-xs text-muted-foreground uppercase tracking-wide">
-        <span>{platform}</span>
-        <span>Read →</span>
-      </div>
-
-      <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-        {title}
-      </h3>
-
-      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-        {excerpt}
-      </p>
-    </motion.a>
-  );
-}
-
 /* ---------------- Blog Section ---------------- */
 
-export default function AIBlogSection() {
+export default function AIEthicsBlog() {
+  // Load Substack embed script safely
+  useEffect(() => {
+    if (document.getElementById("substack-embed-script")) return;
+
+    const script = document.createElement("script");
+    script.src = "https://substack.com/embedjs/embed.js";
+    script.async = true;
+    script.id = "substack-embed-script";
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <section
       id="blog"
@@ -83,19 +43,32 @@ export default function AIBlogSection() {
         <div className="grid gap-8">
 
           {/* Medium Article */}
-          <AnimatedCard
-            title="The Geometry of Fairness"
-            excerpt="When metrics route morality and algorithmic design choices shape ethical outcomes."
+          <motion.a
             href={mediumUrl}
-            platform="Medium"
-          />
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.98 }}
+            className="block rounded-2xl border border-border/40 bg-card p-6 shadow-sm
+                       hover:border-primary/40 hover:shadow-md transition"
+          >
+            <h3 className="text-lg font-semibold mb-2">
+              The Geometry of Fairness
+            </h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              When metrics route morality and algorithmic design choices shape ethical outcomes.
+            </p>
+            <span className="text-xs font-medium text-primary">
+              Read on Medium →
+            </span>
+          </motion.a>
 
           {/* Substack Official Embed */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.45 }}
+            transition={{ duration: 0.4 }}
             className="rounded-2xl border border-border/40 bg-card p-6 shadow-sm"
           >
             <div
@@ -116,20 +89,28 @@ export default function AIBlogSection() {
                 Read on Substack
               </a>
             </div>
-
-            <Script
-              src="https://substack.com/embedjs/embed.js"
-              strategy="lazyOnload"
-            />
           </motion.div>
 
           {/* 2026 Predictions Article */}
-          <AnimatedCard
-            title="2026 AI Predictions vs Reality"
-            excerpt="Examining forecast narratives against institutional constraints and structural incentives."
+          <motion.a
             href={predictionsUrl}
-            platform="Substack"
-          />
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.98 }}
+            className="block rounded-2xl border border-border/40 bg-card p-6 shadow-sm
+                       hover:border-primary/40 hover:shadow-md transition"
+          >
+            <h3 className="text-lg font-semibold mb-2">
+              2026 AI Predictions vs Reality
+            </h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Examining forecast narratives against institutional constraints and structural incentives.
+            </p>
+            <span className="text-xs font-medium text-primary">
+              Read on Substack →
+            </span>
+          </motion.a>
 
         </div>
       </div>

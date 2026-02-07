@@ -1,5 +1,56 @@
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+/* ---------------- Topics ---------------- */
+
+const topics = [
+  { label: "AI risk", description: "Governing autonomous systems" },
+  { label: "Alignment", description: "Ensuring system intent coherence" },
+  { label: "Responsible deployment", description: "Institution-ready AI systems" },
+  { label: "Energy", description: "Intelligent infrastructure" },
+  { label: "Quantum", description: "Next-generation computation" },
+];
+
+/* ---------------- Animated Pill ---------------- */
+
+function TopicPill({ label, description, index }: { label: string; description: string; index: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.span
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary/20 border border-border/40 text-xs font-medium text-foreground/80 cursor-default whitespace-nowrap"
+      initial={{ opacity: 0, scale: 0.8, y: 10 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ 
+        delay: index * 0.1, 
+        type: "spring", 
+        stiffness: 300, 
+        damping: 20 
+      }}
+      whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.4)" }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
+      <motion.span 
+        className="w-1.5 h-1.5 rounded-full bg-primary/60"
+        animate={{ scale: isHovered ? [1, 1.3, 1] : 1 }}
+        transition={{ duration: 0.4, repeat: isHovered ? Infinity : 0 }}
+      />
+      <span>{label}</span>
+      <motion.span
+        className="text-muted-foreground overflow-hidden"
+        initial={{ width: 0, opacity: 0 }}
+        animate={{ 
+          width: isHovered ? "auto" : 0, 
+          opacity: isHovered ? 1 : 0 
+        }}
+        transition={{ duration: 0.2 }}
+      >
+        → {description}
+      </motion.span>
+    </motion.span>
+  );
+}
 
 /* ---------------- Articles ---------------- */
 
@@ -60,7 +111,11 @@ export default function AIEthicsBlog() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground mb-4 leading-tight">
             ​ongoing  analysis   
           </h2>
-          <p className="text-foreground/80 max-w-xl text-sm md:text-base leading-relaxed">AI risk, alignment, responsible deployment, energy, quantum</p>
+          <div className="flex flex-wrap gap-2 max-w-2xl">
+            {topics.map((topic, index) => (
+              <TopicPill key={topic.label} {...topic} index={index} />
+            ))}
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">

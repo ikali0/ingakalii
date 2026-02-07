@@ -49,56 +49,56 @@ interface CategoryProject {
 }
 
 const categories: Category[] = [
-  { id: "energy", label: "Energy", icon: faBolt, color: "text-yellow-500", bgColor: "bg-yellow-500/10 border-yellow-500/30" },
-  { id: "manufacturing", label: "Manufacturing", icon: faIndustry, color: "text-blue-500", bgColor: "bg-blue-500/10 border-blue-500/30" },
-  { id: "quantum", label: "Quantum", icon: faAtom, color: "text-purple-500", bgColor: "bg-purple-500/10 border-purple-500/30" },
   { id: "ai-ml", label: "AI/ML", icon: faBrain, color: "text-primary", bgColor: "bg-primary/10 border-primary/30" },
-  { id: "security", label: "Security", icon: faShieldHalved, color: "text-red-500", bgColor: "bg-red-500/10 border-red-500/30" },
   { id: "governance", label: "Governance", icon: faBalanceScale, color: "text-accent", bgColor: "bg-accent/10 border-accent/30" },
+  { id: "security", label: "Security", icon: faShieldHalved, color: "text-red-500", bgColor: "bg-red-500/10 border-red-500/30" },
+  { id: "ethics", label: "Ethics", icon: faBalanceScale, color: "text-purple-500", bgColor: "bg-purple-500/10 border-purple-500/30" },
+  { id: "education", label: "Education", icon: faBrain, color: "text-blue-500", bgColor: "bg-blue-500/10 border-blue-500/30" },
+  { id: "research", label: "Research", icon: faAtom, color: "text-neural", bgColor: "bg-neural/10 border-neural/30" },
 ];
 
 const categoryProjects: CategoryProject[] = [
   {
     id: "ethics-dashboard",
     title: "AI Ethics Dashboard",
-    description: "Real-time monitoring for AI fairness and accountability",
+    description: "Real-time monitoring for AI fairness, bias detection, and accountability metrics",
     image: ethicsDashboard,
-    categories: ["ai-ml", "governance", "security"],
+    categories: ["ai-ml", "governance", "ethics"],
   },
   {
     id: "governance-framework",
     title: "Governance Framework Tool",
-    description: "Automated compliance checking for AI policies",
+    description: "Automated compliance checking for AI policies and regulatory requirements",
     image: governance,
-    categories: ["governance", "security"],
+    categories: ["governance", "security", "ethics"],
   },
   {
     id: "stakeholder-mapping",
     title: "Stakeholder Mapping",
-    description: "Visual tool for mapping power dynamics in tech deployment",
+    description: "Visual tool for mapping power dynamics and impact in AI deployment",
     image: stakeholder,
-    categories: ["governance", "manufacturing"],
+    categories: ["governance", "research"],
   },
   {
     id: "bias-detection",
     title: "Bias Detection API",
-    description: "RESTful API for measuring bias in datasets",
+    description: "RESTful API for measuring and mitigating bias in ML datasets",
     image: biasDetection,
-    categories: ["ai-ml", "security"],
+    categories: ["ai-ml", "security", "ethics"],
   },
   {
     id: "decision-framework",
     title: "Ethical Decision Framework",
-    description: "Mobile-first ethical decision support app",
+    description: "Mobile-first ethical decision support for AI practitioners",
     image: decisionFramework,
-    categories: ["ai-ml", "governance"],
+    categories: ["ai-ml", "governance", "ethics"],
   },
   {
     id: "tutoring-platform",
     title: "AI Tutoring Platform",
-    description: "Personalized AI-powered learning experiences",
+    description: "Personalized AI-powered learning with built-in ethical safeguards",
     image: tutoring,
-    categories: ["ai-ml", "energy"],
+    categories: ["ai-ml", "education"],
     link: "https://studii.lovable.app",
   },
 ];
@@ -258,10 +258,15 @@ export function HeroCategoryCarousel() {
                 {filteredProjects.map((project, index) => (
                   <motion.div
                     key={project.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    className="group relative overflow-hidden rounded-lg bg-muted/50 border border-border/30"
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ 
+                      delay: index * 0.08,
+                      duration: 0.4,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                    className="group relative overflow-hidden rounded-lg bg-muted/50 border border-border/30 shadow-sm hover:shadow-md transition-shadow duration-300"
                   >
                     {/* Project Image */}
                     <div className="aspect-[16/10] overflow-hidden">

@@ -1,5 +1,6 @@
-import { motion, useReducedMotion, Variants } from "framer-motion";
-import { ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import type { Variants } from "framer-motion";
+import type { ReactNode } from "react";
 
 type Direction = "up" | "down" | "left" | "right";
 
@@ -30,23 +31,26 @@ export function ScrollFade({
   delay = 0,
   className = "",
   direction = "up",
-}: ScrollFadeProps) {
+}: ScrollFadeProps): JSX.Element {
   const shouldReduceMotion = useReducedMotion();
   const offset = DIRECTION_OFFSETS[direction];
 
   const variants: Variants = {
     hidden: shouldReduceMotion
-      ? { opacity: 1 }
-      : { opacity: 0, ...offset },
+      ? // include x/y to avoid layout jumps when motion is disabled
+        { opacity: 1, x: 0, y: 0 }
+      : { opacity: 0, x: offset.x, y: offset.y },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
-      transition: {
-        duration: shouldReduceMotion ? 0 : 0.6,
-        delay,
-        ease: EASE_OUT_QUART,
-      },
+      transition: shouldReduceMotion
+        ? { duration: 0, delay: 0 } // no animation when reduced motion
+        : {
+            duration: 0.6,
+            delay,
+            ease: EASE_OUT_QUART,
+          },
     },
   };
 
@@ -77,14 +81,14 @@ export function StaggerContainer({
   children,
   className = "",
   staggerDelay = 0.1,
-}: StaggerContainerProps) {
+}: StaggerContainerProps): JSX.Element {
   const shouldReduceMotion = useReducedMotion();
 
   const variants: Variants = {
     hidden: {},
     visible: {
       transition: shouldReduceMotion
-        ? {}
+        ? undefined
         : {
             staggerChildren: staggerDelay,
           },
@@ -116,20 +120,22 @@ interface StaggerItemProps {
 export function StaggerItem({
   children,
   className = "",
-}: StaggerItemProps) {
+}: StaggerItemProps): JSX.Element {
   const shouldReduceMotion = useReducedMotion();
 
   const variants: Variants = {
     hidden: shouldReduceMotion
-      ? { opacity: 1 }
+      ? { opacity: 1, y: 0 }
       : { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: shouldReduceMotion ? 0 : 0.5,
-        ease: EASE_OUT_QUART,
-      },
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : {
+            duration: 0.5,
+            ease: EASE_OUT_QUART,
+          },
     },
   };
 

@@ -59,25 +59,7 @@ const About = () => {
           </div>
           
           <TooltipProvider>
-            <div className="flex gap-3">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <TimelineContent as="a" animationNum={1} timelineRef={sectionRef} customVariants={revealVariants} href="https://www.linkedin.com/in/ik11/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 border border-border/50 bg-card/80 backdrop-blur-sm rounded-lg flex items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-colors">
-                    <FontAwesomeIcon icon={faLinkedin} className="w-4 h-4 text-primary" />
-                  </TimelineContent>
-                </TooltipTrigger>
-                <TooltipContent>Connect professionally</TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <TimelineContent as="a" animationNum={2} timelineRef={sectionRef} customVariants={revealVariants} href="mailto:ingakali95@gmail.com" className="w-9 h-9 border border-border/50 bg-card/80 backdrop-blur-sm rounded-lg flex items-center justify-center hover:border-secondary/50 hover:bg-secondary/5 transition-colors">
-                    <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-secondary" />
-                  </TimelineContent>
-                </TooltipTrigger>
-                <TooltipContent>Get in touch directly</TooltipContent>
-              </Tooltip>
-            </div>
+            
           </TooltipProvider>
         </div>
 

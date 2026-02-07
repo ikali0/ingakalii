@@ -165,9 +165,8 @@ const Hero = () => {
       }} transition={{
         duration: 0.6,
         delay: 0.1
-      }} className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-foreground leading-[1.1] tracking-tight mb-6">
-          Building AI systems
-          <br />
+      }} className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-foreground leading-[1.1] tracking-tight mb-6">Building AI systems
+that hold up<br />
           <span className="text-foreground/80">that hold up</span>
         </motion.h1>
 
@@ -182,8 +181,7 @@ const Hero = () => {
         duration: 0.6,
         delay: 0.2
       }} className="text-base sm:text-lg text-muted-foreground max-w-md leading-relaxed mb-10">
-          I translate policy into deployable controls and build AI systems 
-          that hold up under compliance, security, and real-world pressure.
+          ​I bridge governance and engineering — translating policy into enforceable architecture and building AI that performs under institutional pressure.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -198,7 +196,7 @@ const Hero = () => {
         delay: 0.3
       }} className="flex flex-col sm:flex-row items-center gap-4 mb-8">
           <a href="#contact" className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background font-medium rounded-lg hover:bg-foreground/90 transition-colors shadow-sm">
-            Get in touch
+            Contact Me 
             <FontAwesomeIcon icon={faArrowRight} className="w-3.5 h-3.5" />
           </a>
         </motion.div>

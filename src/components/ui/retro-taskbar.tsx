@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { User, Briefcase, FileText, Folder, Moon, Sun, ExternalLink, BookOpen } from "lucide-react";
+import { User, Briefcase, FileText, Folder, Moon, Sun, ExternalLink, BookOpen, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -28,6 +28,10 @@ const menuItems: StartMenuItem[] = [{
   label: "Experience",
   href: "#experience",
   icon: <BookOpen className="w-4 h-4" />
+}, {
+  label: "Contact",
+  href: "#contact",
+  icon: <Mail className="w-4 h-4" />
 }, {
   label: "Resume",
   href: "/Inga_Kaltak_Resume.docx",

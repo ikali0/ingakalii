@@ -1,196 +1,178 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLaptopCode,
+  faLightbulb,
+  faHandshake,
+} from "@fortawesome/free-solid-svg-icons";
+import { faMedium } from "@fortawesome/free-brands-svg-icons";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
-import { SectionHeader } from "./ui/section-header";
+import { FlippingCard } from "./ui/flipping-card";
+import { ScrollFade } from "./ui/scroll-fade";
 
-/* ---------------- Articles ---------------- */
+/* ---------------- Data ---------------- */
 
-const articles = [
+const highlights = [
   {
-    title: "The Geometry of Fairness",
-    excerpt:
-      "When metrics route morality and algorithmic design choices shape ethical outcomes.",
-    url: "https://medium.com/@altruisticxai/the-geometry-of-fairness-when-metrics-route-morality-0d78beb38661",
-    featured: true,
+    icon: faLaptopCode,
+    title: "Technical Rigor",
+    description: "Production-ready systems.",
+    back: "Architecture grounded in clarity, testing, and long-term maintainability.",
   },
   {
-    title: "AI Ethics Is the New Risk Frontier",
-    excerpt:
-      "Why optimism and pessimism about AI both circle back to the same governance gap.",
-    url: "https://ingakali.substack.com/p/frameworks-dont-governpeople-do",
-    embed: true,
+    icon: faLightbulb,
+    title: "Institutional Insight",
+    description: "Governance-aware design.",
+    back: "Understanding incentives, power structures, and policy tradeoffs.",
   },
   {
-    title: "2026 AI Predictions vs Reality",
-    excerpt:
-      "Examining forecast narratives against institutional constraints and structural incentives.",
-    url: "https://open.substack.com/pub/ingakali/p/2026-ai-predictions-vs-reality?r=7e4ma3&utm_campaign=post&utm_medium=web",
+    icon: faHandshake,
+    title: "Collaborative Impact",
+    description: "Cross-domain fluency.",
+    back: "Bridging engineers, researchers, and decision-makers.",
   },
 ];
 
-/* ---------------- Helpers ---------------- */
-
-const getPlatform = (url: string) => {
-  if (url.includes("medium.com")) return "medium";
-  if (url.includes("substack.com")) return "substack";
-  return "external";
-};
-
-const platformStyles: Record<string, string> = {
-  medium:
-    "border-l-4 border-l-black dark:border-l-white",
-  substack:
-    "border-l-4 border-l-orange-500",
-  external:
-    "border-l-4 border-l-primary",
-};
-
 /* ---------------- Component ---------------- */
 
-export default function AIEthicsBlog() {
-  // Load Substack embed script once
-  useEffect(() => {
-    if (document.getElementById("substack-embed-script")) return;
-
-    const script = document.createElement("script");
-    script.src = "https://substack.com/embedjs/embed.js";
-    script.async = true;
-    script.id = "substack-embed-script";
-    document.body.appendChild(script);
-  }, []);
-
-  const featured = articles.find((a) => a.featured);
-  const secondary = articles.filter((a) => !a.featured);
-
+export default function About() {
   return (
     <section
-      id="blog"
-      className="relative py-28 px-4 bg-background overflow-hidden"
+      id="about"
+      className="relative py-16 sm:py-20 px-4 bg-background"
     >
-      <div className="relative mx-auto max-w-4xl space-y-16">
+      <ScrollFade>
+        <div className="mx-auto max-w-2xl">
 
-        <SectionHeader
-          overline="Selected Writing"
-          title="AI Ethics & Institutional Risk"
-          description="Editorial analysis on algorithmic governance, institutional design, and systemic accountability."
-        />
+          {/* Editorial Accent Line */}
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: 48 }}
+            transition={{ duration: 0.7 }}
+            className="h-[2px] bg-primary mb-6"
+          />
 
-        {/* ---------------- Featured Banner ---------------- */}
+          {/* Header */}
+          <div className="mb-8">
+            <p className="text-[11px] uppercase tracking-widest text-muted-foreground mb-2">
+              Profile
+            </p>
 
-        {featured && (
-          <motion.a
-            href={featured.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            whileHover={{ scale: 1.01 }}
-            className="relative block overflow-hidden rounded-3xl
-                       backdrop-blur-xl bg-white/5 dark:bg-white/[0.03]
-                       border border-border/40
-                       shadow-xl"
-          >
-            {/* Animated Accent Glow */}
-            <motion.div
-              animate={{ opacity: [0.4, 0.7, 0.4] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/10"
-            />
+            <h2 className="font-serif text-2xl sm:text-3xl font-semibold leading-tight text-foreground">
+              Artificial Intelligence, Ethics & Institutional Systems
+            </h2>
+          </div>
 
-            <div className="relative p-10 space-y-4">
-              <span className="text-xs uppercase tracking-widest text-muted-foreground">
-                Featured Essay
+          {/* Body Copy */}
+          <div className="space-y-5 text-sm sm:text-base leading-relaxed text-muted-foreground">
+            <p>
+              I work at the intersection of{" "}
+              <span className="text-foreground font-medium">
+                artificial intelligence, governance, and human systems
               </span>
+              —focusing not on speculation, but on structural consequences once
+              technologies are deployed at scale.
+            </p>
 
-              <h2 className="text-3xl font-bold tracking-tight">
-                {featured.title}
-              </h2>
+            <p>
+              My work examines how algorithmic systems influence power,
+              incentives, institutional design, and public trust.
+              Through long-form analysis, I explore where governance models
+              succeed, where they fracture, and what durable oversight requires.
+            </p>
 
-              <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
-                {featured.excerpt}
-              </p>
+            <p>
+              Technology should be{" "}
+              <span className="text-foreground font-medium">
+                transparent, accountable, and grounded in lived reality
+              </span>
+              —not merely optimized.
+            </p>
+          </div>
 
-              <div className="pt-4 text-sm font-medium text-primary">
-                Read the full analysis →
-              </div>
-            </div>
-          </motion.a>
-        )}
+          {/* Platform Links — Minimal Editorial Style */}
+          <div className="mt-10 flex flex-col sm:flex-row gap-6 text-sm">
 
-        {/* ---------------- Secondary Articles ---------------- */}
+            <motion.a
+              href="https://medium.com/@altruisticxai"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ x: 4 }}
+              className="group relative font-medium text-foreground"
+            >
+              <span className="flex items-center gap-2">
+                <FontAwesomeIcon icon={faMedium} />
+                Medium Essays
+              </span>
+              <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+            </motion.a>
 
-        <div className="grid gap-10">
-
-          {secondary.map((article, index) => {
-            const platform = getPlatform(article.url);
-            const platformClass = platformStyles[platform];
-
-            if (article.embed) {
-              // Substack Embedded Article
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className={`rounded-2xl p-8 backdrop-blur-md
-                              bg-white/5 dark:bg-white/[0.03]
-                              border border-border/40 shadow-lg
-                              ${platformClass}`}
+            <motion.a
+              href="https://ingakali.substack.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ x: 4 }}
+              className="group relative font-medium text-foreground"
+            >
+              <span className="flex items-center gap-2">
+                <svg
+                  className="w-4 h-4 text-orange-500"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
                 >
-                  <div
-                    className="substack-post-embed editorial-embed"
-                    data-post-link={article.url}
-                  >
-                    <p lang="en">
-                      {article.title}
-                    </p>
-                    <p>{article.excerpt}</p>
-                    <a
-                      href={article.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Read on Substack
-                    </a>
-                  </div>
-                </motion.div>
-              );
-            }
+                  <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+                </svg>
+                Substack Analysis
+              </span>
+              <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-orange-500 transition-all duration-300 group-hover:w-full" />
+            </motion.a>
 
-            // Regular Card
-            return (
-              <motion.a
-                key={index}
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
+          </div>
+
+          {/* Highlight Cards — Smaller + Cleaner */}
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-6">
+
+            {highlights.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                whileHover={{ y: -4 }}
-                className={`block rounded-2xl p-8 backdrop-blur-md
-                            bg-white/5 dark:bg-white/[0.03]
-                            border border-border/40 shadow-lg
-                            ${platformClass}`}
+                transition={{ delay: i * 0.08 }}
+                whileHover={{ scale: 1.04 }}
+                className="transition-all"
               >
-                <h3 className="text-xl font-semibold mb-3">
-                  {article.title}
-                </h3>
+                <FlippingCard
+                  width={120}
+                  height={140}
+                  className="w-full"
+                  frontContent={
+                    <div className="flex flex-col items-center justify-center h-full p-4 text-center">
+                      <FontAwesomeIcon
+                        icon={item.icon}
+                        className="mb-3 text-primary"
+                      />
+                      <h4 className="text-sm font-medium">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {item.description}
+                      </p>
+                    </div>
+                  }
+                  backContent={
+                    <div className="flex items-center justify-center h-full p-4 text-center bg-muted/20 rounded-xl">
+                      <p className="text-xs leading-snug">
+                        {item.back}
+                      </p>
+                    </div>
+                  }
+                />
+              </motion.div>
+            ))}
 
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {article.excerpt}
-                </p>
+          </div>
 
-                <div className="mt-4 text-sm font-medium text-primary">
-                  Continue reading →
-                </div>
-              </motion.a>
-            );
-          })}
         </div>
-
-      </div>
+      </ScrollFade>
     </section>
   );
 }

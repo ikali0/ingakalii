@@ -1,72 +1,128 @@
 
-# Debug & Fix Plan: JavaScript, HTML, CSS, and TypeScript Errors
 
-## Issues Identified
+# Plan: Theme-Aware Entropy Component Colors
 
-### 1. Broken CSS Class in Portfolio.tsx (Line 278)
-**Problem**: Malformed class string with missing space and newline character
+## Overview
+
+Update the Entropy component to dynamically read CSS variables from the document, ensuring colors adapt to both light and dark themes with complementary palettes.
+
+## Current State Analysis
+
+The Entropy component currently uses a hardcoded purple color:
 ```tsx
-className="w-2h-2 text-fuchsia-500\n"
+const particleColor = '#8b5cf6' // primary purple
 ```
-**Impact**: Icon sizing broken, causes CSS parsing issues
 
-### 2. Missing `--neural` CSS Variables in index.css
-**Problem**: The Hero and other components use `text-neural`, `bg-neural/10`, etc., but the `--neural` CSS variable is only defined in `global.css`, not in the main `index.css` file that is actually loaded.
+This doesn't respond to theme changes and doesn't provide visual distinction between "order" (left side) and "chaos" (right side) particles.
 
-**Affected components**:
-- Hero.tsx (email icon styling)
-- hero-category-carousel.tsx (research category)
-- hero-floating-icons.tsx (icon colors)
+## Proposed Color Scheme
 
-### 3. Duplicate/Conflicting CSS Base Layers
-**Problem**: Both `global.css` and `index.css` define `:root` and `.dark` CSS variables with different values, causing unpredictable styling. The `index.css` values override `global.css`.
+### Light Mode (from CSS variables)
+| Element | CSS Variable | Current Value | Hex Equivalent |
+|---------|--------------|---------------|----------------|
+| Order particles | `--neural` | `263 70% 58%` | ~#8b5cf6 (violet) |
+| Chaos particles | `--accent` | `333 71% 51%` | ~#db2777 (pink) |
+| Connection lines | `--primary` | `221 83% 53%` | ~#3b82f6 (blue) |
+| Divider | `--muted-foreground` | `314 25% 37%` | Soft mauve |
+
+### Dark Mode (complementary palette)
+| Element | CSS Variable | Current Value | Hex Equivalent |
+|---------|--------------|---------------|----------------|
+| Order particles | `--neural` | `258 90% 76%` | ~#c4b5fd (light violet) |
+| Chaos particles | `--accent-foreground` | `344 57% 70%` | ~#f472b6 (light pink) |
+| Connection lines | `--primary` | `314 45% 92%` | ~#fce7f3 (pale rose) |
+| Divider | `--muted-foreground` | `134 27% 75%` | Soft sage |
 
 ---
 
 ## Technical Implementation
 
-### File 1: `src/components/Portfolio.tsx`
-**Fix**: Correct the broken class string on line 278
+### File: `src/components/ui/entropy.tsx`
 
-Change:
+**Changes Required:**
+
+1. **Add theme detection** - Read computed CSS variables at runtime using `getComputedStyle`
+
+2. **Helper function** - Convert HSL CSS variable values to hex for canvas rendering:
+   ```tsx
+   const getCSSColor = (varName: string): string => {
+     const style = getComputedStyle(document.documentElement);
+     const hslValue = style.getPropertyValue(varName).trim();
+     // Parse "263 70% 58%" format and convert to hex
+   };
+   ```
+
+3. **Theme change listener** - Add a MutationObserver to detect `.dark` class changes on `<html>` and update colors accordingly
+
+4. **Dual-color particle system** - Order particles use one color (neural/violet), chaos particles use a complementary color (accent/pink)
+
+5. **Connection line coloring** - Lines between same-type particles use that particle's color; cross-type connections use the primary color
+
+6. **Divider line** - Use `--muted-foreground` for subtle contrast
+
+### Detailed Code Changes
+
 ```tsx
-className="w-2h-2 text-fuchsia-500\n"
+// Inside useEffect, after canvas setup:
+
+// Helper to parse CSS HSL variables and convert to hex
+const hslToHex = (h: number, s: number, l: number): string => {
+  s /= 100;
+  l /= 100;
+  const a = s * Math.min(l, 1 - l);
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color).toString(16).padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+};
+
+const getCSSColor = (varName: string): string => {
+  const style = getComputedStyle(document.documentElement);
+  const hslValue = style.getPropertyValue(varName).trim();
+  if (!hslValue) return '#8b5cf6'; // fallback
+  const [h, s, l] = hslValue.split(' ').map(v => parseFloat(v));
+  return hslToHex(h, s, l);
+};
+
+// Get theme colors
+const orderColor = getCSSColor('--neural');      // violet for order
+const chaosColor = getCSSColor('--accent');      // pink for chaos
+const lineColor = getCSSColor('--primary');      // blue for connections
+const dividerColor = getCSSColor('--muted-foreground'); // subtle divider
 ```
-To:
+
+**Particle draw method update:**
 ```tsx
-className="w-2 h-2 text-fuchsia-500"
+draw(ctx: CanvasRenderingContext2D) {
+  const alpha = this.order ? 0.8 - this.influence * 0.5 : 0.8;
+  const color = this.order ? orderColor : chaosColor;
+  ctx.fillStyle = `${color}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`;
+  // ... rest of draw logic
+}
 ```
 
-### File 2: `src/index.css`
-**Fix**: Add missing `--neural` CSS variables to both light and dark mode definitions
-
-Add to `:root` section (around line 61-62):
-```css
---neural: 263 70% 58%;
---neural-foreground: 0 0% 100%;
-```
-
-Add to `.dark` section (around line 148):
-```css
---neural: 258 90% 76%;
---neural-foreground: 222 54% 8%;
+**Connection lines update:**
+```tsx
+// When drawing connections between particles
+const connectionLineColor = (particle.order === neighbor.order) 
+  ? (particle.order ? orderColor : chaosColor) 
+  : lineColor;
 ```
 
 ---
 
-## Summary of Changes
+## Summary
 
-| File | Issue | Fix |
-|------|-------|-----|
-| `src/components/Portfolio.tsx` | Broken CSS class string | Fix spacing and remove newline |
-| `src/index.css` | Missing `--neural` variable | Add variable to light/dark themes |
+| File | Changes |
+|------|---------|
+| `src/components/ui/entropy.tsx` | Add CSS variable parsing, dual-color system, theme reactivity |
 
----
+## Expected Result
 
-## Expected Outcome
+- **Light mode**: Violet order particles + pink chaos particles with blue connection lines
+- **Dark mode**: Light violet order particles + light pink chaos particles with pale rose connections
+- **Theme switching**: Colors update automatically when dark/light mode toggles
+- **Visual clarity**: Order vs chaos now visually distinct with complementary colors
 
-After these fixes:
-- The chevron icon in Portfolio cards will render correctly with proper sizing
-- Neural-themed colors will display properly throughout the Hero section and category carousel
-- No CSS variable fallback warnings or silent failures
-- Consistent color theming across all components using the `neural` color

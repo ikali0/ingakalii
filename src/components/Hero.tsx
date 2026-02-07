@@ -143,7 +143,14 @@ const Hero = () => {
 
 /* ---------------- Social Icon Component ---------------- */
 
-const SocialIcon = ({ href, label, icon, className }) => (
+interface SocialIconProps {
+  href: string;
+  label: string;
+  icon: typeof faLinkedin;
+  className?: string;
+}
+
+const SocialIcon = ({ href, label, icon, className }: SocialIconProps) => (
   <Tooltip>
     <TooltipTrigger asChild>
       <a

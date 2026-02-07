@@ -1,162 +1,256 @@
-"use client";
+/**
+ * Skills Section Component
+ *
+ * Structured Bento Grid layout with restrained motion and
+ * institutional positioning.
+ */
 
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import {
+  Shield,
+  Brain,
+  Scale,
+  Code,
+  Database,
+  Terminal,
+  Zap,
+} from "lucide-react";
+
+import { SectionHeader } from "./ui/section-header";
+import { SkillBar } from "./ui/skill-bar";
+import { Tag } from "./ui/tag";
+import {
+  ScrollFade,
+  StaggerContainer,
+  StaggerItem,
+} from "./ui/scroll-fade";
 
 interface Skill {
   name: string;
   level: number;
+  examples: string[];
 }
 
-const skills: Skill[] = [
-  { name: "Design", level: 95 },
-  { name: "Development", level: 90 },
-  { name: "Branding", level: 85 },
-  { name: "Motion", level: 78 },
-  { name: "Strategy", level: 82 },
+interface BentoCard {
+  id: string;
+  category: string;
+  icon: typeof Shield;
+  skills: Skill[];
+  span: "normal" | "wide" | "tall";
+}
+
+const bentoCards: BentoCard[] = [
+  {
+    id: "security",
+    category: "Adversarial Security",
+    icon: Shield,
+    span: "tall",
+    skills: [
+      {
+        name: "Penetration Testing",
+        level: 95,
+        examples: ["Red Teaming", "Exploit Development"],
+      },
+      {
+        name: "Vulnerability Research",
+        level: 90,
+        examples: ["CVE Analysis", "SAST/DAST"],
+      },
+      {
+        name: "Threat Modeling",
+        level: 90,
+        examples: ["Zero Trust", "Attack Surface Mapping"],
+      },
+    ],
+  },
+  {
+    id: "ai",
+    category: "Applied LLM Systems",
+    icon: Brain,
+    span: "wide",
+    skills: [
+      {
+        name: "LLM Deployment",
+        level: 95,
+        examples: ["Open-Source Models", "Infrastructure Optimization"],
+      },
+      {
+        name: "Prompt Risk Analysis",
+        level: 90,
+        examples: ["Injection Mitigation", "Agent Guardrails"],
+      },
+    ],
+  },
+  {
+    id: "governance",
+    category: "AI Governance Implementation",
+    icon: Scale,
+    span: "normal",
+    skills: [
+      {
+        name: "NIST AI RMF",
+        level: 95,
+        examples: ["Map / Measure / Manage"],
+      },
+      {
+        name: "Compliance Architecture",
+        level: 85,
+        examples: ["FERPA", "SOC2", "Audit Readiness"],
+      },
+    ],
+  },
+  {
+    id: "engineering",
+    category: "Systems Engineering",
+    icon: Code,
+    span: "normal",
+    skills: [
+      {
+        name: "System Design",
+        level: 90,
+        examples: ["Distributed Systems", "Service Architecture"],
+      },
+      {
+        name: "Full-Stack Development",
+        level: 85,
+        examples: ["React", "Node.js"],
+      },
+    ],
+  },
+  {
+    id: "ml",
+    category: "ML Infrastructure",
+    icon: Database,
+    span: "wide",
+    skills: [
+      {
+        name: "Vector Databases",
+        level: 90,
+        examples: ["Pinecone", "Weaviate"],
+      },
+      {
+        name: "MLOps Pipelines",
+        level: 85,
+        examples: ["MLflow", "CI/CD"],
+      },
+    ],
+  },
 ];
 
-export function Skills(): JSX.Element {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+const secondaryTech = [
+  { name: "Python", icon: Terminal },
+  { name: "PyTorch", icon: Zap },
+  { name: "LangChain", icon: Brain },
+  { name: "Docker", icon: Database },
+  { name: "Linux", icon: Terminal },
+  { name: "DevSecOps", icon: Shield },
+];
+
+function BentoCardComponent({ card }: { card: BentoCard }) {
+  const Icon = card.icon;
+
+  const spanClasses = {
+    normal: "col-span-1 row-span-1",
+    wide: "col-span-1 sm:col-span-2 row-span-1",
+    tall: "col-span-1 row-span-1 lg:row-span-2",
+  };
 
   return (
-    <section
-      aria-label="Skills"
-      className="flex flex-col w-full max-w-md"
+    <motion.div
+      className={`${spanClasses[card.span]} 
+        relative overflow-hidden rounded-lg 
+        bg-card border border-border/40 
+        shadow-sm hover:shadow-md 
+        transition-all duration-300`}
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >
-      {/* Header */}
-      <div className="flex items-center gap-4 mb-10">
-        <div className="h-px w-12 bg-foreground/20 dark:bg-foreground/10" />
-        <span className="text-[10px] font-semibold tracking-[0.25em] uppercase text-muted-foreground">
-          Expertise
-        </span>
-      </div>
+      <div className="p-5 h-full flex flex-col">
 
-      {/* Skills list */}
-      <div className="flex flex-col gap-1">
-        {skills.map((skill, index) => {
-          const isActive = activeIndex === index;
+        {/* Header */}
+        <div className="mb-4 flex items-center gap-2">
+          <div className="w-8 h-8 bg-primary/10 rounded flex items-center justify-center">
+            <Icon className="text-primary h-4 w-4" />
+          </div>
+          <h3 className="font-semibold text-foreground text-sm tracking-tight">
+            {card.category}
+          </h3>
+        </div>
 
-          return (
-            <div
+        {/* Skills */}
+        <div className="space-y-4 flex-1">
+          {card.skills.map((skill) => (
+            <SkillBar
               key={skill.name}
-              className="group relative"
-            >
-              <button
-                type="button"
-                onMouseEnter={() => setActiveIndex(index)}
-                onMouseLeave={() => setActiveIndex(null)}
-                onFocus={() => setActiveIndex(index)}
-                onBlur={() => setActiveIndex(null)}
-                className={cn(
-                  "relative w-full flex items-center justify-between py-5 px-4 -mx-4",
-                  "transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-                  "rounded-lg outline-none",
-                  isActive
-                    ? "bg-foreground/[0.03] dark:bg-foreground/[0.05]"
-                    : "bg-transparent"
-                )}
-              >
-                {/* Left side */}
-                <div className="relative flex items-center gap-4">
-                  <div
-                    className={cn(
-                      "h-5 w-0.5 rounded-full transition-all duration-500",
-                      isActive
-                        ? "bg-accent scale-y-100 opacity-100"
-                        : "bg-border scale-y-50 opacity-0"
-                    )}
-                  />
-
-                  <span
-                    className={cn(
-                      "text-base font-medium tracking-tight transition-all duration-500",
-                      isActive
-                        ? "text-foreground translate-x-0"
-                        : "text-muted-foreground -translate-x-5"
-                    )}
-                  >
-                    {skill.name}
-                  </span>
-                </div>
-
-                {/* Right side */}
-                <div className="flex items-center gap-4">
-                  {/* Progress bar */}
-                  <div
-                    className="relative w-24 h-1 rounded-full overflow-hidden bg-border/50 dark:bg-border/30"
-                    role="progressbar"
-                    aria-valuenow={skill.level}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-label={`${skill.name} proficiency`}
-                  >
-                    <div className="absolute inset-0 bg-muted/50 dark:bg-muted/20" />
-
-                    <div
-                      className={cn(
-                        "absolute inset-y-0 left-0 rounded-full",
-                        "transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
-                        "bg-gradient-to-r from-accent/80 to-accent"
-                      )}
-                      style={{
-                        width: isActive ? `${skill.level}%` : "0%",
-                        transitionDelay: isActive ? "100ms" : "0ms",
-                      }}
-                    />
-
-                    <div
-                      className={cn(
-                        "absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent",
-                        "transition-transform duration-700 ease-out",
-                        isActive ? "translate-x-full" : "-translate-x-full"
-                      )}
-                      style={{
-                        transitionDelay: isActive ? "300ms" : "0ms",
-                      }}
-                    />
-                  </div>
-
-                  {/* Percentage */}
-                  <div className="relative w-10 overflow-hidden">
-                    <span
-                      className={cn(
-                        "block text-sm font-mono tabular-nums text-right",
-                        "transition-all duration-500",
-                        isActive
-                          ? "text-foreground opacity-100 translate-y-0 blur-0"
-                          : "text-muted-foreground/40 opacity-0 translate-y-3 blur-sm"
-                      )}
-                    >
-                      {skill.level}%
-                    </span>
-                  </div>
-                </div>
-              </button>
-
-              {/* Divider */}
-              {index < skills.length - 1 && (
-                <div
-                  className={cn(
-                    "mx-4 h-px transition-all duration-500",
-                    isActive || activeIndex === index + 1
-                      ? "bg-transparent"
-                      : "bg-border/30 dark:bg-border/20"
-                  )}
-                />
-              )}
-            </div>
-          );
-        })}
+              name={skill.name}
+              level={skill.level}
+              examples={skill.examples}
+            />
+          ))}
+        </div>
       </div>
+    </motion.div>
+  );
+}
 
-      {/* Footer hint */}
-      <div className="flex items-center gap-3 mt-10 pt-6 border-t border-border/30 dark:border-border/20">
-        <div className="w-1.5 h-1.5 rounded-full bg-accent/60 animate-pulse" />
-        <p className="text-[11px] text-muted-foreground tracking-wide">
-          Hover or focus to explore
-        </p>
+const Skills = () => {
+  return (
+    <section
+      id="skills"
+      className="relative py-16 md:py-24 px-4 bg-background"
+    >
+      <div className="container mx-auto max-w-5xl">
+
+        {/* Header */}
+        <ScrollFade>
+          <SectionHeader
+            overline="Systems Capability"
+            title="Applied Engineering Domains"
+            description="AI systems, governance implementation, security architecture, and production infrastructure designed to hold under constraint."
+            align="left"
+          />
+        </ScrollFade>
+
+        {/* Bento Grid */}
+        <StaggerContainer
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[minmax(160px,auto)] gap-5 mt-10"
+          staggerDelay={0.08}
+        >
+          {bentoCards.map((card) => (
+            <StaggerItem key={card.id}>
+              <BentoCardComponent card={card} />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+
+        {/* Secondary Stack */}
+        <ScrollFade delay={0.2} className="mt-16">
+          <div className="flex flex-wrap justify-center items-center gap-3 text-xs font-medium tracking-tight text-muted-foreground">
+            {secondaryTech.map((tech) => {
+              const Icon = tech.icon;
+
+              return (
+                <motion.div
+                  key={tech.name}
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <Tag
+                    variant="outline"
+                    size="md"
+                    className="flex items-center gap-1.5"
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    {tech.name}
+                  </Tag>
+                </motion.div>
+              );
+            })}
+          </div>
+        </ScrollFade>
       </div>
     </section>
   );
-}
+};
+
+export default Skills;

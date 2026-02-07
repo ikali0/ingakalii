@@ -78,10 +78,6 @@ const Hero = () => {
           security, and real-world pressure.
         </motion.p>
 
-        {/* Social Buttons */}
-        <TooltipProvider>
-          
-        </TooltipProvider>
 
         {/* Scroll Indicator */}
         <motion.div initial={{

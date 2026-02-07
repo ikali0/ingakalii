@@ -31,15 +31,15 @@ const bentoCards: BentoCard[] = [{
   skills: [{
     name: "Penetration Testing",
     level: 95,
-    examples: ["Red Teaming", "Exploit Development"]
+    examples: ["OWASP Top 10", "API Security", "Red Team Ops"]
   }, {
     name: "Vulnerability Research",
     level: 90,
-    examples: ["CVE Analysis", "SAST/DAST"]
+    examples: ["CVE Triage", "SAST/DAST", "Fuzzing"]
   }, {
     name: "Threat Modeling",
     level: 90,
-    examples: ["Zero Trust", "Attack Surface Mapping"]
+    examples: ["STRIDE", "MITRE ATT&CK", "Kill Chain"]
   }]
 }, {
   id: "ai",
@@ -49,25 +49,25 @@ const bentoCards: BentoCard[] = [{
   skills: [{
     name: "LLM Deployment",
     level: 95,
-    examples: ["Open-Source Models", "Infrastructure Optimization"]
+    examples: ["Llama 3", "Mistral", "vLLM", "Quantization"]
   }, {
-    name: "Prompt Risk Analysis",
+    name: "Prompt Engineering",
     level: 90,
-    examples: ["Injection Mitigation", "Agent Guardrails"]
+    examples: ["Jailbreak Defense", "CoT", "RAG Pipelines"]
   }]
 }, {
   id: "governance",
-  category: "AI Governance Implementation",
+  category: "AI Governance",
   icon: Scale,
   span: "normal",
   skills: [{
     name: "NIST AI RMF",
     level: 95,
-    examples: ["Map / Measure / Manage"]
+    examples: ["Govern", "Map", "Measure", "Manage"]
   }, {
-    name: "Compliance Architecture",
+    name: "Compliance",
     level: 85,
-    examples: ["FERPA", "SOC2", "Audit Readiness"]
+    examples: ["EU AI Act", "SOC2", "HIPAA"]
   }]
 }, {
   id: "engineering",
@@ -75,13 +75,13 @@ const bentoCards: BentoCard[] = [{
   icon: Code,
   span: "normal",
   skills: [{
-    name: "System Design",
+    name: "Architecture",
     level: 90,
-    examples: ["Distributed Systems", "Service Architecture"]
+    examples: ["Microservices", "Event-Driven", "DDD"]
   }, {
-    name: "Full-Stack Development",
+    name: "Full-Stack",
     level: 85,
-    examples: ["React", "Node.js"]
+    examples: ["React", "Next.js", "FastAPI"]
   }]
 }, {
   id: "ml",
@@ -89,34 +89,27 @@ const bentoCards: BentoCard[] = [{
   icon: Database,
   span: "wide",
   skills: [{
-    name: "Vector Databases",
+    name: "Vector Stores",
     level: 90,
-    examples: ["Pinecone", "Weaviate"]
+    examples: ["Pinecone", "Weaviate", "pgvector"]
   }, {
-    name: "MLOps Pipelines",
+    name: "MLOps",
     level: 85,
-    examples: ["MLflow", "CI/CD"]
+    examples: ["MLflow", "Weights & Biases", "DVC"]
   }]
 }];
-const secondaryTech = [{
-  name: "Python",
-  icon: Terminal
-}, {
-  name: "PyTorch",
-  icon: Zap
-}, {
-  name: "LangChain",
-  icon: Brain
-}, {
-  name: "Docker",
-  icon: Database
-}, {
-  name: "Linux",
-  icon: Terminal
-}, {
-  name: "DevSecOps",
-  icon: Shield
-}];
+const secondaryTech = [
+  { name: "Python", icon: Terminal },
+  { name: "PyTorch", icon: Zap },
+  { name: "LangChain", icon: Brain },
+  { name: "Hugging Face", icon: Brain },
+  { name: "Docker", icon: Database },
+  { name: "Kubernetes", icon: Database },
+  { name: "Linux", icon: Terminal },
+  { name: "Burp Suite", icon: Shield },
+  { name: "Terraform", icon: Code },
+  { name: "PostgreSQL", icon: Database },
+];
 function BentoCardComponent({
   card
 }: {
@@ -129,31 +122,31 @@ function BentoCardComponent({
     tall: "col-span-1 row-span-1 lg:row-span-2"
   };
   return <motion.div className={`${spanClasses[card.span]} 
-        relative overflow-hidden rounded-lg 
-        bg-card border border-border/40 
-        shadow-sm hover:shadow-md 
-        transition-all duration-300`} whileHover={{
-    y: -4
+        relative overflow-hidden rounded-md 
+        bg-card/80 border border-border/20 
+        shadow-xs hover:shadow-sm hover:border-border/40
+        transition-all duration-200`} whileHover={{
+    y: -2
   }} transition={{
     type: "spring",
-    stiffness: 300,
-    damping: 25
+    stiffness: 400,
+    damping: 30
   }}>
-      <div className="p-5 h-full flex flex-col">
+      <div className="p-3 h-full flex flex-col">
 
         {/* Header */}
-        <div className="mb-4 gap-2 flex items-start justify-center">
-          <div className="w-8 h-8 bg-primary/10 rounded flex items-center justify-center">
-            <Icon className="text-primary h-4 w-4" />
+        <div className="mb-2.5 gap-1.5 flex items-center">
+          <div className="w-5 h-5 bg-primary/10 rounded-sm flex items-center justify-center flex-shrink-0">
+            <Icon className="text-primary h-2.5 w-2.5" />
           </div>
-          <h3 className="font-semibold text-foreground text-sm tracking-tight">
+          <h3 className="font-medium text-foreground text-[11px] tracking-tight leading-tight">
             {card.category}
           </h3>
         </div>
 
         {/* Skills */}
-        <div className="space-y-4 flex-1">
-          {card.skills.map(skill => <SkillBar key={skill.name} name={skill.name} level={skill.level} examples={skill.examples} />)}
+        <div className="space-y-2 flex-1">
+          {card.skills.map(skill => <SkillBar key={skill.name} name={skill.name} level={skill.level} examples={skill.examples} size="sm" />)}
         </div>
       </div>
     </motion.div>;
@@ -180,7 +173,7 @@ const Skills = () => {
         </div>
 
         {/* Bento Grid */}
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.08}>
+        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5" staggerDelay={0.06}>
           {bentoCards.map(card => <StaggerItem key={card.id}>
               <BentoCardComponent card={card} />
             </StaggerItem>)}

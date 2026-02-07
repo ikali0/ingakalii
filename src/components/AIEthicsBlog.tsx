@@ -60,9 +60,7 @@ export default function AIEthicsBlog() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground mb-4 leading-tight">
             ​ongoing  analysis   
           </h2>
-          <p className="text-foreground/80 max-w-xl text-sm md:text-base leading-relaxed">
-            Long-form analysis on AI risk, alignment, and responsible deployment.
-          </p>
+          <p className="text-foreground/80 max-w-xl text-sm md:text-base leading-relaxed">AI risk, alignment, responsible deployment, energy, quantum</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">

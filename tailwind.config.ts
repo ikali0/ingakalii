@@ -173,7 +173,7 @@ export default {
   				'sans-serif'
   			],
   			sans: [
-  				'Poppins',
+  				'Lato',
   				'ui-sans-serif',
   				'system-ui',
   				'sans-serif',
@@ -183,7 +183,7 @@ export default {
   				'Noto Color Emoji'
   			],
   			serif: [
-  				'Libre Baskerville',
+  				'Source Serif Pro',
   				'ui-serif',
   				'Georgia',
   				'Cambria',
@@ -192,7 +192,7 @@ export default {
   				'serif'
   			],
   			mono: [
-  				'Roboto Mono',
+  				'Geist Mono',
   				'ui-monospace',
   				'SFMono-Regular',
   				'Menlo',

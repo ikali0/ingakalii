@@ -29,6 +29,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono&display=swap");
 
 /* Entropy button animations */
 @keyframes bounce-x {
@@ -99,12 +102,12 @@
     --primary-foreground: 0 0% 0%;
 
     --secondary: 269 100% 91.7647%;
-    --secondary-foreground: 272 71.6667% 47.0588%;
+    --secondary-foreground: 292 84.0796% 60.5882%;
 
     --muted: 134 47% 88%;
     --muted-foreground: 314 25% 37%;
 
-    --accent: 333 71.4286% 50.5882%;
+    --accent: 83 77.9736% 55.4902%;
     --accent-foreground: 293 69.4779% 48.8235%;
 
     --destructive: 0 76% 90%;
@@ -117,7 +120,7 @@
     --neural: 263 70% 58%;
     --neural-foreground: 0 0% 100%;
 
-    --radius: 1.25rem;
+    --radius: 1.125rem;
 
     --chart-1: 314 58% 39%;
     --chart-2: 344 76% 61%;
@@ -128,7 +131,7 @@
     /* Typography */
     --font-display: 'Lora', Georgia, serif;
     --font-body: 'Poppins', system-ui, sans-serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 
     /* Semantic Opacity Scale */
     --opacity-subtle: 0.05;
@@ -140,11 +143,11 @@
     --shadow-color: 326 58% 57% / 0.5;
     --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
     --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-    --shadow-sm: 0px 1px 1.5px 0px hsla(293, 69%, 49%, 0.83);
+    --shadow-sm: 0px 1px 1.5px 0px hsla(293, 69%, 49%, 0.7);
     --shadow-soft: 3px 3px 0px 0px hsl(var(--shadow-color));
     --shadow-card: 3px 3px 0px 0px hsl(var(--shadow-color));
-    --shadow-md: 0px 1px 4.5px 0px hsla(293, 69%, 49%, 0.83);
-    --shadow-lg: 0px 1px 7.5px 0px hsla(293, 69%, 49%, 0.83);
+    --shadow-md: 0px 1px 4.5px 0px hsla(293, 69%, 49%, 0.7);
+    --shadow-lg: 0px 1px 7.5px 0px hsla(293, 69%, 49%, 0.7);
     --shadow-elevated: 6px 6px 0px 0px hsl(var(--shadow-color));
     --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
     --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
@@ -162,9 +165,9 @@
     --sidebar-border: 134 37% 91%;
     --sidebar-ring: 134 27% 75%;
     --sidebar: 248 0.3% 98.4%;
-    --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    --shadow: 0px 1px 3px 0px hsla(293, 69%, 49%, 0.83);
+    --font-sans: Lato, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    --font-serif: "Source Serif Pro", ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
+    --shadow: 0px 1px 3px 0px hsla(293, 69%, 49%, 0.7);
     --tracking-normal: 0em;
     --spacing: 0.25rem;
   }
@@ -211,11 +214,11 @@
     --shadow-color: 199 32% 27%;
     --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
     --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-sm: 0px 1px 1.5px 0px hsla(293, 69%, 49%, 0.7);
     --shadow-soft: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
     --shadow-card: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
-    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
-    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0px 1px 4.5px 0px hsla(293, 69%, 49%, 0.7);
+    --shadow-lg: 0px 1px 7.5px 0px hsla(293, 69%, 49%, 0.7);
     --shadow-elevated: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
     --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
     --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
@@ -232,8 +235,11 @@
     --sidebar-border: 134 22% 17%;
     --sidebar-ring: 134 27% 83%;
     --sidebar: 266 4% 20.8%;
-    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --radius: 1rem;
+    --shadow: 0px 1px 3px 0px hsla(293, 69%, 49%, 0.7);
+    --radius: 1.125rem;
+    --font-sans: Lato, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    --font-serif: "Source Serif Pro", ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
+    --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 }
 

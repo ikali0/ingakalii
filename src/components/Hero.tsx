@@ -80,7 +80,38 @@ const Hero = () => {
 
         {/* Social Buttons */}
         <TooltipProvider>
-          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex gap-3 mb-12"
+          >
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a
+                  href="https://www.linkedin.com/in/ik11/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-border/50 bg-card/80 backdrop-blur-sm rounded-lg flex items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-colors"
+                >
+                  <FontAwesomeIcon icon={faLinkedin} className="w-4 h-4 text-primary" />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>Connect on LinkedIn</TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a
+                  href="mailto:ingakali95@gmail.com"
+                  className="w-10 h-10 border border-border/50 bg-card/80 backdrop-blur-sm rounded-lg flex items-center justify-center hover:border-secondary/50 hover:bg-secondary/5 transition-colors"
+                >
+                  <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-secondary" />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>Email me</TooltipContent>
+            </Tooltip>
+          </motion.div>
         </TooltipProvider>
 
         {/* Scroll Indicator */}

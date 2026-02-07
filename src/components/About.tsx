@@ -95,14 +95,32 @@ const About = () => {
               —focused not on hype, but on real-world consequences. I examine how AI systems shape behavior, power, access, and trust once deployed.
             </p>
             <p>
-              Through long-form writing on AI ethics, alignment, and accountability, I explore where technology delivers value, where it causes subtle harm, and what responsible governance truly requires. I publish independently to think critically, openly, and without constraint.
+              Through long-form writing on AI ethics, alignment, and accountability, I explore where technology delivers value, where it causes subtle harm, and what responsible governance truly requires. I publish independently on{" "}
+              <a 
+                href="https://substack.com/@ingakali" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="font-semibold text-accent hover:text-accent/80 underline underline-offset-2 transition-colors"
+              >
+                Substack
+              </a>{" "}
+              to think critically, openly, and without constraint.
             </p>
             <p>
               I believe technology should be{" "}
               <strong className="text-foreground font-semibold">
                 transparent, humane, and grounded in lived reality
               </strong>
-              . This site brings together my work and serves as a point of connection for readers, researchers, collaborators, and thoughtful technologists worldwide.
+              . This site brings together my work and serves as a point of connection for readers, researchers, collaborators, and thoughtful technologists worldwide. You can also{" "}
+              <a 
+                href="https://ko-fi.com/ingakali" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="font-semibold text-secondary-foreground hover:text-secondary-foreground/80 underline underline-offset-2 transition-colors"
+              >
+                support my work on Ko-fi
+              </a>
+              .
             </p>
           </div>
 

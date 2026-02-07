@@ -59,7 +59,7 @@ export function VerticalTimeline({
   if (entries.length === 0) return null;
   return <ScrollFade className="mt-12">
       
-      
+      <h3 className="font-display text-xl md:text-2xl mb-8">{title}</h3>
 
       <div className="relative pl-6 border-l-2 border-primary/30 space-y-8">
         {entries.map((entry, idx) => {

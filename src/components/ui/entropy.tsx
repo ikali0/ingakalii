@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 
 interface EntropyProps {
@@ -8,8 +8,51 @@ interface EntropyProps {
   size?: number
 }
 
+// Helper to convert HSL to Hex for canvas rendering
+const hslToHex = (h: number, s: number, l: number): string => {
+  s /= 100
+  l /= 100
+  const a = s * Math.min(l, 1 - l)
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1)
+    return Math.round(255 * color).toString(16).padStart(2, '0')
+  }
+  return `#${f(0)}${f(8)}${f(4)}`
+}
+
+// Parse CSS variable HSL value and convert to hex
+const getCSSColor = (varName: string, fallback: string): string => {
+  if (typeof window === 'undefined') return fallback
+  const style = getComputedStyle(document.documentElement)
+  const hslValue = style.getPropertyValue(varName).trim()
+  if (!hslValue) return fallback
+  const parts = hslValue.split(' ').map(v => parseFloat(v))
+  if (parts.length < 3 || parts.some(isNaN)) return fallback
+  return hslToHex(parts[0], parts[1], parts[2])
+}
+
 export function Entropy({ className = "", size = 400 }: EntropyProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [themeKey, setThemeKey] = useState(0)
+
+  // Theme change detection
+  useEffect(() => {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          setThemeKey(prev => prev + 1)
+        }
+      })
+    })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -25,8 +68,11 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
     canvas.style.height = `${size}px`
     ctx.scale(dpr, dpr)
 
-    // Use theme-aware colors
-    const particleColor = '#8b5cf6' // primary purple
+    // Theme-aware colors from CSS variables
+    const orderColor = getCSSColor('--neural', '#8b5cf6')      // violet for order
+    const chaosColor = getCSSColor('--accent', '#db2777')       // pink for chaos
+    const lineColor = getCSSColor('--primary', '#3b82f6')       // for cross-type connections
+    const dividerColor = getCSSColor('--muted-foreground', '#737373') // subtle divider
 
     class Particle {
       x: number
@@ -91,7 +137,8 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
 
       draw(ctx: CanvasRenderingContext2D) {
         const alpha = this.order ? 0.8 - this.influence * 0.5 : 0.8
-        ctx.fillStyle = `${particleColor}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`
+        const color = this.order ? orderColor : chaosColor
+        ctx.fillStyle = `${color}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
@@ -140,7 +187,14 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
           const distance = Math.hypot(particle.x - neighbor.x, particle.y - neighbor.y)
           if (distance < 50) {
             const alpha = 0.2 * (1 - distance / 50)
-            ctx.strokeStyle = `${particleColor}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`
+            // Use appropriate color based on particle types
+            let connectionColor: string
+            if (particle.order === neighbor.order) {
+              connectionColor = particle.order ? orderColor : chaosColor
+            } else {
+              connectionColor = lineColor
+            }
+            ctx.strokeStyle = `${connectionColor}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`
             ctx.beginPath()
             ctx.moveTo(particle.x, particle.y)
             ctx.lineTo(neighbor.x, neighbor.y)
@@ -149,8 +203,8 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
         })
       })
 
-      // Divider line
-      ctx.strokeStyle = `${particleColor}4D`
+      // Divider line with theme-aware color
+      ctx.strokeStyle = `${dividerColor}4D`
       ctx.lineWidth = 0.5
       ctx.beginPath()
       ctx.moveTo(size / 2, 0)
@@ -168,7 +222,7 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
         cancelAnimationFrame(animationId)
       }
     }
-  }, [size])
+  }, [size, themeKey])
 
   return (
     <div className={cn("relative rounded-lg overflow-hidden", className)} style={{ width: size, height: size }}>

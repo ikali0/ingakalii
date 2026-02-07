@@ -59,7 +59,7 @@ export function VerticalTimeline({
   if (entries.length === 0) return null;
   return <ScrollFade className="mt-12">
       
-      <h3 className="font-display text-xl md:text-2xl mb-8">{title}</h3>
+      
 
       <div className="relative pl-6 border-l-2 border-primary/30 space-y-8">
         {entries.map((entry, idx) => {
@@ -85,7 +85,7 @@ export function VerticalTimeline({
 
               {/* Content */}
               <div className="ml-4">
-                <span className="text-caption text-muted-foreground">{yearLabel}</span>
+                <span className="text-secondary-foreground text-xs">{yearLabel}</span>
                 <h4 className="font-semibold text-foreground">{entry.title}</h4>
                 <p className="text-caption text-muted-foreground">
                   {entry.organization} · {entry.location}
@@ -93,7 +93,7 @@ export function VerticalTimeline({
                 <p className="text-body-sm mt-1">{entry.description}</p>
 
                 {entry.highlights && entry.highlights.length > 0 && <ul className="mt-2 space-y-1">
-                    {entry.highlights.map((h, i) => <li key={i} className="text-caption text-muted-foreground">• {h}</li>)}
+                    {entry.highlights.map((h, i) => <li key={i} className="text-caption text-secondary-foreground font-semibold">• {h}</li>)}
                   </ul>}
 
                 {entry.tags && entry.tags.length > 0 && <div className="flex flex-wrap gap-1.5 mt-2">

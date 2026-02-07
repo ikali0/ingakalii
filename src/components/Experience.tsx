@@ -149,7 +149,7 @@ const Experience = () => {
         duration: reduceMotion ? 0 : 0.5
       }} className="mb-container">
           <p className="text-overline text-accent font-semibold">Experience</p>
-          <h2 className="font-display text-display-sm md:text-display-md">Career Journey</h2>
+          <h2 className="font-display text-display-sm md:text-display-sm">Career Journey</h2>
         </motion.div>
 
         {/* Filters */}

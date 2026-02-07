@@ -35,6 +35,17 @@ const getCSSColor = (varName: string, fallback: string): string => {
 export function Entropy({ className = "", size = 400 }: EntropyProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [themeKey, setThemeKey] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Detect mobile for performance optimization
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Theme change detection
   useEffect(() => {
@@ -146,7 +157,8 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
     }
 
     const particles: Particle[] = []
-    const gridSize = 25
+    // Reduce particle count on mobile for better performance
+    const gridSize = isMobile ? 15 : 25
     const spacing = size / gridSize
 
     for (let i = 0; i < gridSize; i++) {
@@ -222,7 +234,7 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
         cancelAnimationFrame(animationId)
       }
     }
-  }, [size, themeKey])
+  }, [size, themeKey, isMobile])
 
   return (
     <div className={cn("relative rounded-lg overflow-hidden", className)} style={{ width: size, height: size }}>

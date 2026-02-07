@@ -104,21 +104,21 @@ const About = () => {
           {/* About Me Content - Exact 120 Words */}
           <div className="text-body-sm md:text-body text-muted-foreground space-y-card-sm mb-card leading-relaxed">
             <p>
-              I write and work at the intersection of{" "}
+              I work at the intersection of{" "}
               <strong className="text-foreground font-semibold">
                 artificial intelligence, ethics, and human impact
               </strong>
-              . My focus is not hype, but consequences: how systems shape behavior, power, access, and trust once they enter the real world.
+              —focused not on hype, but on real-world consequences. I examine how AI systems shape behavior, power, access, and trust once deployed.
             </p>
             <p>
-              I publish long-form writing on AI ethics, alignment, and responsibility, examining where technology helps, where it quietly harms, and what accountability should actually mean. My work lives across independent platforms, where I write freely, critically, and in public.
+              Through long-form writing on AI ethics, alignment, and accountability, I explore where technology delivers value, where it causes subtle harm, and what responsible governance truly requires. I publish independently to think critically, openly, and without constraint.
             </p>
             <p>
-              I believe good technology should be{" "}
+              I believe technology should be{" "}
               <strong className="text-foreground font-semibold">
-                legible, humane, and grounded in lived reality
+                transparent, humane, and grounded in lived reality
               </strong>
-              —not just ambition. This site collects my thinking, writing, and points of contact for readers, collaborators, researchers, and thoughtful technologists globally.
+              . This site brings together my work and serves as a point of connection for readers, researchers, collaborators, and thoughtful technologists worldwide.
             </p>
           </div>
 

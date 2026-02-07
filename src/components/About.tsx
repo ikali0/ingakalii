@@ -103,15 +103,7 @@ const About = () => {
 
           {/* Right column - Stats and CTA */}
           <div className="md:col-span-1">
-            <div className="md:text-right">
-              <TimelineContent as="div" animationNum={7} timelineRef={sectionRef} customVariants={revealVariants} className="text-accent text-2xl md:text-3xl font-bold mb-2">
-                INGA K.
-              </TimelineContent>
-
-              <TimelineContent as="div" animationNum={8} timelineRef={sectionRef} customVariants={revealVariants} className="text-muted-foreground text-sm mb-8">
-                AI Engineer | Ethics Researcher
-              </TimelineContent>
-
+          <div className="md:text-right">
               {/* Writing platforms */}
               <TimelineContent as="div" animationNum={9} timelineRef={sectionRef} customVariants={revealVariants} className="mb-6 flex md:flex-col gap-3 md:items-end">
                 <TooltipProvider>

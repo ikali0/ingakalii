@@ -275,7 +275,7 @@ function ProjectCard({
           }} transition={{
             duration: 0.2
           }}>
-              <FontAwesomeIcon icon={faChevronDown} className="w-2h-2 text-fuchsia-500\n" />
+              <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2 text-fuchsia-500" />
             </motion.div>
           </button>
 

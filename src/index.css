@@ -60,6 +60,9 @@
     --input: 134 37% 91%;
     --ring: 314 65% 20%;
 
+    --neural: 263 70% 58%;
+    --neural-foreground: 0 0% 100%;
+
     --radius: 1.25rem;
 
     --chart-1: 314 58% 39%;
@@ -140,6 +143,9 @@
     --border: 134 22% 17%;
     --input: 134 17% 25%;
     --ring: 134 27% 83%;
+
+    --neural: 258 90% 76%;
+    --neural-foreground: 222 54% 8%;
 
     --chart-1: 314 70% 50%;
     --chart-2: 74 75% 55%;

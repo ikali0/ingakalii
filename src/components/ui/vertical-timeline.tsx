@@ -96,7 +96,7 @@ export function VerticalTimeline({
                     {entry.highlights.map((h, i) => <li key={i} className="text-[11px] font-medium text-primary/90 px-[3px] py-[3px]">• {h}</li>)}
                   </ul>}
 
-                {entry.tags && entry.tags.length > 0 && <div className="inline-flex items-center text-[2px] font-medium px-1 border border-purple-500/70 text-purple-600 whitespace-nowrap rounded-xsm py-[3px]">
+                {entry.tags && entry.tags.length > 0 && <div className="inline-flex items-center text-[2px] font-medium text-purple-600 whitespace-nowrap rounded-xsm py-[3px] border-transparent px-[3px] border-0">
                     {entry.tags.map(tag => <Tag key={tag} size="sm" variant="muted">{tag}</Tag>)}
                   </div>}
               </div>

@@ -32,10 +32,10 @@ const menuItems: StartMenuItem[] = [
   },
   { 
     label: "Resume", 
-    href: "/Inga_Kali_Resume.pdf", 
+    href: "/Inga_Kaltak_Resume.docx", 
     icon: <FileText className="w-4 h-4" />,
     isExternal: true,
-    hoverText: "View PDF résumé"
+    hoverText: "Download résumé"
   },
   { 
     label: "Portfolio", 

@@ -193,32 +193,27 @@ function ProjectCard({
   project
 }: ProjectCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  return (
-    <motion.article 
-      className="h-full touch-manipulation" 
-      whileHover={{ scale: 1.01 }} 
-      whileTap={{ scale: 0.99 }} 
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-    >
+  return <motion.article className="h-full touch-manipulation" whileHover={{
+    scale: 1.01
+  }} whileTap={{
+    scale: 0.99
+  }} transition={{
+    type: "spring",
+    stiffness: 400,
+    damping: 25
+  }}>
       <div className="flex flex-col h-full overflow-hidden rounded-lg glass shadow-soft border border-border/30">
         {/* Image Container with hover zoom effect */}
         <div className="card-image-shine relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-muted group">
-          <img 
-            src={project.image} 
-            alt={project.title} 
-            loading="lazy" 
-            className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105" 
-          />
+          <img src={project.image} alt={project.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105" />
           {/* Category Icon Badge */}
           <div className="absolute top-2 left-2 w-8 h-8 sm:w-6 sm:h-6 rounded bg-card/90 backdrop-blur-sm flex items-center justify-center shadow-sm">
             <FontAwesomeIcon icon={project.icon} className="text-primary text-sm sm:text-xs" />
           </div>
           {/* Primary Impact Metric Badge */}
-          {project.impactMetrics[0] && (
-            <div className="absolute bottom-2 right-2 max-w-[80%] px-2 py-1 sm:px-1.5 sm:py-0.5 rounded bg-secondary/90 backdrop-blur-sm text-secondary-foreground text-xs sm:text-[0.625rem] font-medium shadow-sm truncate">
+          {project.impactMetrics[0] && <div className="absolute bottom-2 right-2 max-w-[80%] px-2 py-1 sm:px-1.5 sm:py-0.5 rounded bg-secondary/90 backdrop-blur-sm text-secondary-foreground text-xs sm:text-[0.625rem] font-medium shadow-sm truncate">
               {project.impactMetrics[0].label}: {project.impactMetrics[0].value}
-            </div>
-          )}
+            </div>}
           <div className="absolute inset-0 bg-gradient-to-t from-card/50 via-transparent to-transparent transition-opacity duration-300 opacity-80" aria-hidden="true" />
         </div>
 
@@ -234,26 +229,22 @@ function ProjectCard({
 
           {/* Tech Stack - Compact display */}
           <div className="flex flex-wrap gap-1.5 sm:gap-1 justify-center mb-3 sm:mb-2">
-            {project.techStack.slice(0, 3).map(tech => (
-              <span key={tech} className="text-xs sm:text-[10px] font-semibold px-2 py-1 sm:py-[2px] rounded-full whitespace-nowrap text-primary-foreground bg-primary/80">
+            {project.techStack.slice(0, 3).map(tech => <span key={tech} className="text-xs sm:text-[10px] font-semibold px-2 py-1 sm:py-[2px] rounded-full whitespace-nowrap text-primary-foreground bg-primary/80">
                 {tech}
-              </span>
-            ))}
-            {project.techStack.length > 3 && (
-              <span className="text-xs sm:text-[0.625rem] px-2 py-1 sm:px-1.5 sm:py-0.5 rounded text-primary-foreground bg-muted-foreground">
+              </span>)}
+            {project.techStack.length > 3 && <span className="text-xs sm:text-[0.625rem] px-2 py-1 sm:px-1.5 sm:py-0.5 rounded text-primary-foreground bg-muted-foreground">
                 +{project.techStack.length - 3}
-              </span>
-            )}
+              </span>}
           </div>
 
           {/* Expandable Case Study Section - touch-friendly button */}
-          <button 
-            onClick={() => setIsExpanded(!isExpanded)} 
-            className="flex items-center justify-center gap-2 text-sm sm:text-xs font-medium tracking-wide text-primary min-h-[44px] sm:min-h-[32px] px-3 py-2" 
-            aria-expanded={isExpanded}
-          >
+          <button onClick={() => setIsExpanded(!isExpanded)} className="flex items-center justify-center gap-2 text-sm sm:text-xs font-medium tracking-wide text-primary min-h-[44px] sm:min-h-[32px] px-3 py-2" aria-expanded={isExpanded}>
             <span>{isExpanded ? "Hide Details" : "View Case Study"}</span>
-            <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
+            <motion.div animate={{
+            rotate: isExpanded ? 180 : 0
+          }} transition={{
+            duration: 0.2
+          }}>
               <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3 text-primary" />
             </motion.div>
           </button>
@@ -345,8 +336,7 @@ function ProjectCard({
             </motion.a>}
         </div>
       </div>
-    </motion.article>
-  );
+    </motion.article>;
 }
 const Portfolio = () => {
   return <section id="portfolio" className="relative py-section-sm px-4 bg-muted/30 overflow-hidden md:py-[88px]" aria-labelledby="portfolio-heading">
@@ -366,14 +356,14 @@ const Portfolio = () => {
         <ScrollFade>
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-accent text-xl animate-spin" style={{ animationDuration: '3s' }}>✱</span>
+              <span className="text-accent text-xl animate-spin" style={{
+              animationDuration: '3s'
+            }}>✱</span>
               <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
                 Case Studies
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground mb-4 leading-tight">
-              Featured Work
-            </h2>
+            
             <p className="text-foreground/80 max-w-xl text-sm md:text-base leading-relaxed">
               Projects designed to solve real problems in AI ethics, governance, and responsible technology deployment.
             </p>
@@ -382,11 +372,9 @@ const Portfolio = () => {
 
         {/* Responsive Grid - mobile-first with consistent gaps */}
         <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3" staggerDelay={0.08}>
-          {projects.map(project => (
-            <StaggerItem key={project.title}>
+          {projects.map(project => <StaggerItem key={project.title}>
               <ProjectCard project={project} />
-            </StaggerItem>
-          ))}
+            </StaggerItem>)}
         </StaggerContainer>
       </div>
     </section>;

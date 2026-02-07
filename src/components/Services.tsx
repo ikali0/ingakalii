@@ -89,9 +89,7 @@ export default function Services() {
               </span>
             </div>
             
-            <p className="text-foreground/80 max-w-xl text-sm md:text-base leading-relaxed">
-              I help startups ship responsibly — and regulated teams deploy safely.
-            </p>
+            
           </div>
         </ScrollFade>
 

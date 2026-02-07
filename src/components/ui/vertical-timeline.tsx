@@ -87,13 +87,13 @@ export function VerticalTimeline({
               <div className="ml-4">
                 <span className="text-[11px] leading-tight mb-2 line-clamp-2 text-secondary font-light">{yearLabel}</span>
                 <h4 className="font-semibold text-foreground px-px py-px">{entry.title}</h4>
-                <p className="text-[11px] text-muted-foreground leading-tight mb-2 line-clamp-2\n">
+                <p className="text-[11px] leading-tight mb-2 line-clamp-2\\n text-secondary-foreground">
                   {entry.organization} · {entry.location}
                 </p>
                 <p className="text-body-sm mt-1">{entry.description}</p>
 
                 {entry.highlights && entry.highlights.length > 0 && <ul className="">
-                    {entry.highlights.map((h, i) => <li key={i} className="text-caption text-secondary-foreground font-semibold">• {h}</li>)}
+                    {entry.highlights.map((h, i) => <li key={i} className="text-caption font-semibold text-primary">• {h}</li>)}
                   </ul>}
 
                 {entry.tags && entry.tags.length > 0 && <div className="flex flex-wrap gap-1.5 mt-2">

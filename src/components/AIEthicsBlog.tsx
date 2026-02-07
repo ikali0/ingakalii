@@ -1,175 +1,138 @@
-/**
- * AI Ethics Blog Section Component
- * Clean, accessible, token-driven, animated.
- */
+"use client";
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faArrowRight,
-  faClock,
-  faBookOpen,
-  faScaleBalanced,
-  faGavel,
-} from "@fortawesome/free-solid-svg-icons"
-import { faMedium } from "@fortawesome/free-brands-svg-icons"
+import { motion } from "framer-motion";
+import Script from "next/script";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import { SectionHeader } from "./ui/section-header";
 
-import { SectionHeader } from "./ui/section-header"
+/* ---------------- Links ---------------- */
 
-/* ---------------- Types ---------------- */
+const mediumUrl =
+  "https://medium.com/@altruisticxai/the-geometry-of-fairness-when-metrics-route-morality-0d78beb38661";
 
-interface BlogArticle {
-  title: string
-  excerpt: string
-  readTime: string
-  publishDate: string
-  category: string
-  icon: any
-  url: string
-  platform: "medium" | "substack"
-  featured?: boolean
-}
+const substackMainUrl =
+  "https://ingakali.substack.com/p/frameworks-dont-governpeople-do";
 
-/* ---------------- Data ---------------- */
+const predictionsUrl =
+  "https://open.substack.com/pub/ingakali/p/2026-ai-predictions-vs-reality?r=7e4ma3&utm_campaign=post&utm_medium=web";
 
-const articles: BlogArticle[] = [
-  {
-    title: `"Fairness" Is Not a Metric`,
-    excerpt:
-      "Why bias detection is not a technical problem but an epistemic one.",
-    readTime: "8 min read",
-    publishDate: "Jan 2025",
-    category: "Bias & Measurement",
-    icon: faScaleBalanced,
-    url: "https://medium.com/",
-    platform: "medium",
-    featured: true,
-  },
-  {
-    title: "AI Ethics Is the New Risk Frontier",
-    excerpt:
-      "Why governance frameworks succeed or fail based on incentives and institutional power.",
-    readTime: "7 min read",
-    publishDate: "Jan 2025",
-    category: "AI Governance",
-    icon: faGavel,
-    url: "https://substack.com/",
-    platform: "substack",
-    featured: true,
-  },
-]
+/* ---------------- Animated Card ---------------- */
 
-/* ---------------- Card ---------------- */
-
-function ArticleCard({ article }: { article: BlogArticle }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+function AnimatedCard({
+  title,
+  excerpt,
+  href,
+  platform,
+}: {
+  title: string;
+  excerpt: string;
+  href: string;
+  platform: "Medium" | "Substack";
+}) {
+  const ref = useRef<HTMLAnchorElement | null>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <motion.a
       ref={ref}
-      href={article.url}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
       whileHover={{ y: -4 }}
-      whileTap={{ scale: 0.99 }}
-      className="group block rounded-lg border border-border/40 bg-card p-card shadow-soft transition-colors hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/50"
+      whileTap={{ scale: 0.98 }}
+      className="group block rounded-2xl border border-border/40 bg-card p-6
+                 shadow-sm transition-all hover:border-primary/40
+                 hover:shadow-md"
     >
-      {/* Header Row */}
-      <div className="flex items-center justify-between mb-4">
-
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-md flex items-center justify-center bg-primary/10">
-            <FontAwesomeIcon
-              icon={article.icon}
-              className="w-5 h-5 text-primary"
-            />
-          </div>
-
-          <div>
-            <span className="text-xs uppercase tracking-wide text-muted-foreground font-medium">
-              {article.category}
-            </span>
-          </div>
-        </div>
-
-        {/* Platform badge */}
-        <div className="text-xs text-muted-foreground flex items-center gap-1">
-          {article.platform === "medium" && (
-            <>
-              <FontAwesomeIcon icon={faMedium} className="w-3 h-3" />
-              Medium
-            </>
-          )}
-          {article.platform === "substack" && (
-            <>
-              <FontAwesomeIcon icon={faBookOpen} className="w-3 h-3" />
-              Substack
-            </>
-          )}
-        </div>
+      <div className="flex items-center justify-between mb-4 text-xs text-muted-foreground uppercase tracking-wide">
+        <span>{platform}</span>
+        <span>Read →</span>
       </div>
 
-      {/* Title */}
-      <h3 className="text-body font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-        {article.title}
+      <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+        {title}
       </h3>
 
-      {/* Excerpt */}
-      <p className="text-body-sm text-muted-foreground mb-4 leading-relaxed line-clamp-3">
-        {article.excerpt}
+      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+        {excerpt}
       </p>
-
-      {/* Footer */}
-      <div className="flex items-center justify-between pt-4 border-t border-border/40 text-xs text-muted-foreground">
-
-        <div className="flex items-center gap-2">
-          <span>{article.publishDate}</span>
-          <span>•</span>
-          <div className="flex items-center gap-1">
-            <FontAwesomeIcon icon={faClock} className="w-3 h-3" />
-            <span>{article.readTime}</span>
-          </div>
-        </div>
-
-        <span className="flex items-center gap-1 font-medium text-primary">
-          Read
-          <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3" />
-        </span>
-      </div>
     </motion.a>
-  )
+  );
 }
 
-/* ---------------- Section ---------------- */
+/* ---------------- Blog Section ---------------- */
 
-export default function AIEthicsBlog() {
+export default function AIBlogSection() {
   return (
     <section
       id="blog"
-      className="relative py-section px-4 bg-background overflow-hidden"
+      className="relative py-24 px-4 bg-background overflow-hidden"
     >
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/20 to-transparent" />
-      </div>
+      <div className="relative mx-auto max-w-3xl space-y-12">
 
-      <div className="relative z-10 mx-auto max-w-3xl">
         <SectionHeader
           overline="Selected Writing"
-          title="Research & Analysis"
-          description="Long-form essays on AI ethics, governance, and algorithmic accountability."
+          title="AI Ethics & Governance"
+          description="Long-form essays on algorithmic accountability, institutional risk, and moral architectures."
         />
 
-        <div className="grid gap-6 mt-8">
-          {articles.map((article) => (
-            <ArticleCard key={article.title} article={article} />
-          ))}
+        <div className="grid gap-8">
+
+          {/* Medium Article */}
+          <AnimatedCard
+            title="The Geometry of Fairness"
+            excerpt="When metrics route morality and algorithmic design choices shape ethical outcomes."
+            href={mediumUrl}
+            platform="Medium"
+          />
+
+          {/* Substack Official Embed */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+            className="rounded-2xl border border-border/40 bg-card p-6 shadow-sm"
+          >
+            <div
+              className="substack-post-embed"
+              data-post-link={substackMainUrl}
+            >
+              <p lang="en">
+                AI Ethics Is the New Risk Frontier by I.K.
+              </p>
+              <p>
+                Why optimism and pessimism about AI both circle back to the same governance gap.
+              </p>
+              <a
+                href={substackMainUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read on Substack
+              </a>
+            </div>
+
+            <Script
+              src="https://substack.com/embedjs/embed.js"
+              strategy="lazyOnload"
+            />
+          </motion.div>
+
+          {/* 2026 Predictions Article */}
+          <AnimatedCard
+            title="2026 AI Predictions vs Reality"
+            excerpt="Examining forecast narratives against institutional constraints and structural incentives."
+            href={predictionsUrl}
+            platform="Substack"
+          />
+
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -7,12 +7,7 @@ import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import { Linkedin, Mail, ArrowDown, BookOpen, Coffee } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Entropy } from "@/components/ui/entropy";
 
 /* ---------------- Types ---------------- */
@@ -74,9 +69,7 @@ const Hero = () => {
     transition: { duration: 0.6, delay },
   });
 
-  const hoverMotion = reduceMotion
-    ? {}
-    : { whileHover: { scale: 1.1, y: -3 }, whileTap: { scale: 0.92 } };
+  const hoverMotion = reduceMotion ? {} : { whileHover: { scale: 1.1, y: -3 }, whileTap: { scale: 0.92 } };
 
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-4 sm:px-6 pt-24 sm:pt-28 pb-16 sm:pb-20">
@@ -84,7 +77,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0 bg-background">
         <Entropy className="opacity-80" />
       </div>
-      
+
       {/* Subtle gradient overlay for text readability */}
       <div className="absolute inset-0 z-5 bg-gradient-to-t from-background/70 via-background/30 to-transparent" />
 
@@ -101,7 +94,7 @@ const Hero = () => {
             Inga K.
           </h1>
           {/* 3D shadow effect */}
-          <h1 
+          <h1
             className="absolute inset-0 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-r from-purple-600/20 via-teal-500/20 to-lime-500/20 bg-clip-text text-transparent blur-lg -z-10"
             style={{ transform: "translateY(4px) translateZ(-10px)" }}
             aria-hidden
@@ -114,38 +107,29 @@ const Hero = () => {
           {...fadeUp(0.2)}
           className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-md sm:max-w-lg leading-relaxed mb-8 sm:mb-12 px-2"
         >
-          I translate{" "}
-          <span className="font-semibold text-foreground italic">
-            policy into deployable controls
-          </span>{" "}
-          and build AI systems that hold up under compliance, security, and
-          real-world pressure.
+          I translate <span className="font-semibold text-foreground italic">policy into deployable controls</span> and
+          build AI systems that hold up under compliance, security, and real-world pressure.
         </motion.p>
 
         <TooltipProvider>
-          <motion.div
-            {...fadeUp(0.3)}
-            className="flex flex-wrap gap-2 sm:gap-3 mb-12 sm:mb-16 justify-center"
-          >
-            {SOCIAL_LINKS.map(
-              ({ href, label, icon: Icon, borderClass, iconClass, tooltip }) => (
-                <Tooltip key={label}>
-                  <TooltipTrigger asChild>
-                    <motion.a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      {...hoverMotion}
-                      className={`flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-background/80 backdrop-blur-md border-2 ${borderClass} transition-all shadow-md hover:shadow-xl`}
-                    >
-                      <Icon className={`w-4 h-4 sm:w-[18px] sm:h-[18px] ${iconClass}`} />
-                    </motion.a>
-                  </TooltipTrigger>
-                  <TooltipContent>{tooltip}</TooltipContent>
-                </Tooltip>
-              )
-            )}
+          <motion.div {...fadeUp(0.3)} className="flex flex-wrap gap-2 sm:gap-3 mb-12 sm:mb-16 justify-center">
+            {SOCIAL_LINKS.map(({ href, label, icon: Icon, borderClass, iconClass, tooltip }) => (
+              <Tooltip key={label}>
+                <TooltipTrigger asChild>
+                  <motion.a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    {...hoverMotion}
+                    className={`flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-background/80 backdrop-blur-md border-2 ${borderClass} transition-all shadow-md hover:shadow-xl`}
+                  >
+                    <Icon className={`w-4 h-4 sm:w-[18px] sm:h-[18px] ${iconClass}`} />
+                  </motion.a>
+                </TooltipTrigger>
+                <TooltipContent>{tooltip}</TooltipContent>
+              </Tooltip>
+            ))}
           </motion.div>
         </TooltipProvider>
 
@@ -154,9 +138,7 @@ const Hero = () => {
             href="#about"
             className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors group"
           >
-            <span className="text-[10px] sm:text-xs uppercase tracking-widest mb-2 sm:mb-3">
-              Explore
-            </span>
+            <span className="text-[10px] sm:text-xs uppercase tracking-widest mb-2 sm:mb-3">Explore</span>
             {!reduceMotion && (
               <motion.div
                 animate={{ y: [0, 8, 0] }}

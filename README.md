@@ -9,40 +9,6 @@ A retro Windows-styled portfolio website built with React, TypeScript, and Tailw
 - 🎨 Responsive design with dark/light mode support
 - ⌨️ Keyboard accessible navigation
 
-## Structure
-src/
-├── assets/
-│
-├── components/
-│   ├── ui/
-│   ├── layout/
-│   ├── sections/
-│   └── feature/
-│
-├── hooks/
-│
-├── integrations/
-│   └── supabase/
-│
-├── lib/
-│
-├── providers/
-│
-├── config/
-│
-├── styles/
-│   ├── tokens.css
-│   ├── base.css
-│   ├── components.css
-│   └── utilities.css
-│
-├── types/
-│
-├── App.tsx
-├── main.tsx
-├── index.css
-└── vite-env.d.ts
-
 ## Environment Variables
 
 This project requires the following environment variables for the contact form:

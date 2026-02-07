@@ -28,7 +28,7 @@ export function SectionHeader({
   className
 }: SectionHeaderProps) {
   return <header className={cn("mb-10 md:mb-14", align === "center" && "text-center", align === "left" && "text-left", className)}>
-      {overline && <p className="text-overline uppercase font-semibold mb-2 text-fuchsia-500">
+      {overline && <p className="text-overline uppercase text-accent font-semibold mb-2">
           {overline}
         </p>}
       <h2 className="text-display-sm md:text-display-md font-display text-foreground mb-3">

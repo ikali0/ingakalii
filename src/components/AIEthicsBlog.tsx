@@ -48,15 +48,15 @@ interface ArticleCardProps {
 function ArticleCard({
   article
 }: ArticleCardProps) {
-  return <motion.a href={article.url} target="_blank" rel="noopener noreferrer" className="relative z-10 mx-auto max-w-3xl md:px-8\\n px-[20px]" whileHover={{
+  return <motion.a href={article.url} target="_blank" rel="noopener noreferrer" className="relative z-10 mx-auto max-w-3xl px-6 md:px-8\n" whileHover={{
     y: -2
   }} whileTap={{
     scale: 0.995
   }}>
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-md flex items-center justify-center bg-fuchsia-500">
-            <FontAwesomeIcon icon={article.icon} className="w-5 h-5 text-lime-300" />
+          <div className="w-10 h-10 rounded-md bg-muted/50 flex items-center justify-center">
+            <FontAwesomeIcon icon={article.icon} className="w-5 h-5 text-foreground/70" />
           </div>
           <div>
             <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium">

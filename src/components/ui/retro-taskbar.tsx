@@ -194,8 +194,8 @@ export const RetroTaskbar = () => {
               <div className="grid grid-cols-2 gap-0.5">
                 <div className="w-2 h-2 rounded-[2px] bg-primary/80" />
                 <div className="w-2 h-2 rounded-[2px] bg-secondary/80" />
-                <div className="w-2 h-2 rounded-[2px] bg-pink-500" />
-                <div className="w-2 h-2 rounded-[2px] bg-chart-4/80 text-secondary-foreground bg-popover-foreground" />
+                <div className="w-2 h-2 rounded-[2px] bg-accent/80" />
+                <div className="w-2 h-2 rounded-[2px] bg-chart-4/80 text-secondary-foreground" />
               </div>
               <span className="text-xs font-medium tracking-tight text-primary">Start</span>
             </motion.button>

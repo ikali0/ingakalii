@@ -51,6 +51,8 @@ const categories: Category[] = [
   { id: "governance", label: "Governance", icon: faBalanceScale, color: "text-accent", bgColor: "bg-accent/10 border-accent/30" },
   { id: "security", label: "Security", icon: faShieldHalved, color: "text-red-500", bgColor: "bg-red-500/10 border-red-500/30" },
   { id: "ethics", label: "Ethics", icon: faBalanceScale, color: "text-purple-500", bgColor: "bg-purple-500/10 border-purple-500/30" },
+  { id: "energy", label: "Energy", icon: faAtom, color: "text-amber-500", bgColor: "bg-amber-500/10 border-amber-500/30" },
+  { id: "quantum", label: "Quantum", icon: faAtom, color: "text-cyan-500", bgColor: "bg-cyan-500/10 border-cyan-500/30" },
   { id: "education", label: "Education", icon: faBrain, color: "text-blue-500", bgColor: "bg-blue-500/10 border-blue-500/30" },
   { id: "research", label: "Research", icon: faAtom, color: "text-neural", bgColor: "bg-neural/10 border-neural/30" },
 ];
@@ -190,25 +192,30 @@ export function HeroCategoryCarousel() {
                 <motion.button
                   key={category.id}
                   onClick={() => handleCategoryClick(category.id)}
-                  whileTap={{ scale: 0.95 }}
+                  whileTap={{ scale: 0.95, y: 1 }}
+                  whileHover={{ y: -2, transition: { duration: 0.15 } }}
                   className={cn(
-                    "flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full",
+                    "flex-shrink-0 flex items-center gap-1.5 px-2.5 py-1.5 rounded-full",
                     "border transition-all duration-200 touch-manipulation",
-                    "min-h-[44px] select-none",
+                    "min-h-[36px] select-none",
+                    // 3D depth effect
+                    "shadow-[0_2px_0_0_hsl(var(--border)/0.5),0_4px_8px_-2px_hsl(var(--foreground)/0.1)]",
+                    "hover:shadow-[0_1px_0_0_hsl(var(--border)/0.5),0_2px_4px_-1px_hsl(var(--foreground)/0.1)]",
+                    "active:shadow-none active:translate-y-[2px]",
                     isSelected
-                      ? `${category.bgColor} ${category.color} border-current shadow-md`
+                      ? `${category.bgColor} ${category.color} border-current shadow-[0_2px_0_0_currentColor/30,0_4px_12px_-2px_currentColor/20]`
                       : "bg-card/60 backdrop-blur-sm border-border/50 text-muted-foreground hover:border-border hover:bg-card/80"
                   )}
                   aria-pressed={isSelected}
                 >
                   <FontAwesomeIcon
                     icon={category.icon}
-                    className={cn("w-4 h-4", isSelected ? category.color : "text-inherit")}
+                    className={cn("w-3 h-3", isSelected ? category.color : "text-inherit")}
                   />
-                  <span className="text-sm font-medium whitespace-nowrap">{category.label}</span>
+                  <span className="text-xs font-medium whitespace-nowrap">{category.label}</span>
                   <span
                     className={cn(
-                      "text-xs px-1.5 py-0.5 rounded-full",
+                      "text-[10px] px-1 py-0.5 rounded-full leading-none",
                       isSelected
                         ? "bg-current/20 text-inherit"
                         : "bg-muted text-muted-foreground"

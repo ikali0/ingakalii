@@ -57,13 +57,13 @@ function CardBack({
   data: HighlightData;
 }) {
   return <div className="flex flex-col items-center justify-center h-full w-full p-card-sm text-center rounded-md bg-secondary/20">
-      <p className="text-[10px] sm:text-[11px] leading-tight mb-1.5 line-clamp-2 text-primary">
+      <p className="text-[10px] sm:text-[11px] \ntext-muted-foreground \nleading-tight \nmb-1.5 \nline-clamp-2\n">
         {data.backDescription}
       </p>
     </div>;
 }
 const About = () => {
-  return <section id="about" className="relative py-section-sm px-4 bg-muted/30 overflow-hidden md:py-[86px]">
+  return <section id="about" className="relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden">
       {/* Abstract background shapes with parallax */}
       <ParallaxShape speed={0.15} className="w-64 h-64 -top-20 -right-20">
         <BlobShape className="w-full h-full opacity-60" />

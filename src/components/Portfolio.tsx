@@ -259,16 +259,16 @@ function ProjectCard({
           
           {/* Tech Stack - Compact display */}
           <div className="text-[11px] text-muted-foreground leading-tight mb-2 line-clamp-2 flex items-center justify-center">
-            {project.techStack.slice(0, 4).map(tech => <span key={tech} className="text-[11px] sm:text-xs text-muted-foreground leading-snug mb-1.5 line-clamp-2\n">
+            {project.techStack.slice(0, 4).map(tech => <span key={tech} className="text-[0.625rem] px-1.5 py-0.5 rounded bg-accent-foreground text-secondary-foreground">
                 {tech}
               </span>)}
-            {project.techStack.length > 4 && <span className="text-[11px] sm:text-xs text-muted-foreground leading-snug mb-1.5 line-clamp-2\n">
+            {project.techStack.length > 4 && <span className="text-[0.625rem] px-1.5 py-0.5 rounded text-slate-50 bg-secondary-foreground">
                 +{project.techStack.length - 4}
               </span>}
           </div>
 
           {/* Expandable Case Study Section - touch-friendly button */}
-          <button onClick={() => setIsExpanded(!isExpanded)} className="text-[10px] sm:text-xs leading-snug mb-1.5 line-clamp-2 text-primary" aria-expanded={isExpanded}>
+          <button onClick={() => setIsExpanded(!isExpanded)} className="text-[11px] text-muted-foreground leading-tight mb-2 line-clamp-2" aria-expanded={isExpanded}>
             <span>{isExpanded ? "Hide Details" : "View Case Study"}</span>
             <motion.div animate={{
             rotate: isExpanded ? 180 : 0

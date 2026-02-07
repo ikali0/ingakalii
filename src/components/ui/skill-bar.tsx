@@ -34,7 +34,7 @@ export function SkillBar({
   };
   return <div className={expandable && examples.length > 0 ? "cursor-pointer" : ""} onClick={handleClick}>
       {/* Header row */}
-      <div className="mb-1 border-primary border flex items-start justify-between">
+      <div className="flex justify-between items-end mb-1">
         <span className="text-[10px] sm:text-[11px] \ntext-muted-foreground \nleading-tight \nmb-1.5 \nline-clamp-2\n">{name}</span>
         <span className="text-[10px] font-mono text-muted-foreground">
           {level}%

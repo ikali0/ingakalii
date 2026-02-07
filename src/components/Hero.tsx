@@ -35,7 +35,7 @@ const Hero = () => {
         duration: 0.6,
         delay: 0.1
       }}>
-          <span className="text-[11px] sm:text-xs leading-snug mb-1.5 line-clamp-2 text-lime-100 text-center px-px py-0 bg-secondary-foreground">
+          <span className="text-[10px] sm:text-[11px] \ntext-muted-foreground \nleading-tight \nmb-1.5 \nline-clamp-2\n">
             AI Engineer & Independent Consultant
           </span>
         </motion.div>

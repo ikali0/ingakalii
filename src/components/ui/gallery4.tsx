@@ -120,9 +120,13 @@ const Gallery4 = ({
         </div>
       </div>
       <div 
-        className="w-full min-w-0 overflow-hidden"
+        className="relative w-full min-w-0 overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        style={{
+          maskImage: 'linear-gradient(to right, black 0%, black 85%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, black 0%, black 85%, transparent 100%)',
+        }}
       >
         <Carousel
           setApi={setCarouselApi}

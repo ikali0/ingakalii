@@ -110,37 +110,7 @@ const About = () => {
           <div className="mb-container md:mb-container-lg">
             
             <TooltipProvider>
-              <div className="flex flex-wrap gap-3">
-                {/* Medium Button */}
-                <Tooltip>
-                  
-                  <TooltipContent>
-                    <p>Read in-depth work on Medium</p>
-                  </TooltipContent>
-                </Tooltip>
-
-                {/* Substack Button */}
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <motion.a href="https://ingakali.substack.com/" target="_blank" rel="noopener noreferrer" className="inline-flex flex-col items-start gap-0.5 px-4 py-3 min-h-[44px] rounded-lg bg-card border border-border/50 hover:border-[#FF6719]/30 hover:bg-[#FF6719]/5 transition-colors touch-manipulation group" whileHover={{
-                    scale: 1.02
-                  }} whileTap={{
-                    scale: 0.98
-                  }}>
-                      <span className="inline-flex items-center gap-2">
-                        <svg className="w-4 h-4 text-[#FF6719]" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
-                        </svg>
-                        <span className="text-body-sm font-medium text-foreground">Substack</span>
-                      </span>
-                      
-                    </motion.a>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Subscribe for new writing</p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
+              
             </TooltipProvider>
           </div>
 

@@ -24,14 +24,14 @@ const Contact = () => {
         <ScrollFade>
           <div className="mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="text-accent text-xl animate-spin" style={{ animationDuration: '3s' }}>✱</span>
+              <span className="text-accent text-xl animate-spin" style={{
+              animationDuration: '3s'
+            }}>✱</span>
               <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
                 Contact
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground text-center leading-tight">
-              Get In Touch
-            </h2>
+            
           </div>
         </ScrollFade>
 

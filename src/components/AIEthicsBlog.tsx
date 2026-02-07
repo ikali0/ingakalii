@@ -97,66 +97,7 @@ export default function AIEthicsBlog() {
 
         {/* ---------------- Secondary Articles ---------------- */}
 
-        <div className="grid gap-10">
-
-          {secondary.map((article, index) => {
-          const platform = getPlatform(article.url);
-          const platformClass = platformStyles[platform];
-          if (article.embed) {
-            // Substack Embedded Article
-            return <motion.div key={index} initial={{
-              opacity: 0,
-              y: 30
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.5
-            }} className={`rounded-2xl p-8 backdrop-blur-md
-                              bg-white/5 dark:bg-white/[0.03]
-                              border border-border/40 shadow-lg
-                              ${platformClass}`}>
-                  <div className="substack-post-embed editorial-embed" data-post-link={article.url}>
-                    <p lang="en">
-                      {article.title}
-                    </p>
-                    <p>{article.excerpt}</p>
-                    <a href={article.url} target="_blank" rel="noopener noreferrer">
-                      Read on Substack
-                    </a>
-                  </div>
-                </motion.div>;
-          }
-
-          // Regular Card
-          return <motion.a key={index} href={article.url} target="_blank" rel="noopener noreferrer" initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.5
-          }} whileHover={{
-            y: -4
-          }} className={`block rounded-2xl p-8 backdrop-blur-md
-                            bg-white/5 dark:bg-white/[0.03]
-                            border border-border/40 shadow-lg
-                            ${platformClass}`}>
-                <h3 className="text-xl font-semibold mb-3">
-                  {article.title}
-                </h3>
-
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {article.excerpt}
-                </p>
-
-                <div className="mt-3 text-sm font-small text-primary">
-                  Continue reading →
-                </div>
-              </motion.a>;
-        })}
-        </div>
+        
 
       </div>
     </section>;

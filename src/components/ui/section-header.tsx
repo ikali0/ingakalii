@@ -37,9 +37,7 @@ export function SectionHeader({
           </span>
         </div>}
       
-      {description && <p className={cn("text-body-lg text-muted-foreground max-w-2xl", align === "center" && "mx-auto")}>
-          {description}
-        </p>}
+      {description}
     </div>;
 }
 export default SectionHeader;

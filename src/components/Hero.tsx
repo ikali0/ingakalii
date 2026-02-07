@@ -102,7 +102,7 @@ const Hero = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <a href="https://www.linkedin.com/in/ik11/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary/10 hover:text-primary flex items-center justify-center text-muted-foreground transition-all duration-300 hover:scale-110">
+                <a href="https://www.linkedin.com/in/ik11/" target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full bg-primary/10 border border-primary/30 text-primary flex items-center justify-center shadow-[0_3px_0_0_hsl(var(--primary)/0.4)] hover:shadow-[0_1px_0_0_hsl(var(--primary)/0.4)] hover:translate-y-[2px] active:shadow-none active:translate-y-[3px] transition-all duration-150 hover:bg-primary/20">
                   <FontAwesomeIcon icon={faLinkedin} className="w-4 h-4" />
                 </a>
               </TooltipTrigger>
@@ -111,7 +111,7 @@ const Hero = () => {
 
             <Tooltip>
               <TooltipTrigger asChild>
-                <a href="https://medium.com/@altruisticxai" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-muted/50 hover:bg-accent/10 hover:text-accent flex items-center justify-center text-muted-foreground transition-all duration-300 hover:scale-110">
+                <a href="https://medium.com/@altruisticxai" target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full bg-accent/10 border border-accent/30 text-accent flex items-center justify-center shadow-[0_3px_0_0_hsl(var(--accent)/0.4)] hover:shadow-[0_1px_0_0_hsl(var(--accent)/0.4)] hover:translate-y-[2px] active:shadow-none active:translate-y-[3px] transition-all duration-150 hover:bg-accent/20">
                   <FontAwesomeIcon icon={faMedium} className="w-4 h-4" />
                 </a>
               </TooltipTrigger>
@@ -120,7 +120,7 @@ const Hero = () => {
 
             <Tooltip>
               <TooltipTrigger asChild>
-                <a href="mailto:hello@ingakali.com" className="w-10 h-10 rounded-full bg-muted/50 hover:bg-neural/10 hover:text-neural flex items-center justify-center text-muted-foreground transition-all duration-300 hover:scale-110">
+                <a href="mailto:hello@ingakali.com" className="w-11 h-11 rounded-full bg-neural/10 border border-neural/30 text-neural flex items-center justify-center shadow-[0_3px_0_0_hsl(var(--neural)/0.4)] hover:shadow-[0_1px_0_0_hsl(var(--neural)/0.4)] hover:translate-y-[2px] active:shadow-none active:translate-y-[3px] transition-all duration-150 hover:bg-neural/20">
                   <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4" />
                 </a>
               </TooltipTrigger>

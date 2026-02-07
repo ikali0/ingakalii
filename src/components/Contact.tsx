@@ -9,20 +9,21 @@ import { faCode, faRobot, faLightbulb, faPalette } from "@fortawesome/free-solid
 import ContactForm from "./ContactForm";
 import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
 import { BlobShape, CircleShape, SparkleShape, ParallaxShape } from "./ui/abstract-shapes";
-
 const Contact = () => {
-  const services = [
-    { text: "Full-stack web development", icon: faCode },
-    { text: "AI/ML integration & consulting", icon: faRobot },
-    { text: "Technical architecture & code review", icon: faLightbulb },
-    { text: "UI/UX design implementation", icon: faPalette },
-  ];
-
-  return (
-    <section
-      id="contact"
-      className="relative py-section-sm md:py-section px-4 pb-[calc(theme(spacing.section)+3.5rem)] sm:pb-section bg-background overflow-hidden"
-    >
+  const services = [{
+    text: "Full-stack web development",
+    icon: faCode
+  }, {
+    text: "AI/ML integration & consulting",
+    icon: faRobot
+  }, {
+    text: "Technical architecture & code review",
+    icon: faLightbulb
+  }, {
+    text: "UI/UX design implementation",
+    icon: faPalette
+  }];
+  return <section id="contact" className="relative py-section-sm md:py-section px-4 pb-[calc(theme(spacing.section)+3.5rem)] sm:pb-section bg-background overflow-hidden">
       {/* Abstract background shapes with parallax */}
       <ParallaxShape speed={0.15} className="w-80 h-80 -bottom-20 -right-32">
         <BlobShape className="w-full h-full opacity-40" />
@@ -53,11 +54,13 @@ const Contact = () => {
         <StaggerContainer className="grid sm:grid-cols-2 gap-container-lg" staggerDelay={0.15}>
           {/* Contact Form Window */}
           <StaggerItem>
-            <motion.div 
-              className="retro-window glass-subtle"
-              whileHover={{ scale: 1.01 }}
-              transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            >
+            <motion.div className="retro-window glass-subtle" whileHover={{
+            scale: 1.01
+          }} transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 30
+          }}>
               <div className="retro-title-bar">
                 <span className="font-bold text-body-sm">Send a Message</span>
                 <div className="flex gap-1">
@@ -75,32 +78,33 @@ const Contact = () => {
           <StaggerItem>
             <div className="space-y-container">
               {/* Services Window */}
-              <motion.div 
-                className="retro-window glass-subtle"
-                whileHover={{ scale: 1.01 }}
-                transition={{ type: "spring", stiffness: 400, damping: 30 }}
-              >
+              <motion.div className="retro-window glass-subtle" whileHover={{
+              scale: 1.01
+            }} transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 30
+            }}>
                 <div className="retro-title-bar">
                   <span className="font-bold text-body-sm">What I Can Help With</span>
                 </div>
                 <div className="p-card bg-card/70 backdrop-blur-sm">
                   <ul className="space-y-element">
-                    {services.map((service, index) => (
-                      <motion.li
-                        key={index}
-                        className="flex items-start gap-element text-foreground"
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1, duration: 0.3 }}
-                      >
-                        <FontAwesomeIcon 
-                          icon={service.icon} 
-                          className="text-accent w-4 h-4 mt-0.5" 
-                        />
-                        <span className="text-body-sm">{service.text}</span>
-                      </motion.li>
-                    ))}
+                    {services.map((service, index) => <motion.li key={index} className="flex items-start gap-element text-foreground" initial={{
+                    opacity: 0,
+                    x: -10
+                  }} whileInView={{
+                    opacity: 1,
+                    x: 0
+                  }} viewport={{
+                    once: true
+                  }} transition={{
+                    delay: index * 0.1,
+                    duration: 0.3
+                  }}>
+                        <FontAwesomeIcon icon={service.icon} className="text-accent w-4 h-4 mt-0.5" />
+                        <span className="text-xs">{service.text}</span>
+                      </motion.li>)}
                   </ul>
                 </div>
               </motion.div>
@@ -108,8 +112,6 @@ const Contact = () => {
           </StaggerItem>
         </StaggerContainer>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;

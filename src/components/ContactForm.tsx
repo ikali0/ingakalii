@@ -15,226 +15,166 @@ import { supabase } from "@/integrations/supabase/client";
  * Validation schema for contact form
  */
 export const contactFormSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(1, { message: "Name is required" })
-    .max(100, { message: "Name must be less than 100 characters" }),
-  email: z
-    .string()
-    .trim()
-    .email({ message: "Please enter a valid email address" })
-    .max(255, { message: "Email must be less than 255 characters" }),
-  subject: z
-    .string()
-    .trim()
-    .min(1, { message: "Subject is required" })
-    .max(200, { message: "Subject must be less than 200 characters" }),
-  message: z
-    .string()
-    .trim()
-    .min(10, { message: "Message must be at least 10 characters" })
-    .max(2000, { message: "Message must be less than 2000 characters" }),
+  name: z.string().trim().min(1, {
+    message: "Name is required"
+  }).max(100, {
+    message: "Name must be less than 100 characters"
+  }),
+  email: z.string().trim().email({
+    message: "Please enter a valid email address"
+  }).max(255, {
+    message: "Email must be less than 255 characters"
+  }),
+  subject: z.string().trim().min(1, {
+    message: "Subject is required"
+  }).max(200, {
+    message: "Subject must be less than 200 characters"
+  }),
+  message: z.string().trim().min(10, {
+    message: "Message must be at least 10 characters"
+  }).max(2000, {
+    message: "Message must be less than 2000 characters"
+  })
 });
-
 export type ContactFormData = z.infer<typeof contactFormSchema>;
-
 interface ContactFormProps {
   className?: string;
 }
-
-const ContactForm = ({ className }: ContactFormProps) => {
-  const { toast } = useToast();
-
+const ContactForm = ({
+  className
+}: ContactFormProps) => {
+  const {
+    toast
+  } = useToast();
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: {
+      errors,
+      isSubmitting
+    }
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
-    mode: "onSubmit",
+    mode: "onSubmit"
   });
-
-  const [status, setStatus] = useState<
-    "idle" | "sending" | "success" | "error" | "rate_limited"
-  >("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "rate_limited">("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
   const isSending = status === "sending" || isSubmitting;
-
-  const onSubmit = useCallback(
-    async (data: ContactFormData) => {
-      setStatus("sending");
-      setErrorMessage(null);
-
-      try {
-        // Step 1: Check rate limit via edge function
-        const { data: rateLimitData, error: rateLimitError } = 
-          await supabase.functions.invoke("check-rate-limit");
-
-        if (rateLimitError) {
-          throw new Error("Unable to verify rate limit. Please try again.");
-        }
-
-        if (!rateLimitData?.allowed) {
-          setStatus("rate_limited");
-          toast({
-            title: "Too Many Requests",
-            description: `You can only send ${rateLimitData?.limit || 3} messages per hour. Please try again later.`,
-            variant: "destructive",
-          });
-          return;
-        }
-
-        // Step 2: Send email via browser SDK
-        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-        if (!serviceId || !templateId || !publicKey) {
-          throw new Error("Email configuration is missing.");
-        }
-
-        await emailjs.send(
-          serviceId,
-          templateId,
-          {
-            from_name: data.name,
-            reply_to: data.email,
-            subject: data.subject,
-            message: data.message,
-          },
-          publicKey
-        );
-
-        // Step 3: Record submission for rate limiting
-        await supabase.functions.invoke("record-submission");
-
-        // Success
-        setStatus("success");
-        reset();
-
-        toast({
-          title: "Message sent",
-          description: "Thanks — I'll reply as soon as I can.",
-          variant: "default",
-        });
-      } catch (err: unknown) {
-        setStatus("error");
-        const message =
-          err instanceof Error ? err.message : "An unexpected error occurred.";
-        setErrorMessage(message);
-
-        toast({
-          title: "Failed to send message",
-          description: message,
-          variant: "destructive",
-        });
-        console.error("[ContactForm] Error:", err);
+  const onSubmit = useCallback(async (data: ContactFormData) => {
+    setStatus("sending");
+    setErrorMessage(null);
+    try {
+      // Step 1: Check rate limit via edge function
+      const {
+        data: rateLimitData,
+        error: rateLimitError
+      } = await supabase.functions.invoke("check-rate-limit");
+      if (rateLimitError) {
+        throw new Error("Unable to verify rate limit. Please try again.");
       }
-    },
-    [reset, toast]
-  );
+      if (!rateLimitData?.allowed) {
+        setStatus("rate_limited");
+        toast({
+          title: "Too Many Requests",
+          description: `You can only send ${rateLimitData?.limit || 3} messages per hour. Please try again later.`,
+          variant: "destructive"
+        });
+        return;
+      }
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className={className}>
+      // Step 2: Send email via browser SDK
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("Email configuration is missing.");
+      }
+      await emailjs.send(serviceId, templateId, {
+        from_name: data.name,
+        reply_to: data.email,
+        subject: data.subject,
+        message: data.message
+      }, publicKey);
+
+      // Step 3: Record submission for rate limiting
+      await supabase.functions.invoke("record-submission");
+
+      // Success
+      setStatus("success");
+      reset();
+      toast({
+        title: "Message sent",
+        description: "Thanks — I'll reply as soon as I can.",
+        variant: "default"
+      });
+    } catch (err: unknown) {
+      setStatus("error");
+      const message = err instanceof Error ? err.message : "An unexpected error occurred.";
+      setErrorMessage(message);
+      toast({
+        title: "Failed to send message",
+        description: message,
+        variant: "destructive"
+      });
+      console.error("[ContactForm] Error:", err);
+    }
+  }, [reset, toast]);
+  return <form onSubmit={handleSubmit(onSubmit)} className={className}>
       {/* Name Field */}
       <div className="space-y-2">
         <Label htmlFor="name">Name</Label>
-        <Input
-          id="name"
-          placeholder="Your name"
-          disabled={isSending}
-          {...register("name")}
-        />
-        {errors.name && (
-          <p className="text-xs text-destructive">{errors.name.message}</p>
-        )}
+        <Input id="name" placeholder="Your name" disabled={isSending} {...register("name")} />
+        {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
       </div>
 
       {/* Email Field */}
       <div className="space-y-2 mt-3">
         <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          placeholder="your.email@example.com"
-          disabled={isSending}
-          {...register("email")}
-        />
-        {errors.email && (
-          <p className="text-xs text-destructive">{errors.email.message}</p>
-        )}
+        <Input id="email" type="email" placeholder="your.email@example.com" disabled={isSending} {...register("email")} />
+        {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
       </div>
 
       {/* Subject Field */}
       <div className="space-y-2 mt-3">
         <Label htmlFor="subject">Subject</Label>
-        <Input
-          id="subject"
-          placeholder="What's this about?"
-          disabled={isSending}
-          {...register("subject")}
-        />
-        {errors.subject && (
-          <p className="text-xs text-destructive">{errors.subject.message}</p>
-        )}
+        <Input id="subject" placeholder="What's this about?" disabled={isSending} {...register("subject")} />
+        {errors.subject && <p className="text-xs text-destructive">{errors.subject.message}</p>}
       </div>
 
       {/* Message Field */}
       <div className="space-y-2 mt-3">
         <Label htmlFor="message">Message</Label>
-        <Textarea
-          id="message"
-          placeholder="Tell me about your project or inquiry..."
-          className="min-h-[120px] resize-none"
-          disabled={isSending}
-          {...register("message")}
-        />
-        {errors.message && (
-          <p className="text-xs text-destructive">{errors.message.message}</p>
-        )}
+        <Textarea id="message" placeholder="Tell me about your project or inquiry..." className="min-h-[120px] resize-none" disabled={isSending} {...register("message")} />
+        {errors.message && <p className="text-xs text-destructive">{errors.message.message}</p>}
       </div>
 
       {/* Buttons & Status */}
-      <div className="flex items-center gap-3 mt-4">
+      <div className="gap-3 mt-4 my-[12px] flex items-start justify-start">
         <Button type="submit" disabled={isSending}>
-          {isSending ? (
-            <>
+          {isSending ? <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Sending...
-            </>
-          ) : (
-            <>
+            </> : <>
               <Send className="mr-2 h-4 w-4" />
               Send message
-            </>
-          )}
+            </>}
         </Button>
 
-        {status === "success" && (
-          <div className="flex items-center text-primary text-sm">
+        {status === "success" && <div className="flex items-center text-primary text-sm">
             <CheckCircle className="mr-1 h-4 w-4" /> Sent
-          </div>
-        )}
+          </div>}
 
-        {status === "error" && (
-          <div className="flex items-center text-destructive text-sm">
+        {status === "error" && <div className="flex items-center text-destructive text-sm">
             <AlertCircle className="mr-1 h-4 w-4" />
             {errorMessage ?? "Failed to send."}
-          </div>
-        )}
+          </div>}
 
-        {status === "rate_limited" && (
-          <div className="flex items-center text-muted-foreground text-sm">
+        {status === "rate_limited" && <div className="flex items-center text-muted-foreground text-sm">
             <Clock className="mr-1 h-4 w-4" />
             Rate limit exceeded
-          </div>
-        )}
+          </div>}
       </div>
-    </form>
-  );
+    </form>;
 };
-
 export default ContactForm;

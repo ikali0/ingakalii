@@ -246,11 +246,11 @@ function ProjectCard({
 
         {/* Content */}
         <div className="relative flex flex-col flex-1 p-3">
-          <h3 className="text-body-sm font-display font-semibold text-foreground leading-tight mb-1">
+          <h3 className="text-body-sm font-display font-semibold text-foreground leading-tight mb-1 text-center">
             {project.title}
           </h3>
 
-          <p className="text-caption text-muted-foreground leading-relaxed mb-2 line-clamp-2">
+          <p className="text-[9px] sm:text-xs text-muted-foreground leading-snug mb-1.5 line-clamp-2 text-center">
             {project.description}
           </p>
 
@@ -258,11 +258,11 @@ function ProjectCard({
           
           
           {/* Tech Stack - Compact display */}
-          <div className="text-[11px] text-muted-foreground leading-tight mb-2 line-clamp-2 flex items-center justify-center">
+          <div className="text-[8px] text-muted-foreground leading-tight mb-2 line-clamp-2 flex items-center justify-center">
             {project.techStack.slice(0, 4).map(tech => <span key={tech} className="text-[10px] font-semibold px-2 py-[2px] rounded-full whitespace-nowrap text-secondary-foreground bg-lime-200">
                 {tech}
               </span>)}
-            {project.techStack.length > 4 && <span className="text-[0.625rem] px-1.5 py-0.5 rounded bg-muted text-slate-50">
+            {project.techStack.length > 4 && <span className="text-[0.625rem] px-1.5 py-0.5 rounded text-slate-50 bg-secondary-foreground">
                 +{project.techStack.length - 4}
               </span>}
           </div>

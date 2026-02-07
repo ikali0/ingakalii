@@ -135,7 +135,7 @@ const About = () => {
                         </svg>
                         <span className="text-body-sm font-medium text-foreground">Substack</span>
                       </span>
-                      <span className="text-caption text-muted-foreground">Ongoing analysis</span>
+                      
                     </motion.a>
                   </TooltipTrigger>
                   <TooltipContent>

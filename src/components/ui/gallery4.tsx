@@ -1,9 +1,9 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState, useCallback } from "react";
 import Autoplay from "embla-carousel-autoplay";
-
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -138,14 +138,24 @@ const Gallery4 = ({
           }}
         >
           <CarouselContent className="-ml-3 md:-ml-4 px-4 md:px-6 lg:px-8">
-            {items.map((item) => (
+            {items.map((item, index) => (
               <CarouselItem
                 key={item.id}
                 className="pl-3 md:pl-4 basis-[85%] sm:basis-[75%] md:basis-1/2 lg:basis-1/3"
               >
-                <button 
+                <motion.button 
                   onClick={(e) => handleCardClick(item, e)} 
                   className="group rounded-xl block text-left w-full cursor-pointer min-w-0"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: index * 0.1,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <div className="group relative w-full min-w-0 aspect-[4/5] sm:aspect-[5/4] overflow-hidden rounded-xl">
                     <img
@@ -167,7 +177,7 @@ const Gallery4 = ({
                       </span>
                     </div>
                   </div>
-                </button>
+                </motion.button>
               </CarouselItem>
             ))}
           </CarouselContent>

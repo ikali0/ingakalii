@@ -154,7 +154,7 @@ function BentoCardComponent({
           <div className="w-7 h-7 bg-primary/10 group-hover:bg-primary/20 transition-colors rounded flex items-center justify-center">
             <Icon className="text-primary h-3.5 w-3.5" />
           </div>
-          <h3 className="text-body-sm font-display font-semibold text-foreground">
+          <h3 className="font-display font-semibold text-foreground text-sm">
             {card.category}
           </h3>
         </div>

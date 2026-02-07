@@ -46,20 +46,18 @@ export default function AIEthicsBlog() {
   }, []);
   const featured = articles.find(a => a.featured);
   const secondary = articles.filter(a => !a.featured);
-  
-  return (
-    <section id="writing" className="py-16 md:py-24 px-4 bg-background">
+  return <section id="writing" className="py-16 md:py-24 px-4 bg-background">
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-accent text-xl animate-spin" style={{ animationDuration: '3s' }}>✱</span>
+            <span className="text-accent text-xl animate-spin" style={{
+            animationDuration: '3s'
+          }}>✱</span>
             <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
               Writing
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground mb-4 leading-tight">
-            AI Ethics & Governance
-          </h2>
+          
           <p className="text-foreground/80 max-w-xl text-sm md:text-base leading-relaxed">
             Long-form analysis on AI risk, alignment, and responsible deployment.
           </p>
@@ -67,15 +65,13 @@ export default function AIEthicsBlog() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {/* Featured Article */}
-          {featured && (
-            <motion.a
-              href={featured.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`block p-6 rounded-xl bg-card border border-border/40 hover:border-primary/30 transition-all ${platformStyles[getPlatform(featured.url)]}`}
-              whileHover={{ y: -4 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            >
+          {featured && <motion.a href={featured.url} target="_blank" rel="noopener noreferrer" className={`block p-6 rounded-xl bg-card border border-border/40 hover:border-primary/30 transition-all ${platformStyles[getPlatform(featured.url)]}`} whileHover={{
+          y: -4
+        }} transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 25
+        }}>
               <span className="text-xs uppercase tracking-widest text-accent mb-2 block">
                 Featured
               </span>
@@ -85,32 +81,26 @@ export default function AIEthicsBlog() {
               <p className="text-sm text-muted-foreground">
                 {featured.excerpt}
               </p>
-            </motion.a>
-          )}
+            </motion.a>}
 
           {/* Secondary Articles */}
           <div className="space-y-4">
-            {secondary.map((article) => (
-              <motion.a
-                key={article.title}
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`block p-5 rounded-lg bg-card border border-border/40 hover:border-primary/30 transition-all ${platformStyles[getPlatform(article.url)]}`}
-                whileHover={{ y: -2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              >
+            {secondary.map(article => <motion.a key={article.title} href={article.url} target="_blank" rel="noopener noreferrer" className={`block p-5 rounded-lg bg-card border border-border/40 hover:border-primary/30 transition-all ${platformStyles[getPlatform(article.url)]}`} whileHover={{
+            y: -2
+          }} transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 25
+          }}>
                 <h4 className="text-sm font-semibold text-foreground mb-1">
                   {article.title}
                 </h4>
                 <p className="text-xs text-muted-foreground">
                   {article.excerpt}
                 </p>
-              </motion.a>
-            ))}
+              </motion.a>)}
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }

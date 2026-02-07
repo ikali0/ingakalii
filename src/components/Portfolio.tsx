@@ -241,7 +241,7 @@ function ProjectCard({
           {project.impactMetrics[0] && <div className="absolute bottom-2 right-2 max-w-[70%] sm:max-w-none px-1.5 py-0.5 rounded bg-secondary/90 backdrop-blur-sm text-secondary-foreground text-[0.625rem] font-medium shadow-sm truncate">
               {project.impactMetrics[0].label}: {project.impactMetrics[0].value}
             </div>}
-          <div className="absolute inset-0 bg-gradient-to-t from-card/50 via-transparent to-transparent transition-opacity duration-300 opacity-40" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-t from-card/50 via-transparent to-transparent transition-opacity duration-300 opacity-80" aria-hidden="true" />
         </div>
 
         {/* Content */}
@@ -258,24 +258,24 @@ function ProjectCard({
           
           
           {/* Tech Stack - Compact display */}
-          <div className="flex-wrap gap-1 mb-card-sm flex items-start justify-center">
+          <div className="text-[11px] text-muted-foreground leading-tight mb-2 line-clamp-2 flex items-center justify-center">
             {project.techStack.slice(0, 4).map(tech => <span key={tech} className="text-[0.625rem] px-1.5 py-0.5 rounded bg-accent-foreground text-secondary-foreground">
                 {tech}
               </span>)}
-            {project.techStack.length > 4 && <span className="text-[0.625rem] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+            {project.techStack.length > 4 && <span className="text-[0.625rem] px-1.5 py-0.5 rounded bg-muted text-slate-50">
                 +{project.techStack.length - 4}
               </span>}
           </div>
 
           {/* Expandable Case Study Section - touch-friendly button */}
-          <button onClick={() => setIsExpanded(!isExpanded)} className="flex items-center gap-element-sm text-body-sm font-medium text-primary hover:text-primary/80 transition-colors mb-element min-h-[44px] touch-manipulation" aria-expanded={isExpanded}>
+          <button onClick={() => setIsExpanded(!isExpanded)} className="text-[11px] text-muted-foreground leading-tight mb-2 line-clamp-2" aria-expanded={isExpanded}>
             <span>{isExpanded ? "Hide Details" : "View Case Study"}</span>
             <motion.div animate={{
             rotate: isExpanded ? 180 : 0
           }} transition={{
             duration: 0.2
           }}>
-              <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" />
+              <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3 text-fuchsia-600" />
             </motion.div>
           </button>
 

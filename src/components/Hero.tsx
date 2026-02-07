@@ -7,12 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faMedium } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import HeroFloatingIcons from "./ui/hero-floating-icons";
 import HeroCategoryCarousel from "./ui/hero-category-carousel";
 import { Entropy } from "./ui/entropy";
@@ -44,15 +39,12 @@ const socialBase =
 const Hero = () => {
   return (
     <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-gradient-to-b from-background via-background to-muted/20 px-4 pt-28 pb-20">
-      
       {/* Floating 3D icons */}
       <HeroFloatingIcons />
 
       <div className="relative z-20 w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
         {/* LEFT COLUMN */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-          
           {/* Accent label */}
           <motion.span
             {...fadeUp(0)}
@@ -75,19 +67,13 @@ const Hero = () => {
           </motion.h1>
 
           {/* Subtitle */}
-          <motion.p
-            {...fadeUp(0.2)}
-            className="text-base text-muted-foreground max-w-md mb-8 leading-relaxed"
-          >
-            From policy to production-grade control. AI systems engineered for
-            compliance, audit, and real-world pressure.
+          <motion.p {...fadeUp(0.2)} className="text-base text-muted-foreground max-w-md mb-8 leading-relaxed">
+            From policy to production-grade control. AI systems engineered for compliance, audit, and real-world
+            pressure.
           </motion.p>
 
           {/* CTA Buttons */}
-          <motion.div
-            {...fadeUp(0.3)}
-            className="flex flex-col sm:flex-row gap-4 mb-8 w-full sm:w-auto"
-          >
+          <motion.div {...fadeUp(0.3)} className="flex flex-col sm:flex-row gap-4 mb-8 w-full sm:w-auto">
             <a
               href="#portfolio"
               className={`${primaryButton} bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:bg-primary/90 group`}
@@ -108,10 +94,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Social Links */}
-          <motion.div
-            {...fadeIn(0.6)}
-            className="flex items-center gap-3 pt-6 border-t border-border/30"
-          >
+          <motion.div {...fadeIn(0.6)} className="flex items-center gap-3 pt-6 border-t border-border/30">
             <TooltipProvider>
               <SocialIcon
                 href="https://www.linkedin.com/in/ik11/"
@@ -137,7 +120,6 @@ const Hero = () => {
 
         {/* RIGHT COLUMN */}
         <div className="flex flex-col items-center gap-6">
-          
           {/* Entropy Visual */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
@@ -146,10 +128,7 @@ const Hero = () => {
             className="relative"
           >
             <div className="absolute inset-0 rounded-lg blur-xl bg-gradient-to-br from-primary/20 via-transparent to-accent/20" />
-            <Entropy
-              size={280}
-              className="relative z-10 bg-background/80 backdrop-blur-sm border border-border/50"
-            />
+            <Entropy size={280} className="relative z-10 bg-background/80 backdrop-blur-sm border border-border/50" />
           </motion.div>
 
           {/* Category Carousel */}

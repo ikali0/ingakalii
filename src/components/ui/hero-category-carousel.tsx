@@ -170,7 +170,7 @@ export function HeroCategoryCarousel() {
       {/* Category Pills Carousel */}
       <div className="relative">
         {/* Navigation Arrows - Hidden on mobile, visible on larger screens */}
-        <button onClick={scrollPrev} disabled={!canScrollPrev} className={cn("absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full", "bg-card/80 backdrop-blur-sm border border-border/50 shadow-sm", "flex items-center justify-center transition-all duration-200", "hover:bg-card hover:border-border", "disabled:opacity-0 disabled:pointer-events-none", "hidden sm:flex")} aria-label="Scroll left">
+        <button onClick={scrollPrev} disabled={!canScrollPrev} className={cn("absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-card/80 backdrop-blur-sm border border-border/50 shadow-sm flex transition-all duration-200 hover:bg-card hover:border-border disabled:opacity-0 disabled:pointer-events-none hidden sm:flex items-center justify-start")} aria-label="Scroll left">
           <FontAwesomeIcon icon={faChevronLeft} className="w-3 h-3 text-muted-foreground" />
         </button>
 
@@ -180,52 +180,41 @@ export function HeroCategoryCarousel() {
 
         {/* Carousel Container with auto-shifting animation */}
         <div className="overflow-hidden px-1 sm:px-10" ref={emblaRef}>
-          <motion.div 
-            className="gap-2 touch-pan-x flex items-start justify-center"
-            animate={{ x: [0, -8, 0, 8, 0] }}
-            transition={{
-              duration: 12,
-              ease: "easeInOut",
-              repeat: Infinity,
-              repeatType: "loop"
-            }}
-          >
+          <motion.div className="gap-2 touch-pan-x flex items-start justify-center" animate={{
+          x: [0, -8, 0, 8, 0]
+        }} transition={{
+          duration: 12,
+          ease: "easeInOut",
+          repeat: Infinity,
+          repeatType: "loop"
+        }}>
             {categories.map((category, index) => {
             const isSelected = selectedCategory === category.id;
             const projectCount = categoryProjects.filter(p => p.categories.includes(category.id)).length;
-            return <motion.button 
-              key={category.id} 
-              onClick={() => handleCategoryClick(category.id)} 
-              animate={{
-                y: [0, -2, 0, 2, 0],
-                rotate: [0, -0.5, 0, 0.5, 0]
-              }}
-              transition={{
-                duration: 4 + index * 0.5,
-                ease: "easeInOut",
-                repeat: Infinity,
-                repeatType: "loop",
-                delay: index * 0.3
-              }}
-              whileTap={{
-                scale: 0.96,
-                y: 1
-              }} 
-              whileHover={{
-                y: -2,
-                scale: 1.05,
-                transition: {
-                  duration: 0.12
-                }
-              }} 
-              className={cn("flex-shrink-0 flex items-center gap-1 px-2 py-1 rounded-full", "border transition-all duration-150 touch-manipulation", "min-h-[28px] select-none",
-              // 3D depth effect
-              "shadow-[0_1px_0_0_hsl(var(--border)/0.4),0_2px_4px_-1px_hsl(var(--foreground)/0.08)]", "hover:shadow-[0_0.5px_0_0_hsl(var(--border)/0.4),0_1px_2px_-0.5px_hsl(var(--foreground)/0.06)]", "active:shadow-none active:translate-y-[1px]", isSelected ? `${category.bgColor} ${category.color} border-current shadow-[0_1px_0_0_currentColor/25,0_2px_6px_-1px_currentColor/15]` : "bg-card/60 backdrop-blur-sm border-border/40 text-muted-foreground hover:border-border/60 hover:bg-card/70")} 
-              aria-pressed={isSelected}
-            >
+            return <motion.button key={category.id} onClick={() => handleCategoryClick(category.id)} animate={{
+              y: [0, -2, 0, 2, 0],
+              rotate: [0, -0.5, 0, 0.5, 0]
+            }} transition={{
+              duration: 4 + index * 0.5,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: index * 0.3
+            }} whileTap={{
+              scale: 0.96,
+              y: 1
+            }} whileHover={{
+              y: -2,
+              scale: 1.05,
+              transition: {
+                duration: 0.12
+              }
+            }} className={cn("flex-shrink-0 flex items-center gap-1 px-2 py-1 rounded-full", "border transition-all duration-150 touch-manipulation", "min-h-[28px] select-none",
+            // 3D depth effect
+            "shadow-[0_1px_0_0_hsl(var(--border)/0.4),0_2px_4px_-1px_hsl(var(--foreground)/0.08)]", "hover:shadow-[0_0.5px_0_0_hsl(var(--border)/0.4),0_1px_2px_-0.5px_hsl(var(--foreground)/0.06)]", "active:shadow-none active:translate-y-[1px]", isSelected ? `${category.bgColor} ${category.color} border-current shadow-[0_1px_0_0_currentColor/25,0_2px_6px_-1px_currentColor/15]` : "bg-card/60 backdrop-blur-sm border-border/40 text-muted-foreground hover:border-border/60 hover:bg-card/70")} aria-pressed={isSelected}>
                   <FontAwesomeIcon icon={category.icon} className={cn("w-2.5 h-2.5", isSelected ? category.color : "text-inherit")} />
                   <span className="text-[11px] font-medium whitespace-nowrap">{category.label}</span>
-                  <span className={cn("text-[9px] px-1 py-0.5 rounded-full leading-none min-w-[14px] text-center", isSelected ? "bg-current/20 text-inherit" : "bg-muted/60 text-muted-foreground")}>
+                  <span className={cn("text-[9px] py-0.5 rounded-full leading-none min-w-[14px] text-center px-[2px]", isSelected ? "bg-current/20 text-inherit" : "bg-muted/60 text-muted-foreground")}>
                     {projectCount}
                   </span>
                 </motion.button>;

@@ -250,15 +250,13 @@ function ProjectCard({
             {project.title}
           </h3>
 
-          <p className="leading-relaxed mb-2 line-clamp-2 text-xs text-primary text-center">
-            {project.description}
-          </p>
+          
 
           {/* Category Tags */}
           
           
           {/* Tech Stack - Compact display */}
-          <div className="flex-wrap mb-card-sm gap-[2px] shadow-sm rounded-sm opacity-70 flex items-center justify-center">
+          <div className="flex-wrap mb-card-sm gap-[2px] shadow-sm rounded-sm opacity-70 flex items-center justify-center py-[4px] px-[4px]">
             {project.techStack.slice(0, 4).map(tech => <span key={tech} className="rounded text-xs px-[4px] py-[4px] font-medium text-secondary bg-lime-100">
                 {tech}
               </span>)}
@@ -354,7 +352,7 @@ function ProjectCard({
           
 
           {/* Action Button - touch-friendly sizing */}
-          {project.live && <motion.a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-element-sm w-full text-body-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 active:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-card rounded-md mt-card-sm min-h-[44px] touch-manipulation px-[6px] py-[6px] my-[10px]" aria-label={`View ${project.title} project`} whileHover={{
+          {project.live && <motion.a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-element-sm w-full text-body-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 active:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-card rounded-md mt-card-sm min-h-[44px] touch-manipulation my-[10px] px-[3px] py-[3px]" aria-label={`View ${project.title} project`} whileHover={{
           scale: 1.02
         }} whileTap={{
           scale: 0.98

@@ -76,7 +76,7 @@ const About = () => {
       </ParallaxShape>
 
       <ScrollFade>
-        <div className="container relative z-10 mx-auto max-w-2xl glass rounded-xl p-card md:p-container shadow-soft">
+        <div className="container relative z-10 mx-auto max-w-2xl glass p-card md:p-container px-[30px] py-[30px] rounded-md shadow-sm opacity-85">
           {/* Header */}
           <div className="mb-container md:mb-container-lg">
             <p className="text-overline uppercase text-accent font-semibold mb-element-sm">

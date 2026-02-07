@@ -156,7 +156,7 @@ function BentoCardComponent({
 }
 const Skills = () => {
   return <section id="skills" className="section-padding bg-background relative overflow-hidden">
-      <div className="container-width">
+      <div className="container-width bg-transparent">
         <ScrollFade>
           <SectionHeader overline="Technical Expertise" title="Core Competencies" description="Security-first approach to AI systems, from adversarial testing to production deployment." />
         </ScrollFade>

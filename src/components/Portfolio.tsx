@@ -386,17 +386,15 @@ const Portfolio = () => {
         <ScrollFade>
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-accent text-xl animate-spin" style={{ animationDuration: '3s' }}>✱</span>
+              <span className="text-accent text-xl animate-spin" style={{
+              animationDuration: '3s'
+            }}>✱</span>
               <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
                 Case Studies
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground mb-4 leading-tight">
-              Featured Work
-            </h2>
-            <p className="text-foreground/80 max-w-xl text-sm md:text-base leading-relaxed">
-              Projects designed to solve real problems in AI ethics, governance, and responsible technology deployment.
-            </p>
+            
+            
           </div>
         </ScrollFade>
 

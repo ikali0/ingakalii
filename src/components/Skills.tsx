@@ -151,58 +151,32 @@ function BentoCardComponent({
     stiffness: 400,
     damping: 30
   }}>
-      <div className="p-3 h-full flex flex-col">
-
-        {/* Header */}
-        <div className="mb-2.5 gap-1.5 flex items-center">
-          <div className="w-5 h-5 bg-primary/10 rounded-sm flex items-center justify-center flex-shrink-0">
-            <Icon className="text-primary h-2.5 w-2.5" />
-          </div>
-          <h3 className="font-medium text-foreground text-[11px] tracking-tight leading-tight">
-            {card.category}
-          </h3>
-        </div>
-
-        {/* Skills */}
-        <div className="space-y-2 flex-1">
-          {card.skills.map(skill => <SkillBar key={skill.name} name={skill.name} level={skill.level} examples={skill.examples} size="sm" />)}
-        </div>
-      </div>
+      
     </motion.div>;
 }
 const Skills = () => {
-  return (
-    <section id="skills" className="section-padding bg-background relative overflow-hidden">
+  return <section id="skills" className="section-padding bg-background relative overflow-hidden">
       <div className="container-width">
         <ScrollFade>
-          <SectionHeader
-            overline="Technical Expertise"
-            title="Core Competencies"
-            description="Security-first approach to AI systems, from adversarial testing to production deployment."
-          />
+          <SectionHeader overline="Technical Expertise" title="Core Competencies" description="Security-first approach to AI systems, from adversarial testing to production deployment." />
         </ScrollFade>
 
         {/* Bento Grid */}
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
-          {bentoCards.map((card) => (
-            <StaggerItem key={card.id}>
+          {bentoCards.map(card => <StaggerItem key={card.id}>
               <BentoCardComponent card={card} />
-            </StaggerItem>
-          ))}
+            </StaggerItem>)}
         </StaggerContainer>
 
         {/* Secondary Technologies */}
         <ScrollFade delay={0.3}>
           <div className="flex flex-wrap justify-center gap-1.5">
-            {secondaryTech.map((tech) => (
-              <Tag key={tech.name} size="sm">
+            {secondaryTech.map(tech => <Tag key={tech.name} size="sm">
                 {tech.name}
-              </Tag>
-            ))}
+              </Tag>)}
           </div>
         </ScrollFade>
       </div>
-    </section>
-  );
+    </section>;
 };
 export default Skills;

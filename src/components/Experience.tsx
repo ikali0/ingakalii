@@ -149,14 +149,14 @@ const Experience = () => {
         duration: reduceMotion ? 0 : 0.5
       }} className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-accent text-xl animate-spin" style={{ animationDuration: '3s' }}>✱</span>
+            <span className="text-accent text-xl animate-spin" style={{
+            animationDuration: '3s'
+          }}>✱</span>
             <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
               Experience
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground leading-tight">
-            Career Journey
-          </h2>
+          
         </motion.div>
 
         {/* Filters */}

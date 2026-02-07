@@ -147,22 +147,7 @@ const About = () => {
 
         {/* Stats row */}
         <TimelineContent as="div" animationNum={12} timelineRef={sectionRef} customVariants={revealVariants} className="mt-12 pt-8 border-t border-border/30">
-          <div className="flex flex-wrap justify-center md:justify-start gap-6 md:gap-10 text-sm">
-            <div className="flex items-center gap-2">
-              <span className="text-accent font-bold text-lg">5+</span>
-              <span className="text-muted-foreground">years in tech</span>
-            </div>
-            <span className="text-border hidden md:block">|</span>
-            <div className="flex items-center gap-2">
-              <span className="text-accent font-bold text-lg">AI Ethics</span>
-              <span className="text-muted-foreground">focus area</span>
-            </div>
-            <span className="text-border hidden md:block">|</span>
-            <div className="flex items-center gap-2">
-              <span className="text-accent font-bold text-lg">20+</span>
-              <span className="text-muted-foreground">articles published</span>
-            </div>
-          </div>
+          
         </TimelineContent>
       </div>
     </section>;

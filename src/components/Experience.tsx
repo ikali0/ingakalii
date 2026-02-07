@@ -1,21 +1,16 @@
-/**
- * Experience Section Component
- *
- * - Expandable experience cards
- * - Filters by role and year
- * - VerticalTimeline derived from same data (no duplication)
- */
 import { useMemo, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPersonWalkingLuggage, faBuilding, faShieldHalved, faChartLine } from "@fortawesome/free-solid-svg-icons";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Tag } from "./ui/tag";
-import { RingShape, DotsPattern, ParallaxShape } from "./ui/abstract-shapes";
-import { VerticalTimeline, type TimelineEntry } from "./ui/vertical-timeline";
+import {
+  faPersonWalkingLuggage,
+  faShieldHalved,
+  faBuilding,
+  faChartLine,
+} from "@fortawesome/free-solid-svg-icons";
 
 /* ------------------------------------------------------------------ */
-/* DATA — single source of truth                                       */
+/* DATA                                                               */
 /* ------------------------------------------------------------------ */
 
 interface ExperienceData {
@@ -27,140 +22,222 @@ interface ExperienceData {
   description: string;
   highlights: string[];
   tags: string[];
-  status: "complete" | "in-progress" | "pending";
+  status: "complete" | "in-progress";
   icon: any;
 }
-const experiences: ExperienceData[] = [{
-  id: "ai-policy",
-  title: "AI Policy Engineer",
-  organization: "Independent Consultant",
-  period: "Oct 2023 – Present",
-  location: "Philadelphia, PA",
-  description: "Leading AI consultancy delivering automation prototypes and compliance frameworks.",
-  highlights: ["Built FERPA/Title IX compliance dashboards", "Converted policy frameworks into deployable controls", "Conducted NIST AI RMF feasibility assessments", "Developed GPT-4 and Claude compliance tools"],
-  tags: ["NIST AI RMF", "Compliance", "LLMs"],
-  status: "in-progress",
-  icon: faPersonWalkingLuggage
-}, {
-  id: "pentest",
-  title: "Penetration Tester",
-  organization: "DIA & Lockheed Martin",
-  period: "Nov 2024 – May 2025",
-  location: "Washington, DC",
-  description: "Executed penetration tests across federal networks.",
-  highlights: ["Executed 12+ penetration tests", "Discovered 47 critical vulnerabilities", "Reduced security incidents by 30%"],
-  tags: ["Metasploit", "OSINT", "Threat Modeling"],
-  status: "complete",
-  icon: faShieldHalved
-}, {
-  id: "consulting",
-  title: "Consulting Analyst",
-  organization: "Accenture Federal Services",
-  period: "Jul 2021 – Oct 2024",
-  location: "Washington, DC",
-  description: "Optimized federal portfolios and compliance frameworks.",
-  highlights: ["30% portfolio optimization", "Developed DLA compliance frameworks", "Designed energy.gov UX interfaces"],
-  tags: ["DoD", "Policy", "UX/UI"],
-  status: "complete",
-  icon: faBuilding
-}, {
-  id: "sap",
-  title: "Business Analyst",
-  organization: "SAP SuccessFactors",
-  period: "Dec 2019 – Mar 2021",
-  location: "Newtown Square, PA",
-  description: "ROI analysis and enterprise reporting.",
-  highlights: ["25% operational efficiency improvement", "30% reduction in data retrieval time"],
-  tags: ["ROI", "Data Analysis"],
-  status: "complete",
-  icon: faChartLine
-}];
+
+const experiences: ExperienceData[] = [
+  {
+    id: "ai-policy",
+    title: "AI Policy Engineer",
+    organization: "Independent Consultant",
+    period: "2023 – Present",
+    location: "Philadelphia, PA",
+    description:
+      "Leading AI consultancy delivering automation prototypes and compliance frameworks.",
+    highlights: [
+      "Built FERPA/Title IX dashboards",
+      "Converted policy frameworks into deployable controls",
+      "NIST AI RMF feasibility assessments",
+      "Developed GPT-4 & Claude compliance tools",
+    ],
+    tags: ["NIST AI RMF", "Compliance", "LLMs"],
+    status: "in-progress",
+    icon: faPersonWalkingLuggage,
+  },
+  {
+    id: "pentest",
+    title: "Penetration Tester",
+    organization: "DIA & Lockheed Martin",
+    period: "2024 – 2025",
+    location: "Washington, DC",
+    description: "Executed penetration tests across federal networks.",
+    highlights: [
+      "12+ penetration tests",
+      "47 critical vulnerabilities discovered",
+      "Reduced incidents by 30%",
+    ],
+    tags: ["Metasploit", "OSINT", "Threat Modeling"],
+    status: "complete",
+    icon: faShieldHalved,
+  },
+  {
+    id: "consulting",
+    title: "Consulting Analyst",
+    organization: "Accenture Federal Services",
+    period: "2021 – 2024",
+    location: "Washington, DC",
+    description: "Optimized federal portfolios and compliance frameworks.",
+    highlights: [
+      "30% portfolio optimization",
+      "DLA compliance frameworks",
+      "Energy.gov UX interfaces",
+    ],
+    tags: ["DoD", "Policy", "UX/UI"],
+    status: "complete",
+    icon: faBuilding,
+  },
+  {
+    id: "sap",
+    title: "Business Analyst",
+    organization: "SAP SuccessFactors",
+    period: "2019 – 2021",
+    location: "Pennsylvania",
+    description: "Enterprise analytics & reporting systems.",
+    highlights: [
+      "25% operational efficiency improvement",
+      "30% faster data retrieval",
+    ],
+    tags: ["ROI", "Data Analysis"],
+    status: "complete",
+    icon: faChartLine,
+  },
+];
 
 /* ------------------------------------------------------------------ */
 /* COMPONENT                                                          */
 /* ------------------------------------------------------------------ */
 
-const Experience = () => {
+export default function Experience() {
   const reduceMotion = useReducedMotion();
-  const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [roleFilter, setRoleFilter] = useState("all");
-  const [yearFilter, setYearFilter] = useState("all");
+  const [expanded, setExpanded] = useState<string | null>(null);
 
-  /* ------------------ derived filter values ------------------ */
+  const sorted = useMemo(
+    () =>
+      [...experiences].sort(
+        (a, b) =>
+          Number(b.period.slice(0, 4)) -
+          Number(a.period.slice(0, 4))
+      ),
+    []
+  );
 
-  const roles = useMemo(() => Array.from(new Set(experiences.map(e => e.title))), []);
-  const years = useMemo(() => {
-    const allYears = experiences.flatMap(e => e.period.match(/\d{4}/g) ?? []);
-    return Array.from(new Set(allYears)).sort((a, b) => Number(b) - Number(a));
-  }, []);
+  return (
+    <section
+      id="experience"
+      className="relative py-16 sm:py-20 px-4 bg-muted/20"
+    >
+      <div className="mx-auto max-w-3xl">
 
-  /* ------------------ filtered experiences ------------------ */
-
-  const filteredExperiences = useMemo(() => {
-    return experiences.filter(exp => {
-      const roleMatch = roleFilter === "all" || exp.title === roleFilter;
-      const yearMatch = yearFilter === "all" || exp.period.includes(yearFilter);
-      return roleMatch && yearMatch;
-    });
-  }, [roleFilter, yearFilter]);
-
-  /* ------------------ derived timeline entries ------------------ */
-
-  const timelineEntries: TimelineEntry[] = useMemo(() => {
-    return filteredExperiences.map(exp => {
-      const years = exp.period.match(/\d{4}/g) ?? [];
-      const startYear = years[0] ?? "";
-      const endYear = exp.period.includes("Present") ? undefined : years[1];
-      return {
-        year: startYear,
-        endYear,
-        title: exp.title,
-        organization: exp.organization,
-        location: exp.location,
-        description: exp.description,
-        highlights: exp.highlights,
-        tags: exp.tags,
-        type: "career",
-        icon: exp.icon,
-        isCurrent: exp.status === "in-progress"
-      };
-    });
-  }, [filteredExperiences]);
-  return <section id="experience" className="relative py-section px-4 bg-muted/30 overflow-hidden">
-      {/* Background */}
-      <ParallaxShape speed={0.15} className="w-40 h-40 -top-10 right-[10%]">
-        <RingShape />
-      </ParallaxShape>
-      <ParallaxShape speed={0.1} className="w-48 h-48 bottom-10 -left-10">
-        <DotsPattern className="opacity-40" />
-      </ParallaxShape>
-
-      <div className="container relative z-10 mx-auto max-w-3xl">
         {/* Header */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 16
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: reduceMotion ? 0 : 0.5
-      }} className="mb-container">
-          <p className="text-overline text-accent font-semibold">Experience</p>
-          <h2 className="font-display text-display-sm md:text-display-sm">Career Journey</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: reduceMotion ? 0 : 0.5 }}
+          className="mb-12"
+        >
+          <p className="text-[11px] uppercase tracking-widest text-muted-foreground mb-2">
+            Experience
+          </p>
+          <h2 className="font-serif text-2xl sm:text-3xl font-semibold">
+            Career Timeline
+          </h2>
         </motion.div>
 
-        {/* Filters */}
-        
+        {/* Timeline Wrapper */}
+        <div className="relative">
 
-        {/* Cards */}
-        
+          {/* Vertical Line */}
+          <div className="absolute left-3 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-border/40" />
 
-        {/* Derived Vertical Timeline */}
-        <VerticalTimeline entries={timelineEntries} title="Career Journey" overline="Timeline" />
+          <div className="space-y-10">
+
+            {sorted.map((exp, index) => {
+              const isExpanded = expanded === exp.id;
+
+              return (
+                <motion.div
+                  key={exp.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08 }}
+                  className="relative flex flex-col sm:flex-row sm:items-start"
+                >
+                  {/* Timeline Dot */}
+                  <div className="absolute left-0 sm:left-1/2 sm:-translate-x-1/2
+                                  w-6 h-6 rounded-full
+                                  bg-primary shadow-lg
+                                  flex items-center justify-center z-10">
+                    <FontAwesomeIcon
+                      icon={exp.icon}
+                      className="text-white text-xs"
+                    />
+                  </div>
+
+                  {/* Card */}
+                  <motion.div
+                    whileHover={{
+                      rotateX: 2,
+                      rotateY: -2,
+                      scale: 1.01,
+                    }}
+                    style={{ perspective: 1000 }}
+                    className="ml-10 sm:ml-0 sm:w-1/2
+                               sm:odd:pr-10 sm:even:pl-10
+                               sm:odd:text-right
+                               rounded-2xl border border-border/40
+                               bg-white/50 dark:bg-white/[0.05]
+                               backdrop-blur-xl
+                               shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)]
+                               p-5 sm:p-6"
+                  >
+                    <div
+                      onClick={() =>
+                        setExpanded(isExpanded ? null : exp.id)
+                      }
+                      className="cursor-pointer"
+                    >
+                      <p className="text-xs text-muted-foreground">
+                        {exp.period}
+                      </p>
+
+                      <h3 className="font-medium text-base mt-1">
+                        {exp.title}
+                      </h3>
+
+                      <p className="text-sm text-muted-foreground">
+                        {exp.organization}
+                      </p>
+                    </div>
+
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden mt-4"
+                        >
+                          <p className="text-sm text-muted-foreground mb-3">
+                            {exp.description}
+                          </p>
+
+                          <ul className="space-y-2 text-sm text-muted-foreground">
+                            {exp.highlights.map((h, i) => (
+                              <li key={i}>
+                                • {h}
+                              </li>
+                            ))}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <ChevronDown
+                      className={`mt-3 w-4 h-4 transition-transform ${
+                        isExpanded ? "rotate-180" : ""
+                      }`}
+                    />
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
       </div>
-    </section>;
-};
-export default Experience;
+    </section>
+  );
+}

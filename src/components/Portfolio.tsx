@@ -80,8 +80,7 @@ const projects: ProjectData[] = [{
     approach: "Built real-time monitoring dashboards using Fairlearn and custom fairness metrics, integrated with existing MLOps workflows via REST APIs.",
     outcome: "Enabled proactive bias detection before production deployment, reducing post-launch fairness incidents."
   },
-  github: "https://github.com",
-  live: "https://example.com"
+  github: "https://github.com"
 }, {
   title: "Governance Framework Tool",
   description: "Tool for organizations to create and implement AI governance policies with automated compliance checking.",
@@ -107,8 +106,7 @@ const projects: ProjectData[] = [{
     approach: "Developed a structured workflow tool mapping RMF categories to specific code patterns, tests, and documentation templates.",
     outcome: "Accelerated compliance documentation and reduced audit preparation time significantly."
   },
-  github: "https://github.com",
-  live: "https://example.com"
+  github: "https://github.com"
 }, {
   title: "Stakeholder Mapping",
   description: "Visual tool for mapping stakeholder interests, power dynamics, and potential conflicts in tech deployment.",
@@ -160,8 +158,7 @@ const projects: ProjectData[] = [{
     approach: "Built a modular API supporting 12+ fairness metrics with clear documentation and integration guides for CI/CD pipelines.",
     outcome: "Enabled teams to catch bias issues early in the development lifecycle."
   },
-  github: "https://github.com",
-  live: "https://example.com"
+  github: "https://github.com"
 }, {
   title: "Ethical Decision Framework",
   description: "Mobile-first application helping teams make ethical decisions under time pressure with structured frameworks.",

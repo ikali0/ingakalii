@@ -57,7 +57,7 @@ function CardBack({
   data: HighlightData;
 }) {
   return <div className="flex flex-col items-center justify-center h-full w-full p-card-sm text-center rounded-md bg-secondary/20">
-      <p className="text-caption leading-snug text-foreground">
+      <p className="text-[10px] sm:text-[11px] \ntext-muted-foreground \nleading-tight \nmb-1.5 \nline-clamp-2\n">
         {data.backDescription}
       </p>
     </div>;

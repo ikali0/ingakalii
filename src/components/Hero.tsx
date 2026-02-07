@@ -35,7 +35,7 @@ const Hero = () => {
         duration: 0.6,
         delay: 0.1
       }}>
-          <span className="inline-block py-1.5 mb-card uppercase bg-secondary/15 text-secondary-foreground rounded-full shadow-sm border border-secondary/25 backdrop-blur-sm text-xs font-normal font-serif text-center px-[6px]">
+          <span className="text-[10px] sm:text-[11px] \ntext-muted-foreground \nleading-tight \nmb-1.5 \nline-clamp-2\n">
             AI Engineer & Independent Consultant
           </span>
         </motion.div>
@@ -134,7 +134,7 @@ const Hero = () => {
         delay: 1
       }}>
           <a href="#about" className="flex flex-col items-center gap-element-sm text-muted-foreground hover:text-foreground transition-colors group">
-            <span className="text-overline uppercase text-secondary-foreground">Explore</span>
+            <span className="text-overline uppercase text-secondary-foreground font-normal">Explore</span>
             <motion.div animate={{
             y: [0, 8, 0]
           }} transition={{

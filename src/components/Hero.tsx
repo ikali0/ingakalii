@@ -1,93 +1,105 @@
 /**
- * Hero Section (Clean + Mobile First)
+ * Hero Section – Elevated & Responsive
  */
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 import EntropyBackground from "./ui/entropy-background";
+
 const Hero = () => {
-  return <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-4 pt-24 pb-16">
+  return (
+    <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-6 pt-28 pb-20">
 
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <EntropyBackground />
       </div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/20 via-transparent to-background/90 pointer-events-none" aria-hidden="true" />
+      {/* Soft Gradient Glow Layers */}
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-accent/20 blur-3xl rounded-full opacity-40 animate-pulse" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/20 blur-3xl rounded-full opacity-40 animate-pulse" />
 
-      <div className="relative z-20 w-full max-w-4xl mx-auto text-center md:text-left flex flex-col items-center md:items-start">
+      {/* Overlay */}
+      <div
+        className="absolute inset-0 z-10 bg-gradient-to-b from-background/30 via-transparent to-background/90 pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="relative z-20 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
 
         {/* Badge */}
-        <motion.span initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.5
-      }} className="inline-block text-xs uppercase tracking-wide px-3 py-1.5 rounded-full bg-secondary/15 border border-secondary/25 text-secondary-foreground mb-6">
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-block text-xs uppercase tracking-widest px-4 py-1.5 rounded-full bg-background/60 backdrop-blur-md border border-border/50 text-muted-foreground mb-8"
+        >
           AI Engineer & Independent Consultant
         </motion.span>
 
-        {/* Name */}
-        <motion.h1 initial={{
-        opacity: 0,
-        y: 30
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.1
-      }} className="text-4xl sm:text-5xl md:text-6xl font-display tracking-tight mb-6">
-          Inga K.
-        </motion.h1>
+        {/* Name with Depth */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="relative mb-6"
+        >
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-display tracking-tight bg-gradient-to-r from-foreground via-accent to-secondary bg-clip-text text-transparent relative z-10">
+            Inga K.
+          </h1>
+
+          {/* Soft Shadow Layer */}
+          <h1 className="absolute inset-0 text-5xl sm:text-6xl md:text-7xl font-display tracking-tight text-foreground/10 translate-y-3 blur-sm -z-10">
+            Inga K.
+          </h1>
+        </motion.div>
 
         {/* Description */}
-        <motion.p initial={{
-        opacity: 0,
-        y: 30
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.2
-      }} className="text-base sm:text-lg text-foreground/80 max-w-xl leading-relaxed mb-10">
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-base sm:text-lg text-foreground/80 max-w-lg leading-relaxed mb-12"
+        >
           I translate{" "}
-          <span className="font-semibold italic text-secondary-foreground">
+          <span className="font-semibold text-foreground italic">
             policy into deployable controls
           </span>{" "}
           and build AI systems that hold up under compliance,
           security, and real-world pressure.
         </motion.p>
 
-        {/* Social Buttons (Smaller + Mobile First) */}
+        {/* Social Buttons */}
         <TooltipProvider>
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.5,
-          delay: 0.3
-        }} className="flex gap-3 mb-12">
-            {/* LinkedIn */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex gap-4 mb-16"
+          >
             <Tooltip>
               <TooltipTrigger asChild>
-                <motion.a href="https://www.linkedin.com/in/ik11/" target="_blank" rel="noopener noreferrer" whileHover={{
-                scale: 1.05
-              }} whileTap={{
-                scale: 0.95
-              }} className="flex items-center justify-center w-9 h-9 rounded-md border border-[#0A66C2]/30 bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 transition-colors" aria-label="LinkedIn">
-                  <FontAwesomeIcon icon={faLinkedin} className="w-3.5 h-3.5 text-[#0A66C2]" />
+                <motion.a
+                  href="https://www.linkedin.com/in/ik11/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-background/70 backdrop-blur-md border border-border hover:border-accent transition-all shadow-sm"
+                  aria-label="LinkedIn"
+                >
+                  <FontAwesomeIcon
+                    icon={faLinkedin}
+                    className="w-4 h-4 text-[#0A66C2]"
+                  />
                 </motion.a>
               </TooltipTrigger>
               <TooltipContent>
@@ -95,15 +107,19 @@ const Hero = () => {
               </TooltipContent>
             </Tooltip>
 
-            {/* Email (Updated) */}
             <Tooltip>
               <TooltipTrigger asChild>
-                <motion.a href="mailto:ingakali95@gmail.com" whileHover={{
-                scale: 1.05
-              }} whileTap={{
-                scale: 0.95
-              }} className="flex items-center justify-center w-9 h-9 rounded-md border border-accent/30 bg-accent/10 hover:bg-accent/20 transition-colors" aria-label="Email">
-                  <FontAwesomeIcon icon={faEnvelope} className="w-3.5 h-3.5 text-accent" />
+                <motion.a
+                  href="mailto:ingakali95@gmail.com"
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-background/70 backdrop-blur-md border border-border hover:border-secondary transition-all shadow-sm"
+                  aria-label="Email"
+                >
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    className="w-4 h-4 text-accent"
+                  />
                 </motion.a>
               </TooltipTrigger>
               <TooltipContent>
@@ -114,31 +130,33 @@ const Hero = () => {
         </TooltipProvider>
 
         {/* Scroll Indicator */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        delay: 0.6
-      }} className="w-full flex justify-center md:justify-start">
-          <a href="#about" className="flex flex-col items-center md:items-start text-muted-foreground hover:text-foreground transition-colors">
-            <span className="text-xs uppercase tracking-widest mb-2 text-secondary-foreground">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+        >
+          <a
+            href="#about"
+            className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <span className="text-xs uppercase tracking-widest mb-3">
               Explore
             </span>
-            <motion.div animate={{
-            y: [0, 6, 0]
-          }} transition={{
-            duration: 1.5,
-            repeat: Infinity
-          }}>
-              <FontAwesomeIcon icon={faArrowDown} className="w-4 h-4 text-accent" />
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity }}
+            >
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                className="w-4 h-4 text-accent"
+              />
             </motion.div>
           </a>
         </motion.div>
 
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;

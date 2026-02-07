@@ -63,7 +63,7 @@ function CardBack({
     </div>;
 }
 const About = () => {
-  return <section id="about" className="relative py-section-sm md:py-section px-4 bg-muted/30 overflow-hidden">
+  return <section id="about" className="relative py-section-sm px-4 bg-muted/30 overflow-hidden md:py-[90px]">
       {/* Abstract background shapes with parallax */}
       <ParallaxShape speed={0.15} className="w-64 h-64 -top-20 -right-20">
         <BlobShape className="w-full h-full opacity-60" />

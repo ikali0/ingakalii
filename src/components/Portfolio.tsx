@@ -258,7 +258,7 @@ function ProjectCard({
           
           
           {/* Tech Stack - Compact display */}
-          <div className="text-[8px] text-muted-foreground leading-tight mb-2 line-clamp-2 flex items-center justify-center">
+          <div className="text-xs text-muted-foreground leading-snug mb-2 line-clamp-2 text-center flex items-start justify-center">
             {project.techStack.slice(0, 4).map(tech => <span key={tech} className="text-[10px] font-semibold px-2 py-[2px] rounded-full whitespace-nowrap text-secondary-foreground bg-lime-200">
                 {tech}
               </span>)}

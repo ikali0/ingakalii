@@ -123,7 +123,7 @@ const Hero = () => {
         aria-hidden
       >
         {/* pass a pixel size so the Entropy canvas renders at an appropriate resolution */}
-        <Entropy className="w-full h-full opacity-80" size={entropySize} />
+        <Entropy className="w-full h-full opacity-80" width={entropySize} height={entropySize} />
       </div>
 
       {/* Subtle gradient overlay for improved legibility */}

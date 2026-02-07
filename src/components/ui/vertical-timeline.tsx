@@ -90,7 +90,7 @@ export function VerticalTimeline({
                 <p className="text-xs font-medium text-primary whitespace-nowrap\n">
                   {entry.organization} · {entry.location}
                 </p>
-                <p className="text-[11px] font-medium py-[2px] px-0 text-secondary-foreground">{entry.description}</p>
+                <p className="text-[11px] py-[2px] px-0 text-secondary-foreground font-normal">{entry.description}</p>
 
                 {entry.highlights && entry.highlights.length > 0 && <ul className="">
                     {entry.highlights.map((h, i) => <li key={i} className="text-[11px] font-medium text-primary/90 px-1 py-[2px]\n">• {h}</li>)}

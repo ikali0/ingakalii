@@ -38,7 +38,7 @@ export default function Services() {
         {/* Header */}
         <ScrollFade>
           <div className="mb-10 md:mb-14">
-            <p className="text-xs font-semibold tracking-widest uppercase text-accent mb-3">
+            <p className="flex items-center gap-3">
               Services
             </p>
             

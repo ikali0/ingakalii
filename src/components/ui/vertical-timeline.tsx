@@ -87,10 +87,10 @@ export function VerticalTimeline({
               <div className="ml-4">
                 <span className="text-caption text-muted-foreground">{yearLabel}</span>
                 <h4 className="font-semibold text-foreground">{entry.title}</h4>
-                <p className="text-caption text-muted-foreground">
+                <p className="text-xs text-secondary-foreground">
                   {entry.organization} · {entry.location}
                 </p>
-                <p className="text-body-sm mt-1">{entry.description}</p>
+                <p className="text-disply-sm">{entry.description}</p>
 
                 {entry.highlights && entry.highlights.length > 0 && <ul className="mt-2 space-y-1">
                     {entry.highlights.map((h, i) => <li key={i} className="text-caption text-muted-foreground">• {h}</li>)}

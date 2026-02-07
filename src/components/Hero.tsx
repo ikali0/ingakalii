@@ -49,7 +49,8 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-base sm:text-lg text-muted-foreground max-w-md leading-relaxed mb-10"
         >
-          I bridge governance and engineering — translating policy into enforceable architecture and building AI that performs under institutional pressure.
+          I bridge governance and engineering — translating policy into enforceable architecture and building AI that
+          performs under institutional pressure.
         </motion.p>
 
         {/* CTA Buttons */}

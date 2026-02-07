@@ -4,11 +4,10 @@
  * Animates text with a vertical reveal effect, splitting by words or characters.
  */
 import { motion, useInView, Transition, Variants } from "framer-motion";
-import { useRef, useMemo, ElementType } from "react";
+import { useRef, useMemo } from "react";
 
 interface VerticalCutRevealProps {
   children: string;
-  as?: ElementType;
   splitBy?: "words" | "characters";
   staggerDuration?: number;
   staggerFrom?: "first" | "last" | "center";
@@ -19,7 +18,6 @@ interface VerticalCutRevealProps {
 
 export const VerticalCutReveal = ({
   children,
-  as: Component = "span",
   splitBy = "words",
   staggerDuration = 0.1,
   staggerFrom = "first",
@@ -31,7 +29,7 @@ export const VerticalCutReveal = ({
   },
   className = "",
 }: VerticalCutRevealProps) => {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   const elements = useMemo(() => {
@@ -53,27 +51,28 @@ export const VerticalCutReveal = ({
     }
   };
 
-  const variants: Variants = {
-    hidden: {
-      y: reverse ? -20 : 20,
-      opacity: 0,
-      filter: "blur(8px)",
-    },
-    visible: (i: number) => ({
-      y: 0,
-      opacity: 1,
-      filter: "blur(0px)",
-      transition: {
-        ...transition,
-        delay: getStaggerDelay(i, elements.length),
+  const variants: Variants = useMemo(
+    () => ({
+      hidden: {
+        y: reverse ? -20 : 20,
+        opacity: 0,
+        filter: "blur(8px)",
       },
+      visible: (i: number) => ({
+        y: 0,
+        opacity: 1,
+        filter: "blur(0px)",
+        transition: {
+          ...transition,
+          delay: getStaggerDelay(i, elements.length),
+        },
+      }),
     }),
-  };
-
-  const MotionComponent = motion(Component);
+    [reverse, transition, elements.length, staggerDuration, staggerFrom]
+  );
 
   return (
-    <MotionComponent ref={ref} className={className} style={{ display: "inline" }}>
+    <span ref={ref} className={className} style={{ display: "inline" }}>
       {elements.map((element, index) => (
         <motion.span
           key={`${element}-${index}`}
@@ -87,7 +86,7 @@ export const VerticalCutReveal = ({
           {splitBy === "words" && index < elements.length - 1 ? " " : ""}
         </motion.span>
       ))}
-    </MotionComponent>
+    </span>
   );
 };
 

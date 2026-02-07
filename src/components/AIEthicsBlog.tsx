@@ -81,11 +81,11 @@ export default function AIEthicsBlog() {
                 Featured Essay
               </span>
 
-              <h2 className="text-3xl font-bold tracking-tight">
+              <h2 className="font-bold tracking-tight text-xl">
                 {featured.title}
               </h2>
 
-              <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+              <p className="text-muted-foreground max-w-2xl leading-relaxed text-sm">
                 {featured.excerpt}
               </p>
 

@@ -170,21 +170,20 @@ export default function RetroTaskbar(): JSX.Element {
       </AnimatePresence>
 
       {/* Taskbar */}
-      <div className={"fixed bottom-0 left-0 right-0 z-50 h-14 bg-card/90 backdrop-blur-xl " + "border-t border-border/30 shadow-[0_-8px_30px_-6px_hsl(var(--foreground)/0.15)] " + "safe-area-bottom"}>
-        <div className="flex items-center justify-between h-full px-[8px]">
-          {/* Start Button */}
+      <div className={"fixed bottom-0 left-0 right-0 z-50 h-10 sm:h-11 bg-card/95 backdrop-blur-xl " + "border-t border-border/40 shadow-[0_-4px_12px_-4px_hsl(var(--foreground)/0.1)] " + "safe-area-bottom"}>
+        <div className="flex items-center justify-between h-full px-1.5 sm:px-2">
+          {/* Start Button - 3D style */}
           <Tooltip>
             <TooltipTrigger asChild>
               <motion.button ref={buttonRef} type="button" onClick={() => setIsStartOpen(s => !s)} whileTap={{
-              scale: 0.95
-            }} aria-haspopup="true" aria-expanded={isStartOpen} className={"flex items-center gap-2 h-10 px-4 rounded-xl text-sm font-semibold " + "bg-gradient-to-b from-muted to-muted/70 border border-border/40 " + "shadow-[inset_0_1px_0_hsl(var(--background)/0.8),0_4px_10px_-3px_hsl(var(--foreground)/0.15)] " + "active:shadow-inner"}>
+              scale: 0.97
+            }} aria-haspopup="true" aria-expanded={isStartOpen} className={"flex items-center gap-1.5 h-7 sm:h-8 px-2.5 sm:px-3 rounded-lg text-[10px] sm:text-xs font-semibold " + "bg-gradient-to-b from-muted to-muted/80 border border-border/50 " + "shadow-[0_3px_0_0_hsl(var(--border)),0_4px_8px_-2px_hsl(var(--foreground)/0.1)] " + "hover:shadow-[0_2px_0_0_hsl(var(--border))] hover:translate-y-[1px] " + "active:shadow-none active:translate-y-[3px] transition-all"}>
                 <div className="grid grid-cols-2 gap-0.5">
-                  <div className="w-2 h-2 rounded-sm bg-primary" />
-                  <div className="w-2 h-2 rounded-sm bg-secondary" />
-                  <div className="w-2 h-2 rounded-sm bg-accent" />
-                  <div className="w-2 h-2 rounded-sm bg-chart-4 bg-secondary-foreground" />
+                  <div className="w-1.5 h-1.5 rounded-[2px] bg-primary" />
+                  <div className="w-1.5 h-1.5 rounded-[2px] bg-secondary" />
+                  <div className="w-1.5 h-1.5 rounded-[2px] bg-accent" />
+                  <div className="w-1.5 h-1.5 rounded-[2px] bg-muted-foreground" />
                 </div>
-
                 <span className="tracking-tight text-primary">Start</span>
               </motion.button>
             </TooltipTrigger>
@@ -192,21 +191,21 @@ export default function RetroTaskbar(): JSX.Element {
           </Tooltip>
 
           {/* Right side: theme toggle + clock */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-1.5">
             {mounted && <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.button type="button" onClick={toggleTheme} whileTap={{
-                scale: 0.9
-              }} className={"w-10 h-10 flex items-center justify-center rounded-xl bg-muted/40 shadow-inner transition"} aria-label="Toggle dark mode">
-                    {theme === "dark" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4 text-fuchsia-500" />}
+                scale: 0.95
+              }} className={"w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg bg-muted/50 " + "border border-border/40 shadow-[0_2px_0_0_hsl(var(--border))] " + "hover:shadow-[0_1px_0_0_hsl(var(--border))] hover:translate-y-[1px] " + "active:shadow-none active:translate-y-[2px] transition-all"} aria-label="Toggle dark mode">
+                    {theme === "dark" ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5 text-accent" />}
                   </motion.button>
                 </TooltipTrigger>
                 <TooltipContent>Toggle dark mode</TooltipContent>
               </Tooltip>}
 
-            <div className={"px-3 py-1.5 rounded-xl bg-muted/40 shadow-inner text-center " + "flex flex-col items-center justify-center"} aria-live="polite">
-              <div className="text-xs font-semibold tracking-tight">{formatTime(currentTime)}</div>
-              <div className="text-[9px] opacity-70 hidden xs:block">{formatDate(currentTime)}</div>
+            <div className={"px-2 py-1 rounded-lg bg-muted/50 border border-border/40 text-center " + "shadow-[inset_0_1px_2px_hsl(var(--foreground)/0.05)] " + "flex flex-col items-center justify-center"} aria-live="polite">
+              <div className="text-[10px] sm:text-xs font-semibold tracking-tight">{formatTime(currentTime)}</div>
+              <div className="text-[8px] opacity-60 hidden xs:block">{formatDate(currentTime)}</div>
             </div>
           </div>
         </div>

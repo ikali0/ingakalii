@@ -18,7 +18,7 @@ const Index = () => {
       
       <Navbar />
       {/* Main content with bottom padding for fixed taskbar */}
-      <main className="crt-phosphor pb-14">
+      <main className="crt-phosphor pb-10 sm:pb-11">
         <Hero />
         <About />
         <Services />

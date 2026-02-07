@@ -154,7 +154,7 @@ function BentoCardComponent({
           <div className="w-7 h-7 bg-primary/10 group-hover:bg-primary/20 transition-colors rounded flex items-center justify-center">
             <Icon className="text-primary h-3.5 w-3.5" />
           </div>
-          <h3 className="text-body-sm font-display font-semibold text-foreground">
+          <h3 className="text-[10px] px-1.5 py-[1px] border border-neutral-300 rounded-sm\n">
             {card.category}
           </h3>
         </div>
@@ -197,7 +197,7 @@ const Skills = () => {
 
         {/* Secondary Stack */}
         <ScrollFade delay={0.3} className="mt-container-lg">
-          <div className="flex flex-wrap justify-center gap-[10px]">
+          <div className="text-[10px] px-1.5 py-[1px] border border-neutral-300 rounded-sm\n">
             {secondaryTech.map((tech, index) => {
             const Icon = tech.icon;
             return <motion.div key={tech.name} initial={{

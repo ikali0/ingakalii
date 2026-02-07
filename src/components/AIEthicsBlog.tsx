@@ -47,5 +47,62 @@ export default function AIEthicsBlog() {
   }, []);
   const featured = articles.find(a => a.featured);
   const secondary = articles.filter(a => !a.featured);
-  return;
+  
+  return (
+    <section id="writing" className="py-16 md:py-24 px-4 bg-background">
+      <div className="max-w-5xl mx-auto">
+        <SectionHeader
+          overline="Writing"
+          title="AI Ethics & Governance"
+          description="Long-form analysis on AI risk, alignment, and responsible deployment."
+        />
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Featured Article */}
+          {featured && (
+            <motion.a
+              href={featured.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`block p-6 rounded-xl bg-card border border-border/40 hover:border-primary/30 transition-all ${platformStyles[getPlatform(featured.url)]}`}
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            >
+              <span className="text-xs uppercase tracking-widest text-accent mb-2 block">
+                Featured
+              </span>
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                {featured.title}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {featured.excerpt}
+              </p>
+            </motion.a>
+          )}
+
+          {/* Secondary Articles */}
+          <div className="space-y-4">
+            {secondary.map((article) => (
+              <motion.a
+                key={article.title}
+                href={article.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`block p-5 rounded-lg bg-card border border-border/40 hover:border-primary/30 transition-all ${platformStyles[getPlatform(article.url)]}`}
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              >
+                <h4 className="text-sm font-semibold text-foreground mb-1">
+                  {article.title}
+                </h4>
+                <p className="text-xs text-muted-foreground">
+                  {article.excerpt}
+                </p>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

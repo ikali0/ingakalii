@@ -369,31 +369,6 @@ function ProjectCard({
     </motion.article>;
 }
 const Portfolio = () => {
-  return <section id="portfolio" className="relative py-section-sm px-4 bg-muted/30 overflow-hidden md:py-[90px]" aria-labelledby="portfolio-heading">
-      {/* Abstract background elements with parallax */}
-      <GradientMesh className="inset-0 w-full h-full" />
-      <ParallaxShape speed={0.2} rotateAmount={10} className="w-24 h-24 top-20 right-[10%]">
-        <TriangleShape className="w-full h-full opacity-50" />
-      </ParallaxShape>
-      <ParallaxShape speed={0.15} rotateAmount={-8} className="w-16 h-16 bottom-32 left-[5%]">
-        <TriangleShape className="w-full h-full opacity-40 rotate-45" />
-      </ParallaxShape>
-      <ParallaxShape speed={0.1} className="w-full h-16 top-1/2 left-0">
-        <WavyLine className="w-full h-full opacity-50" />
-      </ParallaxShape>
-
-      <div className="container relative z-10 mx-auto max-w-5xl">
-        <ScrollFade>
-          <SectionHeader overline="Case Studies" title="Featured Work" description="Projects designed to solve real problems in AI ethics, governance, and responsible technology deployment." />
-        </ScrollFade>
-
-        {/* Responsive Grid */}
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.08}>
-          {projects.map(project => <StaggerItem key={project.title}>
-              <ProjectCard project={project} />
-            </StaggerItem>)}
-        </StaggerContainer>
-      </div>
-    </section>;
+  return;
 };
 export default Portfolio;

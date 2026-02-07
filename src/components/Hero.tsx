@@ -11,7 +11,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/t
 import HeroFloatingIcons from "./ui/hero-floating-icons";
 import HeroCategoryCarousel from "./ui/hero-category-carousel";
 const Hero = () => {
-  return <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-28 pb-20 bg-gradient-to-b from-background via-background to-muted/20 py-[11px] px-[15px]">
+  return <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-28 pb-20 bg-gradient-to-b from-background via-background to-muted/20 px-[15px] py-[19px]">
       {/* 3D Animated floating icons */}
       <HeroFloatingIcons />
 

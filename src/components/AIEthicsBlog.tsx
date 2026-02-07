@@ -48,8 +48,7 @@ interface ArticleCardProps {
 function ArticleCard({
   article
 }: ArticleCardProps) {
-  return <motion.a href={article.url} target="_blank" rel="noopener noreferrer" className="group block border border-border/50 bg-card/50 backdrop-blur-sm rounded-lg p-6 
-                 hover:border-border hover:bg-card/80 transition-all duration-200" whileHover={{
+  return <motion.a href={article.url} target="_blank" rel="noopener noreferrer" className="relative z-10 mx-auto max-w-3xl px-6 md:px-8\n" whileHover={{
     y: -2
   }} whileTap={{
     scale: 0.995
@@ -102,7 +101,7 @@ const AIEthicsBlog = () => <section id="blog" className="relative py-section px-
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/20 to-transparent" />
     </div>
 
-    <div className="container relative z-10 mx-auto max-w-3xl">
+    <div className="relative z-10 mx-auto max-w-3xl px-6 md:px-8\n">
       <ScrollFade>
         <SectionHeader overline="Selected Writing" title="Research & Analysis" description="Long-form essays on AI ethics, governance, and the systems that shape algorithmic accountability." />
       </ScrollFade>

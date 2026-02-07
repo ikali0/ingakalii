@@ -168,7 +168,7 @@ export const EntropyBackground = forwardRef<HTMLDivElement, EntropyBackgroundPro
     let time = 0;
     let animationId: number;
     function animate() {
-      ctx.clearRect(0, 0, width, height);
+      if (!ctx) return;
 
       // Update neighbors less frequently on mobile
       if (time % (mobile ? 45 : 30) === 0) {

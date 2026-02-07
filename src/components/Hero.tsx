@@ -80,13 +80,13 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-4 sm:px-6 pt-24 sm:pt-28 pb-16 sm:pb-20">
-      {/* Entropy particle background */}
+      {/* Vibrant 3D Entropy particle background */}
       <div className="absolute inset-0 z-0 bg-background">
-        <Entropy className="opacity-40" />
+        <Entropy className="opacity-80" />
       </div>
       
-      {/* Gradient overlay for depth */}
-      <div className="absolute inset-0 z-5 bg-gradient-to-t from-background via-background/50 to-background/30" />
+      {/* Subtle gradient overlay for text readability */}
+      <div className="absolute inset-0 z-5 bg-gradient-to-t from-background/70 via-background/30 to-transparent" />
 
       <div className="relative z-20 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
         <motion.span

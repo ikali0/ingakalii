@@ -81,32 +81,7 @@ const About = () => {
           </TimelineContent>
 
           {/* Stats */}
-          <div className="mb-8 md:mb-10">
-            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 text-body-sm md:text-body">
-              <TimelineScale custom={0}>
-                <div className="flex items-baseline gap-2">
-                  <span className="font-display font-bold text-foreground">5+</span>
-                  <span className="text-muted-foreground">years experience</span>
-                </div>
-              </TimelineScale>
-              <span className="text-border hidden sm:inline">|</span>
-              <TimelineScale custom={1}>
-                <div className="flex items-baseline gap-2">
-                  
-                  <span className="text-muted-foreground">articles</span>
-                </div>
-              </TimelineScale>
-            </div>
-            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 text-body-sm md:text-body mt-2">
-              <TimelineScale custom={2}>
-                <span className="text-muted-foreground">AI Ethics</span>
-              </TimelineScale>
-              <span className="text-border hidden sm:inline">|</span>
-              <TimelineScale custom={3}>
-                <span className="text-muted-foreground">Policy & Governance</span>
-              </TimelineScale>
-            </div>
-          </div>
+          
 
           {/* Main Content Grid */}
           <div className="grid lg:grid-cols-3 gap-6 lg:gap-10">

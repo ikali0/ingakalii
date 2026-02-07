@@ -23,7 +23,7 @@ const Hero = () => {
       {/* Overlay */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/30 via-transparent to-background/90 pointer-events-none" aria-hidden="true" />
 
-      <div className="relative z-20 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
+      <div className="relative z-20 w-full max-w-3xl mx-auto flex-col text-center flex items-center justify-center">
 
         {/* Badge */}
         <motion.span initial={{
@@ -49,7 +49,7 @@ const Hero = () => {
         duration: 0.6,
         delay: 0.1
       }} className="relative mb-6">
-          <h1 className="text-5xl sm:text-6xl font-display tracking-tight bg-gradient-to-r from-foreground via-accent to-secondary bg-clip-text text-transparent relative z-10 md:text-6xl py-px px-px">
+          <h1 className="text-5xl sm:text-6xl font-display tracking-tight bg-gradient-to-r from-foreground via-accent to-secondary bg-clip-text text-transparent relative z-10 md:text-6xl py-px px-px text-center">
             Inga K.
           </h1>
 
@@ -80,20 +80,19 @@ const Hero = () => {
 
         {/* Social Buttons */}
         <TooltipProvider>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex gap-3 mb-12"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.3
+        }} className="flex gap-3 mb-12">
             <Tooltip>
               <TooltipTrigger asChild>
-                <a
-                  href="https://www.linkedin.com/in/ik11/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-border/50 bg-card/80 backdrop-blur-sm rounded-lg flex items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-colors"
-                >
+                <a href="https://www.linkedin.com/in/ik11/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-border/50 bg-card/80 backdrop-blur-sm rounded-lg flex items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-colors">
                   <FontAwesomeIcon icon={faLinkedin} className="w-4 h-4 text-primary" />
                 </a>
               </TooltipTrigger>
@@ -102,10 +101,7 @@ const Hero = () => {
 
             <Tooltip>
               <TooltipTrigger asChild>
-                <a
-                  href="mailto:ingakali95@gmail.com"
-                  className="w-10 h-10 border border-border/50 bg-card/80 backdrop-blur-sm rounded-lg flex items-center justify-center hover:border-secondary/50 hover:bg-secondary/5 transition-colors"
-                >
+                <a href="mailto:ingakali95@gmail.com" className="w-10 h-10 border border-border/50 bg-card/80 backdrop-blur-sm rounded-lg flex items-center justify-center hover:border-secondary/50 hover:bg-secondary/5 transition-colors">
                   <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-secondary" />
                 </a>
               </TooltipTrigger>

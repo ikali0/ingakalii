@@ -171,6 +171,38 @@ function BentoCardComponent({
     </motion.div>;
 }
 const Skills = () => {
-  return;
+  return (
+    <section id="skills" className="section-padding bg-background relative overflow-hidden">
+      <div className="container-width">
+        <ScrollFade>
+          <SectionHeader
+            overline="Technical Expertise"
+            title="Core Competencies"
+            description="Security-first approach to AI systems, from adversarial testing to production deployment."
+          />
+        </ScrollFade>
+
+        {/* Bento Grid */}
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+          {bentoCards.map((card) => (
+            <StaggerItem key={card.id}>
+              <BentoCardComponent card={card} />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+
+        {/* Secondary Technologies */}
+        <ScrollFade delay={0.3}>
+          <div className="flex flex-wrap justify-center gap-1.5">
+            {secondaryTech.map((tech) => (
+              <Tag key={tech.name} size="sm">
+                {tech.name}
+              </Tag>
+            ))}
+          </div>
+        </ScrollFade>
+      </div>
+    </section>
+  );
 };
 export default Skills;

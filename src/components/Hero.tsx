@@ -226,7 +226,7 @@ const Hero = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <a href="https://linkedin.com/in/ingakali" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-muted/50 hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
+                <a href="https://www.linkedin.com/in/ik11/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-muted/50 hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
                   <FontAwesomeIcon icon={faLinkedin} className="w-4 h-4" />
                 </a>
               </TooltipTrigger>

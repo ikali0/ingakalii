@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { useEffect, useState, useCallback } from "react";
+import Autoplay from "embla-carousel-autoplay";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -10,6 +11,13 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export interface Gallery4Item {
   id: string;
@@ -17,6 +25,10 @@ export interface Gallery4Item {
   description: string;
   href: string;
   image: string;
+  problem?: string;
+  approach?: string;
+  outcome?: string;
+  techStack?: string[];
 }
 
 export interface Gallery4Props {
@@ -34,6 +46,19 @@ const Gallery4 = ({
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedItem, setSelectedItem] = useState<Gallery4Item | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Autoplay plugin with pause on hover
+  const autoplayPlugin = useCallback(
+    () =>
+      Autoplay({
+        delay: 4000,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      }),
+    []
+  );
 
   useEffect(() => {
     if (!carouselApi) {
@@ -50,6 +75,11 @@ const Gallery4 = ({
       carouselApi.off("select", updateSelection);
     };
   }, [carouselApi]);
+
+  const handleCardClick = (item: Gallery4Item, e: React.MouseEvent) => {
+    e.preventDefault();
+    setSelectedItem(item);
+  };
 
   return (
     <section className="py-section-sm md:py-section">
@@ -87,10 +117,16 @@ const Gallery4 = ({
           </div>
         </div>
       </div>
-      <div className="w-full">
+      <div 
+        className="w-full"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <Carousel
           setApi={setCarouselApi}
+          plugins={[autoplayPlugin()]}
           opts={{
+            loop: true,
             breakpoints: {
               "(max-width: 768px)": {
                 dragFree: true,
@@ -104,7 +140,10 @@ const Gallery4 = ({
                 key={item.id}
                 className="max-w-[280px] pl-[16px] sm:max-w-[320px] lg:max-w-[360px] lg:pl-[20px]"
               >
-                <a href={item.href} target="_blank" rel="noopener noreferrer" className="group rounded-xl block">
+                <button 
+                  onClick={(e) => handleCardClick(item, e)} 
+                  className="group rounded-xl block text-left w-full cursor-pointer"
+                >
                   <div className="group relative h-full min-h-[24rem] sm:min-h-[27rem] max-w-full overflow-hidden rounded-xl md:aspect-[5/4] lg:aspect-[16/9]">
                     <img
                       src={item.image}
@@ -125,7 +164,7 @@ const Gallery4 = ({
                       </div>
                     </div>
                   </div>
-                </a>
+                </button>
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -143,6 +182,104 @@ const Gallery4 = ({
           ))}
         </div>
       </div>
+
+      {/* Case Study Modal */}
+      <Dialog open={!!selectedItem} onOpenChange={(open) => !open && setSelectedItem(null)}>
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+          {selectedItem && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-xl md:text-2xl font-display">
+                  {selectedItem.title}
+                </DialogTitle>
+                <DialogDescription className="text-muted-foreground">
+                  {selectedItem.description}
+                </DialogDescription>
+              </DialogHeader>
+              
+              <div className="mt-4 space-y-6">
+                {/* Project Image */}
+                <div className="rounded-lg overflow-hidden aspect-video">
+                  <img
+                    src={selectedItem.image}
+                    alt={selectedItem.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Case Study Details */}
+                <div className="grid gap-6">
+                  {selectedItem.problem && (
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-foreground flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-destructive" />
+                        Problem / Challenge
+                      </h4>
+                      <p className="text-muted-foreground text-sm leading-relaxed pl-4">
+                        {selectedItem.problem}
+                      </p>
+                    </div>
+                  )}
+
+                  {selectedItem.approach && (
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-foreground flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-accent" />
+                        Approach / Methodology
+                      </h4>
+                      <p className="text-muted-foreground text-sm leading-relaxed pl-4">
+                        {selectedItem.approach}
+                      </p>
+                    </div>
+                  )}
+
+                  {selectedItem.outcome && (
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-foreground flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-primary" />
+                        Measurable Outcomes
+                      </h4>
+                      <p className="text-muted-foreground text-sm leading-relaxed pl-4">
+                        {selectedItem.outcome}
+                      </p>
+                    </div>
+                  )}
+
+                  {selectedItem.techStack && selectedItem.techStack.length > 0 && (
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-foreground">Tech Stack</h4>
+                      <div className="flex flex-wrap gap-2 pl-4">
+                        {selectedItem.techStack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* CTA */}
+                {selectedItem.href && selectedItem.href !== "#" && (
+                  <div className="pt-4 border-t">
+                    <a
+                      href={selectedItem.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                    >
+                      Visit Project <ArrowRight className="size-4" />
+                    </a>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

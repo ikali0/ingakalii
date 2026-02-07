@@ -250,19 +250,19 @@ function ProjectCard({
             {project.title}
           </h3>
 
-          <p className="text-caption text-muted-foreground leading-relaxed mb-2 line-clamp-2">
+          <p className="leading-relaxed mb-2 line-clamp-2 text-xs text-primary">
             {project.description}
           </p>
 
           {/* Category Tags */}
-          <div className="flex flex-wrap gap-1 mb-2" role="list" aria-label="Categories">
+          <div className="flex-wrap mb-2 gap-[2px] flex items-start justify-center" role="list" aria-label="Categories">
             {project.tags.map(tag => <Tag key={tag} variant="default" size="sm" role="listitem">
                 {tag}
               </Tag>)}
           </div>
           
           {/* Tech Stack - Compact display */}
-          <div className="flex flex-wrap gap-1 mb-card-sm">
+          <div className="flex-wrap mb-card-sm flex items-start justify-center gap-[2px] shadow-sm rounded-sm opacity-70">
             {project.techStack.slice(0, 4).map(tech => <span key={tech} className="text-[0.625rem] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
                 {tech}
               </span>)}
@@ -272,7 +272,7 @@ function ProjectCard({
           </div>
 
           {/* Expandable Case Study Section - touch-friendly button */}
-          <button onClick={() => setIsExpanded(!isExpanded)} className="flex items-center gap-element-sm text-body-sm font-medium text-primary hover:text-primary/80 transition-colors mb-element min-h-[44px] touch-manipulation" aria-expanded={isExpanded}>
+          <button onClick={() => setIsExpanded(!isExpanded)} className="text-body-sm font-medium transition-colors mb-element min-h-[44px] touch-manipulation flex items-start justify-center gap-[6px] text-secondary-foreground" aria-expanded={isExpanded}>
             <span>{isExpanded ? "Hide Details" : "View Case Study"}</span>
             <motion.div animate={{
             rotate: isExpanded ? 180 : 0

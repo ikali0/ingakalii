@@ -229,7 +229,7 @@ function ProjectCard({
 
           {/* Tech Stack - Compact display */}
           <div className="flex flex-wrap gap-1.5 sm:gap-1 justify-center mb-3 sm:mb-2">
-            {project.techStack.slice(0, 3).map(tech => <span key={tech} className="text-xs sm:text-[10px] font-semibold px-2 py-1 sm:py-[2px] rounded-full whitespace-nowrap text-primary-foreground bg-primary/80">
+            {project.techStack.slice(0, 3).map(tech => <span key={tech} className="text-xs sm:text-[10px] font-semibold px-2 py-1 sm:py-[2px] rounded-full whitespace-nowrap text-primary-foreground bg-secondary-foreground">
                 {tech}
               </span>)}
             {project.techStack.length > 3 && <span className="text-xs sm:text-[0.625rem] px-2 py-1 sm:px-1.5 sm:py-0.5 rounded text-primary-foreground bg-muted-foreground">

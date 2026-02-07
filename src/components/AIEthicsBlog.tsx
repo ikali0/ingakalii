@@ -11,44 +11,80 @@ const topics = [
   { label: "Quantum", description: "Next-generation computation" },
 ];
 
-/* ---------------- Animated Pill ---------------- */
+/* ---------------- Animated Pill with Auto-Cycle ---------------- */
 
-function TopicPill({ label, description, index }: { label: string; description: string; index: number }) {
+function TopicPill({ label, description, index, isActive }: { label: string; description: string; index: number; isActive: boolean }) {
   const [isHovered, setIsHovered] = useState(false);
+  const showExpanded = isHovered || isActive;
 
   return (
     <motion.span
       className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary/20 border border-border/40 text-xs font-medium text-foreground/80 cursor-default whitespace-nowrap"
       initial={{ opacity: 0, scale: 0.8, y: 10 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
+      animate={{ 
+        opacity: 1, 
+        scale: 1, 
+        y: 0,
+        borderColor: showExpanded ? "hsl(var(--primary) / 0.4)" : "hsl(var(--border) / 0.4)",
+      }}
       transition={{ 
         delay: index * 0.1, 
         type: "spring", 
         stiffness: 300, 
         damping: 20 
       }}
-      whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.4)" }}
+      whileHover={{ scale: 1.05 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
       <motion.span 
         className="w-1.5 h-1.5 rounded-full bg-primary/60"
-        animate={{ scale: isHovered ? [1, 1.3, 1] : 1 }}
-        transition={{ duration: 0.4, repeat: isHovered ? Infinity : 0 }}
+        animate={{ 
+          scale: showExpanded ? [1, 1.3, 1] : 1,
+          backgroundColor: showExpanded ? "hsl(var(--primary))" : "hsl(var(--primary) / 0.6)"
+        }}
+        transition={{ duration: 0.4, repeat: showExpanded ? Infinity : 0 }}
       />
       <span>{label}</span>
       <motion.span
         className="text-muted-foreground overflow-hidden"
         initial={{ width: 0, opacity: 0 }}
         animate={{ 
-          width: isHovered ? "auto" : 0, 
-          opacity: isHovered ? 1 : 0 
+          width: showExpanded ? "auto" : 0, 
+          opacity: showExpanded ? 1 : 0 
         }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
       >
         → {description}
       </motion.span>
     </motion.span>
+  );
+}
+
+/* ---------------- Auto-Cycling Pills Container ---------------- */
+
+function TopicPillsContainer() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % topics.length);
+    }, 3000); // Cycle every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex flex-wrap gap-2 max-w-2xl">
+      {topics.map((topic, index) => (
+        <TopicPill 
+          key={topic.label} 
+          {...topic} 
+          index={index} 
+          isActive={index === activeIndex}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -111,11 +147,7 @@ export default function AIEthicsBlog() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground mb-4 leading-tight">
             ​ongoing  analysis   
           </h2>
-          <div className="flex flex-wrap gap-2 max-w-2xl">
-            {topics.map((topic, index) => (
-              <TopicPill key={topic.label} {...topic} index={index} />
-            ))}
-          </div>
+          <TopicPillsContainer />
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">

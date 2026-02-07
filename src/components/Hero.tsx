@@ -61,10 +61,10 @@ const Hero = () => {
         >
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground font-medium rounded-lg hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-md shadow-[0_4px_0_0_hsl(var(--primary)/0.4)] hover:shadow-[0_2px_0_0_hsl(var(--primary)/0.4)] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all duration-150"
           >
             Contact Me
-            <FontAwesomeIcon icon={faArrowRight} className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
           </a>
         </motion.div>
 

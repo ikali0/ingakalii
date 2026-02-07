@@ -8,6 +8,7 @@
  */
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import type { HTMLAttributes, ReactNode } from "react";
 
 const tagVariants = cva(
   "inline-flex items-center justify-center font-medium transition-colors",
@@ -37,9 +38,9 @@ const tagVariants = cva(
 );
 
 interface TagProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
+  extends HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof tagVariants> {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function Tag({ className, variant, size, children, ...props }: TagProps) {

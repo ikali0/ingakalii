@@ -159,24 +159,17 @@ function BentoCardComponent({
     </motion.div>;
 }
 const Skills = () => {
-  return (
-    <section id="skills" className="py-16 md:py-24 px-4 bg-muted/30">
+  return <section id="skills" className="py-16 px-4 bg-muted/30 md:py-[88px]">
       <div className="max-w-5xl mx-auto">
         <ScrollFade>
-          <SectionHeader
-            overline="Expertise"
-            title="Technical Proficiencies"
-            description="Strategic skills across security, AI systems, and governance."
-          />
+          <SectionHeader overline="Expertise" title="Technical Proficiencies" description="Strategic skills across security, AI systems, and governance." />
         </ScrollFade>
 
         {/* Bento Grid */}
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {bentoCards.map((card) => (
-            <StaggerItem key={card.id}>
+          {bentoCards.map(card => <StaggerItem key={card.id}>
               <BentoCardComponent card={card} />
-            </StaggerItem>
-          ))}
+            </StaggerItem>)}
         </StaggerContainer>
 
         {/* Secondary Tech Tags */}
@@ -186,16 +179,13 @@ const Skills = () => {
               Additional Tools
             </p>
             <div className="flex flex-wrap gap-2">
-              {secondaryTech.map((tech) => (
-                <Tag key={tech.name}>
+              {secondaryTech.map(tech => <Tag key={tech.name}>
                   {tech.name}
-                </Tag>
-              ))}
+                </Tag>)}
             </div>
           </div>
         </ScrollFade>
       </div>
-    </section>
-  );
+    </section>;
 };
 export default Skills;

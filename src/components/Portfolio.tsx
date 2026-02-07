@@ -369,7 +369,7 @@ function ProjectCard({
     </motion.article>;
 }
 const Portfolio = () => {
-  return <section id="portfolio" className="relative py-section-sm px-4 bg-muted/30 overflow-hidden md:py-[90px]" aria-labelledby="portfolio-heading">
+  return <section id="portfolio" className="relative py-section-sm px-4 bg-muted/30 overflow-hidden md:py-[88px]" aria-labelledby="portfolio-heading">
       {/* Abstract background elements with parallax */}
       <GradientMesh className="inset-0 w-full h-full" />
       <ParallaxShape speed={0.2} rotateAmount={10} className="w-24 h-24 top-20 right-[10%]">

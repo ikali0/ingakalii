@@ -1,166 +1,226 @@
-/**
- * Experience Section Component
- *
- * - Expandable experience cards
- * - Filters by role and year
- * - VerticalTimeline derived from same data (no duplication)
- */
-import { useMemo, useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPersonWalkingLuggage, faBuilding, faShieldHalved, faChartLine } from "@fortawesome/free-solid-svg-icons";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Tag } from "./ui/tag";
-import { RingShape, DotsPattern, ParallaxShape } from "./ui/abstract-shapes";
-import { VerticalTimeline, type TimelineEntry } from "./ui/vertical-timeline";
+"use client"
+
+import {
+  Shield,
+  Brain,
+  Scale,
+  BriefcaseBusinessIcon,
+  GraduationCapIcon,
+  ChevronsDownUpIcon,
+  ChevronsUpDownIcon,
+} from "lucide-react"
+
+import Image from "next/image"
+import React from "react"
+import ReactMarkdown from "react-markdown"
+
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { Separator } from "@/components/ui/separator"
+import { cn } from "@/lib/utils"
 
 /* ------------------------------------------------------------------ */
-/* DATA — single source of truth                                       */
+/* Icon Map */
 /* ------------------------------------------------------------------ */
 
-interface ExperienceData {
-  id: string;
-  title: string;
-  organization: string;
-  period: string;
-  location: string;
-  description: string;
-  highlights: string[];
-  tags: string[];
-  status: "complete" | "in-progress" | "pending";
-  icon: any;
+const iconMap = {
+  security: Shield,
+  ai: Brain,
+  governance: Scale,
+  business: BriefcaseBusinessIcon,
+  education: GraduationCapIcon,
+} as const
+
+export type ExperiencePositionIconType = keyof typeof iconMap
+
+/* ------------------------------------------------------------------ */
+/* Types */
+/* ------------------------------------------------------------------ */
+
+export type ExperiencePositionItemType = {
+  id: string
+  title: string
+  employmentPeriod: string
+  employmentType?: string
+  description?: string
+  icon?: ExperiencePositionIconType
+  skills?: string[]
+  isExpanded?: boolean
 }
-const experiences: ExperienceData[] = [{
-  id: "ai-policy",
-  title: "AI Policy Engineer",
-  organization: "Independent Consultant",
-  period: "Oct 2023 – Present",
-  location: "Philadelphia, PA",
-  description: "Leading AI consultancy delivering automation prototypes and compliance frameworks.",
-  highlights: ["Built FERPA/Title IX compliance dashboards", "Converted policy frameworks into deployable controls", "Conducted NIST AI RMF feasibility assessments", "Developed GPT-4 and Claude compliance tools"],
-  tags: ["NIST AI RMF", "Compliance", "LLMs"],
-  status: "in-progress",
-  icon: faPersonWalkingLuggage
-}, {
-  id: "pentest",
-  title: "Penetration Tester",
-  organization: "DIA & Lockheed Martin",
-  period: "Nov 2024 – May 2025",
-  location: "Washington, DC",
-  description: "Executed penetration tests across federal networks.",
-  highlights: ["Executed 12+ penetration tests", "Discovered 47 critical vulnerabilities", "Reduced security incidents by 30%"],
-  tags: ["Metasploit", "OSINT", "Threat Modeling"],
-  status: "complete",
-  icon: faShieldHalved
-}, {
-  id: "consulting",
-  title: "Consulting Analyst",
-  organization: "Accenture Federal Services",
-  period: "Jul 2021 – Oct 2024",
-  location: "Washington, DC",
-  description: "Optimized federal portfolios and compliance frameworks.",
-  highlights: ["30% portfolio optimization", "Developed DLA compliance frameworks", "Designed energy.gov UX interfaces"],
-  tags: ["DoD", "Policy", "UX/UI"],
-  status: "complete",
-  icon: faBuilding
-}, {
-  id: "sap",
-  title: "Business Analyst",
-  organization: "SAP SuccessFactors",
-  period: "Dec 2019 – Mar 2021",
-  location: "Newtown Square, PA",
-  description: "ROI analysis and enterprise reporting.",
-  highlights: ["25% operational efficiency improvement", "30% reduction in data retrieval time"],
-  tags: ["ROI", "Data Analysis"],
-  status: "complete",
-  icon: faChartLine
-}];
+
+export type ExperienceItemType = {
+  id: string
+  companyName: string
+  companyLogo?: string
+  positions: ExperiencePositionItemType[]
+  isCurrentEmployer?: boolean
+}
 
 /* ------------------------------------------------------------------ */
-/* COMPONENT                                                          */
+/* Work Experience Root */
 /* ------------------------------------------------------------------ */
 
-const Experience = () => {
-  const reduceMotion = useReducedMotion();
-  const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [roleFilter, setRoleFilter] = useState("all");
-  const [yearFilter, setYearFilter] = useState("all");
+export function WorkExperience({
+  className,
+  experiences,
+}: {
+  className?: string
+  experiences: ExperienceItemType[]
+}) {
+  return (
+    <div className={cn("bg-background px-4", className)}>
+      {experiences.map((experience) => (
+        <ExperienceItem key={experience.id} experience={experience} />
+      ))}
+    </div>
+  )
+}
 
-  /* ------------------ derived filter values ------------------ */
+/* ------------------------------------------------------------------ */
+/* Company Block */
+/* ------------------------------------------------------------------ */
 
-  const roles = useMemo(() => Array.from(new Set(experiences.map(e => e.title))), []);
-  const years = useMemo(() => {
-    const allYears = experiences.flatMap(e => e.period.match(/\d{4}/g) ?? []);
-    return Array.from(new Set(allYears)).sort((a, b) => Number(b) - Number(a));
-  }, []);
+export function ExperienceItem({
+  experience,
+}: {
+  experience: ExperienceItemType
+}) {
+  return (
+    <div className="space-y-4 py-6">
 
-  /* ------------------ filtered experiences ------------------ */
+      <div className="flex items-center gap-3">
+        <div className="flex size-6 shrink-0 items-center justify-center">
+          {experience.companyLogo ? (
+            <Image
+              src={experience.companyLogo}
+              alt={experience.companyName}
+              width={24}
+              height={24}
+              className="rounded-full"
+              unoptimized
+            />
+          ) : (
+            <span className="flex size-2 rounded-full bg-zinc-400" />
+          )}
+        </div>
 
-  const filteredExperiences = useMemo(() => {
-    return experiences.filter(exp => {
-      const roleMatch = roleFilter === "all" || exp.title === roleFilter;
-      const yearMatch = yearFilter === "all" || exp.period.includes(yearFilter);
-      return roleMatch && yearMatch;
-    });
-  }, [roleFilter, yearFilter]);
+        <h3 className="text-lg font-medium">
+          {experience.companyName}
+        </h3>
 
-  /* ------------------ derived timeline entries ------------------ */
-
-  const timelineEntries: TimelineEntry[] = useMemo(() => {
-    return filteredExperiences.map(exp => {
-      const years = exp.period.match(/\d{4}/g) ?? [];
-      const startYear = years[0] ?? "";
-      const endYear = exp.period.includes("Present") ? undefined : years[1];
-      return {
-        year: startYear,
-        endYear,
-        title: exp.title,
-        organization: exp.organization,
-        location: exp.location,
-        description: exp.description,
-        highlights: exp.highlights,
-        tags: exp.tags,
-        type: "career",
-        icon: exp.icon,
-        isCurrent: exp.status === "in-progress"
-      };
-    });
-  }, [filteredExperiences]);
-  return <section id="experience" className="relative px-4 bg-muted/30 overflow-hidden py-[9px]">
-      {/* Background */}
-      <ParallaxShape speed={0.15} className="w-40 h-40 -top-10 right-[10%]">
-        <RingShape />
-      </ParallaxShape>
-      <ParallaxShape speed={0.1} className="w-48 h-48 bottom-10 -left-10">
-        <DotsPattern className="opacity-40" />
-      </ParallaxShape>
-
-      <div className="container relative z-10 mx-auto max-w-3xl">
-        {/* Header */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 16
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: reduceMotion ? 0 : 0.5
-      }} className="mb-container">
-          <p className="text-overline text-accent font-semibold">Experience</p>
-          <h2 className="font-display text-display-sm md:text-display-sm">Career Journey</h2>
-        </motion.div>
-
-        {/* Filters */}
-        
-
-        {/* Cards */}
-        
-
-        {/* Derived Vertical Timeline */}
-        <VerticalTimeline entries={timelineEntries} title="Career Journey" overline="Timeline" />
+        {experience.isCurrentEmployer && (
+          <span className="relative flex items-center justify-center">
+            <span className="absolute inline-flex size-3 animate-ping rounded-full bg-emerald-500 opacity-40" />
+            <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+          </span>
+        )}
       </div>
-    </section>;
-};
-export default Experience;
+
+      <div className="relative space-y-6 before:absolute before:left-3 before:h-full before:w-px before:bg-border">
+        {experience.positions.map((position) => (
+          <ExperiencePositionItem key={position.id} position={position} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Position Block */
+/* ------------------------------------------------------------------ */
+
+export function ExperiencePositionItem({
+  position,
+}: {
+  position: ExperiencePositionItemType
+}) {
+  const ExperienceIcon = iconMap[position.icon || "business"]
+
+  return (
+    <Collapsible defaultOpen={position.isExpanded} asChild>
+      <div className="relative last:before:absolute last:before:h-full last:before:w-4 last:before:bg-background">
+
+        <CollapsibleTrigger className="group block w-full text-left">
+          <div className="mb-1 flex items-center gap-3 bg-background">
+            <div className="flex size-6 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
+              <ExperienceIcon className="size-4" />
+            </div>
+
+            <h4 className="flex-1 text-base font-medium">
+              {position.title}
+            </h4>
+
+            <div className="text-muted-foreground">
+              <ChevronsDownUpIcon className="hidden group-data-[state=open]:block size-4" />
+              <ChevronsUpDownIcon className="hidden group-data-[state=closed]:block size-4" />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 pl-9 text-sm text-muted-foreground">
+            {position.employmentType && (
+              <>
+                <span>{position.employmentType}</span>
+                <Separator orientation="vertical" className="h-4" />
+              </>
+            )}
+            <span>{position.employmentPeriod}</span>
+          </div>
+        </CollapsibleTrigger>
+
+        <CollapsibleContent className="overflow-hidden duration-300 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
+          {position.description && (
+            <Prose className="pt-3 pl-9">
+              <ReactMarkdown>{position.description}</ReactMarkdown>
+            </Prose>
+          )}
+
+          {position.skills?.length && (
+            <ul className="flex flex-wrap gap-2 pt-3 pl-9">
+              {position.skills.map((skill, index) => (
+                <li key={index}>
+                  <Skill>{skill}</Skill>
+                </li>
+              ))}
+            </ul>
+          )}
+        </CollapsibleContent>
+      </div>
+    </Collapsible>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Prose */
+/* ------------------------------------------------------------------ */
+
+function Prose({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      className={cn(
+        "prose prose-sm max-w-none font-mono text-foreground",
+        "prose-a:underline prose-a:underline-offset-4",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Skill Chip */
+/* ------------------------------------------------------------------ */
+
+function Skill({ className, ...props }: React.ComponentProps<"span">) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-md border bg-muted/50 px-2 py-1 font-mono text-xs text-muted-foreground",
+        className
+      )}
+      {...props}
+    />
+  )
+}

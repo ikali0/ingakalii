@@ -1,83 +1,91 @@
-import { ScrollFade, StaggerContainer, StaggerItem } from "@/components/ui/scroll-fade";
-import { Code2, Database, Layout, Server, Cpu, GitBranch } from "lucide-react";
+/**
+ * Scroll Fade Animation Wrapper
+ *
+ * Wraps content with Framer Motion scroll-triggered fade-in animation.
+ * Optional animated flow-field background support.
+ * Respects reduced motion preferences.
+ */
 
-const skills = [
-  {
-    title: "Frontend Development",
-    description: "React, Next.js, TypeScript, Tailwind CSS",
-    icon: Layout,
-  },
-  {
-    title: "Backend Development",
-    description: "Node.js, Express, APIs, Authentication",
-    icon: Server,
-  },
-  {
-    title: "Databases",
-    description: "PostgreSQL, MongoDB, Prisma",
-    icon: Database,
-  },
-  {
-    title: "DevOps & Tools",
-    description: "Git, CI/CD, Docker",
-    icon: GitBranch,
-  },
-  {
-    title: "Performance",
-    description: "Optimization, Lazy Loading, Code Splitting",
-    icon: Cpu,
-  },
-  {
-    title: "Clean Code",
-    description: "Scalable Architecture & Best Practices",
-    icon: Code2,
-  },
+import { motion, useReducedMotion } from "framer-motion";
+import { ReactNode } from "react";
+import NeuralBackground from "@/components/ui/flow-field-background";
+import { cn } from "@/lib/utils";
+
+type Direction = "up" | "down" | "left" | "right";
+
+interface ScrollFadeProps {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+  direction?: Direction;
+
+  // 🔥 NEW BACKGROUND OPTIONS
+  withBackground?: boolean;
+  backgroundColor?: string;
+  backgroundTrailOpacity?: number;
+  backgroundParticleCount?: number;
+  backgroundSpeed?: number;
+}
+
+const EASE_OUT_QUART: [number, number, number, number] = [
+  0.25, 0.46, 0.45, 0.94,
 ];
 
-export default function SkillsSection() {
+const DIRECTION_OFFSETS: Record<Direction, { x: number; y: number }> = {
+  up: { x: 0, y: 24 },
+  down: { x: 0, y: -24 },
+  left: { x: 24, y: 0 },
+  right: { x: -24, y: 0 },
+};
+
+export function ScrollFade({
+  children,
+  delay = 0,
+  className = "",
+  direction = "up",
+
+  // background defaults
+  withBackground = false,
+  backgroundColor = "#6366f1",
+  backgroundTrailOpacity = 0.12,
+  backgroundParticleCount = 600,
+  backgroundSpeed = 0.8,
+}: ScrollFadeProps) {
+  const shouldReduceMotion = useReducedMotion();
+  const offset = DIRECTION_OFFSETS[direction];
+
   return (
-    <section className="relative py-24 px-6 bg-black text-white overflow-hidden">
-      
-      {/* Section Title */}
-      <ScrollFade className="text-center max-w-3xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-          My Skills
-        </h2>
-        <p className="mt-4 text-gray-400">
-          Technologies and tools I use to build high-performance applications.
-        </p>
-      </ScrollFade>
+    <div className={cn("relative w-full", className)}>
+      {/* 🔥 Background Layer */}
+      {withBackground && !shouldReduceMotion && (
+        <div className="absolute inset-0 -z-10">
+          <NeuralBackground
+            color={backgroundColor}
+            trailOpacity={backgroundTrailOpacity}
+            particleCount={backgroundParticleCount}
+            speed={backgroundSpeed}
+          />
+        </div>
+      )}
 
-      {/* Skills Grid */}
-      <div className="mt-16 max-w-6xl mx-auto">
-        <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {skills.map((skill, index) => {
-            const Icon = skill.icon;
-
-            return (
-              <StaggerItem key={index}>
-                <div className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 transition hover:bg-white/10 hover:border-indigo-500/50">
-                  
-                  <div className="flex items-center gap-4">
-                    <div className="rounded-xl bg-indigo-500/10 p-3 text-indigo-400 group-hover:scale-110 transition">
-                      <Icon size={24} />
-                    </div>
-
-                    <h3 className="text-lg font-semibold">
-                      {skill.title}
-                    </h3>
-                  </div>
-
-                  <p className="mt-4 text-sm text-gray-400">
-                    {skill.description}
-                  </p>
-
-                </div>
-              </StaggerItem>
-            );
-          })}
-        </StaggerContainer>
-      </div>
-    </section>
+      {/* Animated Content */}
+      <motion.div
+        initial={
+          shouldReduceMotion
+            ? { opacity: 1 }
+            : { opacity: 0, ...offset }
+        }
+        whileInView={{ opacity: 1, x: 0, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{
+          duration: shouldReduceMotion ? 0 : 0.6,
+          delay,
+          ease: EASE_OUT_QUART,
+        }}
+        className="relative z-10"
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }

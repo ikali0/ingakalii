@@ -1,9 +1,3 @@
-/**
- * Scroll Fade Animation Wrapper
- *
- * Wraps content with Framer Motion scroll-triggered fade-in animation.
- * Respects reduced motion preferences.
- */
 import { motion, useReducedMotion, Variants } from "framer-motion";
 import { ReactNode } from "react";
 
@@ -16,7 +10,9 @@ interface ScrollFadeProps {
   direction?: Direction;
 }
 
-const EASE_OUT_QUART: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+const EASE_OUT_QUART: [number, number, number, number] = [
+  0.25, 0.46, 0.45, 0.94,
+];
 
 const DIRECTION_OFFSETS: Record<Direction, { x: number; y: number }> = {
   up: { x: 0, y: 24 },
@@ -24,6 +20,10 @@ const DIRECTION_OFFSETS: Record<Direction, { x: number; y: number }> = {
   left: { x: 24, y: 0 },
   right: { x: -24, y: 0 },
 };
+
+/* ------------------------------------------------------------------ */
+/* ScrollFade */
+/* ------------------------------------------------------------------ */
 
 export function ScrollFade({
   children,
@@ -34,16 +34,28 @@ export function ScrollFade({
   const shouldReduceMotion = useReducedMotion();
   const offset = DIRECTION_OFFSETS[direction];
 
-  return (
-    <motion.div
-      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, ...offset }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{
+  const variants: Variants = {
+    hidden: shouldReduceMotion
+      ? { opacity: 1 }
+      : { opacity: 0, ...offset },
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: {
         duration: shouldReduceMotion ? 0 : 0.6,
         delay,
         ease: EASE_OUT_QUART,
-      }}
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      variants={variants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
       className={className}
     >
       {children}
@@ -51,9 +63,10 @@ export function ScrollFade({
   );
 }
 
-/**
- * Stagger container for animating multiple children
- */
+/* ------------------------------------------------------------------ */
+/* StaggerContainer */
+/* ------------------------------------------------------------------ */
+
 interface StaggerContainerProps {
   children: ReactNode;
   className?: string;
@@ -83,7 +96,7 @@ export function StaggerContainer({
       variants={variants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, amount: 0.2 }}
       className={className}
     >
       {children}
@@ -91,15 +104,19 @@ export function StaggerContainer({
   );
 }
 
-/**
- * Stagger item for use inside StaggerContainer.
- */
+/* ------------------------------------------------------------------ */
+/* StaggerItem */
+/* ------------------------------------------------------------------ */
+
 interface StaggerItemProps {
   children: ReactNode;
   className?: string;
 }
 
-export function StaggerItem({ children, className = "" }: StaggerItemProps) {
+export function StaggerItem({
+  children,
+  className = "",
+}: StaggerItemProps) {
   const shouldReduceMotion = useReducedMotion();
 
   const variants: Variants = {

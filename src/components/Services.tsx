@@ -74,7 +74,7 @@ export default function Services() {
       setActive(0);
     }
   };
-  return <section id="services" className="py-16 px-4 bg-background md:py-[11px]">
+  return <section id="services" className="py-16 px-4 bg-background gradient-teal-violet md:py-[11px]">
       <div className="max-w-5xl mx-auto">
         
         {/* Header */}

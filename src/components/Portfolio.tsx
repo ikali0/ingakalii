@@ -250,7 +250,7 @@ function ProjectCard({
             {project.title}
           </h3>
 
-          <p className="text-[8.5px] sm:text-xs text-muted-foreground leading-snug mb-1.5 line-clamp-2 text-center">
+          <p className="text-[8px] sm:text-xs text-muted-foreground leading-snug mb-1.5 line-clamp-2 text-center">
             {project.description}
           </p>
 

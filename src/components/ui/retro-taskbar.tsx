@@ -195,9 +195,9 @@ export const RetroTaskbar = () => {
                 <div className="w-2 h-2 rounded-[2px] bg-primary/80" />
                 <div className="w-2 h-2 rounded-[2px] bg-secondary/80" />
                 <div className="w-2 h-2 rounded-[2px] bg-accent/80" />
-                <div className="w-2 h-2 rounded-[2px] bg-chart-4/80" />
+                <div className="w-2 h-2 rounded-[2px] bg-chart-4/80 text-secondary-foreground" />
               </div>
-              <span className="text-xs text-muted-foreground leading-snug mb-2 line-clamp-2\n">Start</span>
+              <span className="text-xs font-medium tracking-tight text-primary">Start</span>
             </motion.button>
           </div>
 
@@ -230,8 +230,8 @@ export const RetroTaskbar = () => {
             {/* Clock - modern, minimal */}
             <div className="flex items-center justify-center py-1.5 rounded-lg bg-muted/30 px-[8px] text-secondary-foreground">
               <div className="flex flex-col items-center leading-tight">
-                <span className="text-xs text-muted-foreground leading-snug mb-2 line-clamp-2\n">{formatTime(currentTime)}</span>
-                <span className="text-[7px] hidden xs:block text-secondary">{formatDate(currentTime)}</span>
+                <span className="text-xs font-medium text-primary tracking-tight\n">{formatTime(currentTime)}</span>
+                <span className="text-[7px] hidden xs:block text-secondary-foreground">{formatDate(currentTime)}</span>
               </div>
             </div>
           </div>

@@ -67,30 +67,30 @@ function ArticleCard({
         </div>
         
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-          <FontAwesomeIcon icon={article.platform === "medium" ? faMedium : faBookOpen} className="w-3.5 h-3.5" />
+          <FontAwesomeIcon icon={article.platform === "medium" ? faMedium : faBookOpen} className="text-xs font-small text-primary tracking-tight" />
           <span>{article.platform === "medium" ? "Medium" : "Substack"}</span>
         </div>
       </div>
 
-      <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+      <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors text-base">
         {article.title}
       </h3>
       
-      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+      <p className="text-xs font-medium text-primary whitespace-nowrap\n">
         {article.excerpt}
       </p>
 
       <div className="flex items-center justify-between pt-4 border-t border-border/30">
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+        <div className="text-xs font-medium text-primary tracking-tight\n">
           <span>{article.publishDate}</span>
           <span className="text-border">•</span>
-          <span className="flex items-center gap-1">
+          <span className="text-xs font-medium text-primary whitespace-nowrap">
             <FontAwesomeIcon icon={faClock} className="w-3 h-3" />
             {article.readTime}
           </span>
         </div>
 
-        <span className="flex items-center gap-1.5 text-sm font-medium group-hover:gap-2 transition-all text-secondary-foreground">
+        <span className="text-xs font-medium text-primary tracking-tight\n">
           Read 
           <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3" />
         </span>

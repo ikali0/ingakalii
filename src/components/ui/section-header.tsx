@@ -27,6 +27,32 @@ export function SectionHeader({
   align = "center",
   className
 }: SectionHeaderProps) {
-  return;
+  return (
+    <div className={cn(
+      "mb-12",
+      align === "center" ? "text-center" : "text-left",
+      className
+    )}>
+      {overline && (
+        <div className={cn(
+          "flex items-center gap-3 mb-4",
+          align === "center" && "justify-center"
+        )}>
+          <span className="text-accent text-xl animate-spin" style={{ animationDuration: '3s' }}>✱</span>
+          <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+            {overline}
+          </span>
+        </div>
+      )}
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-foreground mb-4 leading-tight">
+        {title}
+      </h2>
+      {description && (
+        <p className="text-foreground/80 max-w-xl text-sm md:text-base leading-relaxed mx-auto">
+          {description}
+        </p>
+      )}
+    </div>
+  );
 }
 export default SectionHeader;

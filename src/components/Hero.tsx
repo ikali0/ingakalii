@@ -49,9 +49,7 @@ const Hero = () => {
         duration: 0.6,
         delay: 0.1
       }} className="relative mb-6">
-          <h1 className="text-5xl sm:text-6xl font-display tracking-tight bg-gradient-to-r from-foreground via-accent to-secondary bg-clip-text text-transparent relative z-10 md:text-6xl py-px px-px">
-            Inga K.
-          </h1>
+          <h1 className="text-5xl sm:text-6xl font-display tracking-tight bg-gradient-to-r from-foreground via-accent to-secondary bg-clip-text text-transparent relative z-10 md:text-6xl py-px px-px">Hi!</h1>
 
           {/* Soft Shadow Layer */}
           <h1 className="absolute inset-0 text-5xl sm:text-6xl md:text-7xl font-display tracking-tight text-foreground/10 translate-y-3 blur-sm -z-10">

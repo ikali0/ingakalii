@@ -394,9 +394,7 @@ const Portfolio = () => {
               </span>
             </div>
             
-            <p className="text-foreground/80 max-w-xl text-sm md:text-base leading-relaxed">
-              Projects designed to solve real problems in AI ethics, governance, and responsible technology deployment.
-            </p>
+            
           </div>
         </ScrollFade>
 

@@ -57,29 +57,35 @@ export function VerticalTimeline({
   overline = "Timeline"
 }: VerticalTimelineProps) {
   if (entries.length === 0) return null;
-  return <ScrollFade className="mt-12">
-      
+
+  return (
+    <ScrollFade className="mt-12">
+      <p className="text-overline text-accent font-semibold mb-2">{overline}</p>
       <h3 className="font-display text-xl md:text-2xl mb-8">{title}</h3>
 
       <div className="relative pl-6 border-l-2 border-primary/30 space-y-8">
         {entries.map((entry, idx) => {
-        const Icon = entry.icon ?? defaultIcons[entry.type];
-        const styles = typeStyles[entry.type];
-        const yearLabel = entry.endYear ? `${entry.year} – ${entry.endYear}` : entry.isCurrent ? `${entry.year} – Present` : entry.year;
-        return <motion.div key={idx} initial={{
-          opacity: 0,
-          x: -12
-        }} whileInView={{
-          opacity: 1,
-          x: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.4,
-          delay: idx * 0.1
-        }} className="relative">
+          const Icon = entry.icon ?? defaultIcons[entry.type];
+          const styles = typeStyles[entry.type];
+          const yearLabel = entry.endYear
+            ? `${entry.year} – ${entry.endYear}`
+            : entry.isCurrent
+              ? `${entry.year} – Present`
+              : entry.year;
+
+          return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="relative"
+            >
               {/* Node marker */}
-              <div className={`absolute -left-[calc(0.75rem+1px)] top-1 w-6 h-6 rounded-full flex items-center justify-center ${styles.node} ${styles.glow}`}>
+              <div
+                className={`absolute -left-[calc(0.75rem+1px)] top-1 w-6 h-6 rounded-full flex items-center justify-center ${styles.node} ${styles.glow}`}
+              >
                 <FontAwesomeIcon icon={Icon} className="text-white text-xs" />
               </div>
 
@@ -92,17 +98,27 @@ export function VerticalTimeline({
                 </p>
                 <p className="text-body-sm mt-1">{entry.description}</p>
 
-                {entry.highlights && entry.highlights.length > 0 && <ul className="mt-2 space-y-1">
-                    {entry.highlights.map((h, i) => <li key={i} className="text-caption text-muted-foreground">• {h}</li>)}
-                  </ul>}
+                {entry.highlights && entry.highlights.length > 0 && (
+                  <ul className="mt-2 space-y-1">
+                    {entry.highlights.map((h, i) => (
+                      <li key={i} className="text-caption text-muted-foreground">• {h}</li>
+                    ))}
+                  </ul>
+                )}
 
-                {entry.tags && entry.tags.length > 0 && <div className="flex flex-wrap gap-1.5 mt-2">
-                    {entry.tags.map(tag => <Tag key={tag} size="sm" variant="muted">{tag}</Tag>)}
-                  </div>}
+                {entry.tags && entry.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    {entry.tags.map((tag) => (
+                      <Tag key={tag} size="sm" variant="muted">{tag}</Tag>
+                    ))}
+                  </div>
+                )}
               </div>
-            </motion.div>;
-      })}
+            </motion.div>
+          );
+        })}
       </div>
-    </ScrollFade>;
+    </ScrollFade>
+  );
 }
 export default VerticalTimeline;

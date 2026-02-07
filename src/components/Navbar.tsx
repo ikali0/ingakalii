@@ -4,7 +4,7 @@
  * Sticky navigation with smooth scroll, active section highlighting,
  * and mobile-responsive hamburger menu.
  */
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
@@ -49,7 +49,7 @@ const Navbar = () => {
     });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setOpen(false);
     const targetId = href.replace("#", "");

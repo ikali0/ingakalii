@@ -43,6 +43,11 @@ const menuItems: StartMenuItem[] = [
     icon: <Briefcase className="w-4 h-4" />,
   },
   {
+    label: "Contact",
+    href: "#contact",
+    icon: <ExternalLink className="w-4 h-4" />,
+  },
+  {
     label: "Publications",
     href: "https://ingakali.substack.com/",
     icon: <BookOpen className="w-4 h-4" />,

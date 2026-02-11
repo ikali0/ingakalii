@@ -370,9 +370,12 @@ const Portfolio = () => {
 
         {/* Responsive Grid - mobile-first with consistent gaps */}
         <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3" staggerDelay={0.08}>
-          {projects.map(project => <StaggerItem key={project.title}>
+          {projects.slice(0, 4).map(project => <StaggerItem key={project.title}>
               <ProjectCard project={project} />
             </StaggerItem>)}
+          {projects[4] && <StaggerItem className="sm:col-span-2 sm:max-w-[50%] sm:mx-auto lg:col-span-1 lg:max-w-none">
+              <ProjectCard project={projects[4]} />
+            </StaggerItem>}
         </StaggerContainer>
       </div>
     </section>;

@@ -4,7 +4,7 @@
  * Decorative shapes to break up boxy layouts and add visual interest.
  * Includes ParallaxShape wrapper for scroll-based parallax effects.
  */
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, forwardRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -22,12 +22,12 @@ interface ParallaxShapeProps {
  * Parallax wrapper that moves children based on scroll position.
  * Creates depth by moving elements at different speeds.
  */
-export function ParallaxShape({
+export const ParallaxShape = forwardRef<HTMLDivElement, ParallaxShapeProps>(function ParallaxShape({
   children,
   speed = 0.15,
   rotateAmount = 0,
   className,
-}: ParallaxShapeProps) {
+}, ref) {
   const [windowHeight, setWindowHeight] = useState(0);
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
@@ -39,14 +39,12 @@ export function ParallaxShape({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Map scroll progress to Y translation
   const y = useTransform(
     scrollYProgress,
     [0, 1],
     [0, prefersReducedMotion ? 0 : speed * windowHeight]
   );
 
-  // Map scroll progress to rotation
   const rotate = useTransform(
     scrollYProgress,
     [0, 1],
@@ -55,13 +53,14 @@ export function ParallaxShape({
 
   return (
     <motion.div
+      ref={ref}
       className={cn("absolute pointer-events-none", className)}
       style={{ y, rotate }}
     >
       {children}
     </motion.div>
   );
-}
+});
 
 interface ShapeProps {
   className?: string;
@@ -233,9 +232,10 @@ export function TriangleShape({ className }: ShapeProps) {
 /**
  * Floating ring shape
  */
-export function RingShape({ className }: ShapeProps) {
+export const RingShape = forwardRef<SVGSVGElement, ShapeProps>(function RingShape({ className }, ref) {
   return (
     <motion.svg
+      ref={ref}
       viewBox="0 0 100 100"
       className={cn("absolute pointer-events-none", className)}
       initial={{ opacity: 0, scale: 0.5 }}
@@ -249,44 +249,22 @@ export function RingShape({ className }: ShapeProps) {
         </linearGradient>
       </defs>
       <motion.circle
-        cx="50"
-        cy="50"
-        r="35"
-        fill="none"
-        stroke="url(#ring-gradient)"
-        strokeWidth="3"
-        animate={{
-          rotate: 360,
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
+        cx="50" cy="50" r="35" fill="none"
+        stroke="url(#ring-gradient)" strokeWidth="3"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         style={{ transformOrigin: "center" }}
       />
       <motion.circle
-        cx="50"
-        cy="50"
-        r="25"
-        fill="none"
-        stroke="hsl(213 94% 35%)"
-        strokeWidth="1"
-        strokeOpacity="0.15"
-        strokeDasharray="5 5"
-        animate={{
-          rotate: -360,
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "linear",
-        }}
+        cx="50" cy="50" r="25" fill="none"
+        stroke="hsl(213 94% 35%)" strokeWidth="1" strokeOpacity="0.15" strokeDasharray="5 5"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
         style={{ transformOrigin: "center" }}
       />
     </motion.svg>
   );
-}
+});
 
 /**
  * Sparkle/star decoration

@@ -7,7 +7,6 @@
 
 import { motion } from "framer-motion";
 import { Shield, Brain, Scale, Code, Database, Terminal, Zap } from "lucide-react";
-import { SectionHeader } from "./ui/section-header";
 import { SkillBar } from "./ui/skill-bar";
 import { Tag } from "./ui/tag";
 import { ScrollFade, StaggerContainer, StaggerItem } from "./ui/scroll-fade";
@@ -183,7 +182,22 @@ const Skills = () => {
         </StaggerContainer>
 
         {/* Secondary Tech */}
-        
+        <ScrollFade>
+          <div className="mt-10 pt-8 border-t border-border/30">
+            <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-4">Also Working With</p>
+            <div className="flex flex-wrap gap-2">
+              {secondaryTech.map(tech => {
+                const Icon = tech.icon;
+                return (
+                  <span key={tech.name} className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md bg-muted/50 text-muted-foreground border border-border/30">
+                    <Icon className="w-3 h-3" />
+                    {tech.name}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </ScrollFade>
       </div>
     </section>;
 };

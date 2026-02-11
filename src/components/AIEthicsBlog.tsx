@@ -27,8 +27,8 @@ const getPlatform = (url: string) => {
   return "external";
 };
 const platformStyles: Record<string, string> = {
-  medium: "border-l-4 border-l-black dark:border-l-white",
-  substack: "border-l-4 border-l-orange-500",
+  medium: "border-l-4 border-l-foreground",
+  substack: "border-l-4 border-l-accent",
   external: "border-l-4 border-l-primary"
 };
 

@@ -271,7 +271,7 @@ export default function RetroTaskbar(): JSX.Element {
                     {theme === "dark" ? (
                       <Moon className="w-4 h-4" />
                     ) : (
-                      <Sun className="w-4 h-4 text-fuchsia-500" />
+                      <Sun className="w-4 h-4 text-accent" />
                     )}
                   </motion.button>
                 </TooltipTrigger>

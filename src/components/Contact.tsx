@@ -45,12 +45,12 @@ const Contact = () => {
           }} transition={{
             duration: 0.25
           }} className="relative rounded-2xl border border-border/40
-                         bg-white/40 dark:bg-white/[0.04]
+                         bg-card/40
                          backdrop-blur-xl
-                         shadow-[0_8px_30px_-10px_rgba(0,0,0,0.15)]
+                         shadow-[0_8px_30px_-10px_hsl(var(--foreground)/0.1)]
                          p-5 sm:p-6">
               {/* Subtle 3D highlight */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/40 to-transparent opacity-30 pointer-events-none" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-background/40 to-transparent opacity-30 pointer-events-none" />
 
               <div className="relative">
                 <h3 className="text-sm font-semibold mb-4">
@@ -69,12 +69,12 @@ const Contact = () => {
           }} transition={{
             duration: 0.25
           }} className="relative rounded-2xl border border-border/40
-                         bg-white/40 dark:bg-white/[0.04]
+                         bg-card/40
                          backdrop-blur-xl
-                         shadow-[0_8px_30px_-10px_rgba(0,0,0,0.15)]
+                         shadow-[0_8px_30px_-10px_hsl(var(--foreground)/0.1)]
                          p-5 sm:p-6">
               {/* Subtle 3D highlight */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/40 to-transparent opacity-30 pointer-events-none" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-background/40 to-transparent opacity-30 pointer-events-none" />
 
               <div className="relative">
                 <h3 className="text-sm font-semibold mb-5">

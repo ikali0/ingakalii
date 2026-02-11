@@ -406,11 +406,6 @@
     background: linear-gradient(90deg, transparent 0%, hsl(var(--border)) 20%, hsl(var(--border)) 80%, transparent 100%);
   }
 
-  .section-divider {
-    @apply h-px w-full;
-    background: linear-gradient(90deg, transparent 0%, hsl(var(--border)) 20%, hsl(var(--border)) 80%, transparent 100%);
-  }
-
   /* ========================================
    * RETRO WINDOWS UI STYLES
    * ======================================== */
